@@ -1,5 +1,5 @@
 # hauntedcupof.dotfiles
--# (thanks for the name, syed)
+> <small>(thanks for the name, syed)</small>
 
 A repository containing nixOS configurations for all my funny little devices. Perpetual WIP, ofcourse, because the rice is never cooked enough :).
 
