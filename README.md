@@ -1,5 +1,5 @@
 # hauntedcupof.dotfiles
-> <small>(thanks for the name, @SyedAhkam)</small>
+> <small>(thanks for the name, [SyedAhkam](https://github.com/SyedAhkam))</small>
 
 A repository containing nixOS configurations for all my funny little devices. Perpetual WIP, ofcourse, because the rice is never cooked enough :).
 
