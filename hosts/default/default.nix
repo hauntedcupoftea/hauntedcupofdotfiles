@@ -36,12 +36,12 @@
   # Mount points for your Windows drives
   fileSystems = {
     "/mnt/games" = {
-      device = "/dev/disk/by-uuid/01D807D412ACB800"; # Replace with actual UUID
+      device = "/dev/disk/by-uuid/01D807D412ACB800";
       fsType = "ntfs3";
       options = ["rw" "uid=1000" "gid=100" "dmask=022" "fmask=133"];
     };
     "/mnt/media" = {
-      device = "/dev/disk/by-uuid/01DB740DE6A065F0"; # Replace with actual UUID
+      device = "/dev/disk/by-uuid/01DB740DE6A065F0";
       fsType = "ntfs3";
       options = ["rw" "uid=1000" "gid=100" "dmask=022" "fmask=133"];
     };
@@ -139,11 +139,11 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    # jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
-    #media-session.enable = true;
+    # media-session.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -155,7 +155,7 @@
     description = "Anand Chauhan";
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
-      #  thunderbird
+      # thunderbird
     ];
   };
 
@@ -163,7 +163,7 @@
     # also pass inputs to home-manager modules
     extraSpecialArgs = {inherit inputs;};
     users = {
-      "tea" = import ./tea.nix;
+      "tea" = import ./home.nix;
     };
   };
 
