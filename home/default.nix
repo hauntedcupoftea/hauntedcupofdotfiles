@@ -32,9 +32,6 @@
     alejandra
   ];
 
-  # Enable Firefox
-  programs.firefox.enable = true;
-
   # This value determines the Home Manager release
   home.stateVersion = "24.11";
 }

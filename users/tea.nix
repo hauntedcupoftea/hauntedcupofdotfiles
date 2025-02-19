@@ -9,6 +9,7 @@
   users.users.tea = {
     isNormalUser = true;
     description = "Anand Chauhan";
+    shell = pkgs.fish;
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [];
   };
