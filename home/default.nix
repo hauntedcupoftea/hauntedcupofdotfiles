@@ -11,14 +11,9 @@
     ./modules/shell
     # ./modules/editors
   ];
-
-  # Home Manager needs a bit of information about you and the paths it should manage
-  home.username = "tea";
-  home.homeDirectory = "/home/tea";
-
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  # Includes basic packages available to a user without much customization.
+  # Includes basic packges available to a user without much customization.
   home.packages = with pkgs; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -49,9 +44,6 @@
     neofetch
     alejandra
   ];
-
-  # This value determines the Home Manager release
-  home.stateVersion = "24.11";
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -87,7 +79,4 @@
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
 }
