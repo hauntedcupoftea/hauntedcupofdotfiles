@@ -5,8 +5,8 @@
   ...
 }: {
   imports = [
-    ./profiles/desktop.nix
-    ./profiles/development.nix
+    # ./profiles/desktop.nix
+    # ./profiles/development.nix
     ./modules/terminals
     ./modules/shell
     ./modules/editors
