@@ -16,7 +16,7 @@
       imports = [../home];
       home.username = "tea";
       home.homeDirectory = "/home/tea";
-      home.stateVersion = "24.11";
+      home.stateVersion = "24.11"; # DO NOT CHANGE
       programs.home-manager.enable = true;
     };
   };

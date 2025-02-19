@@ -9,7 +9,7 @@
     loginShellInit = "";
     interactiveShellInit = ''
       set fish_greeting # disable greeting
-      starship init fish | source # start starship
+      starship init fish | source
     '';
     shellAliases = {
       ll = "ls -la";
