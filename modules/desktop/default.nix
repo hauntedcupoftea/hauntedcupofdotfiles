@@ -1,7 +1,8 @@
 {...}: {
   imports = [
-    ./gnome.nix
+    ./gnome.nix # fallback
     ./fonts.nix
     ./gaming.nix
+    # ./hyprland # soon :)
   ];
 }
