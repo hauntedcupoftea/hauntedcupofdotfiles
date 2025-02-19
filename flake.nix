@@ -1,5 +1,5 @@
 {
-  description = "Nixos config flake";
+  description = "hauntedcupoftea's hauntedcupofdotfiles";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
@@ -13,24 +13,23 @@
   outputs = {
     self,
     nixpkgs,
+    home-manager,
     ...
   } @ inputs: {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./hosts/default/configuration.nix
-        inputs.home-manager.nixosModules.default
-      ];
-    };
-    homeConfigurations.homeConfigName = inputs.home-manager.lib.homeManagerConfiguration {
-      # Specify the host architecture
-      pkgs = nixpkgs.legacyPackages."x86_64-linux";
-
-      # Specify your home configuration modules here, for example,
-      # the path to your home.nix.
-      modules = [./hosts/default/home.nix];
-
-      extraSpecialArgs = {inherit inputs;};
+    nixosConfigurations = {
+      "ge66-raider" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./hosts/default
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = {inherit inputs;};
+          }
+        ];
+      };
     };
   };
 }
