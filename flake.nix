@@ -21,7 +21,7 @@
         system = "x86_64-linux";
         specialArgs = {inherit inputs;};
         modules = [
-          ./hosts/default
+          ./hosts/ge66-raider
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
