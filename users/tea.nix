@@ -7,6 +7,15 @@
 }: {
   imports = [inputs.home-manager.nixosModules.home-manager];
 
+  # Define a user account
+  users.users.tea = {
+    isNormalUser = true;
+    description = "Anand Chauhan";
+    shell = pkgs.fish;
+    extraGroups = ["networkmanager" "wheel"];
+    packages = with pkgs; [];
+  };
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -19,15 +28,6 @@
       home.stateVersion = "24.11"; # DO NOT CHANGE
       programs.home-manager.enable = true;
     };
-  };
-
-  # Define a user account
-  users.users.tea = {
-    isNormalUser = true;
-    description = "Anand Chauhan";
-    shell = pkgs.fish;
-    extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [];
   };
 
   nix.settings.trusted-users = ["tea"];
