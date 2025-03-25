@@ -10,7 +10,6 @@
       name = "FiraCode Nerd Font";
       size = 12;
     };
-    themeFile = "Catppuccin-Mocha";
     settings = {
       scrollback_lines = 10000;
       enable_audio_bell = false;
