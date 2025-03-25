@@ -5,5 +5,6 @@
     ./nix.nix
     ./locale.nix
     ./shells.nix
+    ./security.nix
   ];
 }

@@ -9,6 +9,7 @@
     # ./profiles/development.nix
     ./modules/terminals
     ./modules/shell
+    ./modules/swaylock.nix
     ./theme
     # ./modules/editors
   ];
