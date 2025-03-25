@@ -5,6 +5,5 @@
     ./nix.nix
     ./locale.nix
     ./shells.nix
-    ./home-manager.nix
   ];
 }

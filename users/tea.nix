@@ -5,7 +5,10 @@
   inputs,
   ...
 }: {
-  imports = [inputs.home-manager.nixosModules.home-manager];
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+    inputs.catppuccin.nixosModules.catppuccin
+  ];
 
   # Define a user account
   users.users.tea = {
@@ -20,9 +23,14 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "bak";
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {
+      inherit inputs;
+    };
     users.tea = {
-      imports = [../home];
+      imports = [
+        ../home
+        inputs.catppuccin.homeManagerModules.catppuccin
+      ];
       home.username = "tea";
       home.homeDirectory = "/home/tea";
       home.stateVersion = "24.11"; # DO NOT CHANGE

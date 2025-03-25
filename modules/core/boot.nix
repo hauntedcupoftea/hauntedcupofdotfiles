@@ -12,7 +12,7 @@
       efiSupport = true;
       enableCryptodisk = false;
       useOSProber = true; # Detect Windows
-      default = "saved";
+      default = "saved"; # Default to last booted OS
     };
 
     loader.efi.canTouchEfiVariables = true;

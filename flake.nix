@@ -3,6 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
@@ -14,6 +18,7 @@
     self,
     nixpkgs,
     home-manager,
+    catppuccin,
     ...
   } @ inputs: {
     nixosConfigurations = {
