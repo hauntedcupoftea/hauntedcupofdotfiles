@@ -26,27 +26,27 @@
 
       font = "Maple Mono";
 
-      text-wrong-color = "FBF1C7FF";
-      text-ver-color = "FBF1C7FF";
-      text-clear-color = "FBF1C7FF";
-      key-hl-color = "fabd2fFF";
-      bs-hl-color = "fb4934FF";
-      ring-clear-color = "d65d0eFF";
-      ring-wrong-color = "cc241dff";
-      ring-ver-color = "b8bb26FF";
-      ring-color = "689d6aff";
-      line-clear-color = "FFFFFF00";
-      line-ver-color = "FFFFFF00";
-      line-wrong-color = "FFFFFF00";
-      separator-color = "FFFFFF00";
-      line-color = "FFFFFF00";
-      text-color = "FBF1C7FF";
-      inside-color = "3C3836DD";
-      inside-ver-color = "3C3836DD";
-      inside-clear-color = "3C3836DD";
-      inside-wrong-color = "3C3836DD";
-      layout-bg-color = "FFFFFF00";
-      layout-text-color = "FBF1C7FF";
+      text-wrong-color = lib.mkDefault "FBF1C7FF";
+      text-ver-color = lib.mkDefault "FBF1C7FF";
+      text-clear-color = lib.mkDefault "FBF1C7FF";
+      key-hl-color = lib.mkDefault "fabd2fFF";
+      bs-hl-color = lib.mkDefault "fb4934FF";
+      ring-clear-color = lib.mkDefault "d65d0eFF";
+      ring-wrong-color = lib.mkDefault "cc241dff";
+      ring-ver-color = lib.mkDefault "b8bb26FF";
+      ring-color = lib.mkDefault "689d6aff";
+      line-clear-color = lib.mkDefault "FFFFFF00";
+      line-ver-color = lib.mkDefault "FFFFFF00";
+      line-wrong-color = lib.mkDefault "FFFFFF00";
+      separator-color = lib.mkDefault "FFFFFF00";
+      line-color = lib.mkDefault "FFFFFF00";
+      text-color = lib.mkDefault "FBF1C7FF";
+      inside-color = lib.mkDefault "3C3836DD";
+      inside-ver-color = lib.mkDefault "3C3836DD";
+      inside-clear-color = lib.mkDefault "3C3836DD";
+      inside-wrong-color = lib.mkDefault "3C3836DD";
+      layout-bg-color = lib.mkDefault "FFFFFF00";
+      layout-text-color = lib.mkDefault "FBF1C7FF";
     };
   };
 }
