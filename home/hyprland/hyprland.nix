@@ -7,9 +7,6 @@
   # Hyprland home configuration
   wayland.windowManager.hyprland = {
     enable = true;
-    # set the flake package
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
     settings = {
       # Set default terminal to kitty
@@ -17,6 +14,12 @@
 
       # Mod key (usually Alt or Super)
       "$mod" = "SUPER";
+
+      env = [
+        "LIBVA_DRIVER_NAME,nvidia"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        "NVD_BACKEND,direct"
+      ];
 
       # Basic bindings
       bind = [
@@ -48,9 +51,7 @@
     };
   };
 
-  # Ensure kitty is the default terminal
   home.packages = with pkgs; [
-    kitty
     wofi # Application launcher
     dunst # Notification daemon
   ];
