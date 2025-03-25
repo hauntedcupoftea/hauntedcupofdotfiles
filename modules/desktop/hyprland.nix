@@ -10,6 +10,7 @@
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.default;
     withUWSM = true;
+    xwayland.enable = true;
   };
 
   # Ensure necessary packages are installed

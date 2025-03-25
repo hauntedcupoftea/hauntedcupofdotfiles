@@ -7,7 +7,7 @@
   imports = [
     ./terminals
     ./shell
-    ./hyprlock.nix
+    # ./hyprlock.nix
     ./theme
     ./hyprland
     # ./editors
