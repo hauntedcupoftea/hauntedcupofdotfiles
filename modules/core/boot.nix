@@ -16,6 +16,7 @@
     };
 
     loader.efi.canTouchEfiVariables = true;
+    plymouth.enable = true;
 
     # Add NTFS support
     supportedFilesystems = ["ntfs"];
