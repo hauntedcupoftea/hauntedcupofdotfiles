@@ -5,6 +5,5 @@
     ./gaming.nix
     ./xserver.nix
     ./hyprland.nix
-    ./swaylock.nix
   ];
 }
