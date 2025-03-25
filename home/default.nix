@@ -10,6 +10,7 @@
     # ./hyprlock.nix
     ./theme
     ./hyprland
+    ./utils.nix
     # ./editors
   ];
   # The home.packages option allows you to install Nix packages into your

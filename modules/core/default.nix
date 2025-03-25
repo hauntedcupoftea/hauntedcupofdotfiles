@@ -7,5 +7,6 @@
     ./sddm.nix
     ./shells.nix
     ./security.nix
+    ./utils.nix
   ];
 }
