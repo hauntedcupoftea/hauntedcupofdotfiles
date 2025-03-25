@@ -15,7 +15,6 @@
   # Ensure necessary packages are installed
   environment.systemPackages = with pkgs; [
     hyprland
-    hyprctl
     kitty
     waybar
     wofi
