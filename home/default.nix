@@ -5,13 +5,11 @@
   ...
 }: {
   imports = [
-    # ./profiles/desktop.nix
-    # ./profiles/development.nix
-    ./modules/terminals
-    ./modules/shell
-    ./modules/swaylock.nix
+    ./terminals
+    ./shell
+    ./swaylock.nix
     ./theme
-    # ./modules/editors
+    # ./editors
   ];
   # The home.packages option allows you to install Nix packages into your
   # environment.

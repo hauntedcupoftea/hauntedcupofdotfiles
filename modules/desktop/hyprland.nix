@@ -1,17 +1,38 @@
 {
   inputs,
   pkgs,
+  lib,
+  config,
   ...
 }: {
+  # Enable Hyprland at the system level
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.default;
-    portalPackage =
-      inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
   };
+
+  # Ensure necessary packages are installed
+  environment.systemPackages = with pkgs; [
+    hyprland
+    hyprctl
+    kitty
+    waybar
+    wofi
+    dunst
+    libnotify
+    networkmanagerapplet
+    pavucontrol
+  ];
+
+  # XDG Portal configuration
   xdg.portal = {
     enable = true;
-    xdgOpenUsePortal = true;
+    wlr.enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
+    ];
     config = {
       common.default = ["gtk"];
       hyprland.default = [
@@ -19,7 +40,5 @@
         "hyprland"
       ];
     };
-
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 }
