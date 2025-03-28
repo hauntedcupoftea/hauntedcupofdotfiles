@@ -14,9 +14,7 @@
         "hyprland/workspaces"
         "custom/media"
       ];
-      "modules-center" = [
-        "hyprland/window"
-      ];
+      "modules-center" = "hyprland/window";
       "modules-right" = [
         "idle_inhibitor"
         "custom/vpn"
@@ -137,7 +135,7 @@
       "custom/weather" = {
         "format" = "{}";
         "interval" = 3600;
-        "exec" = "curl -s 'https://wttr.in/~41.03508,28.98331?format=1'";
+        "exec" = "curl -s 'https://wttr.in/?format=1'";
         "exec-if" = "ping wttr.in -c1";
       };
 
