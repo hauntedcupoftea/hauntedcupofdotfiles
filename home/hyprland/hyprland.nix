@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  networking,
   ...
 }: {
   # Hyprland home configuration
@@ -55,11 +56,11 @@
 
       # Monitor configuration (adjust as needed) (add your own config below)
       monitor = lib.mkMerge [
-        (lib.mkIf (config.networking.hostName == "Anand-GE66-Raider") [
+        (lib.mkIf (networking.hostName == "Anand-GE66-Raider") [
           "DP-2, 2560x1440@164.96, 0x0, 1"
           "eDP-1, 1920x1080@240, 2560x1440, 1"
         ])
-        (lib.mkIf (config.networking.hostName != "Anand-GE66-Raider") [
+        (lib.mkIf (networking.hostName != "Anand-GE66-Raider") [
           # Default configuration for other hosts
           ", preferred, auto, 1"
         ])
