@@ -40,6 +40,8 @@
       monitor = [
         # Example: ", preferred, auto, 1"
         # Replace with your specific monitor setup
+        "DP-2, 2560x1440@164.96, 0x0, 1"
+        "eDP-1, 1920x1080@240, 2560x640, 1"
       ];
 
       # Startup applications
