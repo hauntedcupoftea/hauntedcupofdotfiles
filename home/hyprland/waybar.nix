@@ -114,28 +114,31 @@
         height = 36;
         spacing = 6;
 
-        modules-left = [
+        "modules-left" = [
+          "custom/weather"
+          "clock#date"
           "hyprland/workspaces"
+          "custom/media"
+        ];
+        "modules-center" = [
           "hyprland/window"
         ];
-
-        modules-center = [
-          "clock"
-        ];
-
-        modules-right = [
-          "pulseaudio"
+        "modules-right" = [
+          "idle_inhibitor"
+          # "custom/vpn"
           "network"
+          "pulseaudio"
           "battery"
-          "temperature"
+          "clock"
           "tray"
         ];
 
+        # Hyprland workspace module
         "hyprland/workspaces" = {
-          format = "{icon}";
-          all-outputs = true;
-          on-click = "activate";
-          format-icons = {
+          "format" = "{icon}";
+          "all-outputs" = true;
+          "on-click" = "hyprctl dispatch workspace {name}";
+          "format-icons" = {
             "1" = "一";
             "2" = "二";
             "3" = "三";
@@ -146,64 +149,127 @@
             "8" = "八";
             "9" = "九";
             "10" = "十";
-            "urgent" = "";
-            "active" = "";
-            "default" = "";
           };
         };
 
-        "clock" = {
-          format = "{:%H:%M}  ";
-          format-alt = "{:%Y-%m-%d %H:%M:%S}  ";
-          tooltip-format = "<tt><small>{calendar}</small></tt>";
+        # Hyprland window module
+        "hyprland/window" = {
+          "format" = "{title}";
+          "empty-format" = "No active window";
+          "tooltip" = false;
         };
 
+        # Idle inhibitor module
+        "idle_inhibitor" = {
+          "format" = "{icon}";
+          "format-icons" = {
+            "activated" = "";
+            "deactivated" = "";
+          };
+        };
+
+        # Tray module
+        "tray" = {
+          "spacing" = 10;
+        };
+
+        # Clock module
+        "clock" = {
+          "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+          "format-alt" = "{:%Y-%m-%d}";
+        };
+
+        # Date clock module
+        "clock#date" = {
+          "format" = "{:%d.%m.%Y}";
+          "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+        };
+
+        # Backlight module
+        "backlight" = {
+          "format" = "{icon} {percent}%";
+          "format-icons" = [
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
+        };
+
+        # Battery module
         "battery" = {
-          states = {
-            "good" = 95;
+          "states" = {
             "warning" = 30;
             "critical" = 15;
           };
-          format = "{capacity}% {icon}";
-          format-charging = "{capacity}% ";
-          format-plugged = "{capacity}% ";
-          format-icons = ["" "" "" "" ""];
+          "format" = "{icon} {capacity}%";
+          "format-charging" = " {capacity}%";
+          "format-plugged" = " {capacity}%";
+          "format-icons" = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
+          "on-click" = "hyprctl dispatch exec quicksettings";
         };
 
-        "network" = {
-          format-wifi = "{essid} ({signalStrength}%) ";
-          format-ethernet = "Ethernet ";
-          format-linked = "Ethernet (No IP) ";
-          format-disconnected = "Disconnected ⚠";
-          format-alt = "{ifname}: {ipaddr}/{cidr}";
-        };
-
+        # Pulseaudio module
         "pulseaudio" = {
-          format = "{volume}% {icon}";
-          format-bluetooth = "{volume}% {icon}";
-          format-muted = "Muted ";
-          format-icons = {
-            headphone = "";
-            hands-free = "";
-            headset = "";
-            phone = "";
-            portable = "";
-            car = "";
-            default = ["" ""];
+          "format" = "{icon} {volume}% {format_source}";
+          "format-bluetooth" = " {icon} {volume}% {format_source}";
+          "format-bluetooth-muted" = "  {icon} {format_source}";
+          "format-muted" = "  {format_source}";
+          "format-source" = " {volume}%";
+          "format-source-muted" = "";
+          "format-icons" = {
+            "default" = [
+              ""
+              ""
+              ""
+            ];
           };
-          on-click = "pavucontrol";
+          "on-click" = "pavucontrol";
         };
 
-        "temperature" = {
-          thermal-zone = 2;
-          hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
-          critical-threshold = 80;
-          format-critical = "{temperatureC}°C ";
-          format = "{temperatureC}°C ";
+        # Custom weather module
+        "custom/weather" = {
+          "format" = "{}";
+          "interval" = 3600;
+          "exec" = "curl -s 'https://wttr.in/?d&format=%20%m%20%C%20%t(%f)%20%w'";
+          "exec-if" = "ping wttr.in -c1";
         };
 
-        "tray" = {
-          spacing = 10;
+        # Custom VPN module
+        # "custom/vpn" = {
+        #   "tooltip" = false;
+        #   "format" = "VPN {}";
+        #   "exec" = "mullvad status | grep -q 'Connected' && echo '' || echo ''";
+        #   "interval" = 5;
+        #   "on-click" = "mullvad connect";
+        #   "on-click-right" = "mullvad disconnect";
+        # };
+
+        # Network module
+        "network" = {
+          "format-wifi" = " {essid} ({signalStrength}%)";
+          "format-ethernet" = "⬇{bandwidthDownBytes} ⬆{bandwidthUpBytes}";
+          "interval" = 3;
+          "format-linked" = "{ifname} (No IP) ";
+          "format" = "";
+          "format-disconnected" = "";
+          "format-alt" = "{ifname}: {ipaddr}/{cidr}";
+          "on-click" = "wl-copy $(ip address show up scope global | grep inet | head -n1 | cut -d/ -f 1 | tr -d [:space:] | cut -c5-)";
+          "tooltip-format" = " {bandwidthUpBits}  {bandwidthDownBits}\n{ifname}\n{ipaddr}/{cidr}\n";
+          "tooltip-format-wifi" = " {essid} {frequency}MHz\nStrength: {signaldBm}dBm ({signalStrength}%)\nIP: {ipaddr}/{cidr}\n {bandwidthUpBits}  {bandwidthDownBits}";
+          "min-length" = 17;
+          "max-length" = 17;
         };
       };
     };
