@@ -10,9 +10,6 @@
         geometry = "300x50-10+10";
         origin = "bottom-right";
         transparency = 10;
-        frame_color = "#cba6f7";
-        background = "#1e1e2e";
-        foreground = "#cdd6f4";
         font = "FiraCode Nerd Font 12";
 
         frame_width = 1;
@@ -57,7 +54,7 @@
 
       entry {
           background-color: #1e1e2e;
-          color: #cdd6f4;
+          text-color: #cdd6f4;
       }
 
       entry:selected {
@@ -67,7 +64,7 @@
 
       list {
           background-color: #1e1e2e;
-          color: #cdd6f4;
+          text-color: #cdd6f4;
       }
 
       list:selected {

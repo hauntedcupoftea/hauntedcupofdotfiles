@@ -7,9 +7,9 @@
   imports = [
     ./terminals
     ./shell
-    # ./hyprlock.nix
     ./theme
     ./hyprland
+    ./dev
     # ./editors
   ];
   # The home.packages option allows you to install Nix packages into your
