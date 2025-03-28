@@ -10,8 +10,6 @@
 
     # Waybar settings
     settings = {
-      "height" = 32;
-      "spacing" = 0;
       "modules-left" = [
         "hyprland/workspaces"
         "custom/media"
