@@ -31,7 +31,6 @@
       imports = [
         ../home
         inputs.catppuccin.homeManagerModules.catppuccin
-        inputs.nvf.homeManagerModules.default
       ];
       home.username = "tea";
       home.homeDirectory = "/home/tea";
