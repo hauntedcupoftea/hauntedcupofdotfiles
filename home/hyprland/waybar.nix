@@ -111,7 +111,7 @@
       mainBar = {
         layer = "top";
         position = "top";
-        height = 30;
+        height = 36;
         spacing = 6;
 
         modules-left = [
