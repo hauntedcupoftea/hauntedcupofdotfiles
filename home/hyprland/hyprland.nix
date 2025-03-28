@@ -2,7 +2,7 @@
   pkgs,
   lib,
   config,
-  networking,
+  inputs,
   ...
 }: let
   # Extract hostname from the flake target
