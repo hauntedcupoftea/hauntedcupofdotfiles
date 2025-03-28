@@ -12,7 +12,7 @@
     settings = {
       mainBar = {
         "modules-left" = [
-          "custom/weather"
+          # "custom/weather"
           "clock#date"
           "hyprland/workspaces"
           "custom/media"
