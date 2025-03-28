@@ -36,7 +36,7 @@
           "$mod, up, movefocus, u"
           "$mod, down, movefocus, d"
 
-          "$mod, F, exec, firefox"
+          "$mod, F, exec, floorp"
           ", Print, exec, grimblast copy area"
         ]
         ++ (
@@ -53,12 +53,16 @@
             9)
         );
 
-      # Monitor configuration (adjust as needed)
-      monitor = [
-        # Example: ", preferred, auto, 1"
-        # Replace with your specific monitor setup
-        "DP-2, 2560x1440@164.96, 0x0, 1"
-        "eDP-1, 1920x1080@240, 2560x640, 1"
+      # Monitor configuration (adjust as needed) (add your own config below)
+      monitor = lib.mkMerge [
+        (lib.mkIf (config.networking.hostName == "Anand-GE66-Raider") [
+          "DP-2, 2560x1440@164.96, 0x0, 1"
+          "eDP-1, 1920x1080@240, 2560x1440, 1"
+        ])
+        (lib.mkIf (config.networking.hostName != "Anand-GE66-Raider") [
+          # Default configuration for other hosts
+          ", preferred, auto, 1"
+        ])
       ];
 
       # Startup applications
