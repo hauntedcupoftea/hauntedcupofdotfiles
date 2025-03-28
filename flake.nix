@@ -45,7 +45,6 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/ge66-raider
-          nvf.nixosModules.default
         ];
       };
     };

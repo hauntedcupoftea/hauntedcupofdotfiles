@@ -8,6 +8,7 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.catppuccin.nixosModules.catppuccin
+    inputs.nvf.homeManagerModules.default
   ];
 
   # Define a user account
@@ -30,6 +31,7 @@
       imports = [
         ../home
         inputs.catppuccin.homeManagerModules.catppuccin
+        inputs.nvf.homeManagerModules.default
       ];
       home.username = "tea";
       home.homeDirectory = "/home/tea";
