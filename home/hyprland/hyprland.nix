@@ -22,19 +22,36 @@
       ];
 
       # Basic bindings
-      bind = [
-        "$mod, Q, exec, $terminal"
-        "$mod, M, exit"
-        "$mod, C, killactive"
-        "$mod, V, togglefloating"
-        "$mod, R, exec, wofi --show drun"
+      bind =
+        [
+          "$mod, Q, exec, $terminal"
+          "$mod, M, exit"
+          "$mod, C, killactive"
+          "$mod, V, togglefloating"
+          "$mod, space, exec, wofi --show drun"
 
-        # Move focus
-        "$mod, left, movefocus, l"
-        "$mod, right, movefocus, r"
-        "$mod, up, movefocus, u"
-        "$mod, down, movefocus, d"
-      ];
+          # Move focus
+          "$mod, left, movefocus, l"
+          "$mod, right, movefocus, r"
+          "$mod, up, movefocus, u"
+          "$mod, down, movefocus, d"
+
+          "$mod, F, exec, firefox"
+          ", Print, exec, grimblast copy area"
+        ]
+        ++ (
+          # workspaces
+          # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
+          builtins.concatLists (builtins.genList (
+              i: let
+                ws = i + 1;
+              in [
+                "$mod, code:1${toString i}, workspace, ${toString ws}"
+                "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+              ]
+            )
+            9)
+        );
 
       # Monitor configuration (adjust as needed)
       monitor = [
