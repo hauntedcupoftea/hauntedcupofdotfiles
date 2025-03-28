@@ -4,8 +4,8 @@
   lib,
   ...
 }: {
-  vim.package = inputs.neovim-overlay.packages.${pkgs.system}.neovim;
-  vim = {
+  programs.nvf = {
+    enable = true;
     theme = {
       enable = true;
       name = "catppuccin";

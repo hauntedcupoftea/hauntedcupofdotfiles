@@ -13,6 +13,5 @@
     btop.enable = true;
     cursors.enable = true;
     hyprland.enable = true;
-    waybar.enable = true;
   };
 }
