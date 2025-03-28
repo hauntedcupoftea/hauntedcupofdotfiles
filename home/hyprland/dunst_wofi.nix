@@ -3,19 +3,32 @@
   services.dunst = {
     enable = true;
     settings = {
-      font = "FiraCode Nerd Font 12";
-      geometry = "300x50-10+10";
-      transparency = 0;
-      frame_width = 1;
-      separator_height = 2;
-      padding = 8;
-      icon_size = 32;
-      alignment = "left";
-      horizontal_padding = 10;
-      vertical_padding = 10;
-      border_color = "#cba6f7";
-      background = "#1e1e2e";
-      foreground = "#cdd6f4";
+      global = {
+        width = 300;
+        height = 300;
+        offset = "30x50";
+        geometry = "300x50-10+10";
+        origin = "bottom-right";
+        transparency = 10;
+        frame_color = "#cba6f7";
+        background = "#1e1e2e";
+        foreground = "#cdd6f4";
+        font = "FiraCode Nerd Font 12";
+
+        frame_width = 1;
+        separator_height = 2;
+        padding = 8;
+        icon_size = 32;
+        alignment = "left";
+        horizontal_padding = 10;
+        vertical_padding = 10;
+      };
+
+      urgency_normal = {
+        background = "#37474f";
+        foreground = "#eceff1";
+        timeout = 10;
+      };
     };
   };
 
