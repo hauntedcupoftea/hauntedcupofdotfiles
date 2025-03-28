@@ -115,8 +115,8 @@
         spacing = 6;
 
         "modules-left" = [
-          "custom/weather"
           "clock#date"
+          "custom/weather"
           "hyprland/workspaces"
           "custom/media"
         ];
