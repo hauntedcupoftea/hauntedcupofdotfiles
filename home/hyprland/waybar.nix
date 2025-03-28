@@ -12,7 +12,6 @@
     settings = {
       "height" = 32;
       "spacing" = 0;
-      "font" = "FiraCode Nerd Font 12";
       "modules-left" = [
         "hyprland/workspaces"
         "custom/media"
@@ -199,6 +198,10 @@
       @define-color base #1e1e2e;
       @define-color mantle #181825;
       @define-color crust #11111b;
+
+      * {
+        font-family: "FiraCode Nerd Font";
+      }
     '';
   };
 }
