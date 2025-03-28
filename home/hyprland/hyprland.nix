@@ -4,7 +4,12 @@
   config,
   networking,
   ...
-}: {
+}:
+let
+  # Extract hostname from the flake target
+  # This is a simplified example - actual implementation may need adjustment
+  isGE66Raider = builtins.hasAttr "ge66-raider" (inputs.self.nixosConfigurations or {});
+in {
   # Hyprland home configuration
   wayland.windowManager.hyprland = {
     enable = true;
@@ -56,11 +61,11 @@
 
       # Monitor configuration (adjust as needed) (add your own config below)
       monitor = lib.mkMerge [
-        (lib.mkIf (networking.hostName == "Anand-GE66-Raider") [
+        (lib.mkIf isGE66Raider [
           "DP-2, 2560x1440@164.96, 0x0, 1"
           "eDP-1, 1920x1080@240, 2560x1440, 1"
         ])
-        (lib.mkIf (networking.hostName != "Anand-GE66-Raider") [
+        (lib.mkIf !isGE66Raider [
           # Default configuration for other hosts
           ", preferred, auto, 1"
         ])
