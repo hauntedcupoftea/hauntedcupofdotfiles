@@ -6,25 +6,28 @@
 }: {
   programs.nvf = {
     enable = true;
-    theme = {
-      enable = true;
-      name = "catppuccin";
-      style = "mocha";
-    };
+    settings = {
+      vim = {
+        theme = {
+          enable = true;
+          name = "catppuccin";
+          style = "mocha";
+        };
 
-    statusline.lualine.enable = true;
-    telescope.enable = true;
-    autocomplete.nvim-cmp.enable = true;
+        statusline.lualine.enable = true;
+        telescope.enable = true;
+        autocomplete.nvim-cmp.enable = true;
 
-    languages = {
-      enableLSP = true;
-      enableTreesitter = true;
+        languages = {
+          enableLSP = true;
+          enableTreesitter = true;
 
-      nix.enable = true;
-      ts.enable = true;
-      rust.enable = true;
-      python.enable = true;
-      md.enable = true;
+          nix.enable = true;
+          ts.enable = true;
+          rust.enable = true;
+          python.enable = true;
+        };
+      };
     };
   };
 }
