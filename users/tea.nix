@@ -8,7 +8,7 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.catppuccin.nixosModules.catppuccin
-    inputs.nvf.homeManagerModules.default
+    # inputs.nvf.homeManagerModules.default # enabling this makes home manager not work?
   ];
 
   # Define a user account
@@ -31,6 +31,7 @@
       imports = [
         ../home
         inputs.catppuccin.homeManagerModules.catppuccin
+        inputs.nvf.homeManagerModules.default
       ];
       home.username = "tea";
       home.homeDirectory = "/home/tea";
