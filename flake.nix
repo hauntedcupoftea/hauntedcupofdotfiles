@@ -6,7 +6,6 @@
 
     hypr-contrib.url = "github:hyprwm/contrib";
     hyprpicker.url = "github:hyprwm/hyprpicker";
-    obsidian-nvim.url = "github:epwalsh/obsidian.nvim";
 
     nix-gaming.url = "github:fufexan/nix-gaming";
     hyprland.url = "github:hyprwm/Hyprland";
@@ -24,7 +23,6 @@
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.obsidian-nvim.follows = "obsidian-nvim";
     };
 
     home-manager = {
