@@ -6,6 +6,7 @@
 
     hypr-contrib.url = "github:hyprwm/contrib";
     hyprpicker.url = "github:hyprwm/hyprpicker";
+    obsidian-nvim.url = "github:epwalsh/obsidian.nvim";
 
     nix-gaming.url = "github:fufexan/nix-gaming";
     hyprland.url = "github:hyprwm/Hyprland";
@@ -20,6 +21,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.obsidian-nvim.follows = "obsidian-nvim";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,6 +38,7 @@
     nixpkgs,
     home-manager,
     catppuccin,
+    nvf,
     ...
   } @ inputs: {
     nixosConfigurations = {
@@ -39,6 +47,7 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/ge66-raider
+          nvf.nixosModules.default
         ];
       };
     };

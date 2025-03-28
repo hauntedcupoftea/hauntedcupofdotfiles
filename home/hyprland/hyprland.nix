@@ -61,7 +61,7 @@ in {
       # Monitor configuration (adjust as needed) (add your own config below)
       monitor = lib.mkIf isGE66Raider [
         "DP-2, 2560x1440@164.96, 0x0, 1"
-        "eDP-1, 1920x1080@240, 2560x1440, 1"
+        "eDP-1, 1920x1080@240, 2560x360, 1"
       ];
 
       # Startup applications
@@ -72,9 +72,4 @@ in {
       ];
     };
   };
-
-  home.packages = with pkgs; [
-    wofi # Application launcher
-    dunst # Notification daemon
-  ];
 }
