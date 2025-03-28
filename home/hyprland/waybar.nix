@@ -172,19 +172,19 @@
     };
 
     # Waybar style (Catppuccin Mocha)
-    style = ''
-      * {
-        font-family: "FiraCode Nerd Font";
-        font-size: 12pt;
-        font-weight: bold;
-        border-radius: 0px;
-        transition-property: background-color;
-        transition-duration: 0.5s;
-      }
+    # style = ''
+    #   * {
+    #     font-family: "FiraCode Nerd Font";
+    #     font-size: 12pt;
+    #     font-weight: bold;
+    #     border-radius: 0px;
+    #     transition-property: background-color;
+    #     transition-duration: 0.5s;
+    #   }
 
-      #tray {
-        padding-right: 15px;
-      }
-    '';
+    #   #tray {
+    #     padding-right: 15px;
+    #   }
+    # '';
   };
 }
