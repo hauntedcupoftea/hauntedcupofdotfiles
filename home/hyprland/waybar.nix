@@ -12,6 +12,8 @@
     settings = {
       mainBar = {
         "modules-left" = [
+          "custom/weather"
+          "clock#date"
           "hyprland/workspaces"
           "custom/media"
         ];
@@ -23,9 +25,8 @@
           # "custom/vpn"
           "network"
           "pulseaudio"
-          "clock"
-          "clock#date"
           "battery"
+          "clock"
           "tray"
         ];
 
@@ -201,6 +202,15 @@
 
       * {
         font-family: "FiraCode Nerd Font";
+        font-size: 12pt;
+        font-weight: bold;
+        border-radius: 0px;
+        transition-property: background-color;
+        transition-duration: 0.5s;
+      }
+
+      #tray {
+        padding-right: 15px;
       }
     '';
   };
