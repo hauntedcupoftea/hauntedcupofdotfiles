@@ -33,7 +33,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    floorp
+    # floorp
     grimblast
     vscodium
     vesktop
@@ -47,7 +47,7 @@
     neofetch
     alejandra
     rustup
-    # inputs.zen-browser.packages."${system}".specific
+    inputs.zen-browser.packages."${system}".specific
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
