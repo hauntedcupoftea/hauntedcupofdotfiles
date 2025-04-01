@@ -47,6 +47,7 @@
     neofetch
     alejandra
     rustup
+    uv
     inputs.zen-browser.packages."${system}".default
   ];
 
