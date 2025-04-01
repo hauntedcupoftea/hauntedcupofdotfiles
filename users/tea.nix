@@ -9,6 +9,7 @@
     inputs.home-manager.nixosModules.home-manager
     inputs.catppuccin.nixosModules.catppuccin
     # inputs.nvf.homeManagerModules.default # enabling this makes home manager not work?
+    # inputs.zen-browser.packages."x86_64-linux"
   ];
 
   # Define a user account
@@ -26,6 +27,7 @@
     backupFileExtension = "bak";
     extraSpecialArgs = {
       inherit inputs;
+      system = "x86_64-linux";
     };
     users.tea = {
       imports = [

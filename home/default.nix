@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  system,
   ...
 }: {
   imports = [
@@ -32,7 +33,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    inputs.zen-browser.packages."${pkgs.system}".default
+    inputs.zen-browser.packages."${system}".specific
     grimblast
     vscodium
     vesktop
