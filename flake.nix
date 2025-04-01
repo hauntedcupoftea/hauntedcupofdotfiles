@@ -16,8 +16,8 @@
     };
 
     zen-browser = {
-        url = "github:0xc000022070/zen-browser-flake";
-        inputs.nixpkgs.follows = "spicetify-nix";
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "spicetify-nix";
     };
 
     spicetify-nix = {
@@ -48,7 +48,10 @@
     nixosConfigurations = {
       "ge66-raider" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit inputs;};
+        specialArgs = {
+          inherit inputs;
+          inherit system;
+        };
         modules = [
           ./hosts/ge66-raider
         ];

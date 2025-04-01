@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  system,
   ...
 }: {
   imports = [
@@ -33,6 +34,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     inputs.zen-browser.packages."${system}".default
+    grimblast
     vscodium
     vesktop
     wget
