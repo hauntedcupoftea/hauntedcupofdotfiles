@@ -908,7 +908,7 @@
     "zen-browser": {
       "inputs": {
         "nixpkgs": [
-          "spicetify-nix"
+          "nixpkgs"
         ]
       },
       "locked": {
