@@ -742,7 +742,8 @@
         "nix-gaming": "nix-gaming",
         "nixpkgs": "nixpkgs_5",
         "nvf": "nvf",
-        "spicetify-nix": "spicetify-nix"
+        "spicetify-nix": "spicetify-nix",
+        "zen-browser": "zen-browser"
       }
     },
     "rust-overlay": {
@@ -901,6 +902,26 @@
       "original": {
         "owner": "hyprwm",
         "repo": "xdg-desktop-portal-hyprland",
+        "type": "github"
+      }
+    },
+    "zen-browser": {
+      "inputs": {
+        "nixpkgs": [
+          "spicetify-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1743463070,
+        "narHash": "sha256-x+A6Es0VkGyhp4ixhqg1Qi9iusLl7ioymqoe107L/Dg=",
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "rev": "3c4f98e9504d3f94bbd303d428162665a0ade8d6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
         "type": "github"
       }
     }
