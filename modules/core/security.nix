@@ -2,10 +2,16 @@
   security.rtkit.enable = true;
   security.sudo.enable = true;
   security.pam.services.hyprlock = {};
+  security.polkit.enable = true;
 
   # enable gnome-keyring because it just works(tm)
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.hyprland.enableGnomeKeyring = true;
+
+  environment.systemPackages = [
+    pkgs.polkit
+    pkgs.polkit_gnome
+  ];
 
   # gnome polkit auto-start from nix wiki
   systemd = {

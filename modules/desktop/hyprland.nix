@@ -23,6 +23,8 @@
     libnotify
     networkmanagerapplet
     pavucontrol
+    wl-clipboard
+    clipse
   ];
 
   # XDG Portal configuration

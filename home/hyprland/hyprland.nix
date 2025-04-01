@@ -32,7 +32,8 @@ in {
           "$mod, Q, exec, $terminal"
           "$mod, M, exit"
           "$mod, C, killactive"
-          "$mod, V, togglefloating"
+          "$mod, B, togglefloating"
+          "$mod, V, exec,  kitty --class clipse -e 'clipse'"
           "$mod, space, exec, wofi --show drun"
 
           # Move focus
@@ -41,7 +42,7 @@ in {
           "$mod, up, movefocus, u"
           "$mod, down, movefocus, d"
 
-          "$mod, F, exec, floorp"
+          "$mod, F, exec, zen"
           ", Print, exec, grimblast copy area"
         ]
         ++ (
@@ -64,11 +65,19 @@ in {
         "eDP-1, 1920x1080@240, 2560x360, 1"
       ];
 
+      # Window Rules
+      windowrule = [
+        "float,class:(clipse)" # ensure you have a floating window class set if you want this behavior
+        "size 622 652,class:(clipse)" # set the size of the window as necessary
+      ];
+
       # Startup applications
       exec-once = [
         "waybar"
         "dunst"
         "nm-applet"
+        "clipse -listen"
+        "systemctl --user enable --now 
       ];
     };
   };
