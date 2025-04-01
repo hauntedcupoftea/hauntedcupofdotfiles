@@ -43,6 +43,7 @@ in {
           "$mod, down, movefocus, d"
 
           "$mod, F, exec, zen"
+          "$mod, E, exec, $terminal -e yazi"
           ", Print, exec, grimblast copy area"
         ]
         ++ (

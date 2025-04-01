@@ -49,6 +49,7 @@
     rustup
     uv
     inputs.zen-browser.packages."${system}".default
+    yazi
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
