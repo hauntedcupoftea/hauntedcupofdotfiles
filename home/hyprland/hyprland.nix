@@ -33,7 +33,7 @@ in {
           "$mod, M, exit"
           "$mod, C, killactive"
           "$mod, B, togglefloating"
-          "$mod, V, exec,  kitty --class clipse -e 'clipse'"
+          "$mod, V, exec,  $terminal --class clipse -e 'clipse'"
           "$mod, space, exec, wofi --show drun"
 
           # Move focus
@@ -77,7 +77,6 @@ in {
         "dunst"
         "nm-applet"
         "clipse -listen"
-        "systemctl --user enable --now 
       ];
     };
   };
