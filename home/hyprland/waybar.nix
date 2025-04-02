@@ -37,16 +37,16 @@
       #custom-weather,
       #tray {
         margin: 2px 4px;
-        border-radius: 6px;
+        border-radius: 10px;
         padding: 0px 10px 0px 8px;
         background: #1e1e2e;
         border: 1px solid @border;
       }
 
       #workspaces button {
-        background-color: rgba(30, 30, 46, 0.5);
+        background-color: rgba(5, 5, 35, 0.7);
         color: #cdd6f4;
-        border-radius: 6px;
+        border-radius: 10px;
         margin: 4px 2px;
         padding: 0px 10px;
         font-weight: bold;
@@ -123,6 +123,7 @@
 
       #tray {
         padding-right: 15px;
+        color: @flamingo;
       }
       #tray:hover {
         color: @hover;
