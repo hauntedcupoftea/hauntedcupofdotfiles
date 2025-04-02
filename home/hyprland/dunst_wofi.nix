@@ -4,11 +4,9 @@
     enable = true;
     settings = {
       global = {
-        width = 300;
-        height = 300;
         offset = "30x50";
-        height = "(0, 300)" 
-        width = "(0, 500)"
+        height = "(0, 300)";
+        width = "(0, 500)";
         origin = "bottom-right";
         transparency = 10;
         font = "FiraCode Nerd Font 12";
