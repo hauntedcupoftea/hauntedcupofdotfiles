@@ -68,7 +68,7 @@ in {
 
       # Window Rules
       windowrule = [
-        "float,class:(clipse)" # ensure you have a floating window class set if you want this behavior
+        "floata,class:(clipse)" # ensure you have a floating window class set if you want this behavior
         "size 622 652,class:(clipse)" # set the size of the window as necessary
       ];
 
