@@ -23,6 +23,7 @@
       }
 
       #workspace,
+      #workspaces,
       #mode,
       #window,
       #idle_inhibitor,
@@ -32,10 +33,9 @@
       #temperature,
       #backlight,
       #battery,
-      #custom-power
+      #custom-power,
       #tray {
         margin: 2px 4px;
-        margin-right: 0px;
         border-radius: 6px;
         padding: 0px 10px 0px 8px;
         background: @background;
@@ -87,6 +87,14 @@
         color: #f38ba8;
       }
 
+      #custom-weather {
+        color: #89dceb;
+      }
+
+      #window {
+        color: #70abda;
+      }
+
       #network {
         color: #89b4fa;
       }
@@ -120,6 +128,7 @@
       }
 
       #custom-power {
+        margin-right: 0px;
         color: @text;
         background: @background;
       }
@@ -152,6 +161,7 @@
           "battery"
           "clock"
           "tray"
+          "temperature"
           "custom/power"
         ];
 
