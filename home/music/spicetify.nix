@@ -14,8 +14,13 @@ in {
       adblock
       hidePodcasts
       shuffle # shuffle+ (special characters are sanitized out of extension names)
+      keyboardShortcut
     ];
-    theme = spicePkgs.themes.dribbblish;
-    colorScheme = "gruvbox-material-dark";
+    enabledCustomApps = with spicePkgs.apps; [
+      lyricsPlus
+      marketplace
+    ];
+    theme = spicePkgs.themes.text;
+    colorScheme = "catppuccin-mocha";
   };
 }

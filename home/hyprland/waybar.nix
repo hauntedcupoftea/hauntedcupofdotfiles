@@ -152,7 +152,8 @@
           "clock#date"
           "custom/weather"
           "hyprland/workspaces"
-          "custom/media"
+          # "custom/media"
+          "bluetooth"
         ];
         "modules-center" = [
           "hyprland/window"
@@ -193,6 +194,16 @@
           "format" = "{title}";
           "empty-format" = "No active window";
           "tooltip" = false;
+        };
+
+        "bluetooth" = {
+          "format" = "󰂯";
+          "format-disabled" = "󰂲";
+          "format-off" = "󰂲";
+          "interval" = 30;
+          "on-click" = "blueman-manager";
+          "on-click-right" = "sleep 0.1 && kill -9 $pgrep blueman-applet";
+          "format-no-controller" = "";
         };
 
         "custom/power" = {
