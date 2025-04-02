@@ -38,7 +38,7 @@
     layout = [
       {
         "label" = "lock";
-        "action" = "hyprlock";
+        "action" = "uwsm stop";
         "text" = "Lock";
         "keybind" = "l";
       }
@@ -56,7 +56,7 @@
       }
       {
         "label" = "logout";
-        "action" = "loginctl kill-session $XDG_SESSION_ID";
+        "action" = "uwsm stop";
         "text" = "Logout";
         "keybind" = "e";
       }
