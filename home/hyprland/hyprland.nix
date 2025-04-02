@@ -66,9 +66,17 @@ in {
         "eDP-1, 1920x1080@240, 2560x360, 1"
       ];
 
+      workspace = [
+        "1, persistent:true"
+        "2, persistent:true"
+        "3, persistent:true"
+        "4, persistent:true"
+        "5, persistent:true"
+      ];
+
       # Window Rules
       windowrule = [
-        "floata,class:(clipse)" # ensure you have a floating window class set if you want this behavior
+        "float,class:(clipse)" # ensure you have a floating window class set if you want this behavior
         "size 622 652,class:(clipse)" # set the size of the window as necessary
       ];
 
