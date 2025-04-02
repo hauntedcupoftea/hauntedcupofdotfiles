@@ -10,7 +10,6 @@
         origin = "bottom-right";
         transparency = 10;
         font = "FiraCode Nerd Font 12";
-
         frame_width = 1;
         separator_height = 2;
         padding = 8;
