@@ -38,7 +38,7 @@
         margin: 2px 4px;
         border-radius: 6px;
         padding: 0px 10px 0px 8px;
-        background: @background;
+        background: #45475a;
         border: 1px solid @border;
       }
 
@@ -134,6 +134,10 @@
       }
       #custom-power:hover {
         color: @hover;
+      }
+
+      tooltip {
+        background: #45475a;
       }
     '';
 
