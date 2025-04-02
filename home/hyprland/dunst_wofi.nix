@@ -7,7 +7,8 @@
         width = 300;
         height = 300;
         offset = "30x50";
-        geometry = "300x50-10+10";
+        height = "(0, 300)" 
+        width = "(0, 500)"
         origin = "bottom-right";
         transparency = 10;
         font = "FiraCode Nerd Font 12";
@@ -40,7 +41,7 @@
       border = 2;
       border_color = "#cba6f7";
       background_color = "#1e1e2e";
-      text_color = "#cdd6f4";
+      text_color = "#ffffff";
       selection_background_color = "#cba6f7";
       selection_text_color = "#1e1e2e";
     };

@@ -9,17 +9,18 @@
     systemd.enable = true;
     style = ''
       * {
-        font-family: "JetBrainsMono Nerd Font";
-        font-size: 12pt;
+        margin: 0;
+        padding: 0px;
+        font-family: "FiraCode Nerd Font", "JetBrainsMono";
         font-weight: bold;
-        border-radius: 0px;
-        transition-property: background-color;
-        transition-duration: 0.5s;
+        font-size: 12px;
+        min-height: 15px;
+        background: transparent;
       }
 
       window#waybar {
         background-color: rgba(30, 30, 46, 0.5);
-        border-bottom: 2px solid rgba(205, 214, 244, 0.2);
+        border-bottom: 2px solid rgba(205, 214, 244, 0.2);0
         color: #cdd6f4;
       }
 
@@ -105,6 +106,19 @@
       #tray {
         padding-right: 15px;
       }
+
+      #custom-power {
+        margin: 2px 4px;
+        margin-right: 0px;
+        border-radius: 6px;
+        padding: 0px 10px 0px 8px;
+        color: @text;
+        background: @background;
+        border: 1px solid @border;
+      }
+      #custom-power:hover {
+        color: @hover;
+      }
     '';
 
     settings = {
@@ -131,6 +145,7 @@
           "battery"
           "clock"
           "tray"
+          "custom/power"
         ];
 
         # Hyprland workspace module
@@ -157,6 +172,12 @@
           "format" = "{title}";
           "empty-format" = "No active window";
           "tooltip" = false;
+        };
+
+        "custom/power" = {
+          "format" = "";
+          "on-click" = "wlogout";
+          "tooltip-format" = "Power Menu";
         };
 
         # Idle inhibitor module
@@ -242,7 +263,7 @@
         "custom/weather" = {
           "format" = "{}";
           "interval" = 3600;
-          "exec" = "curl -s 'https://wttr.in/?d&format=%20%m%20%C%20%t(%f)%20%w'";
+          "exec" = "curl -s 'https://wttr.in/?d&format=%20%m%20%C%20%t%20(%f)%20%w'";
           "exec-if" = "ping wttr.in -c1";
         };
 
