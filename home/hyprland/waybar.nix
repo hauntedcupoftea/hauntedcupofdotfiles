@@ -20,7 +20,7 @@
 
       window#waybar {
         background-color: rgba(30, 30, 46, 0.5);
-        border-bottom: 2px solid rgba(205, 214, 244, 0.2);0
+        border-bottom: 2px solid rgba(205, 214, 244, 0.2);
         color: #cdd6f4;
       }
 
