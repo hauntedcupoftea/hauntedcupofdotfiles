@@ -38,7 +38,7 @@
     layout = [
       {
         "label" = "lock";
-        "action" = "uwsm stop";
+        "action" = "hyprlock";
         "text" = "Lock";
         "keybind" = "l";
       }
