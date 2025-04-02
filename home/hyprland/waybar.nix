@@ -13,8 +13,8 @@
         padding: 0px;
         font-family: "FiraCode Nerd Font", "JetBrainsMono";
         font-weight: bold;
-        font-size: 12px;
-        min-height: 15px;
+        font-size: 16px;
+        min-height: 20px;
         background: transparent;
       }
 
