@@ -32,11 +32,14 @@
       #temperature,
       #backlight,
       #battery,
+      #custom-power
       #tray {
-        background-color: rgba(30, 30, 46, 0.5);
-        padding: 0 10px;
-        margin: 4px 0px;
-        border: 2px solid rgba(205, 214, 244, 0);
+        margin: 2px 4px;
+        margin-right: 0px;
+        border-radius: 6px;
+        padding: 0px 10px 0px 8px;
+        background: @background;
+        border: 1px solid @border;
       }
 
       #workspaces button {
@@ -68,6 +71,9 @@
       #clock {
         color: #fab387;
       }
+      #clock:hover {
+        background: @hover;
+      }
 
       #battery {
         color: #a6e3a1;
@@ -84,9 +90,15 @@
       #network {
         color: #89b4fa;
       }
+      #network:hover {
+        background: @hover;
+      }
 
       #pulseaudio {
         color: #89dceb;
+      }
+      #pulseaudio:hover {
+        background: @hover;
       }
 
       #temperature {
@@ -96,19 +108,20 @@
       #temperature.critical {
         color: #f38ba8;
       }
+      #temperature:hover {
+        background: @hover;
+      }
 
       #tray {
         padding-right: 15px;
       }
+      #tray:hover {
+        color: @hover;
+      }
 
       #custom-power {
-        margin: 2px 4px;
-        margin-right: 0px;
-        border-radius: 6px;
-        padding: 0px 10px 0px 8px;
         color: @text;
         background: @background;
-        border: 1px solid @border;
       }
       #custom-power:hover {
         color: @hover;
