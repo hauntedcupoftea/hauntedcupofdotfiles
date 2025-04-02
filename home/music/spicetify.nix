@@ -12,15 +12,16 @@ in {
     enable = true;
     enabledExtensions = with spicePkgs.extensions; [
       adblock
-      hidePodcasts
       shuffle # shuffle+ (special characters are sanitized out of extension names)
       keyboardShortcut
+      lastfm
     ];
     enabledCustomApps = with spicePkgs.apps; [
       lyricsPlus
       marketplace
+      betterLibrary
     ];
     theme = spicePkgs.themes.text;
-    colorScheme = "catppuccin-mocha";
+    colorScheme = "CatppuccinMocha";
   };
 }

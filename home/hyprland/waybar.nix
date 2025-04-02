@@ -34,18 +34,19 @@
       #backlight,
       #battery,
       #custom-power,
+      #custom-weather,
       #tray {
         margin: 2px 4px;
         border-radius: 6px;
         padding: 0px 10px 0px 8px;
-        background: #45475a;
+        background: #1e1e2e;
         border: 1px solid @border;
       }
 
       #workspaces button {
         background-color: rgba(30, 30, 46, 0.5);
         color: #cdd6f4;
-        border-radius: 8px;
+        border-radius: 6px;
         margin: 4px 2px;
         padding: 0px 10px;
         font-weight: bold;

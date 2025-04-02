@@ -46,6 +46,7 @@
     easyeffects
     btop
     neofetch
+    obsidian
     alejandra
     rustup
     uv
