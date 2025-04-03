@@ -42,7 +42,7 @@ in {
           "$mod, up, movefocus, u"
           "$mod, down, movefocus, d"
 
-          "$mod, F, exec, zen"
+          "$mod, F, exec, zen-beta"
           "$mod, E, exec, $terminal -e yazi"
           ", Print, exec, grimblast copy area"
         ]
@@ -76,8 +76,8 @@ in {
 
       # Window Rules
       windowrule = [
-        "float,class:(clipse)" # ensure you have a floating window class set if you want this behavior
-        "size 622 652,class:(clipse)" # set the size of the window as necessary
+        "float,title:(clipse)" # ensure you have a floating window class set if you want this behavior
+        "size 622 652,title:(clipse)" # set the size of the window as necessary
       ];
 
       # Startup applications

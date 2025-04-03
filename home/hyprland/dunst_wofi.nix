@@ -32,44 +32,38 @@
     settings = {
       show_icons = true;
       prompt = "Run:";
-      font = "FiraCode Nerd Font 12";
+      font = "FiraCode Nerd Font 16";
       width = "50%";
       height = "50%";
       border = 2;
-      border_color = "#cba6f7";
-      background_color = "#1e1e2e";
-      text_color = "#ffffff";
-      selection_background_color = "#cba6f7";
-      selection_text_color = "#1e1e2e";
     };
-    # style = ''
-    #       window {
-    #       background-color: #1e1e2e;
-    #       border: 2px solid #cba6f7;
-    #       border-radius: 8px;
-    #       padding: 10px;
-    #   }
+    style = ''
+          window {
+          background-color: #1e1e2e;
+          border: 2px solid #cba6f7;
+          border-radius: 8px;
+          padding: 10px;
+      }
 
-    #   entry {
-    #       background-color: #1e1e2e;
-    #       text-color: #cdd6f4;
-    #   }
+      entry {
+          background-color: #1e1e2e;
+          color: #cdd6f4;
+      }
 
-    #   entry:selected {
-    #       background-color: #cba6f7;
-    #       color: #1e1e2e;
-    #   }
+      entry:selected {
+          background-color: #cba6f7;
+          color: #1e1e2e;
+      }
 
-    #   list {
-    #       background-color: #1e1e2e;
-    #       text-color: #cdd6f4;
-    #   }
+      list {
+          background-color: #1e1e2e;
+          color: #cdd6f4;
+      }
 
-    #   list:selected {
-    #       background-color: #cba6f7;
-    #       color: #1e1e2e;
-    #   }
-
-    # '';
+      list:selected {
+          background-color: #cba6f7;
+          color: #1e1e2e;
+      }
+    '';
   };
 }
