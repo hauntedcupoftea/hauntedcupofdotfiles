@@ -52,6 +52,7 @@
     uv
     inputs.zen-browser.packages."${system}".default
     yazi
+    blueman
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

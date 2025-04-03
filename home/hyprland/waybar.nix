@@ -151,7 +151,7 @@
         spacing = 6;
 
         "modules-left" = [
-          "clock#date"
+          "clock"
           "custom/weather"
           "hyprland/workspaces"
           # "custom/media"
@@ -166,7 +166,6 @@
           "network"
           "pulseaudio"
           "battery"
-          "clock"
           "tray"
           "temperature"
           "custom/power"
