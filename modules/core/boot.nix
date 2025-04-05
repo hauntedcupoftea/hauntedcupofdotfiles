@@ -15,6 +15,8 @@
       default = "saved"; # Default to last booted OS
     };
 
+    kernelPackages = pkgs.linuxPackages_latest;
+
     loader.efi.canTouchEfiVariables = true;
     plymouth.enable = true;
 

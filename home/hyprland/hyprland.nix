@@ -76,8 +76,9 @@ in {
 
       # Window Rules
       windowrule = [
-        "float,title:(clipse)" # ensure you have a floating window class set if you want this behavior
-        "size 622 652,title:(clipse)" # set the size of the window as necessary
+        "float, class:(clipse)"
+        "size 622 652, class:(clipse)"
+        "stayfocused, class:(clipse)"
       ];
 
       # Startup applications
