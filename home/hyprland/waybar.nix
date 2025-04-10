@@ -317,7 +317,7 @@
 
         # Network module
         "network" = {
-          "format-wifi" = "  {signalStrength}%)";
+          "format-wifi" = "  ({signalStrength}%) {essid}";
           "format-ethernet" = "⬇{bandwidthDownBytes} ⬆{bandwidthUpBytes}";
           "interval" = 3;
           "format-linked" = "{ifname} (No IP) ";
