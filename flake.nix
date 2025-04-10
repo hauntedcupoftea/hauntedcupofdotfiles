@@ -2,7 +2,7 @@
   description = "hauntedcupoftea's hauntedcupofdotfiles";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     hypr-contrib.url = "github:hyprwm/contrib";
     hyprpicker.url = "github:hyprwm/hyprpicker";
