@@ -10,7 +10,7 @@
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.default;
     withUWSM = true;
-    # xwayland.enable = true;
+    xwayland.enable = true; # kinda needed for electron apps sadly
   };
 
   # Ensure necessary packages are installed
@@ -31,7 +31,7 @@
   # these are actually tied to both nvidia and hyprland in part,
   # so PLEASE consult the hyprland wiki before building this on non novideo systems
   environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
+    # NIXOS_OZONE_WL = "1";
     LIBVA_DRIVER_NAME = "nvidia";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     NVD_BACKEND = "direct";
