@@ -172,6 +172,10 @@
           "custom/power"
         ];
 
+        "temperature" = {
+          "hwmon-path" = "/sys/devices/platform/coretemp.0/hwmon/hwmon6/temp1_input"; # YMMV
+        };
+
         # Hyprland workspace module
         "hyprland/workspaces" = {
           "format" = "{icon}";
@@ -313,7 +317,7 @@
 
         # Network module
         "network" = {
-          "format-wifi" = " {essid} ({signalStrength}%)";
+          "format-wifi" = "  {signalStrength}%)";
           "format-ethernet" = "⬇{bandwidthDownBytes} ⬆{bandwidthUpBytes}";
           "interval" = 3;
           "format-linked" = "{ifname} (No IP) ";
