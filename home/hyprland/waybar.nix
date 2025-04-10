@@ -33,6 +33,7 @@
       #temperature,
       #backlight,
       #battery,
+      #bluetooth,
       #custom-power,
       #custom-weather,
       #tray {
@@ -92,7 +93,7 @@
         color: #89dceb;
       }
 
-      #window {
+      #window, #bluetooth {
         color: #70abda;
       }
 
@@ -153,12 +154,12 @@
         "modules-left" = [
           "clock"
           "custom/weather"
-          "hyprland/workspaces"
           # "custom/media"
           "bluetooth"
         ];
         "modules-center" = [
-          "hyprland/window"
+          # "hyprland/window"
+          "hyprland/workspaces"
         ];
         "modules-right" = [
           "idle_inhibitor"
@@ -284,9 +285,9 @@
           "format-source-muted" = "";
           "format-icons" = {
             "default" = [
-              ""
-              ""
-              ""
+              " "
+              " "
+              " "
             ];
           };
           "on-click" = "pavucontrol";

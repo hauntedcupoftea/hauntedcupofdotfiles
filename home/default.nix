@@ -88,5 +88,6 @@
   #
   home.sessionVariables = {
     EDITOR = "codium";
+    TERM = "kitty";
   };
 }

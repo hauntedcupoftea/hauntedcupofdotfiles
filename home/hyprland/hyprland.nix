@@ -12,6 +12,7 @@ in {
   # Hyprland home configuration
   wayland.windowManager.hyprland = {
     enable = true;
+    systemd.enable = false;
 
     settings = {
       # Set default terminal to kitty
@@ -20,12 +21,6 @@ in {
       # Mod key (usually Alt or Super)
       "$mod" = "SUPER";
 
-      env = [
-        "LIBVA_DRIVER_NAME,nvidia"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        "NVD_BACKEND,direct"
-      ];
-
       # Basic bindings
       bind =
         [
@@ -33,8 +28,8 @@ in {
           "$mod, M, exit"
           "$mod, C, killactive"
           "$mod, B, togglefloating"
-          "$mod, V, exec,  $terminal --class clipse -e 'clipse'"
-          "$mod, space, exec, wofi --show drun"
+          "$mod, V, exec, uwsm app -- $terminal --class clipse -e 'clipse'"
+          "$mod, space, exec, uwsm app -- wofi --show drun"
 
           # Move focus
           "$mod, left, movefocus, l"
@@ -42,9 +37,16 @@ in {
           "$mod, up, movefocus, u"
           "$mod, down, movefocus, d"
 
-          "$mod, F, exec, zen-beta"
-          "$mod, E, exec, $terminal -e yazi"
-          ", Print, exec, grimblast copy area"
+          "$mod, F, exec, uwsm app -- zen-twilight" # bro i cannot decipher whether zen or zen-beta is the way to go.
+          "$mod, E, exec, uwsm app -- $terminal -e yazi"
+          ", Print, exec, uwsm app -- grimblast copy area"
+          # Example special workspace (scratchpad)
+          "$mod, S, togglespecialworkspace, magic"
+          "$mod SHIFT, S, movetoworkspace, special:magic"
+
+          # Scroll through existing workspaces with mod + scroll
+          "$mod, mouse_down, workspace, e+1"
+          "$mod, mouse_up, workspace, e-1"
         ]
         ++ (
           # workspaces
@@ -59,6 +61,30 @@ in {
             )
             9)
         );
+
+      bindm = [
+        # Move/resize windows with mod + LMB/RMB and dragging
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
+      ];
+
+      # multimedia keys for laptops and keyboards that support it.
+      bindel = [
+        ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+        ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ",XF86MonBrightnessUp, exec, brightnessctl s 10%+"
+        ",XF86MonBrightnessDown, exec, brightnessctl s 10%-"
+      ];
+
+      # playerctl binds
+      bindl = [
+        ", XF86AudioNext, exec, playerctl next"
+        ", XF86AudioPause, exec, playerctl play-pause"
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioPrev, exec, playerctl previous"
+      ];
 
       # Monitor configuration (adjust as needed) (add your own config below)
       monitor = lib.mkIf isGE66Raider [
@@ -76,17 +102,17 @@ in {
 
       # Window Rules
       windowrule = [
-        "float, class:(clipse)"
-        "size 622 652, class:(clipse)"
-        "stayfocused, class:(clipse)"
+        "float,class:(clipse)"
+        "size 622 652,class:(clipse)"
+        "stayfocused,class:(clipse)"
       ];
 
       # Startup applications
       exec-once = [
-        "waybar"
-        "dunst"
-        "nm-applet"
-        "clipse -listen"
+        "uwsm app -- waybar"
+        "uwsm app -- dunst"
+        "uwsm app -- nm-applet"
+        "uwsm app -- clipse -listen"
       ];
     };
   };
