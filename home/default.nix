@@ -45,7 +45,7 @@
     helvum
     easyeffects
     btop
-    neofetch
+    fastfetch
     obsidian
     alejandra
     rustup
