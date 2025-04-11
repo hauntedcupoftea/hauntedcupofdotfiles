@@ -45,8 +45,8 @@ in {
           "$mod SHIFT, S, movetoworkspace, special:magic"
 
           # Scroll through existing workspaces with mod + scroll
-          "$mod, mouse_down, workspace, e+1"
-          "$mod, mouse_up, workspace, e-1"
+          "$mod, mouse_down, workspace, e-1"
+          "$mod, mouse_up, workspace, e+1"
         ]
         ++ (
           # workspaces
