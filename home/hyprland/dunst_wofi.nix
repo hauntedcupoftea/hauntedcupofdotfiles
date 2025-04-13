@@ -38,31 +38,56 @@
       border = 2;
     };
     style = ''
-          window {
-          background-color: #1e1e2e;
-          border: 2px solid #cba6f7;
-          border-radius: 8px;
-          padding: 10px;
+      window {
+        font-family: "DejaVu Sans", "Font Awesome 5 Free";
+        margin: 0px;
+        border: 1px solid rgba(0, 0, 0, 0.9);
+        background-color: rgba(29, 31, 33, 0.95);
+        border-radius: 10px;
       }
 
-      entry {
-          background-color: #1e1e2e;
-          color: #cdd6f4;
+      #input {
+        margin: 5px;
+        border: none;
+        color: #f8f8f2;
+        background-color: rgba(55, 59, 65, 0.95);
       }
 
-      entry:selected {
-          background-color: #cba6f7;
-          color: #1e1e2e;
+      #inner-box {
+        margin: 5px;
+        border: none;
+        background-color: transparent;
       }
 
-      list {
-          background-color: #1e1e2e;
-          color: #cdd6f4;
+      #outer-box {
+        margin: 5px;
+        border: none;
+        background-color: transparent;
       }
 
-      list:selected {
-          background-color: #cba6f7;
-          color: #1e1e2e;
+      #scroll {
+        margin: 0px;
+        border: none;
+      }
+
+      #text {
+        margin: 5px;
+        border: none;
+        color: #c5c8c6;
+      }
+
+      #entry {
+        border: none;
+      }
+
+      #entry:focus {
+        border: none;
+      }
+
+      #entry:selected {
+        background-color: rgba(55, 59, 65, 0.95);
+        border-radius: 5px;
+        border: none;
       }
     '';
   };
