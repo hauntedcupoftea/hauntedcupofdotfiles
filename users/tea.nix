@@ -8,6 +8,7 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.catppuccin.nixosModules.catppuccin
+    inputs.walker.homeManagerModules.default
     # inputs.nvf.homeManagerModules.default # enabling this makes home manager not work?
     # inputs.zen-browser.packages."x86_64-linux"
   ];
