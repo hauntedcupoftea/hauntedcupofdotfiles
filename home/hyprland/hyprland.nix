@@ -20,12 +20,13 @@ in {
 
       # Mod key (usually Alt or Super)
       "$mod" = "SUPER";
+      "$altMod" = "SUPER_SHIFT";
 
       # Basic bindings
       bind =
         [
           "$mod, Q, exec, $terminal"
-          "$mod, M, exit"
+          "$mod, M, wlogout"
           "$mod, C, killactive"
           "$mod, B, togglefloating"
           "$mod, V, exec, uwsm app -- $terminal --class clipse -e 'clipse'"
@@ -40,6 +41,7 @@ in {
           "$mod, F, exec, uwsm app -- zen-twilight" # bro i cannot decipher whether zen or zen-beta is the way to go.
           "$mod, E, exec, uwsm app -- $terminal -e yazi"
           ", Print, exec, uwsm app -- grimblast copy area"
+
           # Example special workspace (scratchpad)
           "$mod, S, togglespecialworkspace, magic"
           "$mod SHIFT, S, movetoworkspace, special:magic"
@@ -47,6 +49,10 @@ in {
           # Scroll through existing workspaces with mod + scroll
           "$mod, mouse_down, workspace, e-1"
           "$mod, mouse_up, workspace, e+1"
+
+          # Alt Mods (color pickers, calculator, etc.)
+          "$altMod, c, exec, uwsm app -- hyprpicker -a"
+          "$altMod, space, exec, uwsm app -- $terminal --class kalker -e kalker -r --no-leading-eq"
         ]
         ++ (
           # workspaces
@@ -105,6 +111,9 @@ in {
         "float,class:(clipse)"
         "size 622 652,class:(clipse)"
         "stayfocused,class:(clipse)"
+        "float,class:(kalker)"
+        "size 622 652,class:(kalker)"
+        "stayfocused,class:(kalker)"
       ];
 
       # Startup applications

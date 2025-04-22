@@ -2,7 +2,8 @@
   imports = [
     ./hyprland.nix
     ./waybar.nix
-    ./dunst_wofi.nix
+    ./dunst.nix
+    ./wofi.nix
     ./wlogout.nix
     ./hyprlock.nix
   ];

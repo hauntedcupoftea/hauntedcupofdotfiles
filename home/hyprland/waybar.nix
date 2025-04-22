@@ -139,8 +139,8 @@
         color: @hover;
       }
 
-      tooltip {
-        background: #45475a;
+      tooltip, #tray menu {
+        background:rgba(69, 71, 90, 0.6);
       }
     '';
 
@@ -155,7 +155,7 @@
           "clock"
           "custom/weather"
           # "custom/media"
-          "bluetooth"
+          "hyprland/window"
         ];
         "modules-center" = [
           # "hyprland/window"
@@ -165,6 +165,7 @@
           "idle_inhibitor"
           # "custom/vpn"
           "network"
+          "bluetooth"
           "pulseaudio"
           "battery"
           "tray"
@@ -197,9 +198,14 @@
 
         # Hyprland window module
         "hyprland/window" = {
-          "format" = "{title}";
-          "empty-format" = "No active window";
-          "tooltip" = false;
+          "format" = "󰣆 {title}";
+          "max-length" = 30;
+          "separate-outputs" = false;
+          "rewrite" = {
+            "^.*( — Firefox| - Mozilla Firefox|Firefox|Zen Browser)$" = " Zen Browser";
+            "^.*~$" = " WezTerm";
+            "(.*) " = " Empty";
+          };
         };
 
         "bluetooth" = {

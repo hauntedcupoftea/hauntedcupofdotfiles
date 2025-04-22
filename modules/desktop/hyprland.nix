@@ -26,6 +26,8 @@
     wl-clipboard
     clipse
     playerctl
+    hyprpicker
+    kalker
   ];
 
   # these are actually tied to both nvidia and hyprland in part,
