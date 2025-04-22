@@ -38,6 +38,8 @@
       #custom-weather,
       #group-hardware,
       hardware,
+      #cpu,
+      #memory,
       #tray {
         margin: 2px 4px;
         border-radius: 10px;
@@ -113,8 +115,8 @@
         background: @hover;
       }
 
-      hardware {
-        color: #f5c2e7;
+      #cpu, #memory, #temperature {
+        color: #89b4fa;
       }
 
       #temperature.critical {
@@ -142,7 +144,7 @@
       }
 
       tooltip, #tray menu {
-        background:rgba(69, 71, 90, 0.6);
+        background:rgba(69, 71, 90, 0.9);
       }
     '';
 
