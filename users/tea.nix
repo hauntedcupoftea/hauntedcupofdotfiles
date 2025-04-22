@@ -8,9 +8,6 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.catppuccin.nixosModules.catppuccin
-    inputs.walker.homeManagerModules.default
-    # inputs.nvf.homeManagerModules.default # enabling this makes home manager not work?
-    # inputs.zen-browser.packages."x86_64-linux"
   ];
 
   # Define a user account
@@ -35,6 +32,7 @@
         ../home
         inputs.catppuccin.homeModules.catppuccin
         inputs.nvf.homeManagerModules.default
+        inputs.walker.homeManagerModules.default
       ];
       home.username = "tea";
       home.homeDirectory = "/home/tea";
