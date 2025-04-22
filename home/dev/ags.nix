@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home.systemPackages = [
+  home.packages = [
     pkgs.ags
   ];
 }
