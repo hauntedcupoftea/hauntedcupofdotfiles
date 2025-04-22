@@ -17,6 +17,7 @@
         alignment = "left";
         horizontal_padding = 10;
         vertical_padding = 10;
+        history_length = 20;
       };
 
       urgency_normal = {

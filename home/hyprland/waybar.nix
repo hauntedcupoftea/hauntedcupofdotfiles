@@ -111,7 +111,7 @@
         background: @hover;
       }
 
-      #temperature {
+      hardware {
         color: #f5c2e7;
       }
 
@@ -169,7 +169,7 @@
           "pulseaudio"
           "battery"
           "tray"
-          "temperature"
+          "group/hardware"
           "custom/power"
         ];
 
@@ -266,6 +266,20 @@
           ];
         };
 
+        "group/hardware" = {
+          "orientation" = "horizontal";
+          "drawer" = {
+            "transition-duration" = 500;
+            "transition-left-to-right" = false;
+          };
+          "modules" = [
+            "battery"
+            "cpu"
+            "memory"
+            "temperature"
+          ];
+        };
+
         # Battery module
         "battery" = {
           "states" = {
@@ -310,16 +324,6 @@
           "exec" = "curl -s 'https://wttr.in/?d&format=%20%m%20%C%20%t%20(%f)%20%w'";
           "exec-if" = "ping wttr.in -c1";
         };
-
-        # Custom VPN module
-        # "custom/vpn" = {
-        #   "tooltip" = false;
-        #   "format" = "VPN {}";
-        #   "exec" = "mullvad status | grep -q 'Connected' && echo '' || echo ''";
-        #   "interval" = 5;
-        #   "on-click" = "mullvad connect";
-        #   "on-click-right" = "mullvad disconnect";
-        # };
 
         # Network module
         "network" = {
