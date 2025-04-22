@@ -145,6 +145,8 @@
 
       tooltip, #tray menu {
         background:rgba(69, 71, 90, 0.9);
+        color: #f5c2e7;
+        padding: 4px;
       }
     '';
 
