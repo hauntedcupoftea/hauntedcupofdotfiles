@@ -52,7 +52,7 @@ in {
 
           # Alt Mods (color pickers, calculator, etc.)
           "$altMod, c, exec, uwsm app -- hyprpicker -a"
-          "$altMod, space, exec, uwsm app -- $terminal --class kalker -e kalker -r --no-leading-eq"
+          # "$altMod, space, exec, uwsm app -- $terminal --class kalker -e kalker -r --no-leading-eq"
         ]
         ++ (
           # workspaces
@@ -111,9 +111,9 @@ in {
         "float,class:(clipse)"
         "size 622 652,class:(clipse)"
         "stayfocused,class:(clipse)"
-        "float,class:(kalker)"
-        "size 622 652,class:(kalker)"
-        "stayfocused,class:(kalker)"
+        # "float,class:(kalker)"
+        # "size 622 652,class:(kalker)"
+        # "stayfocused,class:(kalker)"
       ];
 
       # Startup applications

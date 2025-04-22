@@ -27,7 +27,7 @@
     clipse
     playerctl
     hyprpicker
-    kalker
+    # kalker
   ];
 
   # these are actually tied to both nvidia and hyprland in part,
