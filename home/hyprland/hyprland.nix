@@ -98,12 +98,13 @@ in {
         "eDP-1, 1920x1080@240, 2560x360, 1"
       ];
 
-      workspace = [
-        "1, persistent:true"
-        "2, persistent:true"
-        "3, persistent:true"
-        "4, persistent:true"
-        "5, persistent:true"
+      workspace = lib.mkIf isGE66Raider [
+        "1,persistent:true,monitor:DP-2"
+        "2,persistent:true,monitor:DP-2"
+        "3,persistent:true,monitor:DP-2"
+        "4,persistent:true,monitor:eDP-1"
+        "5,persistent:true,monitor:eDP-1"
+        "6,persistent:true,monitor:eDP-1"
       ];
 
       # Window Rules
