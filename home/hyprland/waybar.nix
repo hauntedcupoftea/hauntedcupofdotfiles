@@ -205,7 +205,7 @@
           "separate-outputs" = false;
           "rewrite" = {
             "^.*( — Firefox| - Mozilla Firefox|Firefox|Zen Browser)$" = " Zen Browser";
-            "^.*~$" = " WezTerm";
+            "^.*~$" = " Kitty";
             "(.*) " = " Empty";
           };
         };
