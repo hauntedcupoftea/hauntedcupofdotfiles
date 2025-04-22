@@ -26,7 +26,7 @@ in {
       bind =
         [
           "$mod, Q, exec, $terminal"
-          "$mod, M, wlogout"
+          "$mod, M, exec, wlogout"
           "$mod, C, killactive"
           "$mod, B, togglefloating"
           "$mod, V, exec, uwsm app -- $terminal --class clipse -e 'clipse'"

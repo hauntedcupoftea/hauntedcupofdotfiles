@@ -36,6 +36,8 @@
       #bluetooth,
       #custom-power,
       #custom-weather,
+      #group-hardware,
+      hardware,
       #tray {
         margin: 2px 4px;
         border-radius: 10px;
@@ -167,7 +169,7 @@
           "network"
           "bluetooth"
           "pulseaudio"
-          "battery"
+          # "battery"
           "tray"
           "group/hardware"
           "custom/power"
