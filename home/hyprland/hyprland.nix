@@ -25,12 +25,12 @@ in {
       # Basic bindings
       bind =
         [
-          "$mod, Q, exec, $terminal"
-          "$mod, M, exec, wlogout"
+          "$mod, Q, exec, uwsm app -- $terminal"
+          "$mod, M, exec, uwsm app -- wlogout"
           "$mod, C, killactive"
           "$mod, B, togglefloating"
           "$mod, V, exec, uwsm app -- $terminal --class clipse -e 'clipse'"
-          "$mod, space, exec, uwsm app -- wofi --show drun"
+          "$mod, space, exec, uwsm app -- walker"
 
           # Move focus
           "$mod, left, movefocus, l"
