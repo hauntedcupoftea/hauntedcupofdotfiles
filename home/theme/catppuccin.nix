@@ -15,6 +15,7 @@
       enable = true;
       accent = "dark";
     };
+    gtk.enable = true;
     hyprland.enable = true;
   };
 }
