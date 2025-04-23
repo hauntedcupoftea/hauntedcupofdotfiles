@@ -13,6 +13,7 @@
       enableCryptodisk = false;
       useOSProber = true; # Detect Windows
       default = "saved"; # Default to last booted OS
+      configurationLimit = 8;
     };
 
     kernelPackages = pkgs.linuxPackages_latest;
