@@ -18,7 +18,6 @@
     hyprland
     kitty
     waybar
-    wofi
     dunst
     libnotify
     networkmanagerapplet
@@ -27,7 +26,6 @@
     clipse
     playerctl
     hyprpicker
-    # kalker
     libqalculate
   ];
 

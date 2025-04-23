@@ -7,5 +7,6 @@
     ./wlogout.nix
     ./hyprlock.nix
     ./walker.nix
+    ./hyprpaper.nix
   ];
 }
