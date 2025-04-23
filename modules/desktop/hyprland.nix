@@ -28,6 +28,7 @@
     playerctl
     hyprpicker
     # kalker
+    libqalculate
   ];
 
   # these are actually tied to both nvidia and hyprland in part,
