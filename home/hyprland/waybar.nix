@@ -208,7 +208,7 @@
           "max-length" = 30;
           "separate-outputs" = false;
           "rewrite" = {
-            "^.*( — Firefox| - Mozilla Firefox|Firefox|Zen Browser)$" = " Zen Browser";
+            "^.*( — Firefox| - Mozilla Firefox|Firefox| — Zen Browser| — Zen Twilight|Zen Twilight)$" = " Zen Browser";
             "^.*~$" = " Kitty";
             "(.*) " = " Empty";
           };
