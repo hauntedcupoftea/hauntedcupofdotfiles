@@ -212,6 +212,7 @@
             "^.*~$" = " Kitty";
             "(.*) " = " Empty";
             "^.*( — VSCode| - VSCodium)$" = " Code";
+            "^.*(Steam|steam)$" = " Steam";
           };
         };
 
