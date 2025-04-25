@@ -15,7 +15,7 @@
     isNormalUser = true;
     description = "Anand Chauhan";
     shell = pkgs.fish;
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "openrazer" "plugdev"];
     packages = with pkgs; [];
   };
 

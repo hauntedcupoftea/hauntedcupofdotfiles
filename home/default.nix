@@ -52,7 +52,6 @@
     inputs.zen-browser.packages."${system}".twilight-official
     yazi
     overskride
-    polychromatic
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
