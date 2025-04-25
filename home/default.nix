@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./dev
+    ./gaming
     ./hardware
     ./hyprland
     ./music
