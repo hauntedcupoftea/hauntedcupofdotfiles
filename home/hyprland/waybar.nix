@@ -211,6 +211,7 @@
             "^.*( — Firefox| - Mozilla Firefox|Firefox| — Zen Browser| — Zen Twilight|Zen Twilight)$" = " Zen Browser";
             "^.*~$" = " Kitty";
             "(.*) " = " Empty";
+            "^.*( — VSCode| - VSCodium)$" = " Code";
           };
         };
 
@@ -219,8 +220,8 @@
           "format-disabled" = "󰂲";
           "format-off" = "󰂲";
           "interval" = 30;
-          "on-click" = "blueman-manager";
-          "on-click-right" = "sleep 0.1 && kill -9 $pgrep blueman-applet";
+          "on-click" = "overskride";
+          "on-click-right" = "killall -SIGUSR1 overskride";
           "format-no-controller" = "";
         };
 

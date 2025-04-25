@@ -3,6 +3,6 @@
     ./nvf.nix
     ./ags.nix
     ./ts.nix
-    ./rust
+    ./rust.nix
   ];
 }

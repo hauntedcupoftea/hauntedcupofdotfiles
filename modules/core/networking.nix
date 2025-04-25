@@ -13,6 +13,14 @@
     # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   };
 
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    settings = {
+      General = {
+        Experimental = true;
+        Enable = "Source,Sink,Media,Socket";
+      };
+    };
+  };
   hardware.bluetooth.powerOnBoot = true; # turns on bluetooth controllers on boot
 }

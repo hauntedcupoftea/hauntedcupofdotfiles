@@ -17,6 +17,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   # Includes basic packges available to a user without much customization.
+  # TODO: Organize this better
   home.packages = with pkgs; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -48,11 +49,10 @@
     fastfetch
     obsidian
     alejandra
-    rustup
-    uv
     inputs.zen-browser.packages."${system}".twilight-official
     yazi
-    blueman
+    overskride
+    polychromatic
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
