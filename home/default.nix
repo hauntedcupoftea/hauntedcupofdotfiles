@@ -6,12 +6,13 @@
   ...
 }: {
   imports = [
-    ./terminals
-    ./shell
-    ./theme
-    ./hyprland
     ./dev
+    ./hardware
+    ./hyprland
     ./music
+    ./shell
+    ./terminals
+    ./theme
     # ./editors
   ];
   # The home.packages option allows you to install Nix packages into your
