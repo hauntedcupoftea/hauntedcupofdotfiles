@@ -1,8 +1,9 @@
 {...}: {
   imports = [
-    ./nvf.nix
     ./ags.nix
-    ./ts.nix
+    ./nvf.nix
+    ./py.nix
     ./rust.nix
+    ./ts.nix
   ];
 }
