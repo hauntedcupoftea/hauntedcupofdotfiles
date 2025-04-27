@@ -14,6 +14,7 @@
     ./shell
     ./terminals
     ./theme
+    ./utils
     # ./editors
   ];
   # The home.packages option allows you to install Nix packages into your
