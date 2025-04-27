@@ -1,7 +1,11 @@
 {pkgs, ...}: {
-  home.packages = [
-    pkgs.ags
-    pkgs.gtk4
-    pkgs.gtk4-layer-shell
+  home.packages = with pkgs; [
+    ags
+    gtk4
+    gtk4-layer-shell
+    nodePackages.typescript
+    gobject-introspection
+    gjs
+    nodejs
   ];
 }
