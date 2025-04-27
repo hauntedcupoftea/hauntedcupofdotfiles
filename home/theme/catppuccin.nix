@@ -15,7 +15,11 @@
       enable = true;
       accent = "dark";
     };
-    gtk.enable = true;
+    gtk = {
+      enable = true;
+      icon.enable = true;
+      tweaks = ["black"];
+    };
     hyprland.enable = true;
   };
 }
