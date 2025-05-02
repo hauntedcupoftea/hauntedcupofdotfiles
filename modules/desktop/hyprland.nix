@@ -56,8 +56,8 @@
     config = {
       common.default = ["gtk"];
       hyprland.default = [
-        "gtk"
         "hyprland"
+        "gtk"
       ];
     };
   };

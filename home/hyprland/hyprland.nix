@@ -123,6 +123,7 @@ in {
         "uwsm app -- dunst"
         "uwsm app -- nm-applet"
         "uwsm app -- clipse -listen"
+        "uwsm app -- walker --gapplication-service"
       ];
     };
   };

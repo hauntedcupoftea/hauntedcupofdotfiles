@@ -5,5 +5,6 @@
     ./gaming.nix
     ./xserver.nix
     ./hyprland.nix
+    ./docker.nix
   ];
 }
