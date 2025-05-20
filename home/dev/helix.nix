@@ -34,111 +34,103 @@
 
     # Language specific configurations
     languages = {
+      # 1. Global Language Server Definitions
+      # These will create [language-server.<name>] blocks in languages.toml
+      "language-server.nil-ls" = {
+        command = "${pkgs.nil}/bin/nil";
+      };
+
+      "language-server.pyright-ls" = {
+        command = "${pkgs.pyright}/bin/pyright-langserver";
+        args = ["--stdio"];
+        config = {
+          python = {
+            # Ensure pkgs.python311 is available
+            pythonPath = "${pkgs.python311}/bin/python";
+            analysis = {
+              # Using "strict" as per your latest generated TOML.
+              # Your previous Nix config had "basic". Adjust if needed.
+              typeCheckingMode = "strict";
+            };
+          };
+        };
+      };
+
+      "language-server.rust-analyzer-ls" = {
+        command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
+      };
+
+      "language-server.typescript-ls" = {
+        command = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server";
+        args = ["--stdio"];
+      };
+
+      "language-server.svelte-ls" = {
+        command = "${pkgs.svelte-language-server}/bin/svelte-language-server";
+        args = ["--stdio"];
+      };
+
+      # 2. Language-specific configurations
+      # This will create [[language]] blocks in languages.toml
       language = [
-        # --- Nix Refined ---
+        # --- Nix ---
         {
           name = "nix";
           auto-format = true;
-          # Language Server: nil
-          language-servers = [{ # Corrected: language-servers is a list
-            command = "${pkgs.nil}/bin/nil";
-          }];
-          # Formatter: nixpkgs-fmt
           formatter = {
             command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
           };
-          # Indent settings
-          indent = {
-            tab-width = 2;
-            unit = "  "; # Two spaces
-          };
+          indent = { tab-width = 2; unit = "  "; };
+          # Reference the globally defined LSP by its name (without "language-server." prefix)
+          language-servers = [ "nil-ls" ];
         }
 
         # --- Python ---
         {
           name = "python";
           auto-format = true;
-          # Language Server: pyright
-          language-servers = [{ 
-            command = "${pkgs.pyright}/bin/pyright-langserver";
-            args = ["--stdio"];
-            config = {
-              python = {
-                pythonPath = "${pkgs.python311}/bin/python"; # Or your project's venv
-                analysis = {
-                  typeCheckingMode = "strict"; # "off", "basic", "strict"
-                };
-              };
-            };
-          }];
-          # Formatter: black
           formatter = {
             command = "${pkgs.black}/bin/black";
-            args = ["--quiet" "-"]; 
+            args = ["--quiet" "-"];
           };
-          indent = {
-            tab-width = 4;
-            unit = "    "; # Four spaces
-          };
+          indent = { tab-width = 4; unit = "    "; };
+          language-servers = [ "pyright-ls" ];
         }
 
         # --- Rust ---
         {
           name = "rust";
           auto-format = true;
-          # Language Server: rust-analyzer
-          language-servers = [{ 
-            command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
-          }];
-          # Formatter: rustfmt
           formatter = {
-            command = "${pkgs.rust-analyzer}/bin/rustfmt"; 
+            command = "${pkgs.rust-analyzer}/bin/rustfmt";
             args = ["--emit=stdout"];
           };
-          indent = {
-            tab-width = 4;
-            unit = "    ";
-          };
+          indent = { tab-width = 4; unit = "    "; };
+          language-servers = [ "rust-analyzer-ls" ];
         }
 
         # --- TypeScript ---
         {
           name = "typescript";
           auto-format = true;
-          # Language Server: typescript-language-server
-          language-servers = [{ 
-            command = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server";
-            args = ["--stdio"];
-          }];
-          # Formatter: prettier
           formatter = {
             command = "${pkgs.nodePackages.prettier}/bin/prettier";
-            args = ["--parser" "typescript" "--stdin-filepath" "%"]; 
+            args = ["--parser" "typescript" "--stdin-filepath" "%"];
           };
-          indent = {
-            tab-width = 2;
-            unit = "  ";
-          };
+          indent = { tab-width = 2; unit = "  "; };
+          language-servers = [ "typescript-ls" ];
         }
 
         # --- Svelte ---
         {
           name = "svelte";
           auto-format = true;
-          # Language Server: svelte-language-server
-          language-servers = [{ 
-            command = "${pkgs.svelte-language-server}/bin/svelte-language-server";
-            args = ["--stdio"];
-          }];
-          # Formatter: prettier
           formatter = {
             command = "${pkgs.nodePackages.prettier}/bin/prettier";
-            args = ["--stdin-filepath" "%"]; 
+            args = ["--stdin-filepath" "%"];
           };
-          indent = {
-            tab-width = 2;
-            unit = "  ";
-          };
+          indent = { tab-width = 2; unit = "  "; };
+          language-servers = [ "svelte-ls" ];
         }
       ];
     };
