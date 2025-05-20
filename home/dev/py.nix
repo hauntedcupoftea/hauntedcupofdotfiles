@@ -1,5 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    uv
+    uv # package manager
+    pyright # Microsoft's Pyright LSP
+    black # Python formatter
   ];
 }

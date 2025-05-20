@@ -89,7 +89,7 @@
   #  /etc/profiles/per-user/tea/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = "codium";
+    # EDITOR = "codium";
     TERM = "kitty";
   };
 }
