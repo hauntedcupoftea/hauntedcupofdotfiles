@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ./ags.nix
-    ./nvf.nix
+    # ./nvf.nix
     ./helix.nix
     ./py.nix
     ./rust.nix

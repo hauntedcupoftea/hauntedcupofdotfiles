@@ -209,10 +209,11 @@
           "separate-outputs" = false;
           "rewrite" = {
             "^.*( — Firefox| - Mozilla Firefox|Firefox| — Zen Browser| — Zen Twilight|Zen Twilight)$" = " Zen Browser";
-            "^.*~$" = " Kitty";
             "(.*) " = " Empty";
             "^.*( — VSCode| - VSCodium)$" = " Code";
             "^.*(Steam|steam)$" = " Steam";
+            "^.*(hx)" = "󰚄 Helix";
+            "^.*~$" = " Kitty";
           };
         };
 
