@@ -34,9 +34,11 @@
         inputs.nvf.homeManagerModules.default
         inputs.walker.homeManagerModules.default
       ];
-      home.username = "tea";
-      home.homeDirectory = "/home/tea";
-      home.stateVersion = "24.11"; # DO NOT CHANGE
+      home = {
+        username = "tea";
+        homeDirectory = "/home/tea";
+        stateVersion = "24.11"; # DO NOT CHANGE
+      };
       programs.home-manager.enable = true;
     };
   };
