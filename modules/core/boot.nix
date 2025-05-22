@@ -19,7 +19,7 @@
     kernelPackages = pkgs.linuxPackages_latest;
 
     loader.efi.canTouchEfiVariables = true;
-    plymouth.enable = true;
+    plymouth.enable = false; # temporarily while we find out why no boot.
 
     # Add NTFS support
     supportedFilesystems = ["ntfs"];

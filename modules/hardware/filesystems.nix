@@ -14,6 +14,7 @@
         "uid=1000"
         "gid=100"
         "umask=007"
+        "nofail"
       ];
     };
     "/mnt/media" = {
@@ -24,6 +25,7 @@
         "uid=1000"
         "gid=100"
         "umask=007"
+	"nofail"
       ];
     };
   };
