@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     helix
 
@@ -36,13 +36,13 @@
     languages = {
       # 1. Global Language Server Definitions
       # These will create [language-server.<name>] blocks in languages.toml
-      "language-server.nil-ls" = {
+      language-server.nil-ls = {
         command = "${pkgs.nil}/bin/nil";
       };
 
-      "language-server.pyright-ls" = {
+      language-server.pyright-ls = {
         command = "${pkgs.pyright}/bin/pyright-langserver";
-        args = ["--stdio"];
+        args = [ "--stdio" ];
         config = {
           python = {
             # Ensure pkgs.python311 is available
@@ -56,18 +56,18 @@
         };
       };
 
-      "language-server.rust-analyzer-ls" = {
+      language-server.rust-analyzer-ls = {
         command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
       };
 
-      "language-server.typescript-ls" = {
+      language-server.typescript-ls = {
         command = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server";
-        args = ["--stdio"];
+        args = [ "--stdio" ];
       };
 
-      "language-server.svelte-ls" = {
+      language-server.svelte-ls = {
         command = "${pkgs.svelte-language-server}/bin/svelte-language-server";
-        args = ["--stdio"];
+        args = [ "--stdio" ];
       };
 
       # 2. Language-specific configurations
@@ -91,7 +91,7 @@
           auto-format = true;
           formatter = {
             command = "${pkgs.black}/bin/black";
-            args = ["--quiet" "-"];
+            args = [ "--quiet" "-" ];
           };
           indent = { tab-width = 4; unit = "    "; };
           language-servers = [ "pyright-ls" ];
@@ -103,7 +103,7 @@
           auto-format = true;
           formatter = {
             command = "${pkgs.rust-analyzer}/bin/rustfmt";
-            args = ["--emit=stdout"];
+            args = [ "--emit=stdout" ];
           };
           indent = { tab-width = 4; unit = "    "; };
           language-servers = [ "rust-analyzer-ls" ];
@@ -115,7 +115,7 @@
           auto-format = true;
           formatter = {
             command = "${pkgs.nodePackages.prettier}/bin/prettier";
-            args = ["--parser" "typescript" "--stdin-filepath" "%"];
+            args = [ "--parser" "typescript" "--stdin-filepath" "%" ];
           };
           indent = { tab-width = 2; unit = "  "; };
           language-servers = [ "typescript-ls" ];
@@ -127,7 +127,7 @@
           auto-format = true;
           formatter = {
             command = "${pkgs.nodePackages.prettier}/bin/prettier";
-            args = ["--stdin-filepath" "%"];
+            args = [ "--stdin-filepath" "%" ];
           };
           indent = { tab-width = 2; unit = "  "; };
           language-servers = [ "svelte-ls" ];
