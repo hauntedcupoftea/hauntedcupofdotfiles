@@ -1,8 +1,5 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ pkgs
+, ...
 }: {
   boot = {
     # Enable GRUB
@@ -19,9 +16,9 @@
     kernelPackages = pkgs.linuxPackages_latest;
 
     loader.efi.canTouchEfiVariables = true;
-    plymouth.enable = false; # temporarily while we find out why no boot.
+    plymouth.enable = true; # temporarily while we find out why no boot.
 
     # Add NTFS support
-    supportedFilesystems = ["ntfs"];
+    supportedFilesystems = [ "ntfs" ];
   };
 }
