@@ -66,7 +66,7 @@
       };
 
       language-server.svelte-ls = {
-        command = "${pkgs.svelte-language-server}/bin/svelte-language-server";
+        command = "${pkgs.svelte-language-server}/bin/svelteserver";
         args = [ "--stdio" ];
       };
 
