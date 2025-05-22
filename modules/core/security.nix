@@ -1,7 +1,11 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   security.rtkit.enable = true;
   security.sudo.enable = true;
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = {
+    text = ''
+      auth include login
+    '';
+  };
   security.polkit.enable = true;
 
   # enable gnome-keyring because it just works(tm)
@@ -17,9 +21,9 @@
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
-      wantedBy = ["graphical-session.target"];
-      wants = ["graphical-session.target"];
-      after = ["graphical-session.target"];
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";

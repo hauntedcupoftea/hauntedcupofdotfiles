@@ -1,14 +1,15 @@
-{
-  pkgs,
-  lib,
-  config,
-  inputs,
-  ...
-}: let
+{ pkgs
+, lib
+, config
+, inputs
+, ...
+}:
+let
   # Extract hostname from the flake target
   # This is a simplified example - actual implementation may need adjustment
-  isGE66Raider = builtins.hasAttr "ge66-raider" (inputs.self.nixosConfigurations or {});
-in {
+  isGE66Raider = builtins.hasAttr "ge66-raider" (inputs.self.nixosConfigurations or { });
+in
+{
   # Hyprland home configuration
   wayland.windowManager.hyprland = {
     enable = true;
@@ -57,10 +58,13 @@ in {
         ++ (
           # workspaces
           # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
-          builtins.concatLists (builtins.genList (
-              i: let
+          builtins.concatLists (builtins.genList
+            (
+              i:
+              let
                 ws = i + 1;
-              in [
+              in
+              [
                 "$mod, code:1${toString i}, workspace, ${toString ws}"
                 "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
               ]
@@ -123,7 +127,7 @@ in {
         "uwsm app -- dunst"
         "uwsm app -- nm-applet"
         "uwsm app -- clipse -listen"
-        "uwsm app -- walker --gapplication-service"
+        # "uwsm app -- walker --gapplication-service" # there is a chance walker already runs it as a systemd service.
       ];
     };
   };
