@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ ...
 }: {
   # Enable networking
   networking = {
@@ -15,6 +11,7 @@
 
   hardware.bluetooth = {
     enable = true;
+    powerOnBoot = true; # turns on bluetooth controllers on boot
     settings = {
       General = {
         Experimental = true;
@@ -22,5 +19,4 @@
       };
     };
   };
-  hardware.bluetooth.powerOnBoot = true; # turns on bluetooth controllers on boot
 }

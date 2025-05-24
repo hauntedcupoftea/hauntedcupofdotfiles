@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ ...
 }: {
   programs.waybar = {
     enable = true;
@@ -213,7 +209,8 @@
             "^.*( — VSCode| - VSCodium)$" = " Code";
             "^.*(Steam|steam)$" = " Steam";
             "^.*(hx)" = "󰚄 Helix";
-            "^.*~$" = " Kitty";
+            "^.*(~$|Zellij)" = " Kitty";
+            "^.*(Discord)$" = " Discord (Vesktop)";
           };
         };
 
