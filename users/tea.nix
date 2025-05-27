@@ -1,9 +1,6 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
+{ pkgs
+, inputs
+, ...
 }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
@@ -15,8 +12,8 @@
     isNormalUser = true;
     description = "Anand Chauhan";
     shell = pkgs.fish;
-    extraGroups = ["networkmanager" "wheel" "openrazer" "plugdev"];
-    packages = with pkgs; [];
+    extraGroups = [ "networkmanager" "wheel" "openrazer" "plugdev" "gamemode" "input" ];
+    packages = [ ];
   };
 
   home-manager = {
@@ -43,5 +40,5 @@
     };
   };
 
-  nix.settings.trusted-users = ["tea"];
+  nix.settings.trusted-users = [ "tea" ];
 }
