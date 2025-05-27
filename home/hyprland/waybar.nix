@@ -206,14 +206,16 @@
           "rewrite" = {
             "^.*( — Firefox| - Mozilla Firefox|Firefox| — Zen Browser| — Zen Twilight|Zen Twilight)$" = " Zen Browser";
             "^.*( — VSCode| - VSCodium)$" = " Code";
+            ".*(Zellij|zellij).*" = " Kitty";
+            ".*(Discord|discord).*" = " Discord (Vesktop)";
             "^.*(Steam|steam)$" = " Steam";
-            "^.*(hx)" = "󰚄 Helix";
-            "^.*(~$|Zellij)" = " Kitty";
-            "^.*(Discord)$" = " Discord (Vesktop)";
-            "(.*) " = " Empty";
+            ".*(hx|Hx|hX|HX).*" = "󰚄 Helix";
+            "^.*~$" = " Backup";
           };
+          "window-rewrite-default" = " {title}";
         };
 
+        # Bluetooth
         "bluetooth" = {
           "format" = "󰂯";
           "format-disabled" = "󰂲";
