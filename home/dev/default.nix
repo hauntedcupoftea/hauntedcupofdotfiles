@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./ags.nix
+    ./docker.nix
     ./nvf.nix
     ./helix.nix
     ./py.nix
