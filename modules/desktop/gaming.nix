@@ -1,7 +1,5 @@
-{
-  pkgs,
-  lib,
-  ...
+{ pkgs
+, ...
 }: {
   programs = {
     steam = {
@@ -12,10 +10,13 @@
 
       gamescopeSession.enable = true;
 
-      extraCompatPackages = [pkgs.proton-ge-bin];
+      extraCompatPackages = [ pkgs.proton-ge-bin ];
     };
 
-    gamemode.enable = true;
+    gamemode = {
+      enable = true;
+      settings.general.inhibit_screensaver = 0;
+    };
 
     gamescope = {
       enable = true;
