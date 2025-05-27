@@ -1,5 +1,5 @@
 { ... }: {
-  virtualisation.containers.enable = true;
+  # virtualisation.containers.enable = true;
   virtualisation.docker = {
     enable = false;
     rootless = {
@@ -12,5 +12,8 @@
       };
     };
     enableNvidia = true;
+  };
+  boot.kernel.sysctl = {
+    "net.ipv4.conf.all.forwarding" = true;
   };
 }
