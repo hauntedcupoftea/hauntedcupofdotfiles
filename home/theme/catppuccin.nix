@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
+{ ...
 }: {
   catppuccin = {
     enable = true;
@@ -15,10 +10,11 @@
       enable = true;
       accent = "dark";
     };
+    gitui.enable = true;
     gtk = {
       enable = true;
       icon.enable = true;
-      tweaks = ["black"];
+      tweaks = [ "black" ];
     };
     hyprland.enable = true;
   };
