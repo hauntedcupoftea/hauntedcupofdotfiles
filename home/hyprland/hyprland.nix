@@ -41,8 +41,14 @@ in
 
           "$mod, F, exec, uwsm app -- zen-twilight" # bro i cannot decipher whether zen or zen-beta is the way to go.
           "$mod, E, exec, uwsm app -- $terminal -e yazi"
-          ", Print, exec, uwsm app -- grimblast copy area"
-
+          # Screenshot a region (freezing)
+          ", Print, exec, uwsm app -- hyprshot -m region -z --clipboard-only"
+          # Screenshot a window
+          "$mod, PRINT, exec, uwsm app -- hyprshot -m window"
+          # Screenshot a monitor
+          "SUPER_ALT, PRINT, exec, uwsm app -- hyprshot -m output"
+          # Screenshot a region (non-freezing)
+          "$altMod, PRINT, exec, uwsm app -- hyprshot -m region --clipboard-only"
           # Example special workspace (scratchpad)
           "$mod, S, togglespecialworkspace, magic"
           "$mod SHIFT, S, movetoworkspace, special:magic"

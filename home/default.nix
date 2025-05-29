@@ -1,9 +1,8 @@
-{
-  config,
-  pkgs,
-  inputs,
-  system,
-  ...
+{ config
+, pkgs
+, inputs
+, system
+, ...
 }: {
   imports = [
     ./dev
@@ -40,6 +39,7 @@
     # '')
     # floorp
     grimblast
+    hyprshot
     vscodium
     vesktop
     wget
