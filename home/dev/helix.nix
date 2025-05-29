@@ -46,7 +46,7 @@
         config = {
           python = {
             # Ensure pkgs.python311 is available
-            pythonPath = "${pkgs.python311}/bin/python";
+            # pythonPath = "${pkgs.python311}/bin/python"; # static python path for what purpose??
             analysis = {
               # Using "strict" as per your latest generated TOML.
               # Your previous Nix config had "basic". Adjust if needed.

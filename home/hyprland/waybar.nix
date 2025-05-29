@@ -206,11 +206,12 @@
           "rewrite" = {
             "^.*( — Firefox| - Mozilla Firefox|Firefox| — Zen Browser| — Zen Twilight|Zen Twilight)$" = " Zen Browser";
             "^.*( — VSCode| - VSCodium)$" = " Code";
-            ".*(Zellij|zellij).*" = " Kitty";
+            ".*(Zellij|zellij|fish).*" = " Kitty";
             ".*(Discord|discord).*" = " Discord (Vesktop)";
             "^.*(Steam|steam)$" = " Steam";
             ".*(hx|Hx|hX|HX).*" = "󰚄 Helix";
             "^.*~$" = " Backup";
+            "(.*) " = " Empty";
           };
           "window-rewrite-default" = " {title}";
         };

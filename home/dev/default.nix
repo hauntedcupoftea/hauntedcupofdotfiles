@@ -2,6 +2,7 @@
   imports = [
     ./ags.nix
     ./docker.nix
+    ./git.nix
     ./nvf.nix
     ./helix.nix
     ./py.nix
