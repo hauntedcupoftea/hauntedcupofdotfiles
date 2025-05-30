@@ -20,7 +20,10 @@
       size = "standard";
       tweaks = [ "normal" ];
     };
-    gitui.enable = true;
+    gitui = {
+      enable = true;
+      flavor = "mocha";
+    };
     hyprland.enable = true;
   };
 }
