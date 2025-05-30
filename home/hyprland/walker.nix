@@ -1,7 +1,6 @@
-{
-  inputs,
-  system,
-  ...
+{ inputs
+, system
+, ...
 }: {
   home.packages = [
     inputs.walker.packages."${system}".default
@@ -13,6 +12,7 @@
 
     # All options from the config.json can be used here.
     config = {
+      app_launch_prefix = "uwsm app -- ";
       search.placeholder = "Example";
       ui.fullscreen = true;
       list = {
