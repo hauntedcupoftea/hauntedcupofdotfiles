@@ -41,7 +41,6 @@
     grimblast
     hyprshot
     vscodium
-    vesktop
     wget
     git
     brightnessctl
@@ -91,5 +90,6 @@
   home.sessionVariables = {
     # EDITOR = "codium";
     TERM = "kitty";
+    BROWSER = "zen";
   };
 }
