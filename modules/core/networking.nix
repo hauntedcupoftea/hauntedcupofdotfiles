@@ -14,6 +14,9 @@
   #   "net.ipv6.conf.default.accept_ra" = 2;
   # };
 
+  # This will let us install better wifi drivers supposedly
+  hardware.enableRedistributableFirmware = true;
+
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true; # turns on bluetooth controllers on boot
