@@ -12,6 +12,9 @@
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.hyprland.enableGnomeKeyring = true;
 
+  # ssh agent for git gaming
+  programs.ssh.startAgent = true;
+
   environment.systemPackages = [
     pkgs.polkit
     pkgs.polkit_gnome

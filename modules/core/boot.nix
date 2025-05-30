@@ -13,10 +13,10 @@
       configurationLimit = 8;
     };
 
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_6_14; # temporarily until openrazer is fixed.
 
     loader.efi.canTouchEfiVariables = true;
-    plymouth.enable = true; # temporarily while we find out why no boot.
+    plymouth.enable = true;
 
     # Add NTFS support
     supportedFilesystems = [ "ntfs" ];
