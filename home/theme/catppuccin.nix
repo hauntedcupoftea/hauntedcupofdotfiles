@@ -10,12 +10,17 @@
       enable = true;
       accent = "dark";
     };
-    gitui.enable = true;
     gtk = {
       enable = true;
-      icon.enable = true;
-      tweaks = [ "black" ];
+      icon = {
+        enable = false;
+      };
+      flavor = "mocha";
+      accent = "blue";
+      size = "standard";
+      tweaks = [ "normal" ];
     };
+    gitui.enable = true;
     hyprland.enable = true;
   };
 }

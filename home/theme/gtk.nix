@@ -1,13 +1,6 @@
-{ inputs, ... }: {
-  imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
+{ ... }: {
+  # imports = [ inputs.catppuccin.homeModules.catppuccin ];
   gtk = {
     enable = true;
-    catppuccin = {
-      enable = true;
-      flavor = "mocha";
-      accent = "blue";
-      size = "standard";
-      tweaks = [ "black" ];
-    };
   };
 }
