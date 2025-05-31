@@ -6,23 +6,22 @@
   ];
   programs.walker = {
     enable = true;
-    # package = pkgs.walker; # Or however you reference your walker package
-    runAsService = false; # Or true, if you prefer
+    runAsService = true;
 
     # This is Walker's main configuration
     config = {
-      # Example:
+      app_launch_prefix = "uwsm app --";
+      ui.fullscreen = true;
+      list = {
+        height = 200;
+      };
+      websearch.prefix = "?";
+      switcher.prefix = "/";
       general.runner_mode = "drun";
-      # The module you provided automatically sets `programs.walker.config.theme`
-      # to the name of the theme defined below (which will be "nixos"
-      # due to the module's hardcoded theme.name).
     };
 
     # This is where you define your custom theme using the submodule structure
     theme = {
-      # As per your module, the generated files will be named "nixos.toml" and "nixos.css"
-      # because `theme.name` is "nixos" in the module's `theme` definition.
-      # Walker will be configured to use the theme named "nixos".
       layout = {
         ui.anchors = {
           bottom = true;
@@ -133,7 +132,7 @@
       };
 
       style = ''
-                /* Catppuccin Mocha Blue Theme for Walker - Adapted to Default Structure */
+        /* Catppuccin Mocha Blue Theme for Walker - Adapted to Default Structure */
 
         /* Palette: Catppuccin Mocha */
         :root {
