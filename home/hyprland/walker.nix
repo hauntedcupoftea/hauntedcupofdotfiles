@@ -10,7 +10,7 @@
 
     # This is Walker's main configuration
     config = {
-      app_launch_prefix = "uwsm app --";
+      app_launch_prefix = "uwsm app -- ";
       ui.fullscreen = true;
       list = {
         height = 200;
