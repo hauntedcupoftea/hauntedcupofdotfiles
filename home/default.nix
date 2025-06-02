@@ -1,5 +1,4 @@
-{ config
-, pkgs
+{ pkgs
 , inputs
 , system
 , ...
@@ -38,9 +37,9 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     # floorp
+    bat
     grimblast
     hyprshot
-    vscodium
     wget
     git
     brightnessctl
@@ -50,7 +49,6 @@
     btop
     fastfetch
     obsidian
-    alejandra
     inputs.zen-browser.packages."${system}".twilight-official
     yazi
     overskride
