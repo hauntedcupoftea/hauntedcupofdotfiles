@@ -1,6 +1,5 @@
 { ... }: {
   imports = [
-    ./btop.nix
-    ./misc
+    ./bat.nix
   ];
 }
