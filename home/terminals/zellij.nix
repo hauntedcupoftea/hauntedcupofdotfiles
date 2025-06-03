@@ -1,5 +1,5 @@
-{pkgs, ...}: {
-  home.packages = [pkgs.zellij];
+{ pkgs, ... }: {
+  home.packages = [ pkgs.zellij ];
   programs.zellij = {
     enable = true;
 
@@ -19,6 +19,7 @@
     settings = {
       default_shell = "fish";
       theme = "catppuccin-mocha";
+      show_startup_tips = false;
 
       # Other Zellij options you might want:
       # default_layout = "compact";
