@@ -4,6 +4,8 @@
     enable = true;
     flavor = "mocha";
     accent = "blue";
+
+    # APPLICATION SETTINGS
     bat.enable = true;
     btop.enable = true;
     cursors = {
@@ -28,5 +30,6 @@
     };
     hyprland.enable = true;
     hyprlock.enable = true;
+    yazi.enable = true;
   };
 }

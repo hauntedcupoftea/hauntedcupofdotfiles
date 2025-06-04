@@ -37,7 +37,6 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     # floorp
-    bat
     grimblast
     hyprshot
     wget
@@ -50,7 +49,6 @@
     fastfetch
     obsidian
     inputs.zen-browser.packages."${system}".twilight-official
-    yazi
     overskride
   ];
 
