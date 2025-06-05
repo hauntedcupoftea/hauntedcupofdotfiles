@@ -13,8 +13,10 @@
         error_symbol = "[✗](bold red)";
       };
       nix_shell = {
-        impure_msg = "󱄅";
-        pure_msg = "󱄅";
+        symbol = "󱄅";
+        impure_msg = "";
+        pure_msg = "";
+        format = "via [$symbol$state( \($name\))]($style) ";
       };
     };
   };
