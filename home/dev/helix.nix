@@ -113,10 +113,10 @@
         {
           name = "typescript";
           auto-format = true;
-          formatter = {
-            command = "${pkgs.nodePackages.prettier}/bin/prettier";
-            args = [ "--parser" "typescript" "--stdin-filepath" "%" ];
-          };
+          # formatter = {
+          #   command = "${pkgs.nodePackages.prettier}/bin/prettier";
+          #   args = [ "--parser" "typescript" "--stdin-filepath" "%" ];
+          # };
           indent = { tab-width = 2; unit = "  "; };
           language-servers = [ "typescript-ls" ];
         }
@@ -125,10 +125,10 @@
         {
           name = "svelte";
           auto-format = true;
-          formatter = {
-            command = "${pkgs.nodePackages.prettier}/bin/prettier";
-            args = [ "--stdin-filepath" "%" ];
-          };
+          # formatter = {
+          #   command = "${pkgs.nodePackages.prettier}/bin/prettier";
+          #   args = [ "--stdin-filepath" "%" ];
+          # };
           indent = { tab-width = 2; unit = "  "; };
           language-servers = [ "svelte-ls" ];
         }
