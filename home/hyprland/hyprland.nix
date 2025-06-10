@@ -130,7 +130,6 @@ in
       exec-once = [
         "uwsm app -- waybar"
         "uwsm app -- dunst"
-        "uwsm app -- nm-applet"
         "uwsm app -- clipse -listen"
         # "uwsm app -- walker --gapplication-service" # there is a chance walker already runs it as a systemd service.
       ];

@@ -50,6 +50,9 @@
     obsidian
     inputs.zen-browser.packages."${system}".twilight-official
     overskride
+    iwgtk
+    peazip
+    sioyek
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
