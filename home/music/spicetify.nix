@@ -23,7 +23,7 @@ in
       betterLibrary
       ncsVisualizer
     ];
-    theme = spicePkgs.themes.text;
-    colorScheme = "CatppuccinMocha";
+    theme = spicePkgs.themes.catppuccin;
+    colorScheme = "mocha";
   };
 }

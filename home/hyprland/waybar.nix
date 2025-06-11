@@ -132,8 +132,8 @@
 
       #custom-power {
         margin-right: 0px;
-        color: @text;
-        background: @background;
+        color: #ff2c2c;
+        background: #1e1e2e;
       }
       #custom-power:hover {
         color: @hover;
