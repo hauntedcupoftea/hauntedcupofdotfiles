@@ -9,5 +9,11 @@
     dualsensectl
     wineWowPackages.stable
     winetricks
+    goverlay
   ];
+
+  programs.mangohud = {
+    enable = true;
+    # TODO: add settings (copy from goverlay probably)
+  };
 }
