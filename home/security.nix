@@ -2,9 +2,9 @@
   home.packages = [
     pkgs.seahorse
   ];
+
   services.gnome-keyring = {
     enable = true;
-    unlockOnLogin = true;
     components = [ "pkcs11" "secrets" "ssh" ];
   };
 
