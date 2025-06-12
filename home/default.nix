@@ -10,6 +10,7 @@
     ./hyprland
     ./music
     ./shell
+    ./security.nix
     ./terminals
     ./theme
     ./utils
