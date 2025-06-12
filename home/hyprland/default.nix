@@ -1,8 +1,9 @@
-{...}: {
+{ ... }: {
   imports = [
     ./hyprland.nix
     ./waybar.nix
     ./dunst.nix
+    ./hypridle.nix
     # ./wofi.nix
     ./wlogout.nix
     ./hyprlock.nix

@@ -91,5 +91,6 @@
     # EDITOR = "codium";
     TERM = "kitty";
     BROWSER = "zen";
+    ELECTRON_OZONE_PLATFORM_HINT = "auto"; # for nvidia/wayland i think
   };
 }
