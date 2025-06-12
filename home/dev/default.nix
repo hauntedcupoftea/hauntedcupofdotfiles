@@ -1,6 +1,5 @@
 { ... }: {
   imports = [
-    ./ags.nix
     ./docker.nix
     ./git.nix
     ./nvf.nix
