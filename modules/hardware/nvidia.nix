@@ -16,7 +16,7 @@
     modesetting.enable = true;
 
     # Power management settings
-    powerManagement.enable = true;
+    powerManagement.enable = false;
     powerManagement.finegrained = false;
 
     # Using proprietary driver
