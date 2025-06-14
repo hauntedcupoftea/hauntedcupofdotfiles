@@ -10,6 +10,7 @@
     fzf
     zoxide
     imagemagick
+    dragon-drop
   ];
 
   programs.yazi = {
@@ -18,6 +19,12 @@
     settings = {
       mgr = {
         linemode = "size";
+      };
+    };
+    keymap = {
+      mgr.prepend_keymap = {
+        on = "<C-n>";
+        run = ''shell -- dragon -x -i -T "$1"'';
       };
     };
   };
