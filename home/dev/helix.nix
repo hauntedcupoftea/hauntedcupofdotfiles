@@ -4,8 +4,11 @@
 
     # Python, Rust, TypeScript & JavaScript in their respective files.
     # HTML/CSS/MD
-    markdown-oxide
+    marksman
     vscode-langservers-extracted
+
+    # llvm DAP
+    lldb_20
 
     # Nix
     nil # Nix Language Server
@@ -105,7 +108,7 @@
           name = "rust";
           auto-format = true;
           formatter = {
-            command = "${pkgs.rust-analyzer}/bin/rustfmt";
+            command = "rustfmt";
             args = [ "--emit=stdout" ];
           };
           indent = { tab-width = 4; unit = "    "; };
