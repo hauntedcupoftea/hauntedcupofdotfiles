@@ -3,6 +3,9 @@
     helix
 
     # Python, Rust, TypeScript & JavaScript in their respective files.
+    # HTML/CSS/MD
+    markdown-oxide
+    vscode-langservers-extracted
 
     # Nix
     nil # Nix Language Server
