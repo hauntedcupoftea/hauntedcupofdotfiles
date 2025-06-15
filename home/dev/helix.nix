@@ -5,7 +5,11 @@
     # Python, Rust, TypeScript & JavaScript in their respective files.
     # HTML/CSS/MD
     marksman
+    markdown-oxide
     vscode-langservers-extracted
+
+    # TOML
+    taplo
 
     # llvm DAP
     lldb_20
