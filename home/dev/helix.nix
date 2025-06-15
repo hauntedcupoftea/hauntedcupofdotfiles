@@ -50,20 +50,14 @@
         command = "${pkgs.nil}/bin/nil";
       };
 
-      language-server.pyright-ls = {
-        command = "${pkgs.pyright}/bin/pyright-langserver";
+      language-server.pyright = {
+        command = "pyright-langserver";
         args = [ "--stdio" ];
-        config = {
-          python = {
-            # Ensure pkgs.python311 is available
-            # pythonPath = "${pkgs.python311}/bin/python"; # static python path for what purpose??
-            analysis = {
-              # Using "strict" as per your latest generated TOML.
-              # Your previous Nix config had "basic". Adjust if needed.
-              typeCheckingMode = "strict";
-            };
-          };
-        };
+      };
+
+      language-server.ruff = {
+        command = "ruff";
+        args = [ "server" ];
       };
 
       language-server.rust-analyzer-ls = {
@@ -104,7 +98,7 @@
             args = [ "--quiet" "-" ];
           };
           indent = { tab-width = 4; unit = "    "; };
-          language-servers = [ "pyright-ls" ];
+          language-servers = [ "pyright-ls" "ruff" ];
         }
 
         # --- Rust ---
