@@ -9,5 +9,6 @@
     ./hyprlock.nix
     ./walker.nix
     ./hyprpaper.nix
+    ./hyprsunset.nix
   ];
 }
