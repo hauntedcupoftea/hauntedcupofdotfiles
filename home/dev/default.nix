@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [
     ./docker.nix
     ./git.nix
@@ -7,6 +7,11 @@
     ./py.nix
     ./rust.nix
     ./ts.nix
+  ];
+
+  home.packages = with pkgs; [
+    # misc packages
+    bruno # api testing tool that works on plaintext
   ];
 
   # my preferred, feel free to change:
