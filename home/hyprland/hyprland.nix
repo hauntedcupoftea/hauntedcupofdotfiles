@@ -1,12 +1,8 @@
-{ pkgs
-, lib
-, config
+{ lib
 , inputs
 , ...
 }:
 let
-  # Extract hostname from the flake target
-  # This is a simplified example - actual implementation may need adjustment
   isGE66Raider = builtins.hasAttr "ge66-raider" (inputs.self.nixosConfigurations or { });
 in
 {
@@ -22,6 +18,15 @@ in
       # Mod key (usually Alt or Super)
       "$mod" = "SUPER";
       "$altMod" = "SUPER_SHIFT";
+
+      general = {
+        gaps_in = 5;
+        gaps_out = 10;
+      };
+
+      decoration = {
+        rounding = 8;
+      };
 
       # Basic bindings
       bind =
@@ -46,7 +51,7 @@ in
           # Screenshot a region (non-freezing)
           "$altMod, PRINT, exec, uwsm app -- hyprshot -m region --clipboard-only"
           # Screenshot a monitor
-          "SUPER_ALT, PRINT, exec, uwsm app -- hyprshot -m output"
+          "SUPER, PRINT, exec, uwsm app -- hyprshot -m output"
 
           # Example special workspace (scratchpad)
           "$mod, S, togglespecialworkspace, magic"
