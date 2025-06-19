@@ -1,9 +1,8 @@
-{
-  inputs,
-  pkgs,
-  lib,
-  config,
-  ...
+{ inputs
+, pkgs
+, lib
+, config
+, ...
 }: {
   # Enable Hyprland at the system level
   programs.hyprland = {
@@ -18,7 +17,6 @@
     hyprland
     kitty
     waybar
-    dunst
     libnotify
     networkmanagerapplet
     pavucontrol
@@ -54,7 +52,7 @@
     enable = true;
     wlr.enable = true;
     config = {
-      common.default = ["gtk"];
+      common.default = [ "gtk" ];
       hyprland.default = [
         "hyprland"
         "gtk"
