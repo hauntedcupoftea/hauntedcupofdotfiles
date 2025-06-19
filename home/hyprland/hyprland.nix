@@ -9,7 +9,7 @@ in
   # Hyprland home configuration
   wayland.windowManager.hyprland = {
     enable = true;
-    systemd.enable = false;
+    systemd.enable = true;
 
     settings = {
       # Set default terminal to kitty
