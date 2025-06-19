@@ -2,6 +2,10 @@
   home.packages = with pkgs; [
     helix
 
+    # docker/compose files
+    # docker-compose-langserver
+    # docker-langserver
+
     # Python, Rust, TypeScript & JavaScript in their respective files.
     # HTML/CSS/MD
     marksman
@@ -10,6 +14,9 @@
 
     # TOML
     taplo
+
+    # YAML
+    yaml-language-server
 
     # llvm DAP
     lldb_20
