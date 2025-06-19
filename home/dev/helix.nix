@@ -98,7 +98,7 @@
             args = [ "--quiet" "-" ];
           };
           indent = { tab-width = 4; unit = "    "; };
-          language-servers = [ "pyright-ls" "ruff" ];
+          language-servers = [ "pyright" "ruff" ];
         }
 
         # --- Rust ---
