@@ -3,6 +3,7 @@
   services.mako = {
     enable = true;
     settings = {
+      actions = true;
       font = "FiraCode Nerd Font 12";
       width = 500;
       max-height = 300;
