@@ -10,8 +10,8 @@
       margin = "10,30,50";
       padding = 10;
       border-size = 1;
-      background-color = "#37474fE6";
-      text-color = "#eceff1";
+      # background-color = "#37474fE6";
+      # text-color = "#eceff1";
       text-alignment = "left";
       max-visible = 20;
       default-timeout = 10000;
