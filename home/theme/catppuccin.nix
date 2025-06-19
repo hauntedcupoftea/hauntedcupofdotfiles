@@ -12,7 +12,7 @@
       enable = true;
       accent = "dark";
     };
-    dunst.enable = true;
+    mako.enable = true;
     fish.enable = true;
     gtk = {
       enable = true;
