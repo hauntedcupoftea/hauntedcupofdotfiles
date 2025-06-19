@@ -56,7 +56,7 @@
       }
       {
         "label" = "logout";
-        "action" = ''loginctl terminate user ""'';
+        "action" = "hyprctl dispatch exit";
         "text" = "Logout";
         "keybind" = "e";
       }
