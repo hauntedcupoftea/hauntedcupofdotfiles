@@ -13,7 +13,7 @@
       configurationLimit = 8;
     };
 
-    kernelPackages = pkgs.linuxPackages_6_14; # temporarily until openrazer is fixed
+    kernelPackages = pkgs.linuxPackages_latest;
 
     loader.efi.canTouchEfiVariables = true;
     plymouth.enable = true;
