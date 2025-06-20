@@ -157,8 +157,8 @@
           --yellow: #f9e2af;
           --peach: #fab387;
 
-          --border-radius: 2px; /* From default.css */
-          --item-padding: 8px;  /* From default.css child padding */
+          --border-radius: 8px; /* From default.css */
+          --item-padding: 12px;  /* From default.css child padding */
         }
 
         /* Reset from default.css */

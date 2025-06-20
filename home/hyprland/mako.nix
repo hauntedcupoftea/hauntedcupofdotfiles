@@ -16,6 +16,8 @@
       text-alignment = "left";
       max-visible = 20;
       default-timeout = 10000;
+      max-history = 20;
+      border-radius = 8;
 
       "urgency=low" = {
         border-color = "#44B9B1E6";

@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   programs.wofi = {
     enable = true;
     settings = {
@@ -15,7 +15,7 @@
         margin: 0px;
         border: 1px solid rgba(0, 0, 0, 0.9);
         background-color: rgba(29, 31, 33, 0.95);
-        border-radius: 10px;
+        border-radius: 8px;
       }
 
       #input {
@@ -58,7 +58,7 @@
 
       #entry:selected {
         background-color: rgba(55, 59, 65, 0.95);
-        border-radius: 5px;
+        border-radius: 8px;
         border: none;
       }
     '';
