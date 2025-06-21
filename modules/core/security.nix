@@ -11,6 +11,7 @@
   # enable gnome-keyring because it just works(tm)
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.hyprland.enableGnomeKeyring = true;
+  security.pam.services.sddm.enableGnomeKeyring = true;
 
   environment.systemPackages = [
     pkgs.polkit
