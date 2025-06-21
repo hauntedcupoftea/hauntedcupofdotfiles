@@ -1,10 +1,10 @@
 { pkgs, ... }: {
   imports = [
-    ./docker.nix
     ./git.nix
     ./nvf.nix
     ./helix.nix
     ./py.nix
+    ./podman.nix
     ./rust.nix
     ./ts.nix
   ];

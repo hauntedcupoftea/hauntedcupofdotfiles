@@ -6,13 +6,6 @@
     enable = true;
   };
 
-  boot.initrd.availableKernelModules = [
-    "nvidia"
-    "nvidia_modeset"
-    "nvidia_uvm"
-    "nvidia_drm"
-  ];
-
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = [ "nvidia" ];
 
