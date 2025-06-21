@@ -1,14 +1,14 @@
 { ... }: {
   imports = [
     ./hyprland.nix
-    ./waybar.nix
     ./hypridle.nix
-    # ./wofi.nix
-    ./wlogout.nix
+    # ./wofi.nix # use either this or walker.
     ./hyprlock.nix
-    ./mako.nix
-    ./walker.nix
     ./hyprpaper.nix
-    ./hyprsunset.nix
+    ./mako.nix
+    ./waybar.nix
+    ./walker.nix
+    ./wlogout.nix
+    ./wlsunset.nix
   ];
 }

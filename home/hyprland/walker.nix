@@ -4,6 +4,11 @@
   home.packages = [
     inputs.walker.packages."${system}".default
   ];
+
+  systemd.user.services.walker = {
+    Unit.After = "hyprland-session.target";
+  };
+
   programs.walker = {
     enable = true;
     runAsService = true;
