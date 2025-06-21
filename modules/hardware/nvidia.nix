@@ -1,6 +1,4 @@
 { config
-, lib
-, pkgs
 , ...
 }: {
   # Enable OpenGL
@@ -14,9 +12,6 @@
     "nvidia_uvm"
     "nvidia_drm"
   ];
-
-  # Tell the NVIDIA driver to take over display control early.
-  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = [ "nvidia" ];

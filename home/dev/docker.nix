@@ -16,12 +16,4 @@
       };
     };
   };
-
-  # resolving systemd boot errors
-  systemd.user.services.docker = {
-    Unit = {
-      After = [ "graphical-session.target" ];
-      PartOf = [ "graphical-session.target" ];
-    };
-  };
 }
