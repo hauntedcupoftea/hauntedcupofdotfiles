@@ -10,6 +10,7 @@
       podman-tui
       dive
       docker-compose
+      pods
     ];
   };
 }
