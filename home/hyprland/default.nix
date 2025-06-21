@@ -1,5 +1,6 @@
 { ... }: {
   imports = [
+    ./gammastep.nix
     ./hyprland.nix
     ./hypridle.nix
     # ./wofi.nix # use either this or walker.
@@ -9,6 +10,5 @@
     ./waybar.nix
     ./walker.nix
     ./wlogout.nix
-    ./wlsunset.nix
   ];
 }
