@@ -136,7 +136,7 @@ in
         "uwsm app -- waybar"
         "uwsm app -- clipse -listen"
         "uwsm app -- gnome-keyring-daemon --start --components=pkcs11,secrets,ssh" # i may have been stupid
-        # "uwsm app -- walker --gapplication-service" # there is a chance walker already runs it as a systemd service.
+        "uwsm app -- walker --gapplication-service"
       ];
     };
   };

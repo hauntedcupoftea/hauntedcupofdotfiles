@@ -5,13 +5,9 @@
     inputs.walker.packages."${system}".default
   ];
 
-  systemd.user.services.walker = {
-    Unit.After = "hyprland-session.target";
-  };
-
   programs.walker = {
     enable = true;
-    runAsService = true;
+    runAsService = false; # i will run this from hyprland because systemd cannot figure it out
 
     # This is Walker's main configuration
     config = {
