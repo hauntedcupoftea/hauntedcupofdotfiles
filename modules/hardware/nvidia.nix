@@ -1,4 +1,5 @@
 { config
+, pkgs
 , ...
 }: {
   # Enable OpenGL
@@ -26,4 +27,6 @@
     # Use stable driver package
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+
+  environment.systemPackages = with pkgs; [ nvidia-vaapi-driver libva-utils ];
 }

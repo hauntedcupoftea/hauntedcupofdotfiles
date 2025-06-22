@@ -1,6 +1,18 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
-    vesktop
+    (pkgs.vesktop.override {
+      commandLineArgs = [
+        # tells electron to use the VA-API for both decoding and encoding video.
+        "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder"
+        # Forces hardware acceleration even if electron thinks your GPU is unsupported.
+        "--ignore-gpu-blocklist"
+        # General performance improvements for rendering.
+        "--enable-gpu-rasterization"
+        "--enable-zero-copy"
+        # ozone hint for wayland/hyprland.
+        "--ozone-platform-hint=auto"
+      ];
+    })
     arrpc
   ];
 
