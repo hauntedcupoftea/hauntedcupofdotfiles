@@ -1,7 +1,7 @@
 { ... }: {
   imports = [
     # ./gnome.nix # fallback
-    ./appimage.nix
+    # ./appimage.nix
     ./fonts.nix
     ./gaming.nix
     ./xserver.nix

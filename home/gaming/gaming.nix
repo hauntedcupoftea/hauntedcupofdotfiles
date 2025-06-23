@@ -10,6 +10,7 @@
     wineWowPackages.stable
     winetricks
     goverlay
+    samrewritten
   ];
 
   programs.mangohud = {
