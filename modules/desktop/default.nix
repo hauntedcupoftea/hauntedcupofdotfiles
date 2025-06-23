@@ -6,5 +6,6 @@
     ./xserver.nix
     ./hyprland.nix
     ./podman.nix
+    ./teamviewer.nix
   ];
 }
