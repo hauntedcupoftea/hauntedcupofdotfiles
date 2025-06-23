@@ -7,7 +7,7 @@
 
   programs.walker = {
     enable = true;
-    runAsService = false; # i will run this from hyprland because systemd cannot figure it out
+    runAsService = true; # seeing this set to true again, it fills you with deterination!
 
     # This is Walker's main configuration
     config = {

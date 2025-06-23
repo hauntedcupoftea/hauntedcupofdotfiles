@@ -13,7 +13,7 @@
   };
 
   home.file = {
-    "${config.xdg.configHome}/gammastep" = {
+    "${config.xdg.configHome}/gammastep/hooks" = {
       source = ../../custom-files/gammastep/hooks;
       recursive = true;
     };

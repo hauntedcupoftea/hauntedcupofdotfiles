@@ -136,7 +136,7 @@ in
         "uwsm app -- waybar"
         "uwsm app -- clipse -listen"
         "uwsm app -- gnome-keyring-daemon --start --components=pkcs11,secrets,ssh" # i may have been stupid
-        "uwsm app -- walker --gapplication-service"
+        # "uwsm app -- walker --gapplication-service" # i WILL figure out walker.service activation, no one can stop me (not even you).
       ];
     };
   };
