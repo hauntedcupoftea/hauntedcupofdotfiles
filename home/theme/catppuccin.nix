@@ -14,6 +14,7 @@
     };
     mako.enable = true;
     fish.enable = true;
+    fzf.enable = true;
     gtk = {
       enable = true;
       icon = {

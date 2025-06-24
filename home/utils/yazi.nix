@@ -7,8 +7,8 @@
     poppler
     fd
     ripgrep
-    fzf
-    zoxide
+    # fzf
+    # zoxide
     imagemagick
     dragon-drop
   ];
