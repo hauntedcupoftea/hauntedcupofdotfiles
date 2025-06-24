@@ -41,7 +41,7 @@
         border-radius: 8px;
         padding: 0px 10px 0px 8px;
         background: #1e1e2e;
-        border: 1px solid @border;
+        border: 0px solid @border;
       }
 
       #workspaces button {
