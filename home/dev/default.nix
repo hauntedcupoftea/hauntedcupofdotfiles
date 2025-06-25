@@ -12,6 +12,7 @@
   home.packages = with pkgs; [
     # misc packages
     bruno # api testing tool that works on plaintext
+    geckodriver # selenium-like browser automation for firefox
   ];
 
   # my preferred, feel free to change:
