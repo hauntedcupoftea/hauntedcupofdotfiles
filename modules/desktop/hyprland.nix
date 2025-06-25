@@ -50,13 +50,12 @@
   # XDG Portal configuration
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-    config = {
-      common.default = [ "gtk" ];
-      hyprland.default = [
-        "hyprland"
-        "gtk"
-      ];
-    };
+    wlr.enable = false;
+
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
+
+    config.common.default = [ "hyprland" "gtk" ];
   };
 }
