@@ -14,6 +14,7 @@
     ./terminals
     ./theme
     ./utils
+    ./xdg.nix
     # ./editors
   ];
 
@@ -50,20 +51,6 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-  };
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-gtk gnome-keyring ];
-    config = {
-      common = {
-        default = [ "gtk" ];
-      };
-      preferred = {
-        default = [ "hyprland" "gtk" ];
-        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
-      };
-    };
   };
 
   home.sessionVariables = {
