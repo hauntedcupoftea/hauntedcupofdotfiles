@@ -25,6 +25,13 @@
     playerctl
     hyprpicker
     libqalculate
+
+    # xdg-focused stuff
+    xdg-utils
+    shared-mime-info
+    glib
+    gtk3
+    gtk4
   ];
 
   # these are actually tied to both nvidia and hyprland in part,
@@ -53,9 +60,28 @@
     wlr.enable = false;
 
     extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
       xdg-desktop-portal-gtk
     ];
 
-    config.common.default = [ "hyprland" "gtk" ];
+    # Comprehensive portal configuration
+    config = {
+      common = {
+        default = [ "gtk" ];
+      };
+
+      hyprland = {
+        default = [ "hyprland" "gtk" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
+        "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
+        "org.freedesktop.impl.portal.GlobalShortcuts" = [ "hyprland" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        "org.freedesktop.impl.portal.AppChooser" = [ "gtk" ];
+        "org.freedesktop.impl.portal.Print" = [ "gtk" ];
+        "org.freedesktop.impl.portal.Inhibit" = [ "gtk" ];
+        "org.freedesktop.impl.portal.Access" = [ "gtk" ];
+        "org.freedesktop.impl.portal.Account" = [ "gtk" ];
+      };
+    };
   };
 }
