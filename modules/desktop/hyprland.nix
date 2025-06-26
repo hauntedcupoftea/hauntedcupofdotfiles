@@ -1,9 +1,4 @@
-{ inputs
-, pkgs
-, lib
-, config
-, ...
-}: {
+{ inputs, pkgs, ... }: {
   # Enable Hyprland at the system level
   programs.hyprland = {
     enable = true;
@@ -55,33 +50,5 @@
   };
 
   # XDG Portal configuration
-  xdg.portal = {
-    enable = true;
-    wlr.enable = false;
-
-    extraPortals = with pkgs; [
-      # xdg-desktop-portal-hyprland # doesn't hyprland already include this?
-      xdg-desktop-portal-gtk
-    ];
-
-    # Comprehensive portal configuration
-    config = {
-      common = {
-        default = [ "gtk" ];
-      };
-
-      hyprland = {
-        default = [ "hyprland" "gtk" ];
-        "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
-        "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
-        "org.freedesktop.impl.portal.GlobalShortcuts" = [ "hyprland" ];
-        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
-        "org.freedesktop.impl.portal.AppChooser" = [ "gtk" ];
-        "org.freedesktop.impl.portal.Print" = [ "gtk" ];
-        "org.freedesktop.impl.portal.Inhibit" = [ "gtk" ];
-        "org.freedesktop.impl.portal.Access" = [ "gtk" ];
-        "org.freedesktop.impl.portal.Account" = [ "gtk" ];
-      };
-    };
-  };
+  xdg.portal.enable = true;
 }
