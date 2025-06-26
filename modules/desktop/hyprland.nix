@@ -60,7 +60,7 @@
     wlr.enable = false;
 
     extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
+      # xdg-desktop-portal-hyprland # doesn't hyprland already include this?
       xdg-desktop-portal-gtk
     ];
 
