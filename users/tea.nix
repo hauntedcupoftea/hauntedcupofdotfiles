@@ -30,6 +30,7 @@
         inputs.catppuccin.homeModules.catppuccin
         inputs.nvf.homeManagerModules.default
         inputs.walker.homeManagerModules.default
+        inputs.ags.homeManagerModules.default
       ];
       home = {
         username = "tea";
