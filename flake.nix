@@ -77,6 +77,7 @@
         name = "ags-dev-shell";
         packages = [
           ags.packages.${system}.agsFull
+          pkgs.astal
           pkgs.wrapGAppsHook
           pkgs.gobject-introspection
         ];
@@ -85,7 +86,7 @@
           echo "✅ Setting up AGS development environment..."
           mkdir -p node_modules
           # This is what makes editor autocompletion work perfectly.
-          ln -sf ${ags.packages.${system}.agsFull}/share/astal/gjs node_modules/astal
+          ln -sf ${pkgs.astal.gjs}/share/astal/gjs node_modules/astal
           echo "✅ 'astal' module linked for LSP. Environment is ready."
 
           # Check if we are in an interactive shell, not already in fish, and fish is available
