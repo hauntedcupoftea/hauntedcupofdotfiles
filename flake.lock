@@ -76,26 +76,6 @@
         "type": "github"
       }
     },
-    "astal_2": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1751041261,
-        "narHash": "sha256-K1UrMGJLmArrpJaX9G77NA9yApiAZYz2CbqmC0uq6gc=",
-        "owner": "aylur",
-        "repo": "astal",
-        "rev": "95c6d6dbaf0eaa71a17abf02c20bfca7371956c1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "aylur",
-        "repo": "astal",
-        "type": "github"
-      }
-    },
     "catppuccin": {
       "inputs": {
         "nixpkgs": [
@@ -845,7 +825,6 @@
     "root": {
       "inputs": {
         "ags": "ags",
-        "astal": "astal_2",
         "catppuccin": "catppuccin",
         "home-manager": "home-manager",
         "hypr-contrib": "hypr-contrib",

@@ -39,11 +39,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    astal = {
-      url = "github:aylur/astal";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     ags = {
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -57,7 +52,6 @@
     , catppuccin
     , nvf
     , zen-browser
-    , astal
     , ags
     , ...
     } @ inputs:
@@ -78,25 +72,27 @@
         };
       };
 
+      # THIS SHELL SHOULD NOT BE USED DIRECTLY. use the ags-dev fish alias instead. you will have to change paths.
       devShells.${system}.default = pkgs.mkShell {
         name = "ags-dev-shell";
         packages = [
-          ags.packages.${system}.default # The ags CLI tool
+          ags.packages.${system}.agsFull
           pkgs.wrapGAppsHook
           pkgs.gobject-introspection
-        ] ++ (with astal.packages.${system}; [
-          astal3 # Assuming astal flake provides 'astal3'
-          io # Assuming astal flake provides 'io'
-          # any other packages from astal needed for development
-        ]);
+        ];
 
         shellHook = ''
+          echo "✅ Setting up AGS development environment..."
+          mkdir -p node_modules
+          # This is what makes editor autocompletion work perfectly.
+          ln -sf ${ags.packages.${system}.agsFull}/share/astal/gjs node_modules/astal
+          echo "✅ 'astal' module linked for LSP. Environment is ready."
+
           # Check if we are in an interactive shell, not already in fish, and fish is available
           if [ -t 0 ] && [ -z "$FISH_VERSION" ] && command -v fish &>/dev/null; then
             echo "Switching to fish shell..."
             exec fish # Replace the current shell with fish
           else
-            # Fallback for non-interactive shells or if fish isn't found/already running
             echo "Entered AGS development shell (current: $SHELL)."
             echo "AGS CLI, Astal libraries, and other tools are now available."
           fi
