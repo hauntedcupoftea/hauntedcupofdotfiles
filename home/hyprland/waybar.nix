@@ -2,7 +2,7 @@
 }: {
   programs.waybar = {
     enable = true;
-    systemd.enable = false;
+    systemd.enable = true;
     style = ''
       * {
         margin: 0;

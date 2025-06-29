@@ -137,7 +137,7 @@ in
 
       # Startup applications
       exec-once = [
-        "uwsm app -- waybar"
+        # "uwsm app -- waybar" # trying this as systemd
         "uwsm app -- clipse -listen"
         "uwsm app -- gnome-keyring-daemon --start --components=pkcs11,secrets" # i may have been stupid
         # "uwsm app -- walker --gapplication-service" # i WILL figure out walker.service activation, no one can stop me (not even you).
