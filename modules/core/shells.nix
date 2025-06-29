@@ -1,10 +1,8 @@
-{
-  config,
-  pkgs,
-  ...
+{ pkgs
+, ...
 }: {
   programs.fish.enable = true;
   environment.systemPackages = [
-    pkgs.kitty # required for the default Hyprland config
+    pkgs.alacritty # required for the default Hyprland config
   ];
 }

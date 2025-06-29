@@ -206,7 +206,7 @@
           "rewrite" = {
             "^.*( — Firefox| - Mozilla Firefox|Firefox| — Zen Browser| — Zen Twilight|Zen Twilight)$" = " Zen Browser";
             "^.*( — VSCode| - VSCodium)$" = " Code";
-            ".*(Zellij|zellij|fish).*" = " Kitty";
+            ".*(Zellij|zellij|fish).*" = " Alacritty";
             ".*(Discord|discord).*" = " Discord (Vesktop)";
             "^.*(Steam|steam)$" = " Steam";
             ".*(hx|Hx|hX|HX).*" = "󰚄 Helix";

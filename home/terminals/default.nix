@@ -1,6 +1,6 @@
 { ... }: {
   imports = [
-    ./kitty.nix
+    # ./kitty.nix
     ./alacritty.nix
     ./zellij.nix # multiplexor
   ];
