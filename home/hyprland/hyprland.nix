@@ -24,6 +24,11 @@ in
         gaps_out = 10;
       };
 
+      misc = {
+        disable_hyprland_logo = true;
+        disable_splash_rendering = true;
+      };
+
       decoration = {
         rounding = 8;
       };
@@ -31,7 +36,7 @@ in
       # Basic bindings
       bind =
         [
-          "$mod, Q, exec, uwsm app -- $terminal"
+          "$mod, return, exec, uwsm app -- $terminal"
           "$mod, M, exec, uwsm app -- wlogout"
           "$mod, C, killactive"
           "$mod, B, togglefloating"
@@ -39,10 +44,10 @@ in
           "$mod, space, exec, uwsm app -- walker"
 
           # Move focus
-          "$mod, left, movefocus, l"
-          "$mod, right, movefocus, r"
-          "$mod, up, movefocus, u"
-          "$mod, down, movefocus, d"
+          "$mod, h, movefocus, l"
+          "$mod, j, movefocus, d"
+          "$mod, k, movefocus, u"
+          "$mod, l, movefocus, r"
 
           "$mod, F, exec, uwsm app -- zen-twilight" # bro i cannot decipher whether zen or zen-beta is the way to go.
           "$mod, E, exec, uwsm app -- $terminal -e yazi"
@@ -66,7 +71,6 @@ in
           # "$altMod, space, exec, uwsm app -- $terminal --class kalker -e kalker -r --no-leading-eq"
         ]
         ++ (
-          # workspaces
           # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
           builtins.concatLists (builtins.genList
             (
@@ -135,7 +139,7 @@ in
       exec-once = [
         "uwsm app -- waybar"
         "uwsm app -- clipse -listen"
-        "uwsm app -- gnome-keyring-daemon --start --components=pkcs11,secrets,ssh" # i may have been stupid
+        "uwsm app -- gnome-keyring-daemon --start --components=pkcs11,secrets" # i may have been stupid
         # "uwsm app -- walker --gapplication-service" # i WILL figure out walker.service activation, no one can stop me (not even you).
       ];
     };
