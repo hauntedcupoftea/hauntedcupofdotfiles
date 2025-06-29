@@ -16,6 +16,7 @@
     ./utils
     ./xdg.nix
     # ./editors
+    ./zen-browser.nix
   ];
 
   # TODO: Organize this better
@@ -31,7 +32,6 @@
     btop
     fastfetch
     obsidian
-    inputs.zen-browser.packages."${system}".twilight-official
     overskride
     iwgtk
     peazip
