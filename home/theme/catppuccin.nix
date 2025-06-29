@@ -6,6 +6,7 @@
     accent = "blue";
 
     # APPLICATION SETTINGS
+    alacritty.enable = true;
     bat.enable = true;
     btop.enable = true;
     cursors = {

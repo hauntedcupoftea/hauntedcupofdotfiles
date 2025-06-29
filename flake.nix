@@ -77,7 +77,6 @@
         name = "ags-dev-shell";
         packages = [
           ags.packages.${system}.agsFull
-          pkgs.astal
           pkgs.wrapGAppsHook
           pkgs.gobject-introspection
         ];

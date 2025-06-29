@@ -1,4 +1,5 @@
-{ ...
+{ pkgs
+, ...
 }: {
   programs.fish = {
     enable = true;
@@ -26,5 +27,9 @@
         nix develop ~/hauntedcupofdotfiles
       '';
     };
+  };
+
+  home.sessionVariables = {
+    SHELL = "${pkgs.fish}/bin/fish";
   };
 }
