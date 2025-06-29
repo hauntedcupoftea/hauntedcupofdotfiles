@@ -32,7 +32,7 @@
     };
     hyprland.enable = true;
     hyprlock.enable = true;
-    kitty.anebl = true;
+    kitty.enable = true;
     yazi.enable = true;
   };
 }
