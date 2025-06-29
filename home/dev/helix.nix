@@ -52,6 +52,7 @@
           cursor-line = "warning";
         };
       };
+      };
 
       # Language specific configurations
       languages = {
@@ -148,5 +149,4 @@
         ];
       };
     };
-  };
 }
