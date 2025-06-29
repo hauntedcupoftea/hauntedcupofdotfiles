@@ -18,4 +18,8 @@
     };
     shellIntegration.enableFishIntegration = true;
   };
+
+  home.sessionVariables = {
+    TERM = "kitty";
+  };
 }
