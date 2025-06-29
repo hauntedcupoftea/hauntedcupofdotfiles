@@ -2,6 +2,9 @@
   programs.alacritty = {
     enable = true;
     settings = {
+      colors = {
+        footer_bar = { foreground = "None"; background = "None"; };
+      };
       cursor.style = {
         shape = "Block";
         blinking = "On";
