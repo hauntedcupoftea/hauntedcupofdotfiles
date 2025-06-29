@@ -10,7 +10,7 @@
   # Ensure necessary packages are installed
   environment.systemPackages = with pkgs; [
     hyprland
-    alacritty
+    kitty
     waybar
     libnotify
     networkmanagerapplet

@@ -12,8 +12,8 @@ in
     systemd.enable = true;
 
     settings = {
-      # Set default terminal to alacritty
-      "$terminal" = "alacritty";
+      # Set default terminal to kitty
+      "$terminal" = "kitty";
 
       # Mod key (usually Alt or Super)
       "$mod" = "SUPER";

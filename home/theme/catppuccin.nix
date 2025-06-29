@@ -6,7 +6,7 @@
     accent = "blue";
 
     # APPLICATION SETTINGS
-    alacritty.enable = true;
+    # alacritty.enable = true;
     bat.enable = true;
     btop.enable = true;
     cursors = {
@@ -32,6 +32,7 @@
     };
     hyprland.enable = true;
     hyprlock.enable = true;
+    kitty.anebl = true;
     yazi.enable = true;
   };
 }

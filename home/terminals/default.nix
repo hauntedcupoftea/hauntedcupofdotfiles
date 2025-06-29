@@ -1,7 +1,7 @@
 { ... }: {
   imports = [
-    # ./kitty.nix
-    ./alacritty.nix
+    ./kitty.nix
+    # ./alacritty.nix
     ./zellij.nix # multiplexor
   ];
 }
