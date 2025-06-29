@@ -29,7 +29,8 @@
     };
   };
 
-  home.sessionVariables = {
-    SHELL = "${pkgs.fish}/bin/fish";
-  };
+  # this is potentially dangerous (enable after ags i think)
+  # home.sessionVariables = {
+  #   SHELL = "${pkgs.fish}/bin/fish";
+  # };
 }
