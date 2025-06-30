@@ -9,6 +9,6 @@
     ./mako.nix
     ./waybar.nix
     ./walker.nix
-    ./wlogout.nix
+    ./wleave.nix
   ];
 }
