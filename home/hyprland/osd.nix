@@ -1,0 +1,5 @@
+{ ... }: {
+  programs.swayosd = {
+    enable = true;
+  };
+}

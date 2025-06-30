@@ -7,6 +7,7 @@
     ./hyprlock.nix
     ./hyprpaper.nix
     ./mako.nix
+    ./osd.nix
     ./waybar.nix
     ./walker.nix
     ./wleave.nix
