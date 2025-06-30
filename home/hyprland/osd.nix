@@ -1,5 +1,5 @@
 { ... }: {
-  programs.swayosd = {
+  services.swayosd = {
     enable = true;
   };
 }

@@ -7,7 +7,7 @@
     ./hyprlock.nix
     ./hyprpaper.nix
     ./mako.nix
-    ./osd.nix
+    # ./osd.nix # swayosd is weird. i'll write my own.
     ./waybar.nix
     ./walker.nix
     ./wleave.nix
