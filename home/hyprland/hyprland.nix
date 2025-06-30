@@ -6,6 +6,10 @@ let
   isGE66Raider = builtins.hasAttr "ge66-raider" (inputs.self.nixosConfigurations or { });
 in
 {
+  home.sessionVariables = {
+    HYPRSHOT_DIR = "~/Pictures/";
+  };
+
   # Hyprland home configuration
   wayland.windowManager.hyprland = {
     enable = true;
