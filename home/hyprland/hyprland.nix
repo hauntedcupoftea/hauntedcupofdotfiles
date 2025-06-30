@@ -49,7 +49,9 @@ in
           "$mod, C, killactive"
           "$mod, B, togglefloating"
           "$mod, V, exec, uwsm app -- $terminal --class clipse -e 'clipse'"
-          "$mod, space, exec, uwsm app -- walker"
+          # walker-binds
+          "$mod, space, exec, uwsm app -- walker" # standard run
+          "$mod, tab, exec, uwsm app -- walker -n --modules windows" # window picker
 
           # Move focus
           "$mod, h, movefocus, l"

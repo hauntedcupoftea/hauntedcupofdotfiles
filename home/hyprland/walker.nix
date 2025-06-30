@@ -1,9 +1,26 @@
-{ inputs, system, ... }:
+{ inputs, system, config, ... }:
 {
 
   home.packages = [
     inputs.walker.packages."${system}".default
   ];
+
+  home.file = {
+    "${config.xdg.configHome}/hypr/xdph.conf" = {
+      text = ''
+        screencopy {
+          allow_token_by_default=true
+          custom_picker_binary=${config.xdg.configHome}/hypr/pickerscript
+        }
+      '';
+    };
+    "${config.xdg.configHome}/hypr/pickerscript" = {
+      text = ''
+        walker -n --modules xdphpicker
+      '';
+      executable = true;
+    };
+  };
 
   programs.walker = {
     enable = true;
