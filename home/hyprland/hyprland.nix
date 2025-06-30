@@ -10,6 +10,10 @@ in
     HYPRSHOT_DIR = "~/Pictures/";
   };
 
+  catppuccin.hyprland = {
+    enable = true;
+  };
+
   # Hyprland home configuration
   wayland.windowManager.hyprland = {
     enable = true;
@@ -41,7 +45,7 @@ in
       bind =
         [
           "$mod, return, exec, uwsm app -- $terminal"
-          "$mod, M, exec, uwsm app -- wlogout"
+          "$mod, M, exec, uwsm app -- wleave"
           "$mod, C, killactive"
           "$mod, B, togglefloating"
           "$mod, V, exec, uwsm app -- $terminal --class clipse -e 'clipse'"

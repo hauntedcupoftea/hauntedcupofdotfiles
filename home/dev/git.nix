@@ -3,4 +3,8 @@
   programs.gitui = {
     enable = true;
   };
+  catppuccin.gitui = {
+    enable = true;
+    flavor = "mocha";
+  };
 }

@@ -28,4 +28,6 @@
       }];
     };
   };
+
+  catppuccin.yazi.enable = true;
 }

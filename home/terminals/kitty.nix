@@ -19,6 +19,8 @@
     shellIntegration.enableFishIntegration = true;
   };
 
+  catppuccin.kitty.enable = true;
+
   home.sessionVariables = {
     TERM = "kitty";
   };

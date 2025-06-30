@@ -39,4 +39,5 @@
       };
     };
   };
+  catppuccin.mako.enable = true;
 }
