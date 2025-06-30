@@ -1,18 +1,15 @@
-{ pkgs, ... }: {
-  # catppuccin.wlogout = {
-  #   enable = true;
-  #   iconStyle = "wleave";
-  #   extraStyle = ''
-  #     window {
-  #       background-color: rgba(15, 15, 16, 0.6);
-  #     }
+{ pkgs, config, ... }: {
+  # disable the catppuccin theming defaults
+  catppuccin.wlogout = {
+    enable = false;
+  };
 
-  #     button {
-  #       border-radius: 8px;
-  #       margin: 8px;
-  #     }
-  #   '';
-  # };
+  home.file = {
+    "${config.xdg.configHome}/wlogout/icons" = {
+      source = ../../custom-files/wleave/icons;
+      recursive = true;
+    };
+  };
 
   programs.wlogout = {
     enable = true;
@@ -49,43 +46,43 @@
         }
 
         #lock {
-        	background-image: url("${../../custom-files/wleave/icons/lock.png}");
+        	background-image: url("${config.xdg.configHome}/wlogout/icons/lock.png");
         }
 
         #lock:focus {
-        	background-image: url("${../../custom-files/wleave/icons/lock-hover.png}");
+        	background-image: url("${config.xdg.configHome}/wlogout/icons/lock-hover.png");
         }
 
         #logout {
-        	background-image: url("${../../custom-files/wleave/icons/logout.png}");
+        	background-image: url("${config.xdg.configHome}/wlogout/icons/logout.png");
         }
 
         #logout:focus {
-        	background-image: url("${../../custom-files/wleave/icons/logout-hover.png}");
+        	background-image: url("${config.xdg.configHome}/wlogout/icons/logout-hover.png");
         }
 
         #suspend {
-        	background-image: url("${../../custom-files/wleave/icons/sleep.png}");
+        	background-image: url("${config.xdg.configHome}/wlogout/icons/sleep.png");
         }
 
         #suspend:focus {
-        	background-image: url("${../../custom-files/wleave/icons/sleep-hover.png}");
+        	background-image: url("${config.xdg.configHome}/wlogout/icons/sleep-hover.png");
         }
 
         #shutdown {
-        	background-image: url("${../../custom-files/wleave/icons/power.png}");
+        	background-image: url("${config.xdg.configHome}/wlogout/icons/power.png");
         }
 
         #shutdown:focus {
-        	background-image: url("${../../custom-files/wleave/icons/power-hover.png}");
+        	background-image: url("${config.xdg.configHome}/wlogout/icons/power-hover.png");
         }
 
         #reboot {
-        	background-image: url("${../../custom-files/wleave/icons/restart.png}");
+        	background-image: url("${config.xdg.configHome}/wlogout/icons/restart.png");
         }
 
         #reboot:focus {
-        	background-image: url("${../../custom-files/wleave/icons/restart-hover.png}");
+        	background-image: url("${config.xdg.configHome}/wlogout/icons/restart-hover.png");
         }
     '';
     layout = [

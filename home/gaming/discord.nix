@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   home.packages = with pkgs; [
     vesktop
     arrpc
@@ -9,7 +9,7 @@
   };
 
   home.file = {
-    ".config/vesktop/themes" = {
+    "${config.xdg.configHome}/vesktop/themes" = {
       source = ../../custom-files/vesktop/themes;
       recursive = true;
     };
