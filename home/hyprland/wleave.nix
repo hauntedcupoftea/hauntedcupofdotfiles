@@ -7,7 +7,7 @@
       source = ../../custom-files/wleave/icons;
       recursive = true;
     };
-    "${config.xdg.configHome}/wleave/style.css" =
+    "${config.xdg.configHome}/wleave/style.css".text =
       # css
       ''       
         window {
@@ -78,7 +78,7 @@
         	background-image: url("${config.xdg.configHome}/wlogout/icons/restart-hover.png");
         }
     '';
-    "${config.xdg.configHome}/wleave/layout.json" =
+    "${config.xdg.configHome}/wleave/layout.json".text =
       # json
       ''
         {
@@ -87,38 +87,38 @@
               "label": "lock",
               "action": "hyprlock",
               "text": "Lock",
-              "keybind": "l",
+              "keybind": "l"
             },
             {
               "label": "reboot",
               "action": "systemctl reboot",
               "text": "Reboot",
-              "keybind": "r",
+              "keybind": "r"
             },
             {
               "label": "shutdown",
               "action": "systemctl poweroff",
               "text": "Shutdown",
-              "keybind": "s",
+              "keybind": "s"
             },
             {
-              "label": "logout";
-              "action": "uwsm stop";
-              "text": "Logout";
-              "keybind": "e";
+              "label": "logout",
+              "action": "uwsm stop",
+              "text": "Logout",
+              "keybind": "e"
             },
             {
-              "label": "suspend";
-              "action": "systemctl suspend";
-              "text": "Suspend";
-              "keybind": "u";
+              "label": "suspend",
+              "action": "systemctl suspend",
+              "text": "Suspend",
+              "keybind": "u"
             },
             {
-              "label": "hibernate";
-              "action": "systemctl hibernate";
-              "text": "Hibernate";
-              "keybind": "h";
-            },
+              "label": "hibernate",
+              "action": "systemctl hibernate",
+              "text": "Hibernate",
+              "keybind": "h"
+            }
           ]
         }
       '';
