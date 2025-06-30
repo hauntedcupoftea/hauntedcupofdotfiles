@@ -1,20 +1,13 @@
 { pkgs, config, ... }: {
   # disable the catppuccin theming defaults
-  catppuccin.wlogout = {
-    enable = false;
-  };
+  home.packages = [ pkgs.wleave ];
 
   home.file = {
     "${config.xdg.configHome}/wlogout/icons" = {
       source = ../../custom-files/wleave/icons;
       recursive = true;
     };
-  };
-
-  programs.wlogout = {
-    enable = true;
-    package = pkgs.wleave; # replace with wleave as a test
-    style =
+    "${config.xdg.configHome}/wleave/style.css" =
       # css
       ''       
         window {
@@ -85,47 +78,49 @@
         	background-image: url("${config.xdg.configHome}/wlogout/icons/restart-hover.png");
         }
     '';
-    layout = [
-      {
-        "buttons" = [
-          {
-            "label" = "lock";
-            "action" = "hyprlock";
-            "text" = "Lock";
-            "keybind" = "l";
-          }
-          {
-            "label" = "reboot";
-            "action" = "systemctl reboot";
-            "text" = "Reboot";
-            "keybind" = "r";
-          }
-          {
-            "label" = "shutdown";
-            "action" = "systemctl poweroff";
-            "text" = "Shutdown";
-            "keybind" = "s";
-          }
-          {
-            "label" = "logout";
-            "action" = "uwsm stop";
-            "text" = "Logout";
-            "keybind" = "e";
-          }
-          {
-            "label" = "suspend";
-            "action" = "systemctl suspend";
-            "text" = "Suspend";
-            "keybind" = "u";
-          }
-          {
-            "label" = "hibernate";
-            "action" = "systemctl hibernate";
-            "text" = "Hibernate";
-            "keybind" = "h";
-          }
-        ];
-      }
-    ];
+    "${config.xdg.configHome}/wleave/layout.json" =
+      # json
+      ''
+        {
+          "buttons": [
+            {
+              "label": "lock",
+              "action": "hyprlock",
+              "text": "Lock",
+              "keybind": "l",
+            },
+            {
+              "label": "reboot",
+              "action": "systemctl reboot",
+              "text": "Reboot",
+              "keybind": "r",
+            },
+            {
+              "label": "shutdown",
+              "action": "systemctl poweroff",
+              "text": "Shutdown",
+              "keybind": "s",
+            },
+            {
+              "label": "logout";
+              "action": "uwsm stop";
+              "text": "Logout";
+              "keybind": "e";
+            },
+            {
+              "label": "suspend";
+              "action": "systemctl suspend";
+              "text": "Suspend";
+              "keybind": "u";
+            },
+            {
+              "label": "hibernate";
+              "action": "systemctl hibernate";
+              "text": "Hibernate";
+              "keybind": "h";
+            },
+          ]
+        }
+      '';
   };
 }
