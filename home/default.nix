@@ -1,8 +1,4 @@
-{ pkgs
-, inputs
-, system
-, ...
-}: {
+{ pkgs, ... }: {
   imports = [
     ./dev
     ./gaming
@@ -10,6 +6,7 @@
     ./hyprland
     ./music
     ./shell
+    ./sioyek.nix
     ./security.nix
     ./terminals
     ./theme
@@ -35,8 +32,6 @@
     overskride
     iwgtk
     peazip
-    sioyek
-    gimp3
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
