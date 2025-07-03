@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports = [
-    # ./ags.nix # for developing your own widgets
+    ./ags.nix
     ./git.nix
     ./nvf.nix
     ./helix.nix

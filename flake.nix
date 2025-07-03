@@ -60,10 +60,6 @@
     , astal
     , ...
     } @ inputs:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
     {
       nixosConfigurations = {
         "ge66-raider" = nixpkgs.lib.nixosSystem {
@@ -75,40 +71,6 @@
             ./hosts/ge66-raider
           ];
         };
-      };
-
-      devShells.${system}.default = pkgs.mkShell {
-        buildInputs = [
-          (ags.packages.${system}.default.override {
-            extraPackages = with astal.packages.${system}; [
-              # Core Libraries
-              io
-              astal4
-
-              # All App Libraries
-              auth
-              battery
-              bluetooth
-              cava
-              hyprland
-              mpris
-              network
-              notifd
-              powerprofiles
-              tray
-              wireplumber
-            ];
-          })
-          # You can still add other non-AGS tools here if you need them
-          pkgs.fish
-        ];
-
-        shellHook = ''
-          echo "✅ Entered Correct AGS/Astal Development Environment"
-          echo "   - The 'ags' CLI is now available."
-          echo "   - All Astal modules are ready for use."
-          echo "   - LSP autocompletion is fully configured."
-        '';
       };
     };
 }

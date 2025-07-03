@@ -1,5 +1,8 @@
 { inputs, system, config, ... }:
 {
+  imports = [
+    inputs.walker.homeManagerModules.default
+  ];
 
   home.packages = [
     inputs.walker.packages."${system}".default

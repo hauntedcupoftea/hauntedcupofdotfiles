@@ -20,10 +20,6 @@
          	end
          	rm -f -- "$tmp"
       '';
-      ags-dev = ''
-        cd ~/code/ags-bar
-        nix develop ~/hauntedcupofdotfiles
-      '';
     };
   };
 
