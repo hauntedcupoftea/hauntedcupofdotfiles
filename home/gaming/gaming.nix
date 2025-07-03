@@ -11,6 +11,7 @@
     winetricks
     goverlay
     samrewritten
+    vulkan-tools
   ];
 
   programs.mangohud = {

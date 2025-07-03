@@ -1,14 +1,14 @@
 { ...
 }: {
   # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
+  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # jack.enable = true; # You have this commented, which is fine
+    jack.enable = true; # You have this commented, which is fine
 
     # Add WirePlumber extra configuration here
     wireplumber.extraConfig."51-disable-mic-agc" = {

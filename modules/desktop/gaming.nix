@@ -23,8 +23,8 @@
       enable = true;
       capSysNice = true;
       args = [
+        "--backend sdl"
         "--rt"
-        "--expose-wayland"
       ];
     };
   };
