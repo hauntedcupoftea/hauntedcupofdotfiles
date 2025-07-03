@@ -21,7 +21,7 @@
 
     gamescope = {
       enable = true;
-      capSysNice = true;
+      capSysNice = false;
       args = [
         "--backend sdl"
         "--rt"
