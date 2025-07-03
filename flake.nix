@@ -39,8 +39,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ags = {
-      url = "github:aylur/ags";
+    astal = {
+      url = "github:aylur/astal";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -52,7 +52,7 @@
     , catppuccin
     , nvf
     , zen-browser
-    , ags
+    , astal
     , ...
     } @ inputs:
     let
@@ -72,57 +72,73 @@
         };
       };
 
-      # THIS SHELL SHOULD NOT BE USED DIRECTLY. use the ags-dev fish alias instead. you will have to change paths.
-      devShells.${system}.default = pkgs.mkShell {
-        name = "ags-dev-shell";
-        packages = [
-          ags.packages.${system}.agsFull
-          pkgs.wrapGAppsHook
-          pkgs.gobject-introspection
+      packages.${system}.ags-config = pkgs.stdenvNoCC.mkDerivation {
+        pname = "hauntedcupofbar";
+        version = "0.0.1";
+
+        # IMPORTANT: Your AGS code should be in a sub-folder
+        # of your dotfiles repo, e.g., './ags'.
+        src = ./ags;
+
+        # These are tools needed for DEVELOPMENT and BUILDING
+        nativeBuildInputs = [
+          pkgs.esbuild # A modern, fast bundler for JS/TS
+          pkgs.gobject-introspection # Makes GObject libs (like GTK) visible to JS
+          pkgs.wrapGAppsHook # Automatically sets up paths for GTK apps
         ];
 
-        shellHook = ''
-          echo "✅ Setting up AGS development environment..."
-          mkdir -p node_modules
-          # This is what makes editor autocompletion work perfectly.
-          ln -sf ${pkgs.astal.gjs}/share/astal/gjs node_modules/astal
-          echo "✅ 'astal' module linked for LSP. Environment is ready."
+        # These are libraries needed at RUNTIME
+        buildInputs = [
+          pkgs.gjs # The JavaScript engine
+          pkgs.gtk4
+          astal.packages.${system}.io
+          astal.packages.${system}.astal4
+          # Add other astal libraries here as you use them, e.g.:
+          # astal.packages.${system}.battery
+        ];
 
-          # Check if we are in an interactive shell, not already in fish, and fish is available
-          if [ -t 0 ] && [ -z "$FISH_VERSION" ] && command -v fish &>/dev/null; then
-            echo "Switching to fish shell..."
-            exec fish # Replace the current shell with fish
-          else
-            echo "Entered AGS development shell (current: $SHELL)."
-            echo "AGS CLI, Astal libraries, and other tools are now available."
-          fi
+        # This part is for when you're ready to build a final binary.
+        # You can ignore it for now, but it's ready when you are.
+        installPhase = ''
+          mkdir -p $out/bin
+
+          esbuild \
+            --bundle src/main.js \ # Or main.ts, config.js, etc.
+            --outfile=$out/bin/hauntedcupofbar \
+            --format=esm \
+            --platform=node \
+            --external:gi://* \
+            --external:file://*
+
+          # Make the output executable
+          chmod +x $out/bin/haunted-ags-bar
         '';
       };
 
-      # TODO: use this bundler once ags bar is ready.
-      # packages.${system}.myAgsApp = pkgs.stdenvNoCC.mkDerivation rec {
-      #   name = "hauntedcupofbar";
-      #   version = "0.1.0"; # Or your desired version
+      # 2. CREATE A DEVELOPMENT SHELL FROM THAT PACKAGE
+      # This is the "cohesive development environment" you asked for.
+      devShells.${system}.default = pkgs.mkShell {
+        # This tells the shell to use all the inputs from your package definition.
+        # This is the magic that makes everything "just work".
+        inputsFrom = [ self.packages.${system}.ags-config ];
 
-      #   src = ~/code/ags-nc-bar; # Source directory for your AGS application (e.g., where app.ts is)
+        # You can add extra tools for your dev environment here.
+        packages = [
+          pkgs.fish # For your preferred shell
+        ];
 
-      #   nativeBuildInputs = [
-      #     ags.packages.${system}.default # AGS CLI
-      #     pkgs.wrapGAppsHook
-      #     pkgs.gobject-introspection
-      #   ];
+        # No more complex shellHook needed!
+        shellHook = ''
+          echo "✅ Entered AGS/Astal development environment."
+          echo "   Editor autocompletion (LSP) for 'gi://' and 'file://' will work automatically."
+          echo "   Type 'fish' to switch to the fish shell."
+        '';
+      };
 
-      #   buildInputs = with astal.packages.${system}; [
-      #     astal3
-      #     io
-      #     # any other runtime dependencies from astal
-      #   ];
-
-      #   installPhase = ''
-      #     mkdir -p $out/bin
-      #     # Ensure app.ts is found, adjust path if src is a subdirectory, e.g., ags bundle $src/app.ts ...
-      #     ags bundle app.ts $out/bin/${name}
-      #   '';
-      # };
+      # Make your final AGS config runnable with `nix run .#ags`
+      apps.${system}.ags = {
+        type = "app";
+        program = "${self.packages.${system}.ags-config}/bin/haunted-ags-bar";
+      };
     };
 }
