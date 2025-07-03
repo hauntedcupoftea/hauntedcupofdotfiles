@@ -23,7 +23,7 @@
       enable = true;
       capSysNice = true;
       args = [
-        "--backend sdl"
+        # "--backend sdl" # maybe this isn't what we want
         "--rt"
       ];
     };
