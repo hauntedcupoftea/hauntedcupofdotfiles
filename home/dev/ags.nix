@@ -5,7 +5,7 @@
 
   programs.ags = {
     enable = true;
-    configDir = ../../ags;
+    configDir = null;
     extraPackages = with inputs.astal.packages.${pkgs.system}; [
       auth
       battery
