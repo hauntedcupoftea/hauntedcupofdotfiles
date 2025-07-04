@@ -19,13 +19,13 @@
       settings.general.inhibit_screensaver = 0;
     };
 
-    gamescope = {
-      enable = true;
-      capSysNice = true;
-      args = [
-        # "--backend sdl" # maybe this isn't what we want
-        "--rt"
-      ];
-    };
+    # gamescope = {
+    #   enable = true;
+    #   capSysNice = true;
+    #   args = [
+    #     "--backend sdl"
+    #     "--rt"
+    #   ];
+    # };
   };
 }
