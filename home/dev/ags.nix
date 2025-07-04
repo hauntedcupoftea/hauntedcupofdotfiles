@@ -7,6 +7,7 @@
     enable = true;
     configDir = null;
     extraPackages = with inputs.astal.packages.${pkgs.system}; [
+      apps
       auth
       battery
       bluetooth
@@ -24,6 +25,7 @@
   home.packages = with inputs.astal.packages.${pkgs.system}; [
     astal4
     io
+    apps
     auth
     battery
     bluetooth
