@@ -1,9 +1,8 @@
 { pkgs, config, ... }: {
-  # disable the catppuccin theming defaults
   home.packages = [ pkgs.wleave ];
 
   home.file = {
-    "${config.xdg.configHome}/wlogout/icons" = {
+    "${config.xdg.configHome}/wleave/icons" = {
       source = ../../custom-files/wleave/icons;
       recursive = true;
     };
@@ -39,43 +38,43 @@
         }
 
         #lock {
-        	background-image: url("${config.xdg.configHome}/wlogout/icons/lock.png");
+        	background-image: url("${config.xdg.configHome}/wleave/icons/lock.png");
         }
 
         #lock:focus {
-        	background-image: url("${config.xdg.configHome}/wlogout/icons/lock-hover.png");
+        	background-image: url("${config.xdg.configHome}/wleave/icons/lock-hover.png");
         }
 
         #logout {
-        	background-image: url("${config.xdg.configHome}/wlogout/icons/logout.png");
+        	background-image: url("${config.xdg.configHome}/wleave/icons/logout.png");
         }
 
         #logout:focus {
-        	background-image: url("${config.xdg.configHome}/wlogout/icons/logout-hover.png");
+        	background-image: url("${config.xdg.configHome}/wleave/icons/logout-hover.png");
         }
 
         #suspend {
-        	background-image: url("${config.xdg.configHome}/wlogout/icons/sleep.png");
+        	background-image: url("${config.xdg.configHome}/wleave/icons/sleep.png");
         }
 
         #suspend:focus {
-        	background-image: url("${config.xdg.configHome}/wlogout/icons/sleep-hover.png");
+        	background-image: url("${config.xdg.configHome}/wleave/icons/sleep-hover.png");
         }
 
         #shutdown {
-        	background-image: url("${config.xdg.configHome}/wlogout/icons/power.png");
+        	background-image: url("${config.xdg.configHome}/wleave/icons/power.png");
         }
 
         #shutdown:focus {
-        	background-image: url("${config.xdg.configHome}/wlogout/icons/power-hover.png");
+        	background-image: url("${config.xdg.configHome}/wleave/icons/power-hover.png");
         }
 
         #reboot {
-        	background-image: url("${config.xdg.configHome}/wlogout/icons/restart.png");
+        	background-image: url("${config.xdg.configHome}/wleave/icons/restart.png");
         }
 
         #reboot:focus {
-        	background-image: url("${config.xdg.configHome}/wlogout/icons/restart-hover.png");
+        	background-image: url("${config.xdg.configHome}/wleave/icons/restart-hover.png");
         }
     '';
     "${config.xdg.configHome}/wleave/layout.json".text =
