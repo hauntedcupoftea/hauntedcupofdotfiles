@@ -14,6 +14,7 @@
     # misc packages
     bruno # api testing tool that works on plaintext
     geckodriver # selenium-like browser automation for firefox
+    zrok # self hosted ngrok
   ];
 
   # my preferred, feel free to change:
