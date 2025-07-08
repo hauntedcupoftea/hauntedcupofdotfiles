@@ -86,8 +86,7 @@
         args = [ "--stdio" ];
       };
 
-      # 2. Language-specific configurations
-      # This will create [[language]] blocks in languages.toml
+      # language-specific configurations
       language = [
         # --- Nix ---
         {
@@ -97,7 +96,6 @@
             command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
           };
           indent = { tab-width = 2; unit = "  "; };
-          # Reference the globally defined LSP by its name (without "language-server." prefix)
           language-servers = [ "nil-ls" ];
         }
 
@@ -147,6 +145,14 @@
           # };
           indent = { tab-width = 2; unit = "  "; };
           language-servers = [ "svelte-ls" ];
+        }
+
+        # --- QML ---
+        {
+          name = "qml";
+          auto-format = true;
+          indent = { tab-width = 2; unit = "  "; };
+          language-servers = [ "qmlls " ];
         }
       ];
     };
