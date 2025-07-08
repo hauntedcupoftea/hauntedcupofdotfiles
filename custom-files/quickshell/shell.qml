@@ -2,8 +2,6 @@ import Quickshell
 import QtQuick
 
 Scope {
-    // no more time object
-
     Variants {
         model: Quickshell.screens
 
@@ -21,8 +19,6 @@ Scope {
 
             ClockWidget {
                 anchors.centerIn: parent
-
-                // no more time binding
             }
         }
     }
