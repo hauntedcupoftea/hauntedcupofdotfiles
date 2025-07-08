@@ -1,9 +1,5 @@
-{ inputs, pkgs, system, ... }: {
-  home.packages = [
-    inputs.quickshell.packages.${system}.default
-    pkgs.kdePackages.qtdeclarative
-  ];
-
+{ ... }: {
+  # SEE modules/desktop/quickshell.nix for qs config
   qt = {
     enable = true;
     # catppuccin says we need this
