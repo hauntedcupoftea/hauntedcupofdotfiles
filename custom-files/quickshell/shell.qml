@@ -1,18 +1,29 @@
 import Quickshell
 import QtQuick
 
-PanelWindow {
-  anchors {
-    top: true
-    left: true
-    right: true
-  }
+Scope {
+    // no more time object
 
-  implicitHeight: 30
+    Variants {
+        model: Quickshell.screens
 
-  Text {
-    anchors.centerIn: parent
+        PanelWindow {
+            property var modelData
+            screen: modelData
 
-    text: "hello world"
-  }
+            anchors {
+                top: true
+                left: true
+                right: true
+            }
+
+            implicitHeight: 30
+
+            ClockWidget {
+                anchors.centerIn: parent
+
+                // no more time binding
+            }
+        }
+    }
 }
