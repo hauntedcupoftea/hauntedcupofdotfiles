@@ -6,6 +6,8 @@
 
   qt = {
     enable = true;
-    # style = "";
+    # catppuccin says we need this
+    style.name = "kvantum";
+    platformTheme.name = "kvantum";
   };
 }
