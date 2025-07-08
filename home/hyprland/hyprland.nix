@@ -7,7 +7,7 @@ let
 in
 {
   home.sessionVariables = {
-    HYPRSHOT_DIR = "~/Pictures/";
+    HYPRSHOT_DIR = "~/Pictures";
   };
 
   catppuccin.hyprland = {
