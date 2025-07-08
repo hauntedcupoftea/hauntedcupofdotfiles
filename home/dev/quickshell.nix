@@ -1,6 +1,11 @@
 { inputs, pkgs, system, ... }: {
   home.packages = [
     inputs.quickshell.packages.${system}.default
-    pkgs.qmlls
+    pkgs.kdePackages.qtdeclarative
   ];
+
+  qt = {
+    enable = true;
+    # style = "";
+  };
 }
