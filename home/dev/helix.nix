@@ -67,6 +67,11 @@
         args = [ "server" ];
       };
 
+      language-server.qmlls = {
+        args = [ "-E" ];
+        command = "qmlls";
+      };
+
       language-server.rust-analyzer-ls = {
         command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
       };

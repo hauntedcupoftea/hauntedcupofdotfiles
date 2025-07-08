@@ -39,13 +39,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    astal = {
-      url = "github:aylur/astal";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    ags = {
-      url = "github:aylur/ags";
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -57,8 +52,7 @@
     , catppuccin
     , nvf
     , zen-browser
-    , ags
-    , astal
+    , quickshell
     , ...
     } @ inputs:
     {

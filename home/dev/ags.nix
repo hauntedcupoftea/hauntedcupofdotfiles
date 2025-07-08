@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ inputs, system, ... }: {
   imports = [
     inputs.ags.homeManagerModules.default
   ];
@@ -6,7 +6,7 @@
   programs.ags = {
     enable = true;
     configDir = null;
-    extraPackages = with inputs.astal.packages.${pkgs.system}; [
+    extraPackages = with inputs.astal.packages.${system}; [
       apps
       auth
       battery
@@ -22,7 +22,7 @@
     ];
   };
 
-  home.packages = with inputs.astal.packages.${pkgs.system}; [
+  home.packages = with inputs.astal.packages.${system}; [
     astal4
     io
     apps
