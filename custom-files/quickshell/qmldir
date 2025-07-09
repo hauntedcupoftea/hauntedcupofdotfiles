@@ -1,0 +1,5 @@
+module hauntedcupofbar
+singleton Time Time.qml
+ClockWidget 1.0 ClockWidget.qml
+Bar 1.0 Bar.qml
+PowerMenu 1.0 PowerMenu.qml
