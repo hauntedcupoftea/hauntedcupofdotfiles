@@ -46,7 +46,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-
   outputs =
     { self
     , nixpkgs
@@ -59,7 +58,10 @@
     , ...
     } @ inputs:
     let
+      # Import custom packages overlay from pkgs directory
       customPackagesOverlay = import ./pkgs { inherit inputs; };
+
+      # Function to create pkgs with all overlays
       mkPkgs = system: import nixpkgs {
         inherit system;
         overlays = [
@@ -69,14 +71,26 @@
       };
     in
     {
+      # Add packages output for easier testing
+      packages.x86_64-linux = {
+        hyprland-preview-share-picker = (mkPkgs "x86_64-linux").hyprland-preview-share-picker;
+        default = self.packages.x86_64-linux.hyprland-preview-share-picker;
+      };
+
       nixosConfigurations = {
         "ge66-raider" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
-            pkgs = mkPkgs "x86_64-linux";
           };
           modules = [
+            # Apply the overlays properly within the NixOS module system
+            {
+              nixpkgs.overlays = [
+                rust-overlay.overlays.default
+                customPackagesOverlay
+              ];
+            }
             ./hosts/ge66-raider
           ];
         };
