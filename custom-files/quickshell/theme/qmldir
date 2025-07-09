@@ -1,1 +1,3 @@
 singleton Theme Theme.qml
+ThemeFont 1.0 ThemeFont.qml
+ThemeRounding 1.0 ThemeRounding.qml

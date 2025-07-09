@@ -35,24 +35,10 @@ QtObject {
     readonly property color crust: "#11111B"
 
     // --- TYPOGRAPHY ---
-    readonly property QtObject font: QtObject {
-        property string family: "FiraCode Nerd Font"
-        property int sizeBase: 16
-        property int sizeLarge: 22
-    }
+    readonly property ThemeFont font: ThemeFont {}
 
     // --- LAYOUT ---
-    readonly property QtObject rounding: QtObject {
-        property int unsharpen: 2
-        property int unsharpenmore: 6
-        property int verysmall: 8
-        property int small: 12
-        property int normal: 17
-        property int large: 23
-        property int verylarge: 30
-        property int full: 9999
-        property int screenRounding: large
-        property int windowRounding: 18
-    }
+    readonly property ThemeRounding rounding: ThemeRounding {}
+
     readonly property int padding: 10
 }
