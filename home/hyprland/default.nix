@@ -11,6 +11,6 @@
     ./waybar.nix
     ./walker.nix
     ./wleave.nix
-    ./xdph.nix
+    # ./xdph.nix
   ];
 }
