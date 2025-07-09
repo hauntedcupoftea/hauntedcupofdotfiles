@@ -14,6 +14,8 @@
 
     walker.url = "github:abenz1267/walker";
 
+    rust-overlay.url = "github:oxalica/rust-overlay";
+
     catppuccin = {
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -53,14 +55,26 @@
     , nvf
     , zen-browser
     , quickshell
+    , rust-overlay
     , ...
     } @ inputs:
+    let
+      customPackagesOverlay = import ./pkgs { inherit inputs; };
+      mkPkgs = system: import nixpkgs {
+        inherit system;
+        overlays = [
+          rust-overlay.overlays.default
+          customPackagesOverlay
+        ];
+      };
+    in
     {
       nixosConfigurations = {
         "ge66-raider" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
+            pkgs = mkPkgs "x86_64-linux";
           };
           modules = [
             ./hosts/ge66-raider
