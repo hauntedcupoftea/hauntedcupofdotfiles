@@ -9,24 +9,50 @@ Item {
 
     Action {
         id: togglePowerMenu
-        text: "Toggle Power Menu"
-        icon.name: "power"
-        onTriggered: powerMenu.popupOpen = !powerMenu.popupOpen
+
+        onTriggered: {
+            powerMenu.popupOpen = !powerMenu.popupOpen;
+            // DEBUG: uncomment below
+            // print(`popupOpen state: ${powerMenu.popupOpen}`);
+        }
     }
 
     Button {
+        id: powerButton
         anchors.fill: parent
         action: togglePowerMenu
         background: Rectangle {
             radius: Theme.rounding.verysmall
             color: Theme.base
         }
+        Text {
+            anchors.centerIn: parent
+            text: ""
+            color: Theme.red
+            font {
+                family: Theme.font.family
+                pixelSize: Theme.font.sizeBase
+                weight: 700
+            }
+        }
     }
 
     PopupWindow {
-        color: Theme.base
+        anchor {
+            item: powerButton
+            rect: Qt.rect(powerButton.width, powerButton.height + 8, 0, 0)
+            gravity: Edges.Bottom | Edges.Left
+        }
+        color: "transparent"
+
         implicitWidth: 500
         implicitHeight: 500
         visible: powerMenu.popupOpen
+
+        Rectangle {
+            anchors.fill: parent
+            radius: Theme.rounding.verysmall
+            color: Theme.surface0
+        }
     }
 }

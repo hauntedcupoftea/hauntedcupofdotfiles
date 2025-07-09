@@ -7,6 +7,7 @@ Scope {
         model: Quickshell.screens
 
         PanelWindow {
+            id: bar
             property var modelData
             screen: modelData
             color: "transparent"
