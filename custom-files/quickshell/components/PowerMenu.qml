@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
-import Theme 1.0
-import "./internal/PowerMenuPopup.qml" as Private
+import "../theme"
+import "internal" as Private
 
 Item {
     id: powerMenu
@@ -28,7 +28,7 @@ Item {
         Text {
             anchors.centerIn: parent
             text: ""
-            color: Theme.red
+            color: "red"
             font {
                 family: Theme.font.family
                 pixelSize: Theme.font.sizeBase

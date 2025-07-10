@@ -1,7 +1,7 @@
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
-import Components 1.0
+import "../components"
 
 Scope {
     Variants {

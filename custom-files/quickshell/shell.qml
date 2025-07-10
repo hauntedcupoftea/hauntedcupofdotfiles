@@ -1,5 +1,5 @@
 import Quickshell
-import Widgets 1.0
+import "widgets"
 
 Scope {
     Bar {}
