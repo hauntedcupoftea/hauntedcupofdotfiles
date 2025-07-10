@@ -12,8 +12,8 @@ PopupWindow {
     }
     color: "transparent"
 
-    implicitWidth: 500
-    implicitHeight: 500
+    implicitWidth: 512
+    implicitHeight: 128
     visible: popupOpen
 
     Rectangle {
