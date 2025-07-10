@@ -5,7 +5,7 @@
     enable = true;
     font = {
       name = "FiraCode Nerd Font";
-      size = 14;
+      size = 13;
     };
     settings = {
       scrollback_lines = 10000;
