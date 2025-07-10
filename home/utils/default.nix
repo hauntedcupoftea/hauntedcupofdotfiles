@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [
     ./btop.nix
     ./firefox.nix # only for geckodriver lol
@@ -6,5 +6,9 @@
     ./misc
     ./yazi.nix
     ./zoxide.nix
+  ];
+
+  home.packages = [
+    pkgs.tree
   ];
 }
