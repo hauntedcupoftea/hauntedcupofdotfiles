@@ -1,0 +1,3 @@
+module Components
+ClockWidget 1.0 ClockWidget.qml
+PowerMenu 1.0 PowerMenu.qml

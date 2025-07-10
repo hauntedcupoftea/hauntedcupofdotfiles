@@ -1,3 +1,4 @@
-singleton Theme Theme.qml
+module Theme
+singleton Theme 1.0 Theme.qml
 ThemeFont 1.0 ThemeFont.qml
 ThemeRounding 1.0 ThemeRounding.qml

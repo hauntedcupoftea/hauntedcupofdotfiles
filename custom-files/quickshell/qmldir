@@ -1,5 +1,5 @@
 module hauntedcupofbar
-singleton Time Time.qml
-ClockWidget 1.0 ClockWidget.qml
-Bar 1.0 Bar.qml
-PowerMenu 1.0 PowerMenu.qml
+Widgets 1.0 widgets
+Components 1.0 components
+Theme 1.0 theme
+Services 1.0 services

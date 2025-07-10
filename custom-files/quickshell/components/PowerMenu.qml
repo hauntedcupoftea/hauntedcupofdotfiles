@@ -1,7 +1,7 @@
-import Quickshell
 import QtQuick
 import QtQuick.Controls
-import "./theme"
+import Theme 1.0
+import "./internal/PowerMenuPopup.qml" as Private
 
 Item {
     id: powerMenu
@@ -37,22 +37,8 @@ Item {
         }
     }
 
-    PopupWindow {
-        anchor {
-            item: powerButton
-            rect: Qt.rect(powerButton.width, powerButton.height + 8, 0, 0)
-            gravity: Edges.Bottom | Edges.Left
-        }
-        color: "transparent"
-
-        implicitWidth: 500
-        implicitHeight: 500
-        visible: powerMenu.popupOpen
-
-        Rectangle {
-            anchors.fill: parent
-            radius: Theme.rounding.verysmall
-            color: Theme.surface0
-        }
+    Private.PowerMenuPopup {
+        powerButton: powerMenu
+        popupOpen: powerMenu.popupOpen
     }
 }

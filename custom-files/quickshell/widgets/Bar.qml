@@ -1,6 +1,7 @@
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
+import Components 1.0
 
 Scope {
     Variants {
@@ -30,6 +31,12 @@ Scope {
                     id: clockwidget
                 }
 
+                Item {
+                    // Use an Item for flexible right alignment
+                    Layout.fillWidth: true
+                }
+
+                // IMPORTANT: Use the renamed PowerMenu component
                 PowerMenu {
                     id: powermenu
                     Layout.alignment: Qt.AlignRight
