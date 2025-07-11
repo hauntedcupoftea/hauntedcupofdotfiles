@@ -17,4 +17,6 @@ QtObject {
     // we will add more variables here one day bro i swear bro pl-
     readonly property int margin: 8
     readonly property int padding: 10
+    readonly property int barHeight: 40
+    readonly property int debugOffsetHeight: 36
 }

@@ -4,7 +4,8 @@ import Quickshell
 import Quickshell.Wayland
 import QtQuick
 import "../components/internal" as Private
-import "../components"
+// import "../components"
+import "../theme"
 
 Scope {
     id: bgScope
@@ -18,43 +19,76 @@ Scope {
             property var modelData
             screen: modelData
             color: "transparent"
-            WlrLayershell.exclusionMode: ExclusionMode.Ignore
+            exclusiveZone: Theme.barHeight + Theme.debugOffsetHeight
             WlrLayershell.layer: WlrLayer.Background
+            implicitHeight: screen.height // add this
 
             anchors {
                 left: true
-                bottom: true
+                // bottom: true // comment this
                 top: true
                 right: true
             }
 
+            Bar {
+                id: mainBar
+            }
+
             Private.Corner {
                 rotation: 0
-                anchors.left: parent.left
+                x: Theme.padding
                 anchors.bottom: parent.bottom
-                implicitHeight: 40
-                implicitWidth: 40
+                anchors.bottomMargin: Theme.padding
+                implicitHeight: Theme.padding
+                implicitWidth: Theme.padding
             }
+
             Private.Corner {
                 rotation: 270
                 anchors.right: parent.right
+                anchors.rightMargin: Theme.padding
                 anchors.bottom: parent.bottom
-                implicitHeight: 40
-                implicitWidth: 40
+                anchors.bottomMargin: Theme.padding
+                implicitHeight: Theme.padding
+                implicitWidth: Theme.padding
             }
 
-            // TODO: learn how to align these to bar properly.
             Private.Corner {
                 rotation: 90
-                anchors.left: parent.left
-                implicitHeight: 40
-                implicitWidth: 40
+                x: Theme.padding
+                y: Theme.barHeight + Theme.debugOffsetHeight
+                implicitHeight: Theme.padding
+                implicitWidth: Theme.padding
             }
+
             Private.Corner {
                 rotation: 180
                 anchors.right: parent.right
-                implicitHeight: 40
-                implicitWidth: 40
+                anchors.rightMargin: Theme.padding
+                y: Theme.barHeight + Theme.debugOffsetHeight
+                implicitHeight: Theme.padding
+                implicitWidth: Theme.padding
+            }
+
+            Rectangle {
+                anchors.left: parent.left
+                implicitHeight: parent.height
+                implicitWidth: Theme.padding
+                color: Theme.colors.base
+            }
+
+            Rectangle {
+                anchors.bottom: parent.bottom
+                implicitWidth: parent.width
+                implicitHeight: Theme.padding
+                color: Theme.colors.base
+            }
+
+            Rectangle {
+                anchors.right: parent.right
+                implicitHeight: parent.height
+                implicitWidth: Theme.padding
+                color: Theme.colors.base
             }
         }
     }

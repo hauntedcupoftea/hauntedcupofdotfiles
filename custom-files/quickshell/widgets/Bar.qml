@@ -4,43 +4,37 @@ import QtQuick.Layouts
 import "../components"
 import "../theme"
 
-Scope {
-    Variants {
-        model: Quickshell.screens
+Rectangle {
+    id: bar
+    property var modelData
+    color: Theme.colors.base
 
-        PanelWindow {
-            id: bar
-            property var modelData
-            screen: modelData
-            color: Theme.colors.base
+    anchors {
+        top: parent.top
+        topMargin: Theme.debugOffsetHeight // remove in prod
+        left: parent.left
+        right: parent.right
+    }
 
-            anchors {
-                top: true
-                left: true
-                right: true
-            }
+    implicitHeight: Theme.barHeight
 
-            implicitHeight: 40
+    RowLayout {
+        anchors.leftMargin: 8
+        anchors.rightMargin: 8
+        anchors.topMargin: 6
+        anchors.bottomMargin: 6
+        anchors.fill: parent
+        spacing: 2
 
-            RowLayout {
-                anchors.leftMargin: 8
-                anchors.rightMargin: 8
-                anchors.topMargin: 6
-                anchors.bottomMargin: 6
-                anchors.fill: parent
-                spacing: 2
+        ClockWidget {
+            id: clockwidget
+        }
 
-                ClockWidget {
-                    id: clockwidget
-                }
+        //...more elements
 
-                //...more elements
-
-                PowerMenu {
-                    id: powermenu
-                    Layout.alignment: Qt.AlignRight
-                }
-            }
+        PowerMenu {
+            id: powermenu
+            Layout.alignment: Qt.AlignRight
         }
     }
 }
