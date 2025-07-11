@@ -2,6 +2,7 @@ import QtQuick
 
 QtObject {
     property string family: "FiraCode Nerd Font"
-    property int sizeBase: 16
-    property int sizeLarge: 22
+    property int sizeSmall: 10
+    property int sizeBase: 12
+    property int sizeLarge: 16
 }

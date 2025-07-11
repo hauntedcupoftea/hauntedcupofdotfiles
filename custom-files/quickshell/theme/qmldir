@@ -2,3 +2,7 @@ module Theme
 singleton Theme 1.0 Theme.qml
 ThemeFont 1.0 ThemeFont.qml
 ThemeRounding 1.0 ThemeRounding.qml
+AnimationCurve 1.0 AnimationCurve.qml
+ThemeAnimations 1.0 ThemeAnimations.qml
+ThemeColors 1.0 ThemeColors.qml  
+AnimationDuration 1.0 AnimationDuration.qml
