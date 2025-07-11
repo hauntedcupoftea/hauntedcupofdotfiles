@@ -1,5 +1,5 @@
 import QtQuick
-import Quickshell
+// import Quickshell
 import QtQuick.Controls
 import "../theme"
 import "../services"
@@ -7,11 +7,11 @@ import "../services"
 Button {
     id: clockWidgetRoot
     implicitWidth: clockWidgetText.implicitWidth + (Theme.padding * 2)
-    implicitHeight: 32
+    implicitHeight: 28
 
     background: Rectangle {
         anchors.fill: clockWidgetRoot
-        color: Theme.base
+        color: clockWidgetRoot.hovered ? Theme.colors.surface0 : Theme.colors.crust
         radius: Theme.rounding.verysmall
     }
 
@@ -27,10 +27,10 @@ Button {
         id: clockWidgetText
         text: Time.time
         anchors.centerIn: parent
-        color: Theme.peach
+        color: Theme.colors.peach
         font {
             family: Theme.font.family
-            pixelSize: Theme.font.sizeBase
+            pointSize: Theme.font.sizeBase
             weight: 700
         }
     }
@@ -41,13 +41,13 @@ Button {
         delay: 800
         timeout: 5000
         background: Rectangle {
-            color: Theme.surface1
+            color: Theme.colors.surface1
             radius: Theme.rounding.verysmall
         }
 
         Text {
             text: "Clock. click for calendar"
-            color: Theme.text
+            color: Theme.colors.text
             font {
                 family: Theme.font.family
             }

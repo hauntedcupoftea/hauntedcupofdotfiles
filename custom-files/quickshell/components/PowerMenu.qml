@@ -7,6 +7,7 @@ Item {
     id: powerMenu
     property bool popupOpen
     implicitWidth: 64
+    implicitHeight: 28
 
     Action {
         id: togglePowerMenu
@@ -25,12 +26,12 @@ Item {
 
         background: Rectangle {
             radius: Theme.rounding.verysmall
-            color: powerButton.hovered ? Theme.surface0 : Theme.base
+            color: powerButton.hovered ? Theme.colors.surface0 : Theme.colors.crust
             states: State {
                 name: "pressed"
                 when: powerButton.pressed || powerMenu.popupOpen
                 PropertyChanges {
-                    powerButtonText.color: Theme.red
+                    powerButtonText.color: Theme.colors.red
                 }
             }
         }
@@ -38,11 +39,11 @@ Item {
         Text {
             id: powerButtonText
             anchors.centerIn: parent
-            text: "󰤟  󰂯"
+            text: "󰤟  󰂯" // CHANGE TO DYNAMIC TEXT FOR POP UP PANEL
             color: "red"
             font {
                 family: Theme.font.family
-                pixelSize: Theme.font.sizeBase
+                pointSize: Theme.font.sizeBase
                 weight: 700
             }
         }
