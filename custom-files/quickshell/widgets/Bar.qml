@@ -2,6 +2,7 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import "../components"
+import "../theme"
 
 Scope {
     Variants {
@@ -11,7 +12,7 @@ Scope {
             id: bar
             property var modelData
             screen: modelData
-            color: "transparent"
+            color: Theme.colors.base
 
             anchors {
                 top: true
@@ -19,28 +20,25 @@ Scope {
                 right: true
             }
 
-            implicitHeight: 32
+            implicitHeight: 40
 
             RowLayout {
                 anchors.leftMargin: 8
                 anchors.rightMargin: 8
+                anchors.topMargin: 6
+                anchors.bottomMargin: 6
                 anchors.fill: parent
-                spacing: 8
+                spacing: 2
 
                 ClockWidget {
                     id: clockwidget
                 }
 
-                Item {
-                    // Use an Item for flexible right alignment
-                    Layout.fillWidth: true
-                }
+                //...more elements
 
-                // IMPORTANT: Use the renamed PowerMenu component
                 PowerMenu {
                     id: powermenu
                     Layout.alignment: Qt.AlignRight
-                    Layout.preferredHeight: 32
                 }
             }
         }
