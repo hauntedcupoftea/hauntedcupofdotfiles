@@ -20,5 +20,15 @@ PopupWindow {
         anchors.fill: parent
         radius: Theme.rounding.verysmall
         color: Theme.surface0
+        Text {
+            anchors.centerIn: parent
+            text: "pee pee poo poo"
+            color: Theme.flamingo
+            font {
+                family: Theme.font.family
+                pixelSize: Theme.font.sizeBase
+                weight: 800
+            }
+        }
     }
 }

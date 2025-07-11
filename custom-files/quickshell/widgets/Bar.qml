@@ -41,7 +41,6 @@ Scope {
                     id: powermenu
                     Layout.alignment: Qt.AlignRight
                     Layout.preferredHeight: 32
-                    Layout.preferredWidth: 32
                 }
             }
         }

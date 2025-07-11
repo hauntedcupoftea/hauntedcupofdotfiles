@@ -40,5 +40,6 @@ QtObject {
     // --- LAYOUT ---
     readonly property ThemeRounding rounding: ThemeRounding {}
 
+    readonly property int margin: 8
     readonly property int padding: 10
 }

@@ -6,6 +6,7 @@ import "internal" as Private
 Item {
     id: powerMenu
     property bool popupOpen
+    implicitWidth: 64
 
     Action {
         id: togglePowerMenu
@@ -13,7 +14,7 @@ Item {
         onTriggered: {
             powerMenu.popupOpen = !powerMenu.popupOpen;
             // DEBUG: uncomment below
-            // print(`popupOpen state: ${powerMenu.popupOpen}`);
+            // console.info(`popupOpen state: ${powerMenu.popupOpen}`);
         }
     }
 
@@ -21,13 +22,23 @@ Item {
         id: powerButton
         anchors.fill: parent
         action: togglePowerMenu
+
         background: Rectangle {
             radius: Theme.rounding.verysmall
-            color: Theme.base
+            color: powerButton.hovered ? Theme.surface0 : Theme.base
+            states: State {
+                name: "pressed"
+                when: powerButton.pressed || powerMenu.popupOpen
+                PropertyChanges {
+                    powerButtonText.color: Theme.red
+                }
+            }
         }
+
         Text {
+            id: powerButtonText
             anchors.centerIn: parent
-            text: ""
+            text: "󰤟  󰂯"
             color: "red"
             font {
                 family: Theme.font.family

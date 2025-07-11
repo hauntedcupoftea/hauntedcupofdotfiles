@@ -1,6 +1,6 @@
 import Quickshell
 import "widgets"
 
-Scope {
+ShellRoot {
     Bar {}
 }

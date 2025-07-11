@@ -8,24 +8,11 @@ Button {
     id: control
     property string icon: ""
     property string text: "Action"
-    property QList<string> command: "echo 'No command set'"
+    property Action command
     property color iconColor: Theme.text
 
-    Process {
-        id: shellCommand
-        command: control.command
-        running: false
-        stdout: StdioCollector {
-            onStreamFinished: print(text)
-        }
-    }
-
-    onClicked: {
-        shellCommand.startDetached();
-    }
-
-    implicitWidth: 64
-    implicitHeight: 64
+    implicitWidth: 32
+    implicitHeight: 32
 
     background: Rectangle {
         color: control.hovered ? Theme.surface1 : Theme.surface0
