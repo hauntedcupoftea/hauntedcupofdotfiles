@@ -2,5 +2,10 @@ import Quickshell
 import "widgets"
 
 ShellRoot {
-    Bar {}
+    Bar {
+        id: topbar
+    }
+    // Background {
+    //     bar: topbar
+    // }
 }

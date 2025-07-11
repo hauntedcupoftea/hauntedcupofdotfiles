@@ -1,2 +1,3 @@
 module Services
 singleton Time 1.0 Time.qml
+singleton Bluetooth 1.0 Bluetooth.qml
