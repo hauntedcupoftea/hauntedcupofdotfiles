@@ -23,4 +23,5 @@ If you're running this for the first time and your nixos kernel is not set to `l
 
 - [Vimjoyer](https://www.youtube.com/@vimjoyer) for making the switch from windows + wsl to NixOS easier for a wretch like me =D
 - [fazzi](https://gitlab.com/fazzi/nixohess) for providing an extremely cool way of organizing a flake that i will slowly inch towards + wleave configuration and icons.
+- [soramane](https://github.com/caelestia-dots/shell) for inspiring quickshell layout + some of the functionalities
 - All the flake providers and home manager contributors. We stand on the shoulders of giants, so we may one day see the sun for ourselves.
