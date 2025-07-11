@@ -28,8 +28,8 @@ in
       "$altMod" = "SUPER_SHIFT";
 
       general = {
-        gaps_in = 4;
-        gaps_out = 8;
+        gaps_in = 6;
+        gaps_out = 12;
       };
 
       misc = {
