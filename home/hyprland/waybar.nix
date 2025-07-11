@@ -152,6 +152,7 @@
         position = "top";
         height = 36;
         spacing = 6;
+        marin-bottom = 0;
 
         "modules-left" = [
           "clock"
