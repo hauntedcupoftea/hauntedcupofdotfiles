@@ -5,7 +5,7 @@ import "../../theme"
 Item {
     id: root
     property real rotationAngle: 0
-    property real curveDipAngle: 33
+    property real curveDipAngle: Theme.padding
 
     Shape {
         id: shape

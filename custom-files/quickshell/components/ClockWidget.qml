@@ -1,8 +1,8 @@
 import QtQuick
-// import Quickshell
 import QtQuick.Controls
 import "../theme"
 import "../services"
+import "internal" as Private
 
 Button {
     id: clockWidgetRoot
@@ -35,22 +35,11 @@ Button {
         }
     }
 
-    ToolTip {
-        id: clockWidgetToolTip
-        visible: clockWidgetRoot.hovered
-        delay: 800
-        timeout: 5000
-        background: Rectangle {
-            color: Theme.colors.surface1
-            radius: Theme.rounding.verysmall
-        }
-
-        Text {
-            text: "Clock. click for calendar"
-            color: Theme.colors.text
-            font {
-                family: Theme.font.family
-            }
-        }
+    // Custom popup tooltip
+    Private.ClockTooltipPopup {
+        targetWidget: clockWidgetRoot
+        shouldShow: clockWidgetRoot.hovered
+        showDelay: 800
+        hideDelay: 200
     }
 }
