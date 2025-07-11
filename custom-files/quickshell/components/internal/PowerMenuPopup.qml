@@ -7,7 +7,7 @@ PopupWindow {
     property bool popupOpen
     anchor {
         item: powerButton
-        rect: Qt.rect(powerButton.width, powerButton.height + 8, 0, 0)
+        rect: Qt.rect(powerButton.width, powerButton.height + Theme.padding, 0, 0)
         gravity: Edges.Bottom | Edges.Left
     }
     color: "transparent"
@@ -19,14 +19,14 @@ PopupWindow {
     Rectangle {
         anchors.fill: parent
         radius: Theme.rounding.verysmall
-        color: Theme.surface0
+        color: Theme.colors.surface0
         Text {
             anchors.centerIn: parent
             text: "pee pee poo poo"
-            color: Theme.flamingo
+            color: Theme.colors.flamingo
             font {
                 family: Theme.font.family
-                pixelSize: Theme.font.sizeBase
+                pointSize: Theme.font.sizeBase
                 weight: 800
             }
         }
