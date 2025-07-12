@@ -28,7 +28,7 @@ in
       "$altMod" = "SUPER_SHIFT";
 
       general = {
-        gaps_in = 10;
+        gaps_in = 6;
         gaps_out = "8,16,16,16";
       };
 
