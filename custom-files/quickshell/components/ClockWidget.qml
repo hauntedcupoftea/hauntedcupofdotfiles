@@ -1,4 +1,5 @@
 import QtQuick
+import Quickshell
 import QtQuick.Controls
 import "../theme"
 import "../services"
@@ -35,11 +36,28 @@ Button {
         }
     }
 
-    // Custom popup tooltip
-    Private.ClockTooltipPopup {
+    Private.ToolTipPopup {
         targetWidget: clockWidgetRoot
-        shouldShow: clockWidgetRoot.hovered
-        showDelay: 800
-        hideDelay: 200
+        position: Qt.rect(Theme.padding, clockWidgetRoot.height + Theme.padding, 0, 0)
+        expandDirection: Edges.Bottom | Edges.Right
+
+        Column {
+            spacing: Theme.margin / 2
+            Text {
+                text: "📅 Today: " + Time.time
+                color: Theme.colors.text
+                font.family: Theme.font.family
+            }
+            Text {
+                text: "🌤️ Weather: 22°C Sunny"
+                color: Theme.colors.subtext1
+                font.family: Theme.font.family
+            }
+            Text {
+                text: "Click for calendar"
+                color: Theme.colors.subtext0
+                font.family: Theme.font.family
+            }
+        }
     }
 }
