@@ -1,5 +1,6 @@
 pragma Singleton
 import QtQuick
+import "../config"
 
 QtObject {
     // --- ANIMATION SETTINGS ---
@@ -18,5 +19,5 @@ QtObject {
     readonly property int margin: 8
     readonly property int padding: 10
     readonly property int barHeight: 40
-    readonly property int debugOffsetHeight: 36
+    readonly property int debugOffsetHeight: Settings.debug ? 36 : 0
 }
