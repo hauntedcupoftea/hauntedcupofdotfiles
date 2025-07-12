@@ -1,6 +1,7 @@
 import Quickshell
 import QtQuick
 import "../../theme"
+import "../../services"
 
 PopupWindow {
     property var powerButton
@@ -13,7 +14,7 @@ PopupWindow {
     color: "transparent"
 
     implicitWidth: 512
-    implicitHeight: 128
+    implicitHeight: textSample.height + Theme.padding * 2
     visible: popupOpen
 
     Rectangle {
@@ -21,8 +22,9 @@ PopupWindow {
         radius: Theme.rounding.verysmall
         color: Theme.colors.surface0
         Text {
-            anchors.centerIn: parent
-            text: "pee pee poo poo"
+            id: textSample
+            anchors.fill: parent
+            text: JSON.stringify(Network.availableNetworks, null, 2)
             color: Theme.colors.flamingo
             font {
                 family: Theme.font.family
