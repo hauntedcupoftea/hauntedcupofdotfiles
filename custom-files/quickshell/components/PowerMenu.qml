@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import "../theme"
+import "../services"
 import "internal" as Private
 
 Item {
@@ -39,7 +40,7 @@ Item {
         Text {
             id: powerButtonText
             anchors.centerIn: parent
-            text: "󰤟  󰂯" // CHANGE TO DYNAMIC TEXT FOR POP UP PANEL
+            text: `${Network.status}  ${Bluetooth.status}` // CHANGE TO DYNAMIC TEXT FOR POP UP PANEL
             color: "red"
             font {
                 family: Theme.font.family
