@@ -1,6 +1,6 @@
-import Quickshell
+// import Quickshell
 import QtQuick
-import QtQuick.Layouts
+// import QtQuick.Layouts
 import "../components"
 import "../theme"
 import "../services"
@@ -39,7 +39,7 @@ Rectangle {
             spacing: Theme.padding
 
             Loader {
-                enabled: Battery.isAvailable
+                active: Battery.isAvailable
                 sourceComponent: BatteryMenu {
                     id: batterymenu
                 }
