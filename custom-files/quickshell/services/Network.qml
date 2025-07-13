@@ -146,13 +146,13 @@ Singleton {
     // Get available WiFi networks
     Process {
         id: availableNetworksProcess
-        command: ["nmcli", "-t", "-f", "SSID,SIGNAL,SECURITY", "device", "wifi", "list"]
+        command: ["nmcli", "-g", "SSID,SIGNAL,SECURITY", "device", "wifi", "list"]
 
         property string buffer: ""
 
-        stdout: SplitParser {
-            onRead: data => {
-                availableNetworksProcess.buffer += data;
+        stdout: StdioCollector {
+            onStreamFinished: {
+                availableNetworksProcess.buffer += this.text;
             }
         }
 
