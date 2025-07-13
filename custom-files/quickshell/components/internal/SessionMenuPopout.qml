@@ -14,8 +14,8 @@ PopupWindow {
     }
     color: "transparent"
 
-    implicitWidth: powerMenuGrid.width + (Theme.padding * 2)
-    implicitHeight: powerMenuGrid.height + (Theme.padding * 2)
+    implicitWidth: sessionMenuGrid.width + (Theme.padding * 2)
+    implicitHeight: sessionMenuGrid.height + (Theme.padding * 2)
     visible: popupOpen
 
     Behavior on visible {}
@@ -34,7 +34,7 @@ PopupWindow {
             }
 
             GridLayout {
-                id: powerMenuGrid
+                id: sessionMenuGrid
                 anchors.centerIn: parent
                 columnSpacing: Theme.padding
                 rowSpacing: Theme.padding

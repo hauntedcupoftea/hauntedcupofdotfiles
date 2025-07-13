@@ -49,8 +49,8 @@ Rectangle {
                 id: connectivityMenu
             }
 
-            PowerMenu {
-                id: powermenu
+            SessionMenu {
+                id: sessionMenu
             }
         }
     }

@@ -1,5 +1,5 @@
 module Components
 ClockWidget 1.0 ClockWidget.qml
-PowerMenu 1.0 PowerMenu.qml
+SessionMenu 1.0 SessionMenu.qml
 ConnectivityMenu 1.0 ConnectivityMenu.qml
 BatteryMenu 1.0 BatteryMenu.qml
