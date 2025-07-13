@@ -8,7 +8,7 @@ import Quickshell.Widgets
 
 AbstractBarButton {
     id: batteryIndicator
-    implicitWidth: 100
+    implicitWidth: indicator.width + (Theme.padding * 4)
     implicitHeight: Theme.barHeight - (Theme.margin * 2)
 
     background: ClippingRectangle {
@@ -52,6 +52,7 @@ AbstractBarButton {
         }
 
         Text {
+            id: indicator
             anchors.centerIn: parent
             text: `${Battery.isCharging ? "󱐋 " : ""}${Math.round(Battery.percentage * 100)}% ${Battery.profileIcon}`
             color: Theme.colors.surface2
