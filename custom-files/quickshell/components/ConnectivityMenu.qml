@@ -1,0 +1,33 @@
+import QtQuick
+import Quickshell
+import "../theme"
+import "../services"
+import "../widgets" // Assuming BarButton.qml is in this directory
+import "internal" as Private
+
+BarButton {
+    id: connectivityMenu
+
+    text: `${Network.status}  ${Bluetooth.status}`
+    textColor: Theme.colors.blue
+    pressedColor: Theme.colors.mauve
+
+    Private.ConnectivityMenuPopout {
+        popupOpen: connectivityMenu.isMenuOpen
+        powerButton: connectivityMenu.button
+    }
+
+    Private.ToolTipPopup {
+        id: connectivityToolTip
+        expandDirection: Edges.Bottom | Edges.Left
+        targetWidget: connectivityMenu.button // Target the exposed button
+        triggerTarget: true
+        position: Qt.rect(connectivityMenu.width - Theme.padding, connectivityMenu.height + Theme.padding, 0, 0)
+        blockShow: connectivityMenu.isMenuOpen // Use the exposed property
+
+        Private.StyledText {
+            text: "Network and Bluetooth status"
+            color: Theme.colors.subtext0
+        }
+    }
+}

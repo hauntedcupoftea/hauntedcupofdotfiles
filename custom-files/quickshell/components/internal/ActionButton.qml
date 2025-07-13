@@ -1,18 +1,23 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-// import Quickshell.Io
+import Quickshell
 import "../../theme"
 
 Button {
     id: control
-    property string icon: ""
-    property string text: "Action"
-    property Action command
+    action: buttonAction
+    property string buttonIcon: ""
+    property string buttonText: "Action"
+    property list<string> command: ["notify-send", "The Button You Just Clicked", "please pass a command >.<"]
     property color iconColor: Theme.colors.text
 
-    implicitWidth: 32
-    implicitHeight: 32
+    Action {
+        id: buttonAction
+        onTriggered: {
+            Quickshell.execDetached(control.command);
+        }
+    }
 
     background: Rectangle {
         color: control.hovered ? Theme.colors.surface1 : Theme.colors.surface0
@@ -35,22 +40,22 @@ Button {
         }
 
         Text {
-            text: control.icon
+            text: control.buttonIcon
             color: control.iconColor
             Layout.alignment: Qt.AlignHCenter
             font {
                 family: Theme.font.family
-                pointSize: Theme.font.sizeLarge * 1.8
+                pixelSize: Theme.font.large * 1.8
             }
         }
 
         Text {
-            text: control.text
+            text: control.buttonText
             color: Theme.colors.subtext1
             Layout.alignment: Qt.AlignHCenter
             font {
                 family: Theme.font.family
-                pointSize: Theme.font.sizeBase
+                pixelSize: Theme.font.normal
             }
         }
     }
