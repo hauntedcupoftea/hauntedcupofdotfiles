@@ -1,3 +1,6 @@
-PowerMenuPopup 1.0 PowerMenuPopup.qml
+PowerMenuPopout 1.0 PowerMenuPopout.qml
+ConnectivityMenuPopout 1.0 ConnectivityMenuPopout.qml
 Corner 1.0 Corner.qml
 ToolTipPopup 1.0 ToolTipPopup.qml
+StyledText 1.0 StyledText.qml
+ActionButton 1.0 ActionButton.qml

@@ -1,57 +1,21 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Layouts
 import "../theme"
-import "../services"
+import "../widgets" // Assuming BarButton.qml is in this directory
 import "internal" as Private
 
-Item {
+BarButton {
     id: powerMenu
-    property bool popupOpen
-    implicitWidth: 64
-    implicitHeight: 28
 
-    Action {
-        id: togglePowerMenu
+    Layout.rightMargin: Theme.padding
 
-        onTriggered: {
-            powerMenu.popupOpen = !powerMenu.popupOpen;
-            // DEBUG: uncomment below
-            // console.info(`popupOpen state: ${powerMenu.popupOpen}`);
-        }
-    }
+    text: "󰐥"
+    textColor: "red"
+    pressedColor: Theme.colors.red
 
-    Button {
-        id: powerButton
-        anchors.fill: parent
-        action: togglePowerMenu
-
-        background: Rectangle {
-            radius: Theme.rounding.verysmall
-            color: powerButton.hovered ? Theme.colors.surface0 : Theme.colors.crust
-            states: State {
-                name: "pressed"
-                when: powerButton.pressed || powerMenu.popupOpen
-                PropertyChanges {
-                    powerButtonText.color: Theme.colors.red
-                }
-            }
-        }
-
-        Text {
-            id: powerButtonText
-            anchors.centerIn: parent
-            text: `${Network.status}  ${Bluetooth.status}` // CHANGE TO DYNAMIC TEXT FOR POP UP PANEL
-            color: "red"
-            font {
-                family: Theme.font.family
-                pointSize: Theme.font.sizeBase
-                weight: 700
-            }
-        }
-    }
-
-    Private.PowerMenuPopup {
-        powerButton: powerMenu
-        popupOpen: powerMenu.popupOpen
+    Private.PowerMenuPopout {
+        // Bind directly to the properties exposed by powerMenu (the BarButton)
+        popupOpen: powerMenu.isMenuOpen
+        powerButton: powerMenu.button
     }
 }

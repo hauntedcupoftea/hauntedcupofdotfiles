@@ -7,19 +7,26 @@ PopupWindow {
 
     // Required properties
     required property var targetWidget
+    required property bool triggerTarget
     required property rect position
     required property int expandDirection
 
     // Optional properties
-    property int showDelay: 800
+    property int showDelay: 200
     property int hideDelay: 200
     property color backgroundColor: Theme.colors.surface1
     property real backgroundRadius: Theme.rounding.verysmall
+    property bool blockShow: false
 
     // do not mess with these unless required
     default property alias data: contentContainer.data
     property bool shouldShow: (targetWidget?.hovered ?? false) || isHovered
     property bool isHovered: mouseArea.containsMouse
+
+    function forceHide() {
+        showTimer.stop();
+        internal.actuallyVisible = false;
+    }
 
     anchor {
         item: targetWidget
@@ -52,7 +59,7 @@ PopupWindow {
 
     // Watch for shouldShow changes
     onShouldShowChanged: {
-        if (shouldShow) {
+        if (shouldShow && !blockShow) {
             hideTimer.stop();
             showTimer.start();
         } else {
@@ -96,7 +103,7 @@ PopupWindow {
 
             // Forward clicks to target widget action if it exists
             onClicked: {
-                if (tooltipPopup.targetWidget?.action) {
+                if (tooltipPopup.targetWidget?.action && tooltipPopup.triggerTarget) {
                     tooltipPopup.targetWidget.action.trigger();
                 }
             }

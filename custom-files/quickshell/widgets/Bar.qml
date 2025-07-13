@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import "../components"
 import "../theme"
+import "../services"
 
 Rectangle {
     id: bar
@@ -11,30 +12,46 @@ Rectangle {
 
     anchors {
         top: parent.top
-        topMargin: Theme.debugOffsetHeight // remove in prod
+        topMargin: Theme.debugOffsetHeight
         left: parent.left
         right: parent.right
     }
 
     implicitHeight: Theme.barHeight
 
-    RowLayout {
-        anchors.leftMargin: 8
-        anchors.rightMargin: 8
-        anchors.topMargin: 6
-        anchors.bottomMargin: 6
+    Item {
+        anchors.margins: Theme.margin
         anchors.fill: parent
-        spacing: 2
 
-        ClockWidget {
-            id: clockwidget
+        BarGroup {
+            id: leftPanel
+            anchors.left: parent.left
+            spacing: Theme.margin + Theme.padding
+
+            ClockWidget {
+                id: clockwidget
+            }
         }
 
-        //...more elements
+        BarGroup {
+            id: rightPanel
+            anchors.right: parent.right
+            spacing: Theme.padding
 
-        PowerMenu {
-            id: powermenu
-            Layout.alignment: Qt.AlignRight
+            Loader {
+                enabled: Battery.isAvailable
+                sourceComponent: BatteryMenu {
+                    id: batterymenu
+                }
+            }
+
+            ConnectivityMenu {
+                id: connectivityMenu
+            }
+
+            PowerMenu {
+                id: powermenu
+            }
         }
     }
 }

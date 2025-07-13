@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell
 import QtQuick.Controls
 import "../theme"
@@ -8,7 +9,8 @@ import "internal" as Private
 Button {
     id: clockWidgetRoot
     implicitWidth: clockWidgetText.implicitWidth + (Theme.padding * 2)
-    implicitHeight: 28
+    implicitHeight: Theme.barHeight - (Theme.margin * 2)
+    Layout.leftMargin: Theme.padding
 
     background: Rectangle {
         anchors.fill: clockWidgetRoot
@@ -24,39 +26,35 @@ Button {
     }
     action: clockWidgetAction
 
-    Text {
+    Private.StyledText {
         id: clockWidgetText
         text: Time.time
         anchors.centerIn: parent
         color: Theme.colors.peach
-        font {
-            family: Theme.font.family
-            pointSize: Theme.font.sizeBase
-            weight: 700
-        }
+        animate: false
+        weight: 500
+        font.pixelSize: Theme.font.large
     }
 
     Private.ToolTipPopup {
         targetWidget: clockWidgetRoot
+        triggerTarget: true
         position: Qt.rect(Theme.padding, clockWidgetRoot.height + Theme.padding, 0, 0)
         expandDirection: Edges.Bottom | Edges.Right
 
         Column {
             spacing: Theme.margin / 2
-            Text {
+            Private.StyledText {
                 text: "📅 Today: " + Time.time
                 color: Theme.colors.text
-                font.family: Theme.font.family
             }
-            Text {
+            Private.StyledText {
                 text: "🌤️ Weather: 22°C Sunny"
                 color: Theme.colors.subtext1
-                font.family: Theme.font.family
             }
-            Text {
+            Private.StyledText {
                 text: "Click for calendar"
                 color: Theme.colors.subtext0
-                font.family: Theme.font.family
             }
         }
     }

@@ -7,6 +7,7 @@ Text {
     id: root
 
     property color textColor
+    property int weight: 500
     property bool animate: false
     property string animateProp: "scale"
     property real animateFrom: 0
@@ -17,7 +18,8 @@ Text {
     textFormat: Text.PlainText
     color: textColor ?? Theme.colors.text
     font.family: Theme.font.family
-    font.pointSize: Theme.font.sizeBase
+    font.pixelSize: Theme.font.normal
+    font.weight: weight
 
     Behavior on color {
         ColorAnimation {
