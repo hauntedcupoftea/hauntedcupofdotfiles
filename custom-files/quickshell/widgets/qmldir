@@ -1,3 +1,6 @@
 module Widgets
 Bar 1.0 Bar.qml
 Background 1.0 Background.qml
+BarGroup 1.0 BarGroup.qml
+BarButton 1.0 BarButton.qml
+AbstratBarButton 1.0 AbstractBarButton.qml
