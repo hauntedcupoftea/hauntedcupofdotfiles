@@ -6,4 +6,7 @@ QtObject {
     readonly property bool debug: false // moves the bar a bit below in case waybar is enabled
     // TODO: dhruv's idea: "focus mode" bool that toggles desktop background
     readonly property BatteryThresholds battery: BatteryThresholds {}
+    readonly property int windowsThreshold: 4
+    // edit this to tune how psychotic quickshell-kun gets
+    readonly property list<string> sessionMessages: ["Session Menu", "pwease don't go ;-;", "I'll miss you if you leave...", "Are you sure you want to exit?", "We'll be waiting for your return!", "i will literally cut myself again if you leave", "Don't leave me, I'm scared.", "You're not allowed to leave.", "If you go, you'll regret it."]
 }
