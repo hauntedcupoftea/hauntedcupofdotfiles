@@ -4,6 +4,6 @@
     enableFishIntegration = true;
     colors = "auto";
     git = true;
-    icons = true;
+    icons = "auto";
   };
 }
