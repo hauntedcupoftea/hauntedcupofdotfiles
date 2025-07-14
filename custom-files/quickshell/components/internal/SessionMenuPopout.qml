@@ -2,23 +2,37 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import "../../theme"
+import "../../config"
 
 PopupWindow {
     id: root
     required property var powerButton
     required property bool popupOpen
+    property string hoveredAction: "Session Menu"
+    property list<string> sessionMessages: Settings.sessionMessages
+
+    function getRandomSessionMessage(messages) {
+        const randomIndex = Math.floor(Math.random() * sessionMessages.length);
+        return sessionMessages[randomIndex];
+    }
     anchor {
         item: powerButton
         rect: Qt.rect(powerButton.width, powerButton.height + Theme.padding, 0, 0)
         gravity: Edges.Bottom | Edges.Left
     }
+
     color: "transparent"
 
-    implicitWidth: sessionMenuGrid.width + (Theme.padding * 2)
-    implicitHeight: sessionMenuGrid.height + (Theme.padding * 2)
-    visible: popupOpen
+    Behavior on height {
+        NumberAnimation {
+            duration: 200 // milliseconds
+            easing.type: Easing.OutCubic
+        }
+    }
 
-    Behavior on visible {}
+    implicitWidth: sessionMenuColumn.width + (Theme.padding * 2)
+    implicitHeight: sessionMenuColumn.height + (Theme.padding * 2)
+    visible: popupOpen
 
     Rectangle {
         anchors.fill: parent
@@ -33,49 +47,104 @@ PopupWindow {
                 root.powerButton.action.trigger();
             }
 
-            GridLayout {
-                id: sessionMenuGrid
-                anchors.centerIn: parent
-                columnSpacing: Theme.padding
-                rowSpacing: Theme.padding
-                columns: 3
+            ColumnLayout {
+                id: sessionMenuColumn
 
-                ActionButton {
-                    buttonIcon: "󰍃"
-                    buttonText: "Logout"
+                spacing: Theme.padding
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.topMargin: Theme.padding
+                anchors.leftMargin: Theme.padding
+                anchors.rightMargin: Theme.padding
+                GridLayout {
+                    id: sessionMenuGrid
                     Layout.alignment: Qt.AlignCenter
-                    implicitWidth: 108
+                    columnSpacing: Theme.padding * 2
+                    rowSpacing: Theme.padding * 2
+                    columns: 3
+
+                    SessionMenuButton {
+                        buttonIcon: "󰍃"
+                        buttonText: "Logout"
+                        Layout.alignment: Qt.AlignCenter
+                        onHoveredChanged: {
+                            if (hovered)
+                                root.hoveredAction = this.buttonText;
+                            else
+                                root.hoveredAction = root.getRandomSessionMessage();
+                        }
+                    }
+                    SessionMenuButton {
+                        buttonIcon: "󰜉"
+                        buttonText: "Reboot"
+                        Layout.alignment: Qt.AlignCenter
+                        onHoveredChanged: {
+                            if (hovered)
+                                root.hoveredAction = this.buttonText;
+                            else
+                                root.hoveredAction = root.getRandomSessionMessage();
+                        }
+                    }
+                    SessionMenuButton {
+                        buttonIcon: "󰐥"
+                        buttonText: "Shutdown"
+                        Layout.alignment: Qt.AlignCenter
+                        onHoveredChanged: {
+                            if (hovered)
+                                root.hoveredAction = this.buttonText;
+                            else
+                                root.hoveredAction = root.getRandomSessionMessage();
+                        }
+                    }
+                    SessionMenuButton {
+                        buttonIcon: "󰌾"
+                        buttonText: "Lock"
+                        Layout.alignment: Qt.AlignCenter
+                        command: ["loginctl", "lock-session"]
+                        onHoveredChanged: {
+                            if (hovered)
+                                root.hoveredAction = this.buttonText;
+                            else
+                                root.hoveredAction = root.getRandomSessionMessage();
+                        }
+                    }
+                    SessionMenuButton {
+                        buttonIcon: "󰤄"
+                        buttonText: "Hibernate"
+                        Layout.alignment: Qt.AlignCenter
+                        onHoveredChanged: {
+                            if (hovered)
+                                root.hoveredAction = this.buttonText;
+                            else
+                                root.hoveredAction = root.getRandomSessionMessage();
+                        }
+                    }
+                    SessionMenuButton {
+                        buttonIcon: "󰜗"
+                        buttonText: "Suspend"
+                        Layout.alignment: Qt.AlignCenter
+                        onHoveredChanged: {
+                            if (hovered)
+                                root.hoveredAction = this.buttonText;
+                            else
+                                root.hoveredAction = root.getRandomSessionMessage();
+                        }
+                    }
                 }
-                ActionButton {
-                    buttonIcon: "󰜉"
-                    buttonText: "Reboot"
+
+                Text {
+                    id: sessionMenuText
                     Layout.alignment: Qt.AlignCenter
-                    implicitWidth: 108
-                }
-                ActionButton {
-                    buttonIcon: "󰐥"
-                    buttonText: "Shutdown"
-                    Layout.alignment: Qt.AlignCenter
-                    implicitWidth: 108
-                }
-                ActionButton {
-                    buttonIcon: "󰌾"
-                    buttonText: "Lock"
-                    Layout.alignment: Qt.AlignCenter
-                    implicitWidth: 108
-                    command: ["loginctl", "lock-session"]
-                }
-                ActionButton {
-                    buttonIcon: "󰤄"
-                    buttonText: "Hibernate"
-                    Layout.alignment: Qt.AlignCenter
-                    implicitWidth: 108
-                }
-                ActionButton {
-                    buttonIcon: "󰜗"
-                    buttonText: "Suspend"
-                    Layout.alignment: Qt.AlignCenter
-                    implicitWidth: 108
+                    Layout.maximumWidth: sessionMenuGrid.width
+                    text: root.hoveredAction
+                    color: Theme.colors.subtext1
+                    horizontalAlignment: Text.AlignHCenter
+                    wrapMode: Text.WordWrap
+                    Layout.minimumHeight: lineHeight * 2
+                    font {
+                        family: Theme.font.family
+                        pixelSize: Theme.font.normal
+                    }
                 }
             }
         }
