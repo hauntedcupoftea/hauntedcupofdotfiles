@@ -8,7 +8,7 @@ import Quickshell.Widgets
 
 AbstractBarButton {
     id: batteryIndicator
-    implicitWidth: indicator.width + (Theme.padding * 4)
+    implicitWidth: indicator.width + (Theme.padding * 2)
     implicitHeight: Theme.barHeight - (Theme.margin * 2)
 
     background: ClippingRectangle {
@@ -21,10 +21,10 @@ AbstractBarButton {
             id: fillRect
             anchors {
                 left: parent.left
-                top: parent.top
+                right: parent.right
                 bottom: parent.bottom
             }
-            width: parent.width * Battery.percentage
+            height: parent.height * Battery.percentage
             containmentMask: background
             color: {
                 if (Battery.isCritical)
@@ -32,8 +32,8 @@ AbstractBarButton {
                 if (Battery.isLow)
                     return Theme.colors.red;
                 if (Battery.isCharging)
-                    return Theme.colors.blue;
-                return Theme.colors.green;
+                    return Theme.colors.green;
+                return Theme.colors.blue;
             }
 
             // Smooth animation when percentage changes
@@ -51,13 +51,26 @@ AbstractBarButton {
             }
         }
 
-        Text {
+        Private.StyledText {
             id: indicator
             anchors.centerIn: parent
-            text: `${Battery.isCharging ? "󱐋 " : ""}${Math.round(Battery.percentage * 100)}% ${Battery.profileIcon}`
-            color: Theme.colors.surface2
-            font.pixelSize: Theme.font.small
-            font.weight: 700
+            text: `${Battery.isCharging ? "󱐋" : " "}${Math.round(Battery.percentage * 100)} ${Battery.profileIcon}`
+            weight: 400
+            color: {
+                if (Battery.isLowAndNotCharging) {
+                    return Theme.colors.red;
+                }
+                if (Battery.percentage > 0.5)
+                    return Theme.colors.surface0;
+                return Theme.colors.text;
+            }
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: 200
+                    easing.type: Easing.OutQuad
+                }
+            }
         }
     }
 
