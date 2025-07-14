@@ -1,7 +1,12 @@
 { inputs, pkgs, ... }: {
   home.packages = with pkgs.kdePackages; [
     (inputs.quickshell.packages.${pkgs.system}.default.overrideAttrs
-      { patches = [ ../../custom-files/patches/qs-patch.txt ]; })
+      {
+        patches = [
+          ../../custom-files/patches/qs-patch.txt
+          ../../custom-files/patches/qs-patch2.txt
+        ];
+      })
     qtdeclarative
     qt5compat
     qtstyleplugin-kvantum

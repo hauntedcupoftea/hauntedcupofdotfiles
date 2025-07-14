@@ -1,0 +1,14 @@
+diff --git a/src/window/proxywindow.cpp b/src/window/proxywindow.cpp
+index 56d250c..6dfc0e1 100644
+--- a/src/window/proxywindow.cpp
++++ b/src/window/proxywindow.cpp
+@@ -112,6 +112,9 @@ void ProxyWindowBase::ensureQWindow() {
+         auto opaque = this->qsSurfaceFormat.opaqueModified ? this->qsSurfaceFormat.opaque
+                                                            : this->mColor.alpha() >= 255;
+ 
++        qDebug() << "SET SFORMAT RESET";
++        format.setOption(QSurfaceFormat::ResetNotification);
++
+         if (opaque) format.setAlphaBufferSize(0);
+         else format.setAlphaBufferSize(8);
+ 
