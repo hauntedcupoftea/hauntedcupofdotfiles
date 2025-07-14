@@ -1,0 +1,25 @@
+diff --git a/src/launch/launch.cpp b/src/launch/launch.cpp
+index 91e2e24..f8793df 100644
+--- a/src/launch/launch.cpp
++++ b/src/launch/launch.cpp
+@@ -13,6 +13,7 @@
+ #include <qqmldebug.h>
+ #include <qquickwindow.h>
+ #include <qstring.h>
++#include <qsurfaceformat.h>
+ #include <qtenvironmentvariables.h>
+ #include <qtextstream.h>
+ #include <unistd.h>
+@@ -234,6 +235,12 @@ int launch(const LaunchArgs& args, char** argv, QCoreApplication* coreApplicatio
+ 	// Use a fully transparent window with a colored rect.
+ 	QQuickWindow::setDefaultAlphaBuffer(true);
+ 
++	{
++		auto format = QSurfaceFormat::defaultFormat();
++		format.setOption(QSurfaceFormat::ResetNotification);
++		QSurfaceFormat::setDefaultFormat(format);
++	}
++
+ 	if (pragmas.nativeTextRendering) {
+ 		QQuickWindow::setTextRenderType(QQuickWindow::NativeTextRendering);
+ 	}
