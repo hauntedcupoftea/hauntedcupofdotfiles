@@ -77,7 +77,7 @@ RowLayout {
 
             background: ClippingRectangle {
                 radius: Theme.rounding.full
-                color: workspaceButton.getBgColor()
+                color: workspaceButton.hovered ? Theme.colors.surface0 : workspaceButton.getBgColor()
 
                 // Smooth color transitions
                 Behavior on color {

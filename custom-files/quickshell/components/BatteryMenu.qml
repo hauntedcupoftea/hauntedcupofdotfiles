@@ -54,7 +54,7 @@ AbstractBarButton {
         Private.StyledText {
             id: indicator
             anchors.centerIn: parent
-            text: `${Battery.isCharging ? "󱐋" : " "}${Math.round(Battery.percentage * 100)} ${Battery.profileIcon}`
+            text: `${Battery.isCharging ? "󱐋" : " "} ${Math.round(Battery.percentage * 100)} ${Battery.profileIcon}`
             weight: 400
             color: {
                 if (Battery.isLowAndNotCharging) {
