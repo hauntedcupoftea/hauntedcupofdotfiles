@@ -139,8 +139,9 @@ PopupWindow {
                     text: root.hoveredAction
                     color: Theme.colors.subtext1
                     horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
                     wrapMode: Text.WordWrap
-                    Layout.minimumHeight: lineHeight * 2
+                    Layout.minimumHeight: Theme.font.normal * 4
                     font {
                         family: Theme.font.family
                         pixelSize: Theme.font.normal
