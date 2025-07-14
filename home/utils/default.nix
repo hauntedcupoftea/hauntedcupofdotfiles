@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ ... }: {
   imports = [
     ./btop.nix
     ./eza.nix
@@ -7,9 +7,5 @@
     ./misc
     ./yazi.nix
     ./zoxide.nix
-  ];
-
-  home.packages = [
-    pkgs.tree
   ];
 }
