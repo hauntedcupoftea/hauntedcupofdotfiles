@@ -3,3 +3,4 @@ ClockWidget 1.0 ClockWidget.qml
 SessionMenu 1.0 SessionMenu.qml
 ConnectivityMenu 1.0 ConnectivityMenu.qml
 BatteryMenu 1.0 BatteryMenu.qml
+HyprlandWS 1.0 HyprlandWS.qml

@@ -26,10 +26,20 @@ Rectangle {
         BarGroup {
             id: leftPanel
             anchors.left: parent.left
-            spacing: Theme.margin + Theme.padding
+            spacing: Theme.padding
 
             ClockWidget {
                 id: clockwidget
+            }
+        }
+
+        BarGroup {
+            id: centerPanel
+            anchors.centerIn: parent
+            spacing: Theme.padding
+
+            HyprlandWS {
+                id: hyprgaming
             }
         }
 
