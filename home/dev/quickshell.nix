@@ -1,7 +1,9 @@
 { inputs, pkgs, ... }: {
-  home.packages = [
+  home.packages = with pkgs.kdePackages; [
     inputs.quickshell.packages.${pkgs.system}.default
-    pkgs.kdePackages.qtdeclarative
+    qtdeclarative
+    qt5compat
+    qtstyleplugin-kvantum
   ];
 
   qt = {
