@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-import "../theme" // Assuming a common theme import path
+import "../theme"
 import "../components/internal" as Private
 
 Item {

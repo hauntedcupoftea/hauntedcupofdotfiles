@@ -45,7 +45,7 @@ RowLayout {
                 if (modelData.focused) {
                     return Theme.colors.blue;
                 } else if (modelData.active) {
-                    return Theme.colors.peach;
+                    return Theme.colors.sky;
                 } else {
                     return Theme.colors.rosewater;
                 }
