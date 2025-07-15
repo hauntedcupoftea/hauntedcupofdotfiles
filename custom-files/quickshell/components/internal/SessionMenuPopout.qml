@@ -30,6 +30,10 @@ PopupWindow {
         }
     }
 
+    onPopupOpenChanged: {
+        root.hoveredAction = "Session Menu";
+    }
+
     implicitWidth: sessionMenuColumn.width + (Theme.padding * 2)
     implicitHeight: sessionMenuColumn.height + (Theme.padding * 2)
     visible: popupOpen

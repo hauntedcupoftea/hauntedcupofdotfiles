@@ -1,5 +1,6 @@
 SessionMenuPopout 1.0 SessionMenuPopout.qml
 ConnectivityMenuPopout 1.0 ConnectivityMenuPopout.qml
+ClockWidgetPopout 1.0 ClockWidgetPopout.qml
 Corner 1.0 Corner.qml
 ToolTipPopup 1.0 ToolTipPopup.qml
 StyledText 1.0 StyledText.qml

@@ -68,6 +68,16 @@ PopupWindow {
         }
     }
 
+    onBlockShowChanged: {
+        if (blockShow) {
+            showTimer.stop();
+            hideTimer.start();
+        } else if (targetWidget?.hovered) {
+            showTimer.start();
+            hideTimer.stop();
+        }
+    }
+
     Rectangle {
         id: content
         color: tooltipPopup.backgroundColor
