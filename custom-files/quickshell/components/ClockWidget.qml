@@ -1,30 +1,22 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import QtQuick.Controls
 import "../theme"
 import "../services"
+import "../widgets"
 import "internal" as Private
 
-Button {
-    id: clockWidgetRoot
+AbstractBarButton {
+    id: root
     implicitWidth: clockWidgetText.implicitWidth + (Theme.padding * 2)
     implicitHeight: Theme.barHeight - (Theme.margin * 2)
     Layout.leftMargin: Theme.padding
 
     background: Rectangle {
-        anchors.fill: clockWidgetRoot
-        color: clockWidgetRoot.hovered ? Theme.colors.surface0 : Theme.colors.crust
+        anchors.fill: root
+        color: root.hovered ? Theme.colors.surface0 : Theme.colors.crust
         radius: Theme.rounding.verysmall
     }
-
-    Action {
-        id: clockWidgetAction
-        onTriggered: {
-            console.warn(`Action Not Implemented on clockWidget`);
-        }
-    }
-    action: clockWidgetAction
 
     Private.StyledText {
         id: clockWidgetText
@@ -37,10 +29,11 @@ Button {
     }
 
     Private.ToolTipPopup {
-        targetWidget: clockWidgetRoot
+        targetWidget: root
         triggerTarget: true
-        position: Qt.rect(Theme.padding, clockWidgetRoot.height + Theme.padding, 0, 0)
+        position: Qt.rect(Theme.padding, root.height + Theme.padding, 0, 0)
         expandDirection: Edges.Bottom | Edges.Right
+        blockShow: root.menuOpen
 
         Column {
             spacing: Theme.margin / 2
@@ -57,5 +50,10 @@ Button {
                 color: Theme.colors.subtext0
             }
         }
+    }
+
+    Private.ClockWidgetPopout {
+        popupOpen: root.menuOpen
+        powerButton: root
     }
 }
