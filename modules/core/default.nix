@@ -3,6 +3,7 @@
     ./boot.nix
     ./networking.nix
     ./nix.nix
+    ./nh.nix
     ./locale.nix
     ./location.nix
     ./sddm.nix

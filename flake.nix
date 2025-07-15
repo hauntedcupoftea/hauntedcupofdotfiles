@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    nh.url = "github:nix-community/nh";
+
     hypr-contrib.url = "github:hyprwm/contrib";
 
     hyprpicker.url = "github:hyprwm/hyprpicker";
@@ -49,6 +51,7 @@
   outputs =
     { self
     , nixpkgs
+    , nh
     , home-manager
     , catppuccin
     , nvf
