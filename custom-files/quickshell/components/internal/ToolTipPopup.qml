@@ -25,7 +25,7 @@ PopupWindow {
 
     function forceHide() {
         showTimer.stop();
-        internal.actuallyVisible = false;
+        hideTimer.start();
     }
 
     anchor {
@@ -75,8 +75,8 @@ PopupWindow {
         implicitWidth: contentContainer.implicitWidth + (Theme.padding * 2)
         implicitHeight: contentContainer.implicitHeight + (Theme.padding * 2)
 
-        // Entrance animation
-        scale: internal.actuallyVisible ? 1.0 : 0.8
+        // Smooth scale + fade animation
+        scale: internal.actuallyVisible ? 1.0 : 0.85
         opacity: internal.actuallyVisible ? 1.0 : 0.0
 
         Behavior on scale {
