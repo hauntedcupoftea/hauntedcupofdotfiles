@@ -48,11 +48,8 @@ Rectangle {
             anchors.right: parent.right
             spacing: Theme.padding
 
-            Loader {
-                active: Battery.isAvailable
-                sourceComponent: BatteryMenu {
-                    id: batterymenu
-                }
+            BatteryMenu {
+                id: batterymenu
             }
 
             ConnectivityMenu {
