@@ -12,12 +12,15 @@ Button {
         menuOpen = false;
     }
 
-    onClicked: {
-        if (barButton.menuOpen) {
-            barButton.menuOpen = false;
-        } else {
-            barButton.requestOpen();
-            barButton.menuOpen = true;
+    action: Action {
+        id: toggleMenuAction
+        onTriggered: {
+            if (barButton.menuOpen) {
+                barButton.menuOpen = false;
+            } else {
+                barButton.requestOpen(); // Let the parent manage other open menus
+                barButton.menuOpen = true;
+            }
         }
     }
 }
