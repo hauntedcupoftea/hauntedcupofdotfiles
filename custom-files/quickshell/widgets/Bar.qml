@@ -1,6 +1,4 @@
-// import Quickshell
 import QtQuick
-// import QtQuick.Layouts
 import "../components"
 import "../theme"
 import "../services"
@@ -48,8 +46,11 @@ Rectangle {
             anchors.right: parent.right
             spacing: Theme.padding
 
-            BatteryMenu {
-                id: batterymenu
+            BarGroupLoader {
+                active: Battery.isAvailable
+                sourceComponent: BatteryMenu {
+                    id: batteryMenu
+                }
             }
 
             ConnectivityMenu {
