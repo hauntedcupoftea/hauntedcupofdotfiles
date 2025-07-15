@@ -5,7 +5,7 @@ in
 {
   programs.nh = {
     enable = true;
-    flake = "/home/tea/.config/nixos";
+    flake = "/home/tea/hauntedcupofdotfiles";
     clean = {
       enable = true;
       dates = "weekly";
