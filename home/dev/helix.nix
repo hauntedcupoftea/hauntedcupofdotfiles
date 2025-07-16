@@ -151,7 +151,7 @@
         {
           name = "qml";
           auto-format = true;
-          indent = { tab-width = 2; unit = "  "; };
+          indent = { tab-width = 4; unit = "    "; };
           language-servers = [ "qmlls" ];
         }
       ];
