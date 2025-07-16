@@ -1,7 +1,7 @@
 import QtQuick
+import QtQuick.Layouts
 import "../components"
 import "../theme"
-import "../services"
 
 Rectangle {
     id: bar
@@ -18,7 +18,7 @@ Rectangle {
     implicitHeight: Theme.barHeight
 
     Item {
-        anchors.margins: Theme.margin
+        anchors.margins: Theme.margin / 2
         anchors.fill: parent
 
         BarGroup {
@@ -29,16 +29,15 @@ Rectangle {
             ClockWidget {
                 id: clockwidget
             }
+            ActiveWindow {
+                id: activeWindowName
+            }
         }
 
-        BarGroup {
-            id: centerPanel
+        HyprlandWS {
+            id: hyprgaming
             anchors.centerIn: parent
-            spacing: Theme.padding
-
-            HyprlandWS {
-                id: hyprgaming
-            }
+            Layout.alignment: Qt.AlignCenter
         }
 
         BarGroup {
@@ -46,11 +45,8 @@ Rectangle {
             anchors.right: parent.right
             spacing: Theme.padding
 
-            BarGroupLoader {
-                active: Battery.isAvailable
-                sourceComponent: BatteryMenu {
-                    id: batteryMenu
-                }
+            BatteryMenu {
+                id: batteryMenu
             }
 
             ConnectivityMenu {
