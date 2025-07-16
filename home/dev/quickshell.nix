@@ -4,6 +4,7 @@
     qtdeclarative
     qt5compat
     qtstyleplugin-kvantum
+    qtsvg
   ];
 
   qt = {
