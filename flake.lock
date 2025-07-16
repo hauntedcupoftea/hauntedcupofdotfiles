@@ -158,11 +158,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1752592931,
-        "narHash": "sha256-cAGqSjubxOu+tPB/SbsIAlo/VrW2Hz6yOKw2HGmtzmI=",
+        "lastModified": 1752603129,
+        "narHash": "sha256-S+wmHhwNQ5Ru689L2Gu8n1OD6s9eU9n9mD827JNR+kw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f7a45b08319233b9b93ba60bbfccb41df75a7ac1",
+        "rev": "e8c19a3cec2814c754f031ab3ae7316b64da085b",
         "type": "github"
       },
       "original": {
@@ -284,11 +284,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1752526483,
-        "narHash": "sha256-XbCDmM9uL5i88gPNcY+gU5JTWogFeNogxb+x09UWaH4=",
+        "lastModified": 1752611080,
+        "narHash": "sha256-dHv7iufYA6Bd3JnF0An2biBCLXstSk5VB0ULgS50umE=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "bc764f7065c8e46b4e62cbb511b419034712c509",
+        "rev": "8453fbf4eb0af2e3265fd34a693b7d0e9167f4d2",
         "type": "github"
       },
       "original": {
@@ -560,11 +560,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1752521927,
-        "narHash": "sha256-AnY/lbl+NTZV4beCn9hxPml7pTfEjKzkfa8eHwpqOOc=",
+        "lastModified": 1752630046,
+        "narHash": "sha256-3n8RWZNuanoBvVQTIAcIqds8aDercXz5nAUBhw8cZJU=",
         "owner": "nix-community",
         "repo": "nh",
-        "rev": "183d23544db1a277401ef0b0b949625db3f89a6e",
+        "rev": "2fbf9bc47011c9bcfdb12c13ed4c52c3e6b8cdcf",
         "type": "github"
       },
       "original": {
@@ -579,11 +579,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1752578351,
-        "narHash": "sha256-+6V6MQMCShOAxIiRN/yz/I4/Z+rVqABNJv7YQixpbAE=",
+        "lastModified": 1752631802,
+        "narHash": "sha256-t65TV28ZatEKVyFoTmExQgb8LECvrj/3Wuogn5PxfYI=",
         "owner": "fufexan",
         "repo": "nix-gaming",
-        "rev": "f49bdcb072ed5fa4bb0e341cb3c1ef322da80566",
+        "rev": "b8834a847dee8875e06e218830f33a3486f0185e",
         "type": "github"
       },
       "original": {
@@ -657,11 +657,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1751211869,
-        "narHash": "sha256-1Cu92i1KSPbhPCKxoiVG5qnoRiKTgR5CcGSRyLpOd7Y=",
+        "lastModified": 1752436162,
+        "narHash": "sha256-Kt1UIPi7kZqkSc5HVj6UY5YLHHEzPBkgpNUByuyxtlw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b43c397f6c213918d6cfe6e3550abfe79b5d1c51",
+        "rev": "dfcd5b901dbab46c9c6e80b265648481aafb01f8",
         "type": "github"
       },
       "original": {
@@ -789,11 +789,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1752486994,
-        "narHash": "sha256-/11zPRDdPPn61GXDyvDes9otFTP5lLqmETAtwMdeYWI=",
+        "lastModified": 1752631407,
+        "narHash": "sha256-dLDtKxh1VabwLxv5xbjI+oRkDyqWEKGITU+0dEaaW28=",
         "ref": "refs/heads/master",
-        "rev": "5ac9096c1c63f6940c6b95f1118b540dfe029278",
-        "revCount": 632,
+        "rev": "4d8055f1cd9924bcace59405894b8879633eb83d",
+        "revCount": 638,
         "type": "git",
         "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
       },
@@ -825,11 +825,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1752547600,
-        "narHash": "sha256-0vUE42ji4mcCvQO8CI0Oy8LmC6u2G4qpYldZbZ26MLc=",
+        "lastModified": 1752633862,
+        "narHash": "sha256-Bj7ozT1+5P7NmvDcuAXJvj56txcXuAhk3Vd9FdWFQzk=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "9127ca1f5a785b23a2fc1c74551a27d3e8b9a28b",
+        "rev": "8668ca94858206ac3db0860a9dec471de0d995f8",
         "type": "github"
       },
       "original": {
@@ -940,11 +940,11 @@
         "systems": "systems_5"
       },
       "locked": {
-        "lastModified": 1752595372,
-        "narHash": "sha256-X34D9btRICzriFIYbK6+nq8IlRTVGTAXxkR6eibnGlw=",
+        "lastModified": 1752599873,
+        "narHash": "sha256-YOmWsT1oxpCCXq20OW9cOU48Z1X+nypqmXqr0+KKXCA=",
         "owner": "abenz1267",
         "repo": "walker",
-        "rev": "ae8a01ecbfae814cbb8560b7fee9187cabd5ad7a",
+        "rev": "821735a6a2f4284cd71995e4a1b3911f3caa4b21",
         "type": "github"
       },
       "original": {
