@@ -1,9 +1,9 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Wayland
-import Quickshell.Widgets
 import "../theme"
 import "internal" as Private
 
@@ -15,6 +15,7 @@ Rectangle {
     radius: Theme.rounding.small
 
     property bool showDesktop: Hyprland.focusedWorkspace.toplevels.values.length == 0 || ToplevelManager.activeToplevel == null
+    property bool showIcon: !root.showDesktop && DesktopEntries.byId(ToplevelManager.activeToplevel.appId)
 
     function createTitleString(s: string): string {
         return s.slice(0, 1).toUpperCase() + s.slice(1);
@@ -38,21 +39,40 @@ Rectangle {
             color: Theme.colors.surface0
 
             Loader {
-                active: !root.showDesktop
+                active: root.showIcon
                 anchors.centerIn: parent
-                sourceComponent: IconImage {
+                sourceComponent: Image {
                     anchors.centerIn: parent
-                    // sourceSize: Qt.size(Theme.barIconSize, Theme.barIconSize)
-                    implicitSize: Theme.barIconSize
-                    source: Quickshell.iconPath(DesktopEntries.byId(ToplevelManager.activeToplevel.appId).icon)
-                    Component.onCompleted: print(Quickshell.iconPath(DesktopEntries.byId(ToplevelManager.activeToplevel.appId).icon))
+                    sourceSize: Qt.size(Theme.barIconSize, Theme.barIconSize)
+                    source: Quickshell.iconPath(DesktopEntries.byId(ToplevelManager.activeToplevel?.appId)?.icon)
+                }
+            }
+
+            Loader {
+                active: !root.showIcon
+                anchors.centerIn: parent
+                sourceComponent: Text {
+                    text: {
+                        const title = root.getWindowTitle();
+                        if (title === "Desktop")
+                            return "";
+                        if (title.contains(".exe") || title.contains("steam")) // steamgamescope apps + .exe
+                            return "󰺷";
+                        return "";
+                    }
+                    color: Theme.colors.subtext0
+                    font {
+                        family: Theme.font.family
+                        pixelSize: Theme.barIconSize
+                        weight: 400
+                    }
                 }
             }
         }
 
         Private.StyledText {
             id: windowName
-            text: root.getWindowTitle() //title.split('—')[0]
+            text: root.getWindowTitle()
             color: Theme.colors.text
         }
     }
