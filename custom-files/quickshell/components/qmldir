@@ -1,4 +1,5 @@
 module Components
+ActiveWindow 1.0 ActiveWindow.qml
 ClockWidget 1.0 ClockWidget.qml
 SessionMenu 1.0 SessionMenu.qml
 ConnectivityMenu 1.0 ConnectivityMenu.qml
