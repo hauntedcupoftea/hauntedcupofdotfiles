@@ -19,5 +19,6 @@ QtObject {
     readonly property int margin: 6
     readonly property int padding: 10
     readonly property int barHeight: 40
+    readonly property int barIconSize: 20
     readonly property int debugOffsetHeight: Settings.debug ? 36 : 0
 }
