@@ -40,7 +40,7 @@ AbstractBarButton {
             radius: Theme.rounding.verysmall
             color: Theme.colors.surface0
             implicitWidth: Theme.padding * 2
-            implicitHeight: batteryIndicator.height - (Theme.margin / 2)
+            implicitHeight: batteryIndicator.height - (Theme.margin)
 
             // Fill rectangle that shows battery percentage
             Rectangle {
