@@ -9,7 +9,7 @@ import "internal" as Private
 AbstractBarButton {
     id: root
     implicitWidth: clockWidgetText.implicitWidth + (Theme.padding * 2)
-    implicitHeight: Theme.barHeight - (Theme.margin * 2)
+    implicitHeight: Theme.barHeight - (Theme.margin)
     Layout.leftMargin: Theme.padding
 
     background: Rectangle {

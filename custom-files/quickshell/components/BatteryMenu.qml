@@ -11,7 +11,7 @@ import "internal" as Private
 AbstractBarButton {
     id: batteryIndicator
     implicitWidth: batLayout.width + (Theme.padding * 2)
-    implicitHeight: Theme.barHeight - (Theme.margin * 2)
+    implicitHeight: Theme.barHeight - (Theme.margin)
 
     background: Rectangle {
         color: batteryIndicator.hovered ? Theme.colors.surface0 : Theme.colors.crust

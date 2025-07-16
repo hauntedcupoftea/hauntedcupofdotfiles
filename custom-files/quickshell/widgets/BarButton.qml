@@ -25,7 +25,7 @@ Item {
     }
 
     implicitWidth: mainText.implicitWidth + (Theme.padding * 2)
-    implicitHeight: Theme.barHeight - (Theme.margin * 2)
+    implicitHeight: Theme.barHeight - (Theme.margin)
 
     Action {
         id: toggleMenuAction
