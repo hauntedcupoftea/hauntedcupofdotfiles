@@ -1,5 +1,4 @@
-{ pkgs
-, inputs
+{ inputs
 , system
 , ...
 }:
@@ -13,18 +12,29 @@ in
     enable = true;
     enabledExtensions = with spicePkgs.extensions; [
       adblock
+      QueueTime
+      powerBar
       shuffle # shuffle+ (special characters are sanitized out of extension names)
       keyboardShortcut
       lastfm
       fullAlbumDate
+      oneko
     ];
     enabledCustomApps = with spicePkgs.apps; [
       lyricsPlus
-      marketplace
       betterLibrary
       ncsVisualizer
+      newReleases
+      reddit
+    ];
+    enabledSnippets = with spicePkgs.snippets; [
+      rotatingCoverart
+      pointer
+      hideLyricsButton
+      oneko
     ];
     theme = spicePkgs.themes.catppuccin;
     colorScheme = "mocha";
+    wayland = true;
   };
 }

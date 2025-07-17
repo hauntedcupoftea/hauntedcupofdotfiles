@@ -58,6 +58,7 @@
     , zen-browser
     , quickshell
     , rust-overlay
+    , spicetify-nix
     , ...
     } @ inputs:
     let
