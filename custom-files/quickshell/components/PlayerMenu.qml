@@ -34,8 +34,8 @@ AbstractBarButton {
 
     Private.ScrollingText {
         anchors.centerIn: root
-        scrollingText: qsTr(`${Player.active.trackArtist} - ${Player.active.trackTitle}`)
-        animate: Player.active.isPlaying
+        scrollingText: Player.active && qsTr(`${Player.active.trackArtist} - ${Player.active.trackTitle}`)
+        animate: Player.active && Player.active.isPlaying
         // DEBUG
         // onScrollingTextChanged: print(JSON.stringify(Player.active.metadata, null, 2))
     }

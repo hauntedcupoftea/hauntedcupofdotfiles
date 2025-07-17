@@ -17,7 +17,7 @@ Singleton {
     }
 
     FrameAnimation {
-        running: root.active.playbackState == MprisPlaybackState.Playing
+        running: root.active && root.active.playbackState == MprisPlaybackState.Playing
         onTriggered: root.active.positionChanged()
     }
 }
