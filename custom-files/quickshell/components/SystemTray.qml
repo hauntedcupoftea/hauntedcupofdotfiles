@@ -2,7 +2,8 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import "../theme"
-// import Quickshell
+import "../config"
+import Quickshell.Widgets
 import Quickshell.Services.SystemTray
 
 Rectangle {
@@ -16,21 +17,21 @@ Rectangle {
         anchors.centerIn: parent
         spacing: Theme.margin / 2
         Repeater {
-            model: SystemTray.items.values
+            model: SystemTray.items.values.filter(item => !Settings.ignoredTrayItems.includes(item.id))
             Button {
                 id: sysTrayButton
                 required property SystemTrayItem modelData
-                implicitHeight: Theme.barIconSize
-                implicitWidth: Theme.barIconSize
+                implicitHeight: Theme.trayIconSize + Theme.margin
+                implicitWidth: Theme.trayIconSize + Theme.margin
                 background: Rectangle {
                     radius: Theme.rounding.full
-                    color: Theme.colors.mantle
+                    color: sysTrayButton.hovered ? Theme.colors.surface0 : Theme.colors.mantle
                 }
 
-                Image {
+                IconImage {
                     anchors.centerIn: parent
-                    source: sysTrayButton.modelData.icon
-                    sourceSize: Qt.size(Theme.barIconSize - Theme.margin, Theme.barIconSize - Theme.margin)
+                    source: sysTrayButton.modelData.icon //.split("?")[0]
+                    implicitSize: Theme.trayIconSize
                 }
                 // DEBUG
                 // Component.onCompleted: print(JSON.stringify(modelData))

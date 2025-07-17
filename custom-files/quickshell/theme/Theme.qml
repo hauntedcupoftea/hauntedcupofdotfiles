@@ -20,5 +20,6 @@ QtObject {
     readonly property int padding: 10
     readonly property int barHeight: 40
     readonly property int barIconSize: 20
+    readonly property int trayIconSize: 16
     readonly property int debugOffsetHeight: Settings.debug ? 36 : 0
 }
