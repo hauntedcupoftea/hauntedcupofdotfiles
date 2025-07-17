@@ -30,7 +30,6 @@
     fastfetch
     obsidian
     overskride
-    iwgtk
     peazip
   ];
 
