@@ -14,19 +14,22 @@ ClippingRectangle {
     Text {
         id: movingText
         x: parent.width
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
         text: root.scrollingText
         color: Theme.colors.text
-
+        verticalAlignment: Qt.AlignVCenter
         font {
-            family: Theme.font.altFamily
-            pixelSize: Theme.font.normal
+            family: Theme.font.family
+            pixelSize: Theme.font.large
+            weight: 600
         }
 
         NumberAnimation on x {
-            from: root.width
+            from: root.width - Theme.padding
             to: -1 * movingText.width
             loops: Animation.Infinite
-            duration: 8000
+            duration: 7500
         }
     }
 }
