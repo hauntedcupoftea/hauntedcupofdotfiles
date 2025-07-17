@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell.Widgets
 
@@ -25,15 +26,17 @@ AbstractBarButton {
                 anchors.left: parent.left
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
-                width: Player.active.isPlaying ? root.width * Player.percentageProgress : 0
+                width: root.width * Player.percentageProgress
                 color: Theme.colors.overlay0
             }
         }
     }
 
     Private.ScrollingText {
-        anchors.centerIn: parent
-        scrollingText: Player.active.isPlaying ? qsTr(`${Player.active.trackArtist} - ${Player.active.trackTitle}`) : "Not Playing"
-        onScrollingTextChanged: print(JSON.stringify(Player.active.metadata, null, 2))
+        anchors.centerIn: root
+        scrollingText: qsTr(`${Player.active.trackArtist} - ${Player.active.trackTitle}`)
+        animate: Player.active.isPlaying
+        // DEBUG
+        // onScrollingTextChanged: print(JSON.stringify(Player.active.metadata, null, 2))
     }
 }

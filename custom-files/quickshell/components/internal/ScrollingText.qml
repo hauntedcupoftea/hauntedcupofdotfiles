@@ -7,6 +7,7 @@ ClippingRectangle {
     id: root
     anchors.fill: parent
     property string scrollingText
+    property bool animate
     radius: Theme.rounding.small
     anchors.margins: Theme.margin
     color: "transparent"
@@ -26,6 +27,7 @@ ClippingRectangle {
         }
 
         NumberAnimation on x {
+            running: root.animate
             from: root.width - Theme.padding
             to: -1 * movingText.width
             loops: Animation.Infinite
