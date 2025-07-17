@@ -50,12 +50,16 @@ Rectangle {
             anchors.right: parent.right
             spacing: Theme.padding
 
+            ConnectivityMenu {
+                id: connectivityMenu
+            }
+
             BatteryMenu {
                 id: batteryMenu
             }
 
-            ConnectivityMenu {
-                id: connectivityMenu
+            SystemTray {
+                id: sysTray
             }
 
             SessionMenu {
