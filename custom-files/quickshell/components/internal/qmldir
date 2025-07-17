@@ -6,3 +6,4 @@ ToolTipPopup 1.0 ToolTipPopup.qml
 StyledText 1.0 StyledText.qml
 ActionButton 1.0 ActionButton.qml
 SessionMenuButton 1.0 SessionMenuButton.qml
+ScrollingText 1.0 ScrollingText.qml

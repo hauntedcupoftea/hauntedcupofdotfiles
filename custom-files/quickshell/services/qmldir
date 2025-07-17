@@ -3,3 +3,4 @@ singleton Time 1.0 Time.qml
 singleton Bluetooth 1.0 Bluetooth.qml
 singleton Network 1.0 Network.qml
 singleton Battery 1.0 Battery.qml
+singleton Player 1.0 Player.qml

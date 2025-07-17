@@ -34,6 +34,11 @@ Rectangle {
             }
         }
 
+        PlayerMenu {
+            id: player
+            anchors.right: hyprgaming.left
+            anchors.rightMargin: Theme.padding
+        }
         HyprlandWS {
             id: hyprgaming
             anchors.centerIn: parent
