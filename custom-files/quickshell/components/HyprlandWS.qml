@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Widgets
 import "../theme"
@@ -99,7 +100,7 @@ Rectangle {
                         anchors.right: parent.right
                         anchors.bottom: parent.bottom
                         height: parent.height * workspaceButton.fillPercentage
-                        color: workspaceButton.getFillColor()
+                        color: workspaceButton.hovered ? Theme.colors.maroon : workspaceButton.getFillColor()
 
                         // Smooth transitions for fill
                         Behavior on height {
@@ -144,6 +145,19 @@ Rectangle {
                         workspaceButton.modelData.activate();
                     }
                 }
+
+                // i don't even know if i want a popup here. what would it even say?
+                // Private.ToolTipPopup {
+                //     expandDirection: Edges.Bottom
+                //     targetWidget: workspaceButton
+                //     triggerTarget: true
+                //     position: Qt.rect(workspaceButton.width / 2, workspaceButton.height + Theme.padding, 0, 0)
+
+                //     Private.StyledText {
+                //         text: "pee pee\npoo poo"
+                //         color: Theme.colors.subtext1
+                //     }
+                // }
             }
         }
     }
