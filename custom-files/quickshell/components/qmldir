@@ -1,9 +1,0 @@
-module Components
-ActiveWindow 1.0 ActiveWindow.qml
-ClockWidget 1.0 ClockWidget.qml
-SessionMenu 1.0 SessionMenu.qml
-ConnectivityMenu 1.0 ConnectivityMenu.qml
-BatteryMenu 1.0 BatteryMenu.qml
-HyprlandWS 1.0 HyprlandWS.qml
-PlayerMenu 1.0 PlayerMenu.qml
-SystemTray 1.0 SystemTray.qml
