@@ -72,6 +72,7 @@ PopupWindow {
                         buttonIcon: "󰍃"
                         buttonText: "Logout"
                         Layout.alignment: Qt.AlignCenter
+                        command: ["uwsm", "stop"]
                         onHoveredChanged: {
                             if (hovered)
                                 root.hoveredAction = this.buttonText;
@@ -83,6 +84,7 @@ PopupWindow {
                         buttonIcon: "󰜉"
                         buttonText: "Reboot"
                         Layout.alignment: Qt.AlignCenter
+                        command: ["systemctl", "reboot"]
                         onHoveredChanged: {
                             if (hovered)
                                 root.hoveredAction = this.buttonText;
@@ -94,6 +96,7 @@ PopupWindow {
                         buttonIcon: "󰐥"
                         buttonText: "Shutdown"
                         Layout.alignment: Qt.AlignCenter
+                        command: ["systemctl", "poweroff"]
                         onHoveredChanged: {
                             if (hovered)
                                 root.hoveredAction = this.buttonText;
@@ -117,6 +120,7 @@ PopupWindow {
                         buttonIcon: "󰤄"
                         buttonText: "Hibernate"
                         Layout.alignment: Qt.AlignCenter
+                        command: ["systemctl", "hibernate"]
                         onHoveredChanged: {
                             if (hovered)
                                 root.hoveredAction = this.buttonText;
@@ -127,6 +131,7 @@ PopupWindow {
                     SessionMenuButton {
                         buttonIcon: "󰜗"
                         buttonText: "Suspend"
+                        command: ["systemctl", "suspend"]
                         Layout.alignment: Qt.AlignCenter
                         onHoveredChanged: {
                             if (hovered)
