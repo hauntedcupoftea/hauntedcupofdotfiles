@@ -19,11 +19,11 @@ BarButton {
 
     Private.ToolTipPopup {
         id: connectivityToolTip
-        expandDirection: Edges.Bottom | Edges.Left
-        targetWidget: connectivityMenu.button // Target the exposed button
+        expandDirection: Edges.Bottom
+        targetWidget: connectivityMenu.button
         triggerTarget: true
-        position: Qt.rect(connectivityMenu.width - Theme.padding, connectivityMenu.height + Theme.padding, 0, 0)
-        blockShow: connectivityMenu.isMenuOpen // Use the exposed property
+        position: Qt.rect(connectivityMenu.width / 2, connectivityMenu.height + Theme.padding, 0, 0)
+        blockShow: connectivityMenu.isMenuOpen
 
         Private.StyledText {
             text: "Network and Bluetooth status"

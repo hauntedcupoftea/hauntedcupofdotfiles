@@ -11,13 +11,13 @@ PopupWindow {
     property string networkText: JSON.stringify(Network.availableNetworks, null, 2)
     anchor {
         item: powerButton
-        rect: Qt.rect(powerButton.width - Theme.margin, powerButton.height + Theme.padding, 0, 0)
-        gravity: Edges.Bottom | Edges.Left
+        rect: Qt.rect(powerButton.width / 2, powerButton.height + Theme.padding, 0, 0)
+        gravity: Edges.Bottom
     }
     color: "transparent"
 
-    implicitWidth: 512
-    implicitHeight: 900
+    implicitWidth: 300
+    implicitHeight: 240
     visible: popupOpen
 
     Rectangle {
