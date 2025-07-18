@@ -2,7 +2,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
-import "../../theme"
+
+import qs.theme
 
 Button {
     id: control

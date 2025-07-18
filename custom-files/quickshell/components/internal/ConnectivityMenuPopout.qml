@@ -1,7 +1,8 @@
 import Quickshell
 import QtQuick
-import "../../theme"
-import "../../services"
+
+import qs.theme
+import qs.services
 
 PopupWindow {
     id: root

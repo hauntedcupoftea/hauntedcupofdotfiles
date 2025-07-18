@@ -5,9 +5,10 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Wayland
-import "../theme"
-import "../utils"
-import "internal" as Private
+
+import qs.theme
+import qs.utils
+import qs.components.internal as Private
 
 Rectangle {
     id: root

@@ -1,7 +1,8 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import "../../theme"
+
+import qs.theme
 
 Text {
     id: root

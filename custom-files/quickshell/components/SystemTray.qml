@@ -1,10 +1,12 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import "../theme"
-import "../config"
+import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
+
+import qs.theme
+import qs.config
 
 Rectangle {
     id: systemTray
@@ -17,7 +19,9 @@ Rectangle {
         anchors.centerIn: parent
         spacing: Theme.margin / 2
         Repeater {
-            model: SystemTray.items.values.filter(item => !Settings.ignoredTrayItems.includes(item.id))
+            model: ScriptModel {
+                values: SystemTray.items.values.filter(item => !Settings.ignoredTrayItems.includes(item.id))
+            }
             Button {
                 id: sysTrayButton
                 required property SystemTrayItem modelData

@@ -1,7 +1,8 @@
 import QtQuick
-import QtQuick.Effects
+// import QtQuick.Effects
 import Quickshell.Widgets
-import "../../theme"
+
+import qs.theme
 
 ClippingRectangle {
     id: root

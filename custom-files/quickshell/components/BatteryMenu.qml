@@ -3,9 +3,9 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
 
-import "../widgets"
-import "../services"
-import "../theme"
+import qs.widgets
+import qs.services
+import qs.theme
 import "internal" as Private
 
 AbstractBarButton {

@@ -1,7 +1,8 @@
 pragma Singleton
 import Quickshell
 import Quickshell.Services.UPower
-import "../config"
+
+import qs.config
 
 Singleton {
     property bool isAvailable: UPower.displayDevice.isLaptopBattery

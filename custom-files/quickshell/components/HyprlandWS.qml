@@ -4,8 +4,9 @@ import QtQuick.Controls
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Widgets
-import "../theme"
-import "../config"
+
+import qs.theme
+import qs.config
 import "internal" as Private
 
 Rectangle {
@@ -18,7 +19,9 @@ Rectangle {
         anchors.centerIn: parent
         spacing: Theme.margin
         Repeater {
-            model: Hyprland.workspaces.values.filter(workspace => workspace.id >= 0)
+            model: ScriptModel {
+                values: Hyprland.workspaces.values.filter(workspace => workspace.id >= 0)
+            }
             Button {
                 id: workspaceButton
                 required property HyprlandWorkspace modelData

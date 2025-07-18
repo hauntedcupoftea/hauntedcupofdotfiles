@@ -1,7 +1,10 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
-import "../components"
-import "../theme"
+
+import qs.components
+import qs.theme
+import qs.services
 
 Rectangle {
     id: bar
@@ -42,7 +45,6 @@ Rectangle {
         HyprlandWS {
             id: hyprgaming
             anchors.centerIn: parent
-            Layout.alignment: Qt.AlignCenter
         }
 
         BarGroup {

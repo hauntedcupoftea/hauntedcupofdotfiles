@@ -1,6 +1,7 @@
 pragma Singleton
 import QtQuick
-import "../config"
+
+import qs.config
 
 QtObject {
     // --- ANIMATION SETTINGS ---

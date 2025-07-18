@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
-import "../theme"
-import "../widgets" // Assuming BarButton.qml is in this directory
+import qs.theme
+import qs.widgets
 import "internal" as Private
 
 BarButton {
@@ -14,7 +14,6 @@ BarButton {
     pressedColor: Theme.colors.red
 
     Private.SessionMenuPopout {
-        // Bind directly to the properties exposed by sessionMenu (the BarButton)
         popupOpen: sessionMenu.isMenuOpen
         powerButton: sessionMenu.button
     }

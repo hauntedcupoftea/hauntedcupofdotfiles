@@ -1,7 +1,8 @@
 import QtQuick
 import QtQuick.Controls
-import "../theme"
-import "../components/internal" as Private
+
+import qs.theme
+import qs.components.internal as Private
 
 Item {
     id: barButton

@@ -1,7 +1,8 @@
 import Quickshell
 import QtQuick
 import QtQuick.Controls
-import "../../theme"
+
+import qs.theme
 
 // import "../../services"
 

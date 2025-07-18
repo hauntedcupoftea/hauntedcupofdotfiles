@@ -1,8 +1,9 @@
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
-import "../../theme"
-import "../../config"
+
+import qs.theme
+import qs.config
 
 PopupWindow {
     id: root

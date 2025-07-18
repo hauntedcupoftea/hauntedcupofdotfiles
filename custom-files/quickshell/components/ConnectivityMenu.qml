@@ -1,8 +1,8 @@
 import QtQuick
 import Quickshell
-import "../theme"
-import "../services"
-import "../widgets" // Assuming BarButton.qml is in this directory
+import qs.theme
+import qs.services
+import qs.widgets
 import "internal" as Private
 
 BarButton {

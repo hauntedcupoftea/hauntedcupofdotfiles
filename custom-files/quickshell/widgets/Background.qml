@@ -3,9 +3,9 @@ pragma ComponentBehavior: Bound
 import Quickshell
 import Quickshell.Wayland
 import QtQuick
-import "../components/internal" as Private
-// import "../components"
-import "../theme"
+
+import qs.components.internal as Private
+import qs.theme
 
 Scope {
     id: bgScope
@@ -16,16 +16,15 @@ Scope {
 
         PanelWindow {
             id: bgpanel
-            property var modelData
+            required property var modelData
             screen: modelData
             color: "transparent"
             exclusiveZone: Theme.barHeight + Theme.debugOffsetHeight
             WlrLayershell.layer: WlrLayer.Background
-            implicitHeight: screen.height // add this
+            implicitHeight: screen.height
 
             anchors {
                 left: true
-                // bottom: true // comment this
                 top: true
                 right: true
             }
