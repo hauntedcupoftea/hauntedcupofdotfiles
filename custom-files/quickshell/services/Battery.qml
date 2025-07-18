@@ -64,7 +64,9 @@ Singleton {
     property bool thermalThrottling: PowerProfiles.degradationReason == PerformanceDegradationReason.HighTemperature
 
     // Function to set specific profile
-    function setProfile(profileName) {
+    function setProfile(profile) {
+        print(profile);
+        PowerProfiles.profile = profile;
     }
 
     // TODO: add more interactions here (expose time to empty as undef, notification when charging stops, etc.)
@@ -84,8 +86,8 @@ Singleton {
             Quickshell.execDetached(["bash", "-c", `notify-send "Thermal Throttling" "System is reducing performance due to thermal constraints. Consider improving cooling or reducing workload." -u normal -a "quickshell"`]);
     }
 
-    // Profile change notification (optional)
-    onActiveProfileChanged: {
+    // Profile change notification (bind to icon because that changes later :D)
+    onProfileIconChanged: {
         var profileName = PowerProfile.toString(activeProfile);
         Quickshell.execDetached(["bash", "-c", `notify-send "Power Profile Changed" "Switched to ${profileName} mode ${profileIcon}" -u low -a "quickshell"`]);
     }
