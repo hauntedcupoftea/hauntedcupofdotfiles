@@ -103,4 +103,10 @@ AbstractBarButton {
             color: Theme.colors.subtext0
         }
     }
+
+    Private.BatteryMenuPopout {
+        id: popout
+        popupOpen: batteryIndicator.menuOpen
+        powerButton: batteryIndicator
+    }
 }
