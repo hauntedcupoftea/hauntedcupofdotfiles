@@ -11,5 +11,5 @@
     enable = true;
   };
 
-  catppuccin.kvantume.enable = false; # god i hate this flake someone get me out
+  catppuccin.kvantum.enable = false; # god i hate this flake someone get me out
 }
