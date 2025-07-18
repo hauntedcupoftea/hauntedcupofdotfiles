@@ -1,10 +1,11 @@
 pragma ComponentBehavior: Bound
 import QtQuick
-import QtQuick.Layouts
+// import QtQuick.Layouts
 
 import qs.components
 import qs.theme
-import qs.services
+
+// import qs.services
 
 Rectangle {
     id: bar
