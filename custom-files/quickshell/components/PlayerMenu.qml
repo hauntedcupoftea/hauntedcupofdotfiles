@@ -10,15 +10,14 @@ import "internal" as Private
 AbstractBarButton {
     id: root
     implicitHeight: Theme.barHeight - (Theme.margin)
-    implicitWidth: 100
+    implicitWidth: Theme.playerWidth
 
     background: Loader {
         active: Player.active
         sourceComponent: Rectangle {
-
-            anchors.fill: root
             radius: Theme.rounding.small
             color: Theme.colors.crust
+
             ClippingRectangle {
                 anchors.fill: parent
                 anchors.margins: (Theme.margin / 1)
@@ -28,8 +27,8 @@ AbstractBarButton {
                     anchors.left: parent.left
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
-                    width: root.width * Player.percentageProgress
-                    color: Theme.colors.overlay0
+                    implicitWidth: root.width * Player.percentageProgress
+                    color: Theme.colors.surface1
                 }
             }
         }
