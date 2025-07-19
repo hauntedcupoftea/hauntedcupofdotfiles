@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     vesktop
     arrpc
+    legcord # testing
   ];
 
   programs.vesktop = {
