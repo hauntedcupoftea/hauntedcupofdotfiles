@@ -9,7 +9,6 @@
 
   qt = {
     enable = true;
+    style.name = "kvantum";
   };
-
-  catppuccin.kvantum.enable = false; # god i hate this flake someone get me out
 }
