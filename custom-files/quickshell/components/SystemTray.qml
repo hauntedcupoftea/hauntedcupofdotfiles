@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
@@ -16,7 +18,6 @@ Rectangle {
     implicitHeight: Theme.barHeight - (Theme.margin)
     color: Theme.colors.crust
 
-    // Hide the tray if no items are present
     property var filteredItems: SystemTray.items.values.filter(item => !Settings.ignoredTrayItems.includes(item.id))
     visible: filteredItems.length > 0
 
@@ -24,6 +25,12 @@ Rectangle {
         id: sysTrayRow
         anchors.centerIn: parent
         spacing: Theme.margin / 2
+
+        // universal pop-up
+        Private.TrayMenu {
+            id: trayMenu
+            anchorItem: systemTray
+        }
 
         Repeater {
             model: ScriptModel {
@@ -41,6 +48,7 @@ Rectangle {
                     targetWidget: sysTrayButton
                     triggerTarget: true
                     position: Qt.rect(sysTrayButton.width / 2, Theme.barHeight - Theme.margin, 0, 0)
+                    blockShow: trayMenu.visible
 
                     Private.StyledText {
                         text: sysTrayButton.modelData.tooltipTitle || sysTrayButton.modelData.title
@@ -64,11 +72,9 @@ Rectangle {
                         return Theme.colors.mantle;
                     }
 
-                    // Visual feedback for items with attention
                     border.width: sysTrayButton.modelData.status === Status.NeedsAttention ? 2 : 0
                     border.color: Theme.colors.red
 
-                    // Subtle animation for attention status
                     SequentialAnimation on opacity {
                         running: sysTrayButton.modelData.status === Status.NeedsAttention
                         loops: Animation.Infinite
@@ -100,18 +106,10 @@ Rectangle {
                     acceptedButtons: Qt.RightButton
                     onClicked: {
                         if (sysTrayButton.modelData.hasMenu) {
-                            sysTrayContextMenu.open();
+                            // TODO: add a way to supple sysTrayButton.modelData.menu into this.
+                            trayMenu.open(sysTrayButton.modelData.menu);
                         }
                     }
-                }
-
-                QsMenuAnchor {
-                    id: sysTrayContextMenu
-                    anchor {
-                        item: sysTrayButton
-                        rect: Qt.rect(sysTrayButton.width / 2, Theme.barHeight - Theme.margin, 0, 0)
-                    }
-                    menu: sysTrayButton.modelData.menu
                 }
 
                 MouseArea {
@@ -121,40 +119,6 @@ Rectangle {
                         sysTrayButton.modelData.secondaryActivate();
                     }
                 }
-
-                // DEBUG
-                // Component.onCompleted: {
-                //     print("SystemTray item:", JSON.stringify({
-                //         id: modelData.id,
-                //         title: modelData.title,
-                //         status: modelData.status,
-                //         hasMenu: !!modelData.menu
-                //     }))
-                // }
-            }
-        }
-    }
-
-    // Smooth show/hide animation
-    Behavior on opacity {
-        NumberAnimation {
-            duration: 200
-            easing.type: Easing.OutCubic
-        }
-    }
-
-    // Close any open context menus when clicking outside the tray
-    MouseArea {
-        anchors.fill: parent
-        z: -1
-        onClicked: {
-            // Find and close any open context menus
-            for (var i = 0; i < sysTrayRow.children.length; i++) {
-                var repeater = sysTrayRow.children[i];
-                if (repeater.model)
-                // This is a bit hacky but works for closing menus
-                // You might want to implement a more robust solution
-                {}
             }
         }
     }
