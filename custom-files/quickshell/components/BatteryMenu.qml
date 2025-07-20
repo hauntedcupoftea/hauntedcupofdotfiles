@@ -37,7 +37,7 @@ AbstractBarButton {
         }
         ClippingRectangle {
             id: batteryCan
-            radius: Theme.rounding.verysmall
+            radius: Theme.rounding.unsharpenmore
             color: Theme.colors.surface0
             implicitWidth: Theme.padding * 2
             implicitHeight: batteryIndicator.height - (Theme.padding)
