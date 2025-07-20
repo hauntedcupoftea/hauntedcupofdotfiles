@@ -13,7 +13,7 @@ PopupWindow {
 
     required property Rectangle anchorItem
     property QsMenuHandle menuHandle
-    property QsMenuHandle previousMenu: null
+    property QsMenuHandle previousMenu: null // TODO: this is better as a list to traverse backwards
 
     implicitHeight: content.height + (Theme.padding * 2)
     implicitWidth: content.width + (Theme.padding * 2)
@@ -28,7 +28,7 @@ PopupWindow {
     function open(handle: QsMenuHandle) {
         visible = true;
         root.previousMenu = null;
-        opener.menu = handle;
+        root.menuHandle = handle;
     }
 
     QsMenuOpener {
