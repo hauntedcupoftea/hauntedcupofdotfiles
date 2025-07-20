@@ -51,12 +51,12 @@ Rectangle {
                     blockShow: trayMenu.visible
 
                     Private.StyledText {
-                        text: sysTrayButton.modelData.tooltipTitle || sysTrayButton.modelData.title
+                        text: sysTrayButton.modelData?.tooltipTitle || sysTrayButton.modelData?.title || ""
                         color: Theme.colors.subtext0
                         font.pixelSize: Theme.font.normal
                     }
                     Private.StyledText {
-                        text: sysTrayButton.modelData.tooltipDescription
+                        text: sysTrayButton.modelData?.tooltipDescription ?? ""
                         color: Theme.colors.subtext1
                         font.pixelSize: Theme.font.small
                     }
@@ -72,11 +72,11 @@ Rectangle {
                         return Theme.colors.mantle;
                     }
 
-                    border.width: sysTrayButton.modelData.status === Status.NeedsAttention ? 2 : 0
+                    border.width: sysTrayButton.modelData?.status === Status.NeedsAttention ? 2 : 0
                     border.color: Theme.colors.red
 
                     SequentialAnimation on opacity {
-                        running: sysTrayButton.modelData.status === Status.NeedsAttention
+                        running: sysTrayButton.modelData?.status === Status.NeedsAttention
                         loops: Animation.Infinite
                         NumberAnimation {
                             to: 0.6
@@ -93,7 +93,7 @@ Rectangle {
                     anchors.centerIn: parent
                     source: sysTrayButton.modelData.icon
                     implicitSize: Theme.trayIconSize
-                    opacity: sysTrayButton.modelData.status === "Passive" ? 0.7 : 1.0
+                    opacity: sysTrayButton.modelData?.status === "Passive" ? 0.7 : 1.0
                 }
 
                 onClicked: {
@@ -106,7 +106,6 @@ Rectangle {
                     acceptedButtons: Qt.RightButton
                     onClicked: {
                         if (sysTrayButton.modelData.hasMenu) {
-                            // TODO: add a way to supple sysTrayButton.modelData.menu into this.
                             trayMenu.open(sysTrayButton.modelData.menu);
                         }
                     }
