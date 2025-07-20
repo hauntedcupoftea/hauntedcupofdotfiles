@@ -15,8 +15,8 @@ PopupWindow {
     property QsMenuHandle menuHandle
     property QsMenuHandle previousMenu: null // TODO: this is better as a list to traverse backwards
 
-    implicitHeight: content.height + (Theme.padding * 2)
-    implicitWidth: content.width + (Theme.padding * 2)
+    implicitHeight: content.height + (Theme.padding)
+    implicitWidth: content.width + (Theme.padding)
     color: "transparent"
 
     anchor {
@@ -26,7 +26,7 @@ PopupWindow {
     }
 
     function open(handle: QsMenuHandle) {
-        visible = true;
+        root.visible = true;
         root.previousMenu = null;
         root.menuHandle = handle;
     }
@@ -37,117 +37,141 @@ PopupWindow {
     }
 
     MouseArea {
+        id: reactiveArea
+        hoverEnabled: true
         anchors.fill: parent
-    }
 
-    Rectangle {
-        anchors.fill: parent
-        radius: Theme.rounding.verysmall
-        color: Theme.colors.base
-        RowLayout {
-            id: content
-            anchors.left: parent.left
-            anchors.top: parent.top
-            anchors.margins: Theme.padding
-            Loader {
-                Layout.fillHeight: true
-                active: root.previousMenu != null
-                sourceComponent: Button {
-                    id: backButton
-                    implicitWidth: backText.width
-                    background: Rectangle {
-                        radius: Theme.rounding.verysmall
-                        color: backButton.hovered ? Theme.colors.surface0 : Theme.colors.base
-                    }
-                    StyledText {
-                        id: backText
-                        anchors.centerIn: parent
-                        text: "󰅁"
-                        textColor: Theme.colors.overlay0
-                        font.pixelSize: Theme.font.larger
-                    }
-                    action: Action {
-                        onTriggered: {
-                            root.menuHandle = root.previousMenu;
-                            root.previousMenu = null;
+        Rectangle {
+            anchors.fill: parent
+            radius: Theme.rounding.verysmall
+            color: Theme.colors.base
+            Rectangle {
+                id: content
+                color: "transparent"
+                anchors.left: parent.left
+                anchors.top: parent.top
+                anchors.margins: Theme.padding / 2
+                implicitHeight: menuLayout.height
+                implicitWidth: menuLayout.width
+                Loader {
+                    Layout.fillHeight: true
+                    active: root.previousMenu
+                    sourceComponent: Button {
+                        id: backButton
+                        implicitWidth: backText.width + Theme.margin
+                        implicitHeight: menuLayout.height + Theme.padding
+                        anchors.right: menuLayout.left
+                        background: Rectangle {
+                            radius: Theme.rounding.verysmall
+                            color: backButton.hovered ? Theme.colors.surface0 : Theme.colors.base
+                        }
+                        StyledText {
+                            id: backText
+                            anchors.centerIn: parent
+                            text: "󰅁"
+                            textColor: Theme.colors.overlay0
+                            font.pixelSize: Theme.font.larger
+                        }
+                        action: Action {
+                            onTriggered: {
+                                root.menuHandle = root.previousMenu;
+                                root.previousMenu = null;
+                            }
                         }
                     }
                 }
-            }
-            Rectangle {
-                color: Theme.colors.surface0
-                radius: Theme.rounding.verysmall
+                Rectangle {
+                    color: Theme.colors.surface0
+                    radius: Theme.rounding.verysmall
 
-                implicitHeight: menuLayout.implicitHeight
-                implicitWidth: menuLayout.implicitWidth
+                    implicitHeight: menuLayout.implicitHeight
+                    implicitWidth: menuLayout.implicitWidth
 
-                ColumnLayout {
-                    id: menuLayout
-                    anchors.centerIn: parent
+                    ColumnLayout {
+                        id: menuLayout
+                        anchors.centerIn: parent
 
-                    Repeater {
-                        id: innerMenu
-                        model: opener.children.values
-                        delegate: Loader {
-                            id: loader
-                            required property QsMenuEntry modelData
-                            Component {
-                                id: separatorComponent
-                                Rectangle {
-                                    implicitWidth: menuLayout.width
-                                    implicitHeight: Theme.rounding.unsharpen
-                                    color: Theme.colors.base
-                                }
-                            }
+                        Repeater {
+                            id: innerMenu
+                            model: opener.children.values
 
-                            Component {
-                                id: textComponent
-                                Button {
-                                    id: textButton
-                                    implicitWidth: textLayout.width
-                                    implicitHeight: textLayout.height
-                                    property bool buttonOn: loader.modelData?.enabled || false
-                                    property bool hasSubMenu: loader.modelData?.hasChildren || false
-
-                                    background: Rectangle {
-                                        radius: Theme.rounding.verysmall
-                                        color: textButton.hovered && textButton.buttonOn ? Theme.colors.surface2 : "transparent"
+                            delegate: Loader {
+                                id: loader
+                                required property QsMenuEntry modelData
+                                Component {
+                                    id: separatorComponent
+                                    Rectangle {
+                                        implicitWidth: menuLayout.width
+                                        implicitHeight: Theme.rounding.unsharpen
+                                        color: Theme.colors.base
                                     }
+                                }
 
-                                    action: Action {
-                                        onTriggered: {
-                                            // TODO: add a check here for radio groups and shit later
-                                            if (textButton.hasSubMenu) {
-                                                root.previousMenu = root.menuHandle;
-                                                root.menuHandle = loader.modelData;
-                                            } else {
-                                                loader.modelData.triggered();
-                                                root.visible = false;
+                                Component {
+                                    id: textComponent
+                                    Button {
+                                        id: textButton
+                                        implicitWidth: textLayout.width
+                                        implicitHeight: textLayout.height
+                                        property bool buttonOn: loader.modelData?.enabled || false
+                                        property bool hasSubMenu: loader.modelData?.hasChildren || false
+
+                                        background: Rectangle {
+                                            radius: Theme.rounding.verysmall
+                                            color: textButton.hovered && textButton.buttonOn ? Theme.colors.surface2 : "transparent"
+                                        }
+                                        action: Action {
+                                            onTriggered: {
+                                                if (textButton.hasSubMenu) {
+                                                    root.previousMenu = root.menuHandle;
+                                                    root.menuHandle = loader.modelData; // broken
+                                                } else {
+                                                    loader.modelData.triggered();
+                                                    root.visible = false;
+                                                }
+                                            }
+                                        }
+
+                                        RowLayout {
+                                            id: textLayout
+                                            implicitWidth: textButton.width
+                                            property QsMenuEntry entry: loader.modelData
+
+                                            function getIcon() {
+                                                if (entry?.buttonType == QsMenuButtonType.CheckBox) {
+                                                    if (entry.checkState == Qt.Unchecked)
+                                                        return "";
+                                                    return "";
+                                                }
+                                                if (entry?.buttonType == QsMenuButtonType.RadioButton) {
+                                                    if (entry.checkState == Qt.Checked)
+                                                        return "󰐾";
+                                                    return "󰄰";
+                                                }
+                                                if (entry?.hasChildren)
+                                                    return "󰅂";
+                                                return "";
+                                            }
+
+                                            StyledText {
+                                                Layout.leftMargin: Theme.padding
+                                                text: loader.modelData?.text || ""
+                                                color: textButton.buttonOn ? Theme.colors.text : Theme.colors.surface1
+                                                font.pixelSize: Theme.font.small
+                                            }
+                                            StyledText {
+                                                Layout.alignment: Qt.AlignRight
+                                                Layout.leftMargin: Theme.padding
+                                                text: textLayout.getIcon()
+                                                color: Theme.colors.subtext0
+                                                font.pixelSize: Theme.font.small
                                             }
                                         }
                                     }
-
-                                    RowLayout {
-                                        id: textLayout
-                                        implicitWidth: menuLayout.width
-                                        Layout.fillWidth: true
-                                        StyledText {
-                                            Layout.leftMargin: Theme.padding
-                                            text: loader.modelData?.text || ""
-                                            color: textButton.buttonOn ? Theme.colors.subtext0 : Theme.colors.surface1
-                                            font.pixelSize: Theme.font.small
-                                        }
-                                        StyledText {
-                                            Layout.leftMargin: Theme.padding
-                                            text: loader.modelData?.hasChildren ? "󰅂" : ""
-                                            color: Theme.colors.subtext0
-                                            font.pixelSize: Theme.font.small
-                                        }
-                                    }
                                 }
-                            }
 
-                            sourceComponent: loader.modelData.isSeparator ? separatorComponent : textComponent
+                                sourceComponent: loader.modelData.isSeparator ? separatorComponent : textComponent
+                            }
                         }
                     }
                 }
