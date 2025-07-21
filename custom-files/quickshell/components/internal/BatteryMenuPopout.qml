@@ -26,7 +26,12 @@ PopupWindow {
     Rectangle {
         anchors.fill: parent
         radius: Theme.rounding.verysmall
-        color: Theme.colors.surface0
+        color: Theme.colors.base
+        border {
+            width: 1
+            color: Theme.colors.surface0
+        }
+
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
@@ -84,7 +89,7 @@ PopupWindow {
                                         return Theme.colors.surface1;
                                     if (Battery.activeProfile === selectorRoot.modelData.profile)
                                         return selectorRoot.modelData.color + "40";
-                                    return Theme.colors.mantle;
+                                    return Theme.colors.surface0;
                                 }
 
                                 border.width: Battery.activeProfile === selectorRoot.modelData.profile ? 2 : 0

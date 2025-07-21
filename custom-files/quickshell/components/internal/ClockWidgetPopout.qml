@@ -25,7 +25,11 @@ PopupWindow {
     Rectangle {
         anchors.fill: parent
         radius: Theme.rounding.verysmall
-        color: Theme.colors.surface0
+        color: Theme.colors.base
+        border {
+            width: 1
+            color: Theme.colors.surface0
+        }
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true

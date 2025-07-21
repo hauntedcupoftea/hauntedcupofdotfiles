@@ -121,7 +121,7 @@ PopupWindow {
                     Repeater {
                         id: innerMenu
                         model: ScriptModel {
-                            values: root.menuHandle && root.menuHandle.children.values
+                            values: root.menuHandle && root.menuHandle.children.values // qmllint disable
                         }
 
                         delegate: Loader {

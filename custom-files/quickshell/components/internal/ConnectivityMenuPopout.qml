@@ -12,7 +12,7 @@ PopupWindow {
     anchor {
         item: powerButton
         rect: Qt.rect(powerButton.width / 2, powerButton.height + Theme.padding, 0, 0)
-        gravity: Edges.Bottom
+        gravity: Edges.Bottom // qmllint disable
     }
     color: "transparent"
 
@@ -23,7 +23,11 @@ PopupWindow {
     Rectangle {
         anchors.fill: parent
         radius: Theme.rounding.verysmall
-        color: Theme.colors.surface0
+        color: Theme.colors.base
+        border {
+            width: 1
+            color: Theme.colors.surface0
+        }
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
