@@ -7,16 +7,15 @@ import QtQuick.Layouts
 
 import qs.theme
 
-// DISCLAIMER: THIS IS VERY BAD. DO NOT COPY OR LEARN FROM THIS FILE. I WILL REMOVE THIS WHEN I FEEL GOOD ABOUT HAVING THIS FILE
 PopupWindow {
     id: root
 
     required property Rectangle anchorItem
-    property QsMenuHandle menuHandle
-    property QsMenuHandle previousMenu: null // TODO: this is better as a list to traverse backwards
+    property QsMenuOpener menuHandle
+    property list<QsMenuOpener> menuStack: []  // Stack to track menu history
 
-    implicitHeight: content.height + (Theme.padding)
-    implicitWidth: content.width + (Theme.padding)
+    implicitHeight: content.height + (Theme.padding * 2)
+    implicitWidth: content.width + (Theme.padding * 2)
     color: "transparent"
 
     anchor {
@@ -25,153 +24,202 @@ PopupWindow {
         gravity: Edges.Bottom | Edges.Left
     }
 
-    function open(handle: QsMenuHandle) {
+    function open(handle: QsMenuOpener) {
         root.visible = true;
-        root.previousMenu = null;
+        root.menuStack = [];
         root.menuHandle = handle;
     }
 
-    QsMenuOpener {
-        id: opener
-        menu: root.menuHandle
+    function pushMenu(newMenu: QsMenuOpener) {
+        root.menuStack.push(root.menuHandle);
+        root.menuHandle = newMenu;
     }
+
+    function popMenu() {
+        if (root.menuStack.length > 0) {
+            root.menuHandle = root.menuStack.pop();
+        }
+    }
+
+    // DEBUG
+    // onMenuStackChanged: {
+    //     print(menuStack);
+    // }
 
     MouseArea {
         id: reactiveArea
         hoverEnabled: true
         anchors.fill: parent
+        onHoveredChanged: {
+            if (!reactiveArea.containsMouse)
+                root.visible = false;
+        }
 
         Rectangle {
-            anchors.fill: parent
-            radius: Theme.rounding.verysmall
+            id: content
+            anchors.centerIn: parent
+            radius: Theme.rounding.small
             color: Theme.colors.base
-            Rectangle {
-                id: content
-                color: "transparent"
-                anchors.left: parent.left
-                anchors.top: parent.top
-                anchors.margins: Theme.padding / 2
-                implicitHeight: menuLayout.height
-                implicitWidth: menuLayout.width
-                Loader {
-                    Layout.fillHeight: true
-                    active: root.previousMenu
-                    sourceComponent: Button {
-                        id: backButton
-                        implicitWidth: backText.width + Theme.margin
-                        implicitHeight: menuLayout.height + Theme.padding
-                        anchors.right: menuLayout.left
-                        background: Rectangle {
-                            radius: Theme.rounding.verysmall
-                            color: backButton.hovered ? Theme.colors.surface0 : Theme.colors.base
-                        }
+            border.width: 1
+            border.color: Theme.colors.surface0
+
+            implicitWidth: Math.max(menuLayout.implicitWidth, backButton.visible ? backButton.implicitWidth : 0) + (Theme.padding * 2)
+            implicitHeight: menuLayout.implicitHeight + (backButton.visible ? backButton.implicitHeight + Theme.padding / 2 : 0) + (Theme.padding * 2)
+
+            ColumnLayout {
+                anchors.fill: parent
+                anchors.margins: Theme.padding
+                spacing: Theme.padding / 2
+
+                // Back button at the top when there's menu history
+                Button {
+                    id: backButton
+                    visible: root.menuStack.length > 0
+                    Layout.fillWidth: true
+                    implicitHeight: Theme.font.normal + Theme.padding
+                    background: Rectangle {
+                        radius: Theme.rounding.small
+                        color: backButton.hovered ? Theme.colors.surface1 : Theme.colors.surface0
+                        border.width: 1
+                        border.color: backButton.hovered ? Theme.colors.surface2 : Theme.colors.surface1
+                    }
+
+                    contentItem: RowLayout {
+                        spacing: Theme.padding / 2
+
                         StyledText {
-                            id: backText
-                            anchors.centerIn: parent
                             text: "󰅁"
-                            textColor: Theme.colors.overlay0
-                            font.pixelSize: Theme.font.larger
+                            color: Theme.colors.subtext1
+                            font.pixelSize: Theme.font.normal
                         }
-                        action: Action {
-                            onTriggered: {
-                                root.menuHandle = root.previousMenu;
-                                root.previousMenu = null;
-                            }
+
+                        StyledText {
+                            text: "Back"
+                            color: Theme.colors.text
+                            font.pixelSize: Theme.font.small
+                            Layout.fillWidth: true
                         }
                     }
+
+                    onClicked: root.popMenu()
                 }
+
+                // Separator between back button and menu items
                 Rectangle {
-                    color: Theme.colors.surface0
-                    radius: Theme.rounding.verysmall
+                    visible: backButton.visible
+                    Layout.fillWidth: true
+                    implicitHeight: 1
+                    color: Theme.colors.surface1
+                }
 
-                    implicitHeight: menuLayout.implicitHeight
-                    implicitWidth: menuLayout.implicitWidth
+                // Main menu content
+                ColumnLayout {
+                    id: menuLayout
+                    Layout.fillWidth: true
+                    spacing: 0
 
-                    ColumnLayout {
-                        id: menuLayout
-                        anchors.centerIn: parent
+                    Repeater {
+                        id: innerMenu
+                        model: ScriptModel {
+                            values: root.menuHandle && root.menuHandle.children.values
+                        }
 
-                        Repeater {
-                            id: innerMenu
-                            model: opener.children.values
+                        delegate: Loader {
+                            id: loader
+                            required property QsMenuEntry modelData
+                            Layout.fillWidth: true
 
-                            delegate: Loader {
-                                id: loader
-                                required property QsMenuEntry modelData
-                                Component {
-                                    id: separatorComponent
-                                    Rectangle {
-                                        implicitWidth: menuLayout.width
-                                        implicitHeight: Theme.rounding.unsharpen
-                                        color: Theme.colors.base
-                                    }
-                                }
-
-                                Component {
-                                    id: textComponent
-                                    Button {
-                                        id: textButton
-                                        implicitWidth: textLayout.width
-                                        implicitHeight: textLayout.height
-                                        property bool buttonOn: loader.modelData?.enabled || false
-                                        property bool hasSubMenu: loader.modelData?.hasChildren || false
-
-                                        background: Rectangle {
-                                            radius: Theme.rounding.verysmall
-                                            color: textButton.hovered && textButton.buttonOn ? Theme.colors.surface2 : "transparent"
-                                        }
-                                        action: Action {
-                                            onTriggered: {
-                                                if (textButton.hasSubMenu) {
-                                                    root.previousMenu = root.menuHandle;
-                                                    root.menuHandle = loader.modelData; // broken
-                                                } else {
-                                                    loader.modelData.triggered();
-                                                    root.visible = false;
-                                                }
-                                            }
-                                        }
-
-                                        RowLayout {
-                                            id: textLayout
-                                            implicitWidth: textButton.width
-                                            property QsMenuEntry entry: loader.modelData
-
-                                            function getIcon() {
-                                                if (entry?.buttonType == QsMenuButtonType.CheckBox) {
-                                                    if (entry.checkState == Qt.Unchecked)
-                                                        return "";
-                                                    return "";
-                                                }
-                                                if (entry?.buttonType == QsMenuButtonType.RadioButton) {
-                                                    if (entry.checkState == Qt.Checked)
-                                                        return "󰐾";
-                                                    return "󰄰";
-                                                }
-                                                if (entry?.hasChildren)
-                                                    return "󰅂";
-                                                return "";
-                                            }
-
-                                            StyledText {
-                                                Layout.leftMargin: Theme.padding
-                                                text: loader.modelData?.text || ""
-                                                color: textButton.buttonOn ? Theme.colors.text : Theme.colors.surface1
-                                                font.pixelSize: Theme.font.small
-                                            }
-                                            StyledText {
-                                                Layout.alignment: Qt.AlignRight
-                                                Layout.leftMargin: Theme.padding
-                                                text: textLayout.getIcon()
-                                                color: Theme.colors.subtext0
-                                                font.pixelSize: Theme.font.small
-                                            }
-                                        }
-                                    }
-                                }
-
-                                sourceComponent: loader.modelData.isSeparator ? separatorComponent : textComponent
+                            QsMenuOpener {
+                                id: subMenu
+                                menu: loader.modelData
                             }
+
+                            Component {
+                                id: separatorComponent
+                                Rectangle {
+                                    Layout.fillWidth: true
+                                    implicitHeight: Theme.padding / 4
+                                    Layout.topMargin: Theme.padding / 4
+                                    Layout.bottomMargin: Theme.padding / 4
+                                    color: Theme.colors.surface1
+                                }
+                            }
+
+                            Component {
+                                id: textComponent
+                                Button {
+                                    id: textButton
+                                    Layout.fillWidth: true
+                                    implicitHeight: Math.max(textLayout.implicitHeight, Theme.font.normal + Theme.padding)
+
+                                    property bool buttonOn: loader.modelData?.enabled || false
+                                    property bool hasSubMenu: loader.modelData?.hasChildren || false
+
+                                    background: Rectangle {
+                                        radius: Theme.rounding.small
+                                        color: {
+                                            if (!textButton.buttonOn)
+                                                return "transparent";
+                                            if (textButton.pressed)
+                                                return Theme.colors.surface2;
+                                            if (textButton.hovered)
+                                                return Theme.colors.surface1;
+                                            return "transparent";
+                                        }
+                                        border.width: textButton.hovered && textButton.buttonOn ? 1 : 0
+                                        border.color: Theme.colors.surface2
+                                    }
+
+                                    onClicked: {
+                                        if (textButton.hasSubMenu) {
+                                            root.pushMenu(subMenu);
+                                        } else {
+                                            loader.modelData.triggered();
+                                            root.visible = false;
+                                        }
+                                    }
+
+                                    contentItem: RowLayout {
+                                        id: textLayout
+                                        spacing: Theme.padding
+
+                                        property QsMenuEntry entry: loader.modelData
+
+                                        function getIcon() {
+                                            if (entry?.buttonType == QsMenuButtonType.CheckBox) {
+                                                if (entry.checkState == Qt.Unchecked)
+                                                    return "󰄱";
+                                                return "󰱒";
+                                            }
+                                            if (entry?.buttonType == QsMenuButtonType.RadioButton) {
+                                                if (entry.checkState == Qt.Checked)
+                                                    return "󰐾";
+                                                return "󰄰";
+                                            }
+                                            if (entry?.hasChildren)
+                                                return "󰅂";
+                                            return "";
+                                        }
+
+                                        StyledText {
+                                            Layout.fillWidth: true
+                                            Layout.leftMargin: Theme.padding / 2
+                                            text: loader.modelData?.text || ""
+                                            color: textButton.buttonOn ? Theme.colors.text : Theme.colors.overlay1
+                                            font.pixelSize: Theme.font.small
+                                        }
+
+                                        StyledText {
+                                            Layout.rightMargin: Theme.padding / 2
+                                            text: textLayout.getIcon()
+                                            color: textButton.buttonOn ? Theme.colors.subtext1 : Theme.colors.overlay0
+                                            font.pixelSize: Theme.font.small
+                                        }
+                                    }
+                                }
+                            }
+
+                            sourceComponent: loader.modelData?.isSeparator ? separatorComponent : textComponent
                         }
                     }
                 }

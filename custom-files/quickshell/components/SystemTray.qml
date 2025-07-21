@@ -91,7 +91,7 @@ Rectangle {
 
                 IconImage {
                     anchors.centerIn: parent
-                    source: sysTrayButton.modelData.icon
+                    source: sysTrayButton.modelData && sysTrayButton.modelData.icon
                     implicitSize: Theme.trayIconSize
                     opacity: sysTrayButton.modelData?.status === "Passive" ? 0.7 : 1.0
                 }
@@ -101,12 +101,17 @@ Rectangle {
                         sysTrayButton.modelData.activate();
                 }
 
+                QsMenuOpener {
+                    id: traySubMenu
+                    menu: sysTrayButton.modelData && sysTrayButton.modelData.menu
+                }
+
                 MouseArea {
                     anchors.fill: parent
                     acceptedButtons: Qt.RightButton
                     onClicked: {
                         if (sysTrayButton.modelData.hasMenu) {
-                            trayMenu.open(sysTrayButton.modelData.menu);
+                            trayMenu.open(traySubMenu);
                         }
                     }
                 }
