@@ -47,6 +47,11 @@ Rectangle {
             id: hyprgaming
             anchors.centerIn: parent
         }
+        VolumeMenu {
+            id: volumeGaming
+            anchors.left: hyprgaming.right
+            anchors.leftMargin: Theme.padding
+        }
 
         BarGroup {
             id: rightPanel
