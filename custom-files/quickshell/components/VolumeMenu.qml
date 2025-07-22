@@ -64,8 +64,8 @@ AbstractBarButton {
             color: root.hovered ? Theme.colors.surface1 : Theme.colors.crust
 
             border {
-                width: (root.focusOutput && Audio.defaultOutput.audio.muted) || Audio.defaultInput.audio.muted ? 2 : 0
-                color: Theme.colors.red
+                width: 2
+                color: (root.focusOutput && Audio.defaultOutput.audio.muted) || Audio.defaultInput.audio.muted ? Theme.colors.red : Theme.colors.mantle
             }
 
             RowLayout {
