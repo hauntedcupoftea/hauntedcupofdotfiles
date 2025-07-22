@@ -18,19 +18,20 @@
 
   # TODO: Organize this better
   home.packages = with pkgs; [
-    grimblast
-    hyprshot
-    wget
-    git
-    brightnessctl
-    pavucontrol
-    helvum
-    easyeffects
-    btop
-    fastfetch
-    obsidian
-    overskride
-    peazip
+    grimblast # ss
+    hyprshot # ss
+    wget # utility for downloading
+    git # version control
+    brightnessctl # brightness control
+    pavucontrol # gui for volume
+    helvum # i don't know what this is but it's cool
+    easyeffects # eq and shit
+    btop # system resource monitor
+    fastfetch # cool sysinfo monitor
+    obsidian # notetaking
+    overskride # bluetooth but good
+    peazip # winrar but good
+    remmina # rdp but good
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
