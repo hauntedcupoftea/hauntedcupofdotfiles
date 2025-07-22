@@ -12,4 +12,5 @@ QtObject {
     // edit this to choose which (problematic) tray icons are ignored by ID
     readonly property list<string> ignoredTrayItems: ["spotify-client"]
     readonly property int trayMenuWidth: 70
+    readonly property real volumeChange: 5
 }
