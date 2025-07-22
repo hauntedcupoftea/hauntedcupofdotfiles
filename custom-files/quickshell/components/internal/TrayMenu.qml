@@ -50,10 +50,11 @@ PopupWindow {
         id: reactiveArea
         hoverEnabled: true
         anchors.fill: parent
-        onHoveredChanged: {
-            if (!reactiveArea.containsMouse)
-                root.visible = false;
-        }
+        // TODO: needs better close policies than this
+        // onHoveredChanged: {
+        //     if (!reactiveArea.containsMouse)
+        //         root.visible = false;
+        // }
 
         Rectangle {
             id: content
