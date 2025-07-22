@@ -20,7 +20,7 @@ PopupWindow {
 
     anchor {
         item: anchorItem
-        rect: Qt.rect(anchorItem.width, anchorItem.height + Theme.padding, 0, 0)
+        rect: Qt.rect(anchorItem.width, anchorItem.height, 0, 0)
         gravity: Edges.Bottom | Edges.Left
     }
 
