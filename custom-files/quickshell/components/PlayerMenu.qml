@@ -34,7 +34,7 @@ AbstractBarButton {
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     implicitWidth: root.width * Player.percentageProgress
-                    color: Theme.colors.surface1
+                    color: Qt.alpha(Theme.colors.blue, 0.75)
                 }
             }
         }
