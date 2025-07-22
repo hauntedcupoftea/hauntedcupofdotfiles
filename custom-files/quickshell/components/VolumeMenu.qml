@@ -22,6 +22,7 @@ AbstractBarButton {
     property bool focusOutput: false
     property real outputAlpha: focusOutput ? 0.9 : 0.45
     property real inputAlpha: focusOutput ? 0.45 : 0.9
+    property string focusedIcon: focusOutput ? Audio.defaultOutput.audio.muted ? "󰝟" : "󰕾" : Audio.defaultInput.audio.muted ? "󰍭" : "󰍬"
 
     MouseArea {
         id: swapFocus
@@ -40,6 +41,18 @@ AbstractBarButton {
         }
     }
 
+    MouseArea {
+        id: toggleMute
+        anchors.fill: parent
+        acceptedButtons: Qt.RightButton
+        onPressed: {
+            if (root.focusOutput)
+                Audio.toggleOutputMute();
+            else
+                Audio.toggleInputMute();
+        }
+    }
+
     action: Action {
         onTriggered: print("No action assigned yet")
     }
@@ -48,35 +61,52 @@ AbstractBarButton {
         active: Audio.ready
         sourceComponent: Rectangle {
             radius: Theme.rounding.small
-            color: Theme.colors.crust
+            color: root.hovered ? Theme.colors.surface1 : Theme.colors.crust
 
-            ClippingRectangle {
-                id: content
+            border {
+                width: (root.focusOutput && Audio.defaultOutput.audio.muted) || Audio.defaultInput.audio.muted ? 2 : 0
+                color: Theme.colors.red
+            }
+
+            RowLayout {
                 anchors.fill: parent
-                anchors.margins: (Theme.margin / 1)
-                radius: Theme.rounding.verysmall
-                color: Theme.colors.mantle
-                Rectangle {
-                    anchors.left: parent.left
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    implicitWidth: root.width * Audio.defaultOutput.audio.volume
-                    color: Qt.alpha(Theme.colors.blue, root.outputAlpha)
+                anchors.margins: Theme.margin
+                Text {
+                    font {
+                        family: Theme.font.family
+                        pixelSize: Theme.font.large
+                    }
+                    color: root.focusOutput ? Theme.colors.blue : Theme.colors.rosewater
+                    text: root.focusedIcon
+                }
+                ClippingRectangle {
+                    id: content
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    radius: Theme.rounding.verysmall
+                    color: Theme.colors.surface0
+                    Rectangle {
+                        anchors.left: parent.left
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        implicitWidth: root.width * Audio.defaultOutput.audio.volume
+                        color: Qt.alpha(Theme.colors.blue, root.outputAlpha)
 
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: Theme.anims.duration.large
-                            easing.type: Easing.BezierSpline
-                            easing.bezierCurve: Theme.anims.curve.standard
+                        Behavior on opacity {
+                            NumberAnimation {
+                                duration: Theme.anims.duration.large
+                                easing.type: Easing.BezierSpline
+                                easing.bezierCurve: Theme.anims.curve.standard
+                            }
                         }
                     }
-                }
-                Rectangle {
-                    anchors.left: parent.left
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    implicitWidth: root.width * Audio.defaultInput.audio.volume
-                    color: Qt.alpha(Theme.colors.rosewater, root.inputAlpha)
+                    Rectangle {
+                        anchors.left: parent.left
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        implicitWidth: root.width * Audio.defaultInput.audio.volume
+                        color: Qt.alpha(Theme.colors.rosewater, root.inputAlpha)
+                    }
                 }
             }
         }
