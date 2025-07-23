@@ -11,12 +11,16 @@ PopupWindow {
     id: root
 
     required property Rectangle anchorItem
-    property QsMenuOpener menuHandle
+    property QsMenuOpener menuHandle: dummy
     property list<QsMenuOpener> menuStack: []  // Stack to track menu history
 
     implicitHeight: content.height + (Theme.padding * 2)
     implicitWidth: content.width + (Theme.padding * 2)
     color: "transparent"
+
+    QsMenuOpener {
+        id: dummy
+    }
 
     anchor {
         item: anchorItem
@@ -39,6 +43,12 @@ PopupWindow {
         if (root.menuStack.length > 0) {
             root.menuHandle = root.menuStack.pop();
         }
+    }
+
+    function close() {
+        root.menuStack = [];
+        root.menuHandle = dummy;
+        root.visible = false;
     }
 
     // DEBUG
@@ -178,7 +188,7 @@ PopupWindow {
                                             root.pushMenu(subMenu);
                                         } else {
                                             loader.modelData.triggered();
-                                            root.visible = false;
+                                            root.close();
                                         }
                                     }
 

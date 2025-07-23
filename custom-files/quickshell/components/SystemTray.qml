@@ -21,6 +21,12 @@ Rectangle {
     property var filteredItems: SystemTray.items.values.filter(item => !Settings.ignoredTrayItems.includes(item.id))
     visible: filteredItems.length > 0
 
+    signal requestOpen
+
+    function forceClose() {
+        trayMenu.close();
+    }
+
     RowLayout {
         id: sysTrayRow
         anchors.centerIn: parent
@@ -111,6 +117,7 @@ Rectangle {
                     acceptedButtons: Qt.RightButton
                     onClicked: {
                         if (sysTrayButton.modelData.hasMenu) {
+                            systemTray.requestOpen();
                             trayMenu.open(traySubMenu);
                         }
                     }
