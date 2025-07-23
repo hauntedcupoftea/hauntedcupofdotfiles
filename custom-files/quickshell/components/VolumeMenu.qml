@@ -22,7 +22,7 @@ AbstractBarButton {
     property bool focusOutput: false
     property real outputAlpha: focusOutput ? 0.9 : 0.45
     property real inputAlpha: focusOutput ? 0.45 : 0.9
-    property string focusedIcon: focusOutput ? Audio.defaultOutput.audio.muted ? "󰝟" : "󰕾" : Audio.defaultInput.audio.muted ? "󰍭" : "󰍬"
+    property string focusedIcon: focusOutput ? Audio.defaultOutput?.audio.muted ? "󰝟" : "󰕾" : Audio.defaultInput?.audio.muted ? "󰍭" : "󰍬"
 
     MouseArea {
         id: swapFocus
@@ -72,6 +72,7 @@ AbstractBarButton {
                 anchors.fill: parent
                 anchors.margins: Theme.margin
                 Text {
+                    Layout.minimumWidth: Theme.font.large
                     font {
                         family: Theme.font.family
                         pixelSize: Theme.font.large
