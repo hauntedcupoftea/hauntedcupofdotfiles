@@ -122,6 +122,8 @@ PopupWindow {
                     Repeater {
                         id: innerMenu
                         model: ScriptModel {
+                            // NOTE: this throws null for a brief moment when the opener is swapped.
+                            //       i do not know how to handle it (|| []) break it because it doens't update
                             values: root.menuHandle && root.menuHandle.children.values // qmllint disable
                         }
 
