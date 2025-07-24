@@ -73,6 +73,7 @@ AbstractBarButton {
                 anchors.margins: Theme.margin
                 Text {
                     Layout.minimumWidth: Theme.font.large
+                    horizontalAlignment: Qt.AlignHCenter
                     font {
                         family: Theme.font.family
                         pixelSize: Theme.font.large
