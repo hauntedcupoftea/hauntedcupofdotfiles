@@ -3,7 +3,7 @@
 , ...
 }:
 let
-  isGE66Raider = builtins.hasAttr "ge66-raider" (inputs.self.nixosConfigurations or { });
+  isGE66Raider = builtins.hasAttr "Anand-GE66-Raider" (inputs.self.nixosConfigurations or { });
 in
 {
   home.sessionVariables = {
