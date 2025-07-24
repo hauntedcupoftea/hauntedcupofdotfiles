@@ -17,7 +17,7 @@ import "internal" as Private
 AbstractBarButton {
     id: root
     implicitHeight: Theme.barHeight - (Theme.margin)
-    implicitWidth: Theme.playerWidth
+    implicitWidth: Theme.playerWidth + Theme.font.large // add font width to get bar to 100px
 
     property bool focusOutput: false
     property real outputAlpha: focusOutput ? 0.9 : 0.45
@@ -61,7 +61,13 @@ AbstractBarButton {
         active: Audio.ready
         sourceComponent: Rectangle {
             radius: Theme.rounding.small
-            color: root.hovered ? Theme.colors.surface1 : Theme.colors.crust
+            color: root.hovered ? Theme.colors.surface0 : Theme.colors.crust
+            Behavior on color {
+                ColorAnimation {
+                    duration: 200
+                    easing.type: Easing.OutQuad
+                }
+            }
 
             border {
                 width: 2
@@ -82,7 +88,7 @@ AbstractBarButton {
                     text: root.focusedIcon
                 }
                 ClippingRectangle {
-                    id: content
+                    id: bg
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     radius: Theme.rounding.verysmall
@@ -91,7 +97,7 @@ AbstractBarButton {
                         anchors.left: parent.left
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
-                        implicitWidth: root.width * Audio.defaultOutput.audio.volume
+                        implicitWidth: bg.width * Audio.defaultOutput.audio.volume
                         color: Qt.alpha(Theme.colors.blue, root.outputAlpha)
 
                         Behavior on opacity {

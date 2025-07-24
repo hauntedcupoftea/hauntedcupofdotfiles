@@ -16,14 +16,32 @@ import "internal" as Private
 AbstractBarButton {
     id: root
     implicitHeight: Theme.barHeight - (Theme.margin)
-    implicitWidth: Theme.playerWidth
+    implicitWidth: Theme.playerWidth + Theme.font.large
     property string playerIcon: Player.active.playbackState == MprisPlaybackState.Playing ? "󰐊" : "󰏤"
+
+    MouseArea {
+        id: toggleMute
+        anchors.fill: parent
+        acceptedButtons: Qt.RightButton
+        onPressed: {
+            if (Player.active && Player.active.canPause && Player.active.playbackState != MprisPlaybackState.Paused)
+                Player.active.pause();
+            else if (Player.active && Player.active.canPlay)
+                Player.active.play();
+        }
+    }
 
     background: Loader {
         active: Player.active
         sourceComponent: Rectangle {
             radius: Theme.rounding.small
-            color: Theme.colors.crust
+            color: root.hovered ? Theme.colors.surface0 : Theme.colors.crust
+            Behavior on color {
+                ColorAnimation {
+                    duration: 200
+                    easing.type: Easing.OutQuad
+                }
+            }
 
             RowLayout {
                 anchors.fill: parent
@@ -39,6 +57,7 @@ AbstractBarButton {
                     text: root.playerIcon
                 }
                 ClippingRectangle {
+                    id: bg
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     implicitWidth: Theme.playerWidth
@@ -48,7 +67,7 @@ AbstractBarButton {
                         anchors.left: parent.left
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
-                        implicitWidth: root.width * Player.percentageProgress
+                        implicitWidth: bg.width * Player.percentageProgress
                         color: Qt.alpha(Theme.colors.blue, 0.75)
                     }
                     Private.ScrollingText {
@@ -72,6 +91,7 @@ AbstractBarButton {
         targetWidget: root
         triggerTarget: true
         position: Qt.rect(root.width / 2, root.height + Theme.padding, 0, 0)
+        blockShow: !Player.active
 
         RowLayout {
             spacing: 12
