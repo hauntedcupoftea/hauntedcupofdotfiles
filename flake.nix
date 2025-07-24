@@ -82,7 +82,7 @@
       };
 
       nixosConfigurations = {
-        "ge66-raider" = nixpkgs.lib.nixosSystem {
+        "Anand-GE66-Raider" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
