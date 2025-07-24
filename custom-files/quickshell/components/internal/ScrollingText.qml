@@ -10,7 +10,6 @@ ClippingRectangle {
     property string scrollingText
     property bool animate
     radius: Theme.rounding.small
-    anchors.margins: Theme.margin
     color: "transparent"
 
     Text {

@@ -17,6 +17,7 @@ AbstractBarButton {
     id: root
     implicitHeight: Theme.barHeight - (Theme.margin)
     implicitWidth: Theme.playerWidth
+    property string playerIcon: Player.active.playbackState == MprisPlaybackState.Playing ? "󰐊" : "󰏤"
 
     background: Loader {
         active: Player.active
@@ -24,17 +25,39 @@ AbstractBarButton {
             radius: Theme.rounding.small
             color: Theme.colors.crust
 
-            ClippingRectangle {
+            RowLayout {
                 anchors.fill: parent
-                anchors.margins: (Theme.margin / 1)
-                radius: Theme.rounding.verysmall
-                color: Theme.colors.mantle
-                Rectangle {
-                    anchors.left: parent.left
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    implicitWidth: root.width * Player.percentageProgress
-                    color: Qt.alpha(Theme.colors.blue, 0.75)
+                anchors.margins: Theme.margin
+                Text {
+                    Layout.minimumWidth: Theme.font.large
+                    horizontalAlignment: Qt.AlignHCenter
+                    font {
+                        family: Theme.font.family
+                        pixelSize: Theme.font.large
+                    }
+                    color: Theme.colors.sapphire
+                    text: root.playerIcon
+                }
+                ClippingRectangle {
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    implicitWidth: Theme.playerWidth
+                    radius: Theme.rounding.verysmall
+                    color: Theme.colors.surface0
+                    Rectangle {
+                        anchors.left: parent.left
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        implicitWidth: root.width * Player.percentageProgress
+                        color: Qt.alpha(Theme.colors.blue, 0.75)
+                    }
+                    Private.ScrollingText {
+                        anchors.centerIn: root
+                        scrollingText: Player.active && qsTr(`${Player.active.trackArtist} - ${Player.active.trackTitle}`)
+                        animate: Player.active && Player.active.isPlaying
+                        // DEBUG
+                        // onScrollingTextChanged: print(JSON.stringify(Player.active.metadata, null, 2))
+                    }
                 }
             }
         }
@@ -94,13 +117,5 @@ AbstractBarButton {
         //     text: JSON.stringify(Player.active, null, 2)
         //     color: Theme.colors.text
         // }
-    }
-
-    Private.ScrollingText {
-        anchors.centerIn: root
-        scrollingText: Player.active && qsTr(`${Player.active.trackArtist} - ${Player.active.trackTitle}`)
-        animate: Player.active && Player.active.isPlaying
-        // DEBUG
-        // onScrollingTextChanged: print(JSON.stringify(Player.active.metadata, null, 2))
     }
 }
