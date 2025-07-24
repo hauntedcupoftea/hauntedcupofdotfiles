@@ -8,7 +8,7 @@
     ];
     config = {
       common = {
-        default = [ "gtk" ];
+        default = [ "hyprland" "termfilechooser" ];
       };
       preferred = {
         default = [ "hyprland" ];
