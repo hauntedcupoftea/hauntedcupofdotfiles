@@ -9,14 +9,14 @@
   ];
 
   home.file = {
-    "${config.xdg.configHome}/hypr/xdph.conf" = {
-      text = ''
-        screencopy {
-          allow_token_by_default=true
-          custom_picker_binary=${config.xdg.configHome}/hypr/pickerscript
-        }
-      '';
-    };
+    # "${config.xdg.configHome}/hypr/xdph.conf" = {
+    #   text = ''
+    #     screencopy {
+    #       allow_token_by_default=false
+    #       custom_picker_binary=${config.xdg.configHome}/hypr/pickerscript
+    #     }
+    #   '';
+    # };
     "${config.xdg.configHome}/hypr/pickerscript" = {
       text = ''
         walker -n --modules xdphpicker
