@@ -12,7 +12,7 @@
     };
   };
 
-  home.file.".config/xdg-desktop-portal-termfilechooser/config".text = ''
+  xdg.configFile."/xdg-desktop-portal-termfilechooser/config".text = ''
     [filechooser]
     cmd=${../../custom-files/termfilechooser/yazi-wrapper.sh}
     env=TERMCMD=kitty
