@@ -47,7 +47,7 @@ Rectangle {
             implicitHeight: Theme.barHeight - (Theme.margin * 2)
             implicitWidth: implicitHeight
             radius: Theme.rounding.full
-            color: Theme.colors.surface0
+            color: Theme.colors.mantle
 
             Loader {
                 active: root.showIcon

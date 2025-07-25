@@ -4,22 +4,27 @@
     enable = true;
     polarity = "dark";
     base16Scheme = with config.programs.matugen.theme.colors.dark; {
-      base00 = background;
-      base01 = surface;
-      base02 = surface-variant;
-      base03 = on-surface;
-      base04 = on-background;
-      base05 = primary;
-      base06 = primary-variant;
-      base07 = on-primary;
-      base08 = secondary;
-      base09 = on-secondary;
-      base0A = tertiary;
-      base0B = on-tertiary;
-      base0C = error;
-      base0D = on-error;
-      base0E = secondary-variant;
-      base0F = outline;
+      # Backgrounds
+      base00 = surface_container_lowest;
+      base01 = surface_container_low;
+      base02 = surface_container;
+
+      # Foregrounds
+      base03 = on_surface_variant; # Comments
+      base04 = on_surface; # Default
+      base05 = on_primary_container; # Bright
+      base06 = on_secondary_container; # Brighter
+      base07 = on_tertiary_container; # Brightest
+
+      # Accents
+      base08 = error; # Red
+      base09 = tertiary; # Orange
+      base0A = primary; # Yellow
+      base0B = secondary; # Green
+      base0C = tertiary_container; # Cyan
+      base0D = primary_container; # Blue
+      base0E = secondary_container; # Magenta
+      base0F = outline; # Misc
     };
     cursor = {
       name = "phinger-cursors-dark";
