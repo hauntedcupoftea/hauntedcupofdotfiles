@@ -15,7 +15,7 @@
         name = "Fira Code Nerd Font";
       };
       monospace = {
-        package = pkgs.nerd.fonts.fira-code;
+        package = pkgs.nerd-fonts.fira-code;
         name = "Fira Code Nerd Font Mono";
       };
       sizes = {
