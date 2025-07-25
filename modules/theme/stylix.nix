@@ -27,7 +27,7 @@
     };
     opacity = {
       terminal = 0.85;
-      desktop = 0;
+      desktop = 0.85;
     };
   };
 }

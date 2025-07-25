@@ -17,7 +17,7 @@ AbstractBarButton {
     id: root
     implicitHeight: Theme.barHeight - (Theme.margin)
     implicitWidth: Theme.playerWidth + Theme.font.large
-    property string playerIcon: Player.active.playbackState == MprisPlaybackState.Playing ? "󰐊" : "󰏤"
+    property string playerIcon: Player.active && Player.active.playbackState == MprisPlaybackState.Playing ? "󰐊" : "󰏤"
 
     MouseArea {
         id: toggleMute
