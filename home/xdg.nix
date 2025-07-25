@@ -16,7 +16,7 @@
     ".config/xdg-desktop-portal-termfilechooser/config" = {
       text = ''
         [filechooser]
-        cmd=yazi-wrapper.sh
+        cmd=yazi-wrapper.fish
         env=TERMCMD=kitty
             EDITOR=hx
       '';
