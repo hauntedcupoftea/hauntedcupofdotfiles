@@ -41,7 +41,7 @@ Rectangle {
         PlayerMenu {
             id: player
             anchors.right: hyprgaming.left
-            anchors.rightMargin: Theme.padding
+            anchors.rightMargin: Theme.padding * 2
         }
         HyprlandWS {
             id: hyprgaming
@@ -50,7 +50,7 @@ Rectangle {
         VolumeMenu {
             id: volumeGaming
             anchors.left: hyprgaming.right
-            anchors.leftMargin: Theme.padding
+            anchors.leftMargin: Theme.padding * 2
         }
 
         BarGroup {
