@@ -17,8 +17,7 @@
       text = ''
         [filechooser]
         cmd=yazi-wrapper.fish
-        env=TERMCMD=kitty
-            EDITOR=hx
+        env=EDITOR=hx
       '';
     };
     ".config/xdg-desktop-portal-termfilechooser/yazi-wrapper.fish" = {
