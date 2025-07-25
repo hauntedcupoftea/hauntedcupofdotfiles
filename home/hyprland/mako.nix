@@ -19,24 +19,24 @@
       max-history = 20;
       border-radius = 8;
 
-      "urgency=low" = {
-        border-color = "#44B9B1E6";
-        default-timeout = 5000;
-      };
+      # "urgency=low" = {
+      #   border-color = "#44B9B1E6";
+      #   default-timeout = 5000;
+      # };
 
-      "urgency=normal" = {
-        border-color = "#eceff1E6";
-      };
+      # "urgency=normal" = {
+      #   border-color = "#eceff1E6";
+      # };
 
-      "urgency=critical" = {
-        border-color = "#f44336E6";
-        font = "FiraCode Nerd Font Bold 12";
-        default-timeout = 0;
-      };
+      # "urgency=critical" = {
+      #   border-color = "#f44336E6";
+      #   font = "FiraCode Nerd Font Bold 12";
+      #   default-timeout = 0;
+      # };
 
-      actionable = {
-        border-color = "#2196f3E6";
-      };
+      # actionable = {
+      #   border-color = "#2196f3E6";
+      # };
     };
   };
   # catppuccin.mako.enable = true;
