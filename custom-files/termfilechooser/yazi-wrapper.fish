@@ -34,11 +34,11 @@ set cmd yazi
 
 # "wezterm start --always-new-process" if you use wezterm
 if test "$save" = 1
-    set TITLE "Save File:"
+    set TITLE "Save File"
 else if test "$directory" = 1
-    set TITLE "Select Directory:"
+    set TITLE "Select Directory"
 else
-    set TITLE "Select File:"
+    set TITLE "Select File"
 end
 
 function quote_string

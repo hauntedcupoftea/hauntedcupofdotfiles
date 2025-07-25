@@ -140,9 +140,11 @@ in
         "float,class:(clipse)"
         "size 622 652,class:(clipse)"
         "stayfocused,class:(clipse)"
-        # "float,class:(kalker)"
-        # "size 622 652,class:(kalker)"
-        # "stayfocused,class:(kalker)"
+        # this is for hyprland termfilechooser
+        "float, class:^(kitty)$,title:^(Save File|Select Directory|Select File)$"
+        "stayfocused, class:^(kitty)$,title:^(Save File|Select Directory|Select File)$"
+        "size 1200 800, class:^(kitty)$,title:^(Save File|Select Directory|Select File)$"
+        "center, class:^(kitty)$,title:^(Save File|Select Directory|Select File)$"
       ];
 
       # Startup applications
