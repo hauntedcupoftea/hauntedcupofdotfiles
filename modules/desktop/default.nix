@@ -8,5 +8,6 @@
     ./hyprland.nix
     ./podman.nix
     ./teamviewer.nix
+    ./xdg.nix
   ];
 }
