@@ -18,6 +18,11 @@ PLEASE NOTE that it is NOT RECOMMENDED to use this if you don't know what you ar
 - Home Manager imports /[user].nix instead of home.nix (to make multi-user management easier).
 - Even though the organization of this repo might be a bit unconventional compared to standard, I aimed for a "buffet" approach with my configuration which should make it easy to simply pick and choose what you require by commenting/uncommenting stuff in the various `default.nix` files scattered around.
 
+## Wallpaper Credits
+
+- Malenia: [Espen Olsen Saetervik](https://x.com/VideoArtGame/status/1698002847575769189)
+  -# This is the only source I could find that credits this image, I cannot find the artist, if you know who they are, please tell me so i can credit them.
+
 ## Special Thanks
 
 - [Vimjoyer](https://www.youtube.com/@vimjoyer) for making the switch from windows + wsl to NixOS easier for a wretch like me =D
