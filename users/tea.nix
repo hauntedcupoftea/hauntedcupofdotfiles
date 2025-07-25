@@ -1,4 +1,5 @@
 { inputs
+, pkgs
 , ...
 }: {
   imports = [
@@ -10,7 +11,7 @@
   users.users.tea = {
     isNormalUser = true;
     description = "Anand Chauhan";
-    # shell = pkgs.fish; # we will use the bash fix
+    shell = pkgs.fish; # we will use the bash fix
     extraGroups = [ "networkmanager" "wheel" "openrazer" "plugdev" "gamemode" "input" ];
     packages = [ ];
   };
