@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
+{ config
+, pkgs
+, inputs
+, ...
 }: {
   imports = [
     # Hardware configuration
@@ -16,6 +15,9 @@
 
     # Desktop environment
     ../../modules/desktop
+
+    # Theme
+    ../../modules/theme
 
     # User configuration
     ../../users

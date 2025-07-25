@@ -18,6 +18,11 @@
 
     rust-overlay.url = "github:oxalica/rust-overlay";
 
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     catppuccin = {
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -55,14 +60,14 @@
   outputs =
     { self
     , nixpkgs
-    , nh
-    , home-manager
-    , catppuccin
-    , nvf
-    , zen-browser
-    , quickshell
+      # , nh
+      # , home-manager
+      # , catppuccin
+      # , nvf
+      # , zen-browser
+      # , quickshell
     , rust-overlay
-    , spicetify-nix
+      # , spicetify-nix
     , ...
     } @ inputs:
     let
