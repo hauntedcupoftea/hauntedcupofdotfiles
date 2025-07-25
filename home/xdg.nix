@@ -12,12 +12,20 @@
     };
   };
 
-  home.file.".config/xdg-desktop-portal-termfilechooser/config".text = ''
-    [filechooser]
-    cmd=${../custom-files/termfilechooser/yazi-wrapper.sh}
-    env=TERMCMD=kitty
-        EDITOR=hx
-  '';
+  home.file = {
+    ".config/xdg-desktop-portal-termfilechooser/config" = {
+      text = ''
+        [filechooser]
+        cmd=yazi-wrapper.sh
+        env=TERMCMD=kitty
+            EDITOR=hx
+      '';
+    };
+    ".config/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh" = {
+      executable = true;
+      source = ../custom-files/termfilechooser/yazi-wrapper.sh;
+    };
+  };
 
   home.sessionVariables = {
     GTK_USE_PORTAL = "1";
