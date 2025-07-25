@@ -56,9 +56,9 @@ in
       };
 
     cursor = {
-      name = if currentPolarity == "dark" then "phinger-cursors-dark" else "phinger-cursors-light";
-      package = pkgs.phinger-cursors;
-      size = 40;
+      name = "Bibata-Modern-Classic";
+      package = pkgs.bibata-cursors;
+      size = 48;
     };
     fonts = {
       sansSerif = {
