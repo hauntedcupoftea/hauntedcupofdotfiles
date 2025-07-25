@@ -1,11 +1,7 @@
-{ inputs, system, config, ... }:
+{ inputs, config, pkgs, ... }:
 {
   imports = [
     inputs.walker.homeManagerModules.default
-  ];
-
-  home.packages = [
-    inputs.walker.packages."${system}".default
   ];
 
   home.file = {
@@ -28,6 +24,7 @@
   programs.walker = {
     enable = true;
     runAsService = true; # seeing this set to true again, it fills you with deterination!
+    package = pkgs.walker;
 
     # This is Walker's main configuration
     config = {
