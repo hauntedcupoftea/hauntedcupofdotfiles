@@ -6,22 +6,20 @@
       gnome-keyring
       xdg-desktop-portal-termfilechooser
     ];
-    config = {
-      common = {
-        default = [ "hyprland" "termfilechooser" ];
-      };
-      preferred = {
-        default = [ "hyprland" ];
-        "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
-      };
+    config.common.default = [ "hyprland" "gtk" ];
+    config."org.freedesktop.impl.portal.FileChooser" = {
+      default = [ "termfilechooser" "gtk" ];
     };
   };
 
-  # Configure termfilechooser
   home.file.".config/xdg-desktop-portal-termfilechooser/config".text = ''
-    [Default]
-    cmd=kitty yazi --chooser-file=%f
-    file=%f
-    directory=%d
+    [filechooser]
+    cmd=${../custom-files/termfilechooser/yazi-wrapper.sh}
+    env=TERMCMD=kitty
+        EDITOR=hx
   '';
+
+  environment.sessionVariables = {
+    GTK_USE_PORTAL = "1";
+  };
 }
