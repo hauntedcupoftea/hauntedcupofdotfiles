@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{ inputs, config, ... }: {
   imports = [ inputs.matugen.nixosModules.default ];
 
   programs.matugen = {
@@ -7,5 +7,9 @@
     variant = "dark";
     contrast = 0.25;
     type = "scheme-vibrant";
+  };
+
+  home-manager.extraSpecialArgs = {
+    matugenTheme = config.programs.matugen.theme.files;
   };
 }
