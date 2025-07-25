@@ -5,6 +5,7 @@
     image = ../../wallpapers/malenia.jpg;
     polarity = "dark";
     cursor = {
+      name = "phinger-cursors-dark";
       package = pkgs.phinger-cursors;
       size = 40;
     };
