@@ -3,7 +3,8 @@
   stylix = {
     enable = true;
     polarity = "dark";
-    image = ../../wallpapers/malenia.jpg;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+    # image = ../../wallpapers/malenia.jpg;
     # base16Scheme = with config.programs.matugen.theme.colors.dark; {
     #   base00 = shadow; # Darkest possible background
     #   base01 = surface_container_lowest; # Slightly lighter background
