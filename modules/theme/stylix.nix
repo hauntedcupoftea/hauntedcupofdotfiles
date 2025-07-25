@@ -58,7 +58,7 @@ in
     cursor = {
       name = "Bibata-Modern-Classic";
       package = pkgs.bibata-cursors;
-      size = 40;
+      size = 36;
     };
     fonts = {
       sansSerif = {
