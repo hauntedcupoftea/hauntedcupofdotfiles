@@ -1,5 +1,5 @@
 { inputs, ... }: {
-  imports = [ inputs.kurukurubar.nixosModule.kurukuruDM ];
+  imports = [ inputs.kurukurubar.nixosModules.kurukuruDM ];
   programs.kurukuruDM = {
     enable = true;
     settings = {
