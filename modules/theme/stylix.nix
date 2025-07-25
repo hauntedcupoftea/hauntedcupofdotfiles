@@ -20,7 +20,7 @@ in
       # Backgrounds - these work for both light and dark
       base00 = surface_container_lowest;
       base01 = surface_container_low;
-      base02 = surface_container;
+      base02 = surface_container_high; # More contrast for selections/highlights
       base03 = outline_variant;
 
       # Foregrounds - automatically correct for polarity
