@@ -12,12 +12,13 @@
     };
   };
 
-  xdg.configFile."/xdg-desktop-portal-termfilechooser/config".text = ''
-    [filechooser]
-    cmd=${../../custom-files/termfilechooser/yazi-wrapper.sh}
-    env=TERMCMD=kitty
-        EDITOR=hx
-  '';
+  # idk how to set this in nix lol
+  # xdg.configFile."/xdg-desktop-portal-termfilechooser/config".text = ''
+  #   [filechooser]
+  #   cmd=${../../custom-files/termfilechooser/yazi-wrapper.sh}
+  #   env=TERMCMD=kitty
+  #       EDITOR=hx
+  # '';
 
   environment.sessionVariables = {
     GTK_USE_PORTAL = "1";
