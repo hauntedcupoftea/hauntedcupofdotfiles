@@ -14,31 +14,46 @@ in
   imports = [ inputs.stylix.nixosModules.stylix ./matugen.nix ];
   stylix = {
     enable = true;
-    polarity = currentPolarity; # Use the same polarity value
+    polarity = currentPolarity;
     image = ../../wallpapers/malenia.jpg;
-    base16Scheme = with matugenTheme; {
-      # Backgrounds - these work for both light and dark
-      base00 = surface_container_lowest;
-      base01 = surface_container_low;
-      base02 = surface_container_high; # More contrast for selections/highlights
-      base03 = outline_variant;
 
-      # Foregrounds - automatically correct for polarity
-      base04 = outline;
-      base05 = on_surface;
-      base06 = surface_bright;
-      base07 = surface_container_highest;
-
-      # Accent colors - these should work for both themes
-      base08 = error;
-      base09 = on_error_container;
-      base0A = on_primary_container;
-      base0B = on_secondary_container;
-      base0C = on_tertiary_container;
-      base0D = primary;
-      base0E = secondary;
-      base0F = tertiary;
-    };
+    # https://github.com/make-42/stylix/blob/matugen-clean-diff-rebuild/stylix/palette.nix
+    base16Scheme = with matugenTheme;
+      if currentPolarity == "light" then {
+        base00 = background;
+        base01 = surface_container;
+        base02 = surface_container_highest;
+        base03 = outline;
+        base04 = on_surface_variant;
+        base05 = on_surface;
+        base06 = on_secondary_fixed;
+        base07 = on_primary_container;
+        base08 = error;
+        base09 = on_tertiary;
+        base0A = on_secondary_container;
+        base0B = on_secondary_fixed_variant;
+        base0C = on_primary_fixed;
+        base0D = surface_tint;
+        base0E = on_tertiary_fixed;
+        base0F = on_error_container;
+      } else {
+        base00 = background;
+        base01 = surface_container;
+        base02 = surface_container_highest;
+        base03 = outline;
+        base04 = on_surface_variant;
+        base05 = on_surface;
+        base06 = secondary_fixed;
+        base07 = on_primary_container;
+        base08 = error;
+        base09 = tertiary;
+        base0A = secondary;
+        base0B = primary;
+        base0C = primary_fixed;
+        base0D = surface_tint;
+        base0E = tertiary_fixed;
+        base0F = on_error_container;
+      };
 
     cursor = {
       name = if currentPolarity == "dark" then "phinger-cursors-dark" else "phinger-cursors-light";
