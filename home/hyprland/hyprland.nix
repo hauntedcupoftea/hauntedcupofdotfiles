@@ -10,9 +10,9 @@ in
     HYPRSHOT_DIR = "Pictures";
   };
 
-  catppuccin.hyprland = {
-    enable = true;
-  };
+  # catppuccin.hyprland = {
+  #   enable = true;
+  # };
 
   # Hyprland home configuration
   wayland.windowManager.hyprland = {

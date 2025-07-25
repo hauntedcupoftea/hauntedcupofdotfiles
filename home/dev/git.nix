@@ -5,8 +5,8 @@
     enable = true;
   };
 
-  catppuccin.gitui = {
-    enable = true;
-    flavor = "mocha";
-  };
+  # catppuccin.gitui = {
+  #   enable = true;
+  #   flavor = "mocha";
+  # };
 }

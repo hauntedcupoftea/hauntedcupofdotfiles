@@ -33,8 +33,6 @@ in
       hideLyricsButton
       oneko
     ];
-    theme = spicePkgs.themes.catppuccin;
-    colorScheme = "mocha";
     wayland = true;
   };
 }

@@ -2,7 +2,7 @@
 
   home.packages = [ pkgs.bat ];
 
-  catppuccin.bat.enable = true;
+  # catppuccin.bat.enable = true;
 
   programs.bat = {
     enable = true;

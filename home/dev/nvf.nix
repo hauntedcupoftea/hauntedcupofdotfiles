@@ -8,11 +8,11 @@
     enable = true;
     settings = {
       vim = {
-        theme = {
-          enable = true;
-          name = "catppuccin";
-          style = "mocha";
-        };
+        # theme = {
+        #   enable = true;
+        #   name = "catppuccin";
+        #   style = "mocha";
+        # };
 
         statusline.lualine.enable = true;
         telescope.enable = true;

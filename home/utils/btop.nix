@@ -3,5 +3,5 @@
     enable = true;
     package = pkgs.btop;
   };
-  catppuccin.btop.enable = true;
+  # catppuccin.btop.enable = true;
 }

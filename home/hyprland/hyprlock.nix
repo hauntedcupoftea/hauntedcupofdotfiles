@@ -3,5 +3,5 @@
     enable = true;
     package = pkgs.hyprlock;
   };
-  catppuccin.hyprlock.enable = true;
+  # catppuccin.hyprlock.enable = true;
 }

@@ -23,7 +23,7 @@
     };
   };
 
-  catppuccin.fish.enable = true;
+  # catppuccin.fish.enable = true;
 
   # this is potentially dangerous (enable after ags i think)
   # home.sessionVariables = {

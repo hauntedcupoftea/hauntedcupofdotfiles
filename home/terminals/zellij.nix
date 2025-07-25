@@ -9,7 +9,7 @@
     # Zellij settings (written to $XDG_CONFIG_HOME/zellij/config.kdl)
     settings = {
       default_shell = "fish";
-      theme = "catppuccin-mocha";
+      # theme = "catppuccin-mocha";
       show_startup_tips = false;
       ui = {
         pane_frames = {
