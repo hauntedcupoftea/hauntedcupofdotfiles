@@ -7,21 +7,21 @@
       base00 = surface_container_lowest;
       base01 = surface_container_low;
       base02 = surface_container;
+      base03 = outline_variant;
 
-      base03 = outline;
       base04 = on_surface_variant;
       base05 = on_surface;
-      base06 = surface_container_high;
-      base07 = surface_container_highest;
+      base06 = on_surface;
+      base07 = inverse_on_surface;
 
       base08 = error;
-      base09 = on_error_container;
-      base0A = on_primary_container;
-      base0B = on_secondary_container;
-      base0C = on_tertiary_container;
+      base09 = on_primary_container;
+      base0A = on_secondary_container;
+      base0B = on_tertiary_container;
+      base0C = tertiary;
       base0D = primary;
       base0E = secondary;
-      base0F = tertiary;
+      base0F = error_container;
     };
     cursor = {
       name = "phinger-cursors-dark";
