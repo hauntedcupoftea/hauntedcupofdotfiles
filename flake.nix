@@ -47,6 +47,10 @@
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    kurukurubar = {
+      url = "github:Rexcrazy804/Zaphkiel/kurukuru-greeter";
+    };
   };
   outputs =
     { self
