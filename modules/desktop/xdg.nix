@@ -19,7 +19,7 @@
         EDITOR=hx
   '';
 
-  home.sessionVariables = {
+  environment.sessionVariables = {
     GTK_USE_PORTAL = "1";
   };
 }
