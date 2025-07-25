@@ -1,10 +1,8 @@
-{ config, pkgs, ... }: {
-  imports = [ ];
+{ inputs, ... }: {
+  imports = [ inputs.matugen.nixosModules.default ];
 
-  config = {
-    matugen = {
-      enable = true;
-      image = ../../wallpapers/malenia.jpg;
-    };
+  programs.matugen = {
+    enable = true;
+    wallpaper = ../../wallpapers/malenia.jpg;
   };
 }

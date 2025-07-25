@@ -3,7 +3,7 @@
   stylix = {
     enable = true;
     polarity = "dark";
-    base16Scheme = with config.matugen.colors.dark; {
+    base16Scheme = with config.programs.matugen.theme.colors.dark; {
       base00 = background;
       base01 = surface;
       base02 = surface-variant;
