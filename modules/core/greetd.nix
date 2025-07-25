@@ -4,7 +4,7 @@
     enable = true;
     settings = {
       wallpaper = ../../wallpapers/malenia.jpg;
-      instantAuth = true;
+      instantAuth = false;
       extraConfig = ''
         monitor = DP-2, preferred, auto, 1
       '';
