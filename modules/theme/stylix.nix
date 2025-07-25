@@ -1,32 +1,47 @@
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, config, ... }:
+let
+  # Define polarity in one place
+  currentPolarity = "dark"; # Change this to "light" to switch everything
+
+  # Select the right matugen theme based on polarity
+  matugenTheme =
+    if currentPolarity == "dark"
+    then config.programs.matugen.theme.colors.dark
+    else config.programs.matugen.theme.colors.light;
+
+in
+{
   imports = [ inputs.stylix.nixosModules.stylix ./matugen.nix ];
   stylix = {
     enable = true;
-    polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-    # image = ../../wallpapers/malenia.jpg;
-    # base16Scheme = with config.programs.matugen.theme.colors.dark; {
-    #   base00 = shadow; # Darkest possible background
-    #   base01 = surface_container_lowest; # Slightly lighter background
-    #   base02 = surface_container_low; # Selection background
-    #   base03 = outline_variant; # Comments (keep dim)
+    polarity = currentPolarity; # Use the same polarity value
+    image = ../../wallpapers/malenia.jpg;
+    base16Scheme = with matugenTheme; {
+      # Backgrounds - these work for both light and dark
+      base00 = surface_container_lowest;
+      base01 = surface_container_low;
+      base02 = surface_container;
+      base03 = outline_variant;
 
-    #   base04 = outline; # Disabled text
-    #   base05 = on_surface; # Default text
-    #   base06 = inverse_on_surface; # Bright text
-    #   base07 = surface_container_highest; # Brightest text
+      # Foregrounds - automatically correct for polarity
+      base04 = outline;
+      base05 = on_surface;
+      base06 = surface_bright;
+      base07 = surface_container_highest;
 
-    #   base08 = error; # Red - errors
-    #   base09 = on_error; # Bright red/orange - literals
-    #   base0A = on_primary; # Bright primary color - classes
-    #   base0B = on_secondary; # Bright secondary - strings
-    #   base0C = on_tertiary; # Bright tertiary - cyan/regex
-    #   base0D = on_primary_container; # High contrast blue - functions
-    #   base0E = on_secondary_container; # High contrast purple - keywords
-    #   base0F = on_tertiary_container; # High contrast accent - deprecated
-    # };
+      # Accent colors - these should work for both themes
+      base08 = error;
+      base09 = on_error_container;
+      base0A = on_primary_container;
+      base0B = on_secondary_container;
+      base0C = on_tertiary_container;
+      base0D = primary;
+      base0E = secondary;
+      base0F = tertiary;
+    };
+
     cursor = {
-      name = "phinger-cursors-dark";
+      name = if currentPolarity == "dark" then "phinger-cursors-dark" else "phinger-cursors-light";
       package = pkgs.phinger-cursors;
       size = 40;
     };
