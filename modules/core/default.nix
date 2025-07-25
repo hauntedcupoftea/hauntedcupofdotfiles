@@ -6,8 +6,8 @@
     ./nh.nix
     ./locale.nix
     ./location.nix
-    # ./sddm.nix
-    ./greetd.nix
+    ./sddm.nix
+    # ./greetd.nix
     ./shells.nix
     ./security.nix
     ./utils.nix
