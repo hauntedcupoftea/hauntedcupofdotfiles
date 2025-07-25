@@ -21,9 +21,9 @@
             EDITOR=hx
       '';
     };
-    ".config/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh" = {
+    ".config/xdg-desktop-portal-termfilechooser/yazi-wrapper.fish" = {
       executable = true;
-      source = ../custom-files/termfilechooser/yazi-wrapper.sh;
+      source = ../custom-files/termfilechooser/yazi-wrapper.fish;
     };
   };
 
