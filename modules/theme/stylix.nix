@@ -19,7 +19,7 @@
         name = "Fira Code Nerd Font Mono";
       };
       sizes = {
-        popups = 12;
+        popups = 13;
         applications = 13;
         terminal = 13;
         desktop = 14;
@@ -27,6 +27,7 @@
     };
     opacity = {
       terminal = 0.85;
+      desktop = 0;
     };
   };
 }
