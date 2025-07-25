@@ -5,7 +5,7 @@
     settings = {
       actions = true;
       history = true;
-      font = "FiraCode Nerd Font 12";
+      # font = "FiraCode Nerd Font 12";
       width = 500;
       height = 300;
       anchor = "bottom-right";
