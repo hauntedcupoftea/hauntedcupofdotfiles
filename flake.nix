@@ -107,9 +107,6 @@
               nixpkgs.overlays = [
                 rust-overlay.overlays.default
                 customPackagesOverlay
-                (final: prev: {
-                  jdk8 = final.openjdk8-bootstrap;
-                })
               ];
             }
             ./hosts/ge66-raider
