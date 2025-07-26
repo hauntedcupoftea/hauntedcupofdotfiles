@@ -85,7 +85,7 @@ AbstractBarButton {
                         return Theme.colors.error;
                     }
                     if (Battery.percentage > 0.44)
-                        return Theme.colors.on_surface;
+                        return Theme.colors.on_primary;
                     return Theme.colors.on_surface;
                 }
             }
