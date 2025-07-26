@@ -40,7 +40,7 @@ in
         base00 = background;
         base01 = surface_container;
         base02 = surface_container_highest;
-        base03 = outline;
+        base03 = outline_variant;
         base04 = on_surface_variant;
         base05 = on_surface;
         base06 = secondary_fixed;
