@@ -18,7 +18,7 @@ ClippingRectangle {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         text: root.scrollingText
-        color: Theme.colors.text
+        color: Theme.colors.on_surface
         verticalAlignment: Qt.AlignVCenter
         font {
             family: Theme.font.family

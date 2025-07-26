@@ -15,7 +15,7 @@ AbstractBarButton {
 
     background: Rectangle {
         anchors.fill: root
-        color: root.hovered ? Theme.colors.surface0 : Theme.colors.crust
+        color: root.hovered ? Theme.colors.surface_container : Theme.colors.surface
         radius: Theme.rounding.verysmall
     }
 
@@ -23,7 +23,7 @@ AbstractBarButton {
         id: clockWidgetText
         text: Time.time
         anchors.centerIn: parent
-        color: Theme.colors.peach
+        color: Theme.colors.primary
         animate: false
         weight: 500
         font.pixelSize: Theme.font.large
@@ -40,15 +40,15 @@ AbstractBarButton {
             spacing: Theme.margin / 2
             Private.StyledText {
                 text: "📅 Today: " + Time.time
-                color: Theme.colors.text
+                color: Theme.colors.on_surface
             }
             Private.StyledText {
                 text: "🌤️ Weather: 22°C Sunny"
-                color: Theme.colors.subtext1
+                color: Theme.colors.on_surface_variant
             }
             Private.StyledText {
                 text: "Click for calendar"
-                color: Theme.colors.subtext0
+                color: Theme.colors.on_surface_variant
             }
         }
     }

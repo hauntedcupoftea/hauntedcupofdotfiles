@@ -14,7 +14,7 @@ Rectangle {
     id: root
     implicitHeight: Theme.barHeight - Theme.margin
     implicitWidth: windowContent.width + (Theme.padding * 2)
-    color: Theme.colors.crust
+    color: Theme.colors.surface
     radius: Theme.rounding.small
 
     WindowUtils {
@@ -47,7 +47,7 @@ Rectangle {
             implicitHeight: Theme.barHeight - (Theme.margin * 2)
             implicitWidth: implicitHeight
             radius: Theme.rounding.full
-            color: Theme.colors.mantle
+            color: Theme.colors.surface_container
 
             Loader {
                 active: root.showIcon
@@ -64,7 +64,7 @@ Rectangle {
                 anchors.centerIn: parent
                 sourceComponent: Text {
                     text: root.iconText
-                    color: Theme.colors.subtext0
+                    color: Theme.colors.on_surface_variant
                     font {
                         family: Theme.font.family
                         pixelSize: Theme.barIconSize
@@ -77,7 +77,7 @@ Rectangle {
         Private.StyledText {
             id: windowName
             text: root.windowTitle
-            color: Theme.colors.text
+            color: Theme.colors.on_surface
         }
     }
 }

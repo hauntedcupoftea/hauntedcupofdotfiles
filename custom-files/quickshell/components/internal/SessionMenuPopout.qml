@@ -42,11 +42,11 @@ PopupWindow {
     Rectangle {
         anchors.fill: parent
         radius: Theme.rounding.verysmall
-        color: Theme.colors.base
+        color: Theme.colors.background
 
         border {
             width: 1
-            color: Theme.colors.surface0
+            color: Theme.colors.outline
         }
 
         MouseArea {
@@ -152,7 +152,7 @@ PopupWindow {
                     Layout.alignment: Qt.AlignCenter
                     Layout.maximumWidth: sessionMenuGrid.width
                     text: root.hoveredAction
-                    color: Theme.colors.subtext1
+                    color: Theme.colors.on_surface_variant
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     wrapMode: Text.WordWrap

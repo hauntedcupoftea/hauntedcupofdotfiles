@@ -14,7 +14,7 @@ AbstractBarButton {
     implicitHeight: Theme.barHeight - (Theme.margin)
 
     background: Rectangle {
-        color: batteryIndicator.hovered ? Theme.colors.surface0 : Theme.colors.crust
+        color: batteryIndicator.hovered ? Theme.colors.surface_container : Theme.colors.surface
         radius: Theme.rounding.small
     }
 
@@ -26,7 +26,7 @@ AbstractBarButton {
             id: indicator
             text: `${Battery.isCharging ? "󱐋" : ""}${Math.round(Battery.percentage * 100)}%`
             weight: 400
-            color: Battery.isLowAndNotCharging ? Theme.colors.red : Theme.colors.text
+            color: Battery.isLowAndNotCharging ? Theme.colors.error : Theme.colors.on_surface
 
             Behavior on color {
                 ColorAnimation {
@@ -38,7 +38,7 @@ AbstractBarButton {
         ClippingRectangle {
             id: batteryCan
             radius: Theme.rounding.unsharpenmore
-            color: Theme.colors.surface0
+            color: Theme.colors.surface_container
             implicitWidth: Theme.padding * 2
             implicitHeight: batteryIndicator.height - (Theme.padding)
 
@@ -54,12 +54,12 @@ AbstractBarButton {
                 containmentMask: batteryCan
                 color: {
                     if (Battery.isCritical)
-                        return "red";
+                        return Theme.colors.error;
                     if (Battery.isLow)
-                        return Theme.colors.red;
+                        return Theme.colors.error;
                     if (Battery.isCharging)
-                        return Theme.colors.green;
-                    return Theme.colors.blue;
+                        return Theme.colors.primary;
+                    return Theme.colors.secondary;
                 }
 
                 // Smooth animation when percentage changes
@@ -82,11 +82,11 @@ AbstractBarButton {
                 weight: 400
                 color: {
                     if (Battery.isLowAndNotCharging) {
-                        return Theme.colors.red;
+                        return Theme.colors.error;
                     }
                     if (Battery.percentage > 0.44)
-                        return Theme.colors.base;
-                    return Theme.colors.text;
+                        return Theme.colors.on_surface;
+                    return Theme.colors.on_surface;
                 }
             }
         }
@@ -100,7 +100,7 @@ AbstractBarButton {
 
         Private.StyledText {
             text: `${Battery.formatETA(Battery.estimatedTime)}`
-            color: Theme.colors.subtext0
+            color: Theme.colors.on_surface_variant
         }
     }
 

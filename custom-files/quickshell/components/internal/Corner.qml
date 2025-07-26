@@ -19,7 +19,7 @@ Item {
             startX: 0
             startY: 0
             strokeWidth: -1
-            fillColor: Theme.colors.base
+            fillColor: Theme.colors.background
 
             PathLine {
                 x: 0

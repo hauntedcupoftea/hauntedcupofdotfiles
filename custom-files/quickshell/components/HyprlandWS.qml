@@ -13,7 +13,7 @@ Rectangle {
     radius: Theme.rounding.small
     implicitWidth: hyprlandRow.width + (Theme.padding * 2)
     implicitHeight: Theme.barHeight - (Theme.margin)
-    color: Theme.colors.crust
+    color: Theme.colors.surface
     RowLayout {
         id: hyprlandRow
         anchors.centerIn: parent
@@ -38,27 +38,27 @@ Rectangle {
 
                 function getBgColor() {
                     if (modelData.urgent && urgencyFlash.flashOn) {
-                        return Theme.colors.flamingo;
+                        return Theme.colors.error_container;
                     }
 
                     if (modelData.focused)
-                        return Theme.colors.surface2;
+                        return Theme.colors.primary_container;
                     if (modelData.active)
-                        return Theme.colors.surface1;
-                    return Theme.colors.mantle;
+                        return Theme.colors.secondary_container;
+                    return Theme.colors.surface_container;
                 }
 
                 function getFillColor() {
                     if (modelData.urgent && urgencyFlash.flashOn) {
-                        return Theme.colors.red;
+                        return Theme.colors.error;
                     }
 
                     if (modelData.focused) {
-                        return Theme.colors.blue;
+                        return Theme.colors.primary;
                     } else if (modelData.active) {
-                        return Theme.colors.sky;
+                        return Theme.colors.secondary;
                     } else {
-                        return Theme.colors.rosewater;
+                        return Theme.colors.tertiary;
                     }
                 }
 
@@ -88,7 +88,7 @@ Rectangle {
 
                 background: ClippingRectangle {
                     radius: Theme.rounding.full
-                    color: workspaceButton.hovered ? Theme.colors.surface0 : workspaceButton.getBgColor()
+                    color: workspaceButton.hovered ? Theme.colors.surface_container_high : workspaceButton.getBgColor()
 
                     // Smooth color transitions
                     Behavior on color {
@@ -103,7 +103,7 @@ Rectangle {
                         anchors.right: parent.right
                         anchors.bottom: parent.bottom
                         height: parent.height * workspaceButton.fillPercentage
-                        color: workspaceButton.hovered ? Theme.colors.maroon : workspaceButton.getFillColor()
+                        color: workspaceButton.hovered ? Theme.colors.secondary_container : workspaceButton.getFillColor()
 
                         // Smooth transitions for fill
                         Behavior on height {
@@ -127,11 +127,17 @@ Rectangle {
                     anchors.centerIn: parent
                     color: {
                         if (workspaceButton.modelData.urgent && urgencyFlash.flashOn) {
-                            return workspaceButton.fillPercentage > 0.5 ? Theme.colors.flamingo : Theme.colors.overlay0;
+                            return Theme.colors.on_error_container;
+                        }
+                        if (workspaceButton.modelData.focused) {
+                            return Theme.colors.on_primary_container;
+                        }
+                        if (workspaceButton.modelData.active) {
+                            return Theme.colors.on_secondary_container;
                         }
                         if (workspaceButton.fillPercentage > 0.5)
-                            return Theme.colors.surface0;
-                        return Theme.colors.text;
+                            return Theme.colors.on_primary;
+                        return Theme.colors.on_surface;
                     }
 
                     Behavior on color {
@@ -158,7 +164,7 @@ Rectangle {
 
                 //     Private.StyledText {
                 //         text: "pee pee\npoo poo"
-                //         color: Theme.colors.subtext1
+                
                 //     }
                 // }
             }

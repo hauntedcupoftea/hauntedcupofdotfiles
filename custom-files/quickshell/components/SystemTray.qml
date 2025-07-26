@@ -16,7 +16,7 @@ Rectangle {
     radius: Theme.rounding.small
     implicitWidth: sysTrayRow.width + (Theme.padding)
     implicitHeight: Theme.barHeight - (Theme.margin)
-    color: Theme.colors.crust
+    color: Theme.colors.surface
 
     property var filteredItems: SystemTray.items.values.filter(item => !Settings.ignoredTrayItems.includes(item.id))
     visible: filteredItems.length > 0
@@ -58,12 +58,12 @@ Rectangle {
 
                     Private.StyledText {
                         text: sysTrayButton.modelData?.tooltipTitle || sysTrayButton.modelData?.title || ""
-                        color: Theme.colors.subtext0
+                        color: Theme.colors.on_surface_variant
                         font.pixelSize: Theme.font.normal
                     }
                     Private.StyledText {
                         text: sysTrayButton.modelData?.tooltipDescription ?? ""
-                        color: Theme.colors.subtext1
+                        color: Theme.colors.on_surface_variant
                         font.pixelSize: Theme.font.small
                     }
                 }
@@ -72,14 +72,14 @@ Rectangle {
                     radius: Theme.rounding.full
                     color: {
                         if (sysTrayButton.pressed)
-                            return Theme.colors.surface1;
+                            return Theme.colors.surface_container_high;
                         if (sysTrayButton.hovered)
-                            return Theme.colors.surface0;
-                        return Theme.colors.mantle;
+                            return Theme.colors.surface_container;
+                        return Theme.colors.surface_container_low;
                     }
 
                     border.width: sysTrayButton.modelData?.status === Status.NeedsAttention ? 2 : 0
-                    border.color: Theme.colors.red
+                    border.color: Theme.colors.error
 
                     SequentialAnimation on opacity {
                         running: sysTrayButton.modelData?.status === Status.NeedsAttention

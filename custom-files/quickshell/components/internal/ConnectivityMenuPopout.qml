@@ -23,10 +23,10 @@ PopupWindow {
     Rectangle {
         anchors.fill: parent
         radius: Theme.rounding.verysmall
-        color: Theme.colors.base
+        color: Theme.colors.background
         border {
             width: 1
-            color: Theme.colors.surface0
+            color: Theme.colors.outline
         }
         MouseArea {
             anchors.fill: parent
@@ -39,7 +39,7 @@ PopupWindow {
                 id: textSample
                 anchors.fill: parent
                 text: root.networkText
-                color: Theme.colors.flamingo
+                color: Theme.colors.primary
                 font {
                     family: Theme.font.family
                     pixelSize: Theme.font.normal

@@ -15,7 +15,7 @@ PopupWindow {
     // Optional properties
     property int showDelay: 200
     property int hideDelay: 200
-    property color backgroundColor: Theme.colors.surface1
+    property color backgroundColor: Theme.colors.surface_container
     property real backgroundRadius: Theme.rounding.verysmall
     property bool blockShow: false
 

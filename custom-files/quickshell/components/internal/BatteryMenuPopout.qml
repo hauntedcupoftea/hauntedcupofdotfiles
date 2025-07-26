@@ -26,10 +26,10 @@ PopupWindow {
     Rectangle {
         anchors.fill: parent
         radius: Theme.rounding.verysmall
-        color: Theme.colors.base
+        color: Theme.colors.background
         border {
             width: 1
-            color: Theme.colors.surface0
+            color: Theme.colors.outline
         }
 
         MouseArea {
@@ -47,7 +47,7 @@ PopupWindow {
                 Text {
                     id: textSample
                     text: PowerProfile.toString(Battery.activeProfile)
-                    color: Theme.colors.flamingo
+                    color: Theme.colors.primary
                     font {
                         family: Theme.font.family
                         pixelSize: Theme.font.normal
@@ -61,17 +61,17 @@ PopupWindow {
                             {
                                 profile: PowerProfile.PowerSaver,
                                 icon: "󰌪",
-                                color: Theme.colors.green
+                                color: Theme.colors.primary
                             },
                             {
                                 profile: PowerProfile.Balanced,
                                 icon: "󰘮",
-                                color: Theme.colors.yellow
+                                color: Theme.colors.secondary
                             },
                             {
                                 profile: PowerProfile.Performance,
                                 icon: "󰓅",
-                                color: Theme.colors.red
+                                color: Theme.colors.error
                             }
                         ]
 
@@ -84,12 +84,12 @@ PopupWindow {
                                 radius: Theme.rounding.small
                                 color: {
                                     if (mouseArea.pressed)
-                                        return Theme.colors.surface2;
+                                        return Theme.colors.surface_container_high;
                                     if (mouseArea.containsMouse)
-                                        return Theme.colors.surface1;
+                                        return Theme.colors.surface_container;
                                     if (Battery.activeProfile === selectorRoot.modelData.profile)
                                         return selectorRoot.modelData.color + "40";
-                                    return Theme.colors.surface0;
+                                    return Theme.colors.surface;
                                 }
 
                                 border.width: Battery.activeProfile === selectorRoot.modelData.profile ? 2 : 0
@@ -116,7 +116,7 @@ PopupWindow {
                                 anchors.centerIn: parent
                                 text: selectorRoot.modelData.icon
                                 font.pixelSize: 18
-                                color: Battery.activeProfile === selectorRoot.modelData.profile ? selectorRoot.modelData.color : Theme.colors.text
+                                color: Battery.activeProfile === selectorRoot.modelData.profile ? selectorRoot.modelData.color : Theme.colors.on_surface
                             }
                         }
                     }

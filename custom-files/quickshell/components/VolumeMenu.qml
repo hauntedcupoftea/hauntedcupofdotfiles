@@ -61,7 +61,7 @@ AbstractBarButton {
         active: Audio.ready
         sourceComponent: Rectangle {
             radius: Theme.rounding.small
-            color: root.hovered ? Theme.colors.surface0 : Theme.colors.crust
+            color: root.hovered ? Theme.colors.surface_container : Theme.colors.surface
             Behavior on color {
                 ColorAnimation {
                     duration: 200
@@ -71,7 +71,7 @@ AbstractBarButton {
 
             border {
                 width: 2
-                color: (root.focusOutput && Audio.defaultOutput.audio.muted) || Audio.defaultInput.audio.muted ? Theme.colors.red : Theme.colors.mantle
+                color: (root.focusOutput && Audio.defaultOutput.audio.muted) || Audio.defaultInput.audio.muted ? Theme.colors.error : Theme.colors.surface_container
             }
 
             RowLayout {
@@ -84,7 +84,7 @@ AbstractBarButton {
                         family: Theme.font.family
                         pixelSize: Theme.font.large
                     }
-                    color: root.focusOutput ? Theme.colors.blue : Theme.colors.rosewater
+                    color: root.focusOutput ? Theme.colors.primary : Theme.colors.secondary
                     text: root.focusedIcon
                 }
                 ClippingRectangle {
@@ -92,13 +92,13 @@ AbstractBarButton {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     radius: Theme.rounding.verysmall
-                    color: Theme.colors.surface0
+                    color: Theme.colors.surface_container
                     Rectangle {
                         anchors.left: parent.left
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
                         implicitWidth: bg.width * Audio.defaultOutput.audio.volume
-                        color: Qt.alpha(Theme.colors.blue, root.outputAlpha)
+                        color: Qt.alpha(Theme.colors.primary, root.outputAlpha)
 
                         Behavior on opacity {
                             NumberAnimation {
@@ -113,7 +113,7 @@ AbstractBarButton {
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
                         implicitWidth: root.width * Audio.defaultInput.audio.volume
-                        color: Qt.alpha(Theme.colors.rosewater, root.inputAlpha)
+                        color: Qt.alpha(Theme.colors.secondary, root.inputAlpha)
                     }
                 }
             }
@@ -129,14 +129,14 @@ AbstractBarButton {
     //         Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
     //         Layout.leftMargin: Theme.padding
     //         text: "󰕾"
-    //         color: Theme.colors.text
+
     //         font.pixelSize: Theme.font.large
     //     }
     //     Private.StyledText {
     //         Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
     //         Layout.rightMargin: Theme.padding
     //         text: "󰍬"
-    //         color: Theme.colors.text
+
     //         font.pixelSize: Theme.font.large
     //     }
     // }
@@ -150,7 +150,7 @@ AbstractBarButton {
 
         Text {
             text: JSON.stringify(Audio.defaultInput, null, 2)
-            color: Theme.colors.text
+            color: Theme.colors.on_surface
         }
     }
 }

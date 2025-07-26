@@ -17,7 +17,7 @@ Text {
 
     renderType: Text.NativeRendering
     textFormat: Text.PlainText
-    color: textColor ?? Theme.colors.text
+    color: textColor ?? Theme.colors.on_surface
     font.family: Theme.font.family
     font.pixelSize: Theme.font.normal
     font.weight: weight

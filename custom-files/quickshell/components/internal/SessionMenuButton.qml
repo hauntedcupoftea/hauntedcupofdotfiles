@@ -11,7 +11,7 @@ Button {
     property string buttonIcon: ""
     property string buttonText: "Action"
     property list<string> command: ["notify-send", "The Button You Just Clicked", "please pass a command >.<"]
-    property color iconColor: Theme.colors.text
+    property color iconColor: Theme.colors.on_surface
 
     implicitHeight: Theme.font.huge * 1.8 + (Theme.padding * 2.2)
     implicitWidth: actionIcon.width + (Theme.font.large * 2.2)
@@ -24,7 +24,7 @@ Button {
     }
 
     background: Rectangle {
-        color: control.hovered ? Theme.colors.surface1 : Theme.colors.surface0
+        color: control.hovered ? Theme.colors.surface_container : Theme.colors.surface
         radius: Theme.rounding.small
 
         Behavior on color {

@@ -70,9 +70,9 @@ PopupWindow {
             id: content
             anchors.centerIn: parent
             radius: Theme.rounding.small
-            color: Theme.colors.base
+            color: Theme.colors.background
             border.width: 1
-            border.color: Theme.colors.surface0
+            border.color: Theme.colors.outline
 
             implicitWidth: Math.max(menuLayout.implicitWidth, backButton.visible ? backButton.implicitWidth : 0) + (Theme.padding * 2)
             implicitHeight: menuLayout.implicitHeight + (backButton.visible ? backButton.implicitHeight + Theme.padding / 2 : 0) + (Theme.padding * 2)
@@ -90,9 +90,9 @@ PopupWindow {
                     implicitHeight: Theme.font.normal + Theme.padding
                     background: Rectangle {
                         radius: Theme.rounding.small
-                        color: backButton.hovered ? Theme.colors.surface1 : Theme.colors.surface0
+                        color: backButton.hovered ? Theme.colors.surface_container : Theme.colors.surface
                         border.width: 1
-                        border.color: backButton.hovered ? Theme.colors.surface2 : Theme.colors.surface1
+                        border.color: backButton.hovered ? Theme.colors.surface_container_high : Theme.colors.surface_container
                     }
 
                     contentItem: RowLayout {
@@ -100,13 +100,13 @@ PopupWindow {
 
                         StyledText {
                             text: "󰅁"
-                            color: Theme.colors.subtext1
+                            color: Theme.colors.on_surface_variant
                             font.pixelSize: Theme.font.normal
                         }
 
                         StyledText {
                             text: "Back"
-                            color: Theme.colors.text
+                            color: Theme.colors.on_surface
                             font.pixelSize: Theme.font.small
                             Layout.fillWidth: true
                         }
@@ -120,7 +120,7 @@ PopupWindow {
                     visible: backButton.visible
                     Layout.fillWidth: true
                     implicitHeight: 1
-                    color: Theme.colors.surface1
+                    color: Theme.colors.surface_container
                 }
 
                 // Main menu content
@@ -154,7 +154,7 @@ PopupWindow {
                                     implicitHeight: Theme.padding / 4
                                     Layout.topMargin: Theme.padding / 4
                                     Layout.bottomMargin: Theme.padding / 4
-                                    color: Theme.colors.surface1
+                                    color: Theme.colors.surface_container
                                 }
                             }
 
@@ -174,13 +174,13 @@ PopupWindow {
                                             if (!textButton.buttonOn)
                                                 return "transparent";
                                             if (textButton.pressed)
-                                                return Theme.colors.surface2;
+                                                return Theme.colors.surface_container_high;
                                             if (textButton.hovered)
-                                                return Theme.colors.surface1;
+                                                return Theme.colors.surface_container;
                                             return "transparent";
                                         }
                                         border.width: textButton.hovered && textButton.buttonOn ? 1 : 0
-                                        border.color: Theme.colors.surface2
+                                        border.color: Theme.colors.surface_container_high
                                     }
 
                                     onClicked: {
@@ -218,14 +218,14 @@ PopupWindow {
                                             Layout.fillWidth: true
                                             Layout.leftMargin: Theme.padding / 2
                                             text: loader.modelData?.text || ""
-                                            color: textButton.buttonOn ? Theme.colors.text : Theme.colors.overlay1
+                                            color: textButton.buttonOn ? Theme.colors.on_surface : Theme.colors.on_surface_variant
                                             font.pixelSize: Theme.font.small
                                         }
 
                                         StyledText {
                                             Layout.rightMargin: Theme.padding / 2
                                             text: textLayout.getIcon()
-                                            color: textButton.buttonOn ? Theme.colors.subtext1 : Theme.colors.overlay0
+                                            color: textButton.buttonOn ? Theme.colors.on_surface_variant : Theme.colors.on_surface_variant
                                             font.pixelSize: Theme.font.small
                                         }
                                     }

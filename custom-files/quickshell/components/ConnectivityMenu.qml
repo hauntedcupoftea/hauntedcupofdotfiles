@@ -9,8 +9,8 @@ BarButton {
     id: connectivityMenu
 
     text: `${Network.status}  ${Bluetooth.status}`
-    textColor: Theme.colors.blue
-    pressedColor: Theme.colors.mauve
+    textColor: Theme.colors.secondary
+    pressedColor: Theme.colors.primary
 
     Private.ConnectivityMenuPopout {
         popupOpen: connectivityMenu.isMenuOpen
@@ -27,7 +27,7 @@ BarButton {
 
         Private.StyledText {
             text: "Network and Bluetooth status"
-            color: Theme.colors.subtext0
+            color: Theme.colors.on_surface_variant
         }
     }
 }

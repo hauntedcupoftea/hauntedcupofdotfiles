@@ -35,7 +35,7 @@ AbstractBarButton {
         active: Player.active
         sourceComponent: Rectangle {
             radius: Theme.rounding.small
-            color: root.hovered ? Theme.colors.surface0 : Theme.colors.crust
+            color: root.hovered ? Theme.colors.surface_container : Theme.colors.surface
             Behavior on color {
                 ColorAnimation {
                     duration: 200
@@ -53,7 +53,7 @@ AbstractBarButton {
                         family: Theme.font.family
                         pixelSize: Theme.font.large
                     }
-                    color: Theme.colors.sapphire
+                    color: Theme.colors.secondary
                     text: root.playerIcon
                 }
                 ClippingRectangle {
@@ -62,16 +62,16 @@ AbstractBarButton {
                     Layout.fillWidth: true
                     implicitWidth: Theme.playerWidth
                     radius: Theme.rounding.verysmall
-                    color: Theme.colors.surface0
+                    color: Theme.colors.surface_container
                     Rectangle {
                         anchors.left: parent.left
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
                         implicitWidth: bg.width * Player.percentageProgress
-                        color: Qt.alpha(Theme.colors.blue, 0.75)
+                        color: Qt.alpha(Theme.colors.primary, 0.75)
                     }
                     Private.ScrollingText {
-                        anchors.centerIn: root
+                        anchors.centerIn: bg
                         scrollingText: Player.active && qsTr(`${Player.active.trackArtist} - ${Player.active.trackTitle}`)
                         animate: Player.active && Player.active.isPlaying
                         // DEBUG
@@ -104,12 +104,12 @@ AbstractBarButton {
                 Private.StyledText {
                     Layout.maximumWidth: 400
                     text: `${Player.active?.trackTitle}`
-                    color: Theme.colors.text
+                    color: Theme.colors.on_surface
                 }
                 Text {
                     Layout.maximumWidth: 400
                     text: Player.active?.trackArtists || ""
-                    color: Theme.colors.subtext0
+                    color: Theme.colors.on_surface_variant
                     font.family: Theme.font.family
                     font.pixelSize: Theme.font.small
                     wrapMode: Text.WordWrap
@@ -117,7 +117,7 @@ AbstractBarButton {
                 Text {
                     Layout.maximumWidth: 400
                     text: `${Player.active?.trackAlbum}`
-                    color: Theme.colors.subtext1
+                    color: Theme.colors.on_surface_variant
                     font.family: Theme.font.family
                     font.pixelSize: Theme.font.small
                     wrapMode: Text.WordWrap
@@ -125,17 +125,12 @@ AbstractBarButton {
                 Text {
                     Layout.maximumWidth: 400
                     text: MprisPlaybackState.toString(Player.active?.playbackState)
-                    color: Theme.colors.subtext1
+                    color: Theme.colors.on_surface_variant
                     font.family: Theme.font.family
                     font.pixelSize: Theme.font.small
                     wrapMode: Text.WordWrap
                 }
             }
         }
-
-        // Text {
-        //     text: JSON.stringify(Player.active, null, 2)
-        //     color: Theme.colors.text
-        // }
     }
 }
