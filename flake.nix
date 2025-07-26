@@ -60,6 +60,8 @@
 
     kurukurubar = {
       url = "github:Rexcrazy804/Zaphkiel/kurukuru-greeter";
+      inputs.nixpkgs.follows = "nixpkgs";
+      flake = false;
     };
   };
   outputs =
