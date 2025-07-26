@@ -26,15 +26,15 @@ in
         base03 = outline;
         base04 = on_surface_variant;
         base05 = on_surface;
-        base06 = on_secondary_fixed;
-        base07 = on_primary_container;
+        base06 = surface_dim; # Changed from on_secondary_fixed (was white)
+        base07 = surface_container_low; # Changed from on_primary_container (was white)
         base08 = error;
         base09 = on_tertiary;
         base0A = on_secondary_container;
         base0B = on_secondary_fixed_variant;
-        base0C = on_primary_fixed;
+        base0C = surface_bright; # Changed from on_primary_fixed (was white)
         base0D = surface_tint;
-        base0E = on_tertiary_fixed;
+        base0E = surface_container_high; # Changed from on_tertiary_fixed (was white)
         base0F = on_error_container;
       } else {
         base00 = background;
@@ -44,7 +44,7 @@ in
         base04 = on_surface_variant;
         base05 = on_surface;
         base06 = secondary_fixed;
-        base07 = on_primary_container;
+        base07 = surface_container_low; # Changed from on_primary_container (was white)
         base08 = error;
         base09 = tertiary;
         base0A = secondary;
@@ -52,7 +52,7 @@ in
         base0C = primary_fixed;
         base0D = surface_tint;
         base0E = tertiary_fixed;
-        base0F = on_error_container;
+        base0F = surface_dim; # Changed from on_error_container (was white)
       };
 
     cursor = {
@@ -63,11 +63,11 @@ in
     fonts = {
       sansSerif = {
         package = pkgs.nerd-fonts.fira-code;
-        name = "Fira Code Nerd Font";
+        name = "FiraCode Nerd Font";
       };
       monospace = {
         package = pkgs.nerd-fonts.fira-code;
-        name = "Fira Code Nerd Font Mono";
+        name = "FiraCode Nerd Font Mono";
       };
       sizes = {
         popups = 13;
