@@ -1,11 +1,11 @@
 { inputs, config, ... }: {
-  imports = inputs.kurukurubar + "/nixosModules/exported/matugen";
+  imports = [ (inputs.kurukurubar + "/nixosModules/external/matugen") ];
   programs.matugen = {
     enable = true;
     wallpaper = ../../wallpapers/malenia.jpg;
     variant = "dark";
     contrast = 0.25;
-    type = "scheme-vibrant";
+    # type = "scheme-expressive";
   };
 
   home-manager.extraSpecialArgs = {
