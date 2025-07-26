@@ -9,7 +9,7 @@
   ],
   "eagerPatches": false,
   "enabledThemes": [
-    "Stylix"
+    "stylix.css"
   ],
   "enableReactDevtools": false,
   "frameless": false,
