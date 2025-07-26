@@ -1,6 +1,5 @@
 { inputs, config, ... }: {
-  imports = [ inputs.matugen.nixosModules.default ];
-
+  imports = inputs.kurukurubar + "/nixosModules/exported/matugen";
   programs.matugen = {
     enable = true;
     wallpaper = ../../wallpapers/malenia.jpg;
