@@ -39,7 +39,7 @@ in
       } else {
         base00 = background;
         base01 = surface_container;
-        base02 = secondary_fixed_dim;
+        base02 = surface_container_highest;
         base03 = outline_variant;
         base04 = on_surface_variant;
         base05 = on_surface;
