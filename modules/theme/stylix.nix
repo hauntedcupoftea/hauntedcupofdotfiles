@@ -44,7 +44,7 @@ in
         base04 = on_surface_variant;
         base05 = on_surface;
         base06 = secondary_fixed;
-        base07 = surface_container_low; # Changed from on_primary_container (was white)
+        base07 = surface_bright; # Changed from on_primary_container (was white)
         base08 = error;
         base09 = tertiary;
         base0A = secondary;
@@ -52,7 +52,7 @@ in
         base0C = primary_fixed;
         base0D = surface_tint;
         base0E = tertiary_fixed;
-        base0F = surface_dim; # Changed from on_error_container (was white)
+        base0F = on_error; # Changed from on_error_container (was white)
       };
 
     cursor = {
