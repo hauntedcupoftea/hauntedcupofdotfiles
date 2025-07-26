@@ -97,7 +97,7 @@ Rectangle {
 
                 IconImage {
                     anchors.centerIn: parent
-                    source: sysTrayButton.modelData && sysTrayButton.modelData.icon
+                    source: sysTrayButton.modelData?.icon || "" //qmllint disable
                     implicitSize: Theme.trayIconSize
                     opacity: sysTrayButton.modelData?.status === "Passive" ? 0.7 : 1.0
                 }
