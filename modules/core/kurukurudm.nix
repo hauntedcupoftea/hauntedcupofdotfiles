@@ -1,6 +1,6 @@
 { pkgs
 , inputs
-,
+, ...
 }: {
   imports = [ (inputs.kurukurubar + "/nixosModules/exported/kurukuruDM.nix") ];
 
