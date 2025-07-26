@@ -7,10 +7,11 @@
   programs.kurukuruDM.package =
     let
       gpurecording = pkgs.callPackage (inputs.kurukurubar + "/pkgs/scripts/gpurecording.nix") { };
+      librebarcode = pkgs.callPackage (inputs.kurukurubar + "/pkgs/librebarcode.nix") { };
     in
     pkgs.callPackage (inputs.kurukurubar + "/pkgs/kurukurubar.nix") {
       quickshell = inputs.quickshell.packages.${pkgs.system}.default;
-      inherit gpurecording;
+      inherit gpurecording librebarcode;
     };
 
   programs.kurukuruDM = {
