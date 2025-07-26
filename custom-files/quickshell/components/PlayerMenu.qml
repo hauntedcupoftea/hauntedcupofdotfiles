@@ -35,7 +35,7 @@ AbstractBarButton {
         active: Player.active
         sourceComponent: Rectangle {
             radius: Theme.rounding.small
-            color: root.hovered ? Theme.colors.surface_container : Theme.colors.surface
+            color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
             Behavior on color {
                 ColorAnimation {
                     duration: 200
@@ -71,7 +71,7 @@ AbstractBarButton {
                         color: Qt.alpha(Theme.colors.primary, 0.75)
                     }
                     Private.ScrollingText {
-                        anchors.centerIn: bg
+                        anchors.centerIn: parent
                         scrollingText: Player.active && qsTr(`${Player.active.trackArtist} - ${Player.active.trackTitle}`)
                         animate: Player.active && Player.active.isPlaying
                         // DEBUG

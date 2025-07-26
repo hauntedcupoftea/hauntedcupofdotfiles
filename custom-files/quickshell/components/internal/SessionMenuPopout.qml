@@ -42,7 +42,7 @@ PopupWindow {
     Rectangle {
         anchors.fill: parent
         radius: Theme.rounding.verysmall
-        color: Theme.colors.background
+        color: Theme.colors.surface_container_high
 
         border {
             width: 1

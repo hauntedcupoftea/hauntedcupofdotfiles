@@ -14,7 +14,7 @@ Rectangle {
     id: root
     implicitHeight: Theme.barHeight - Theme.margin
     implicitWidth: windowContent.width + (Theme.padding * 2)
-    color: Theme.colors.surface
+    color: Theme.colors.surface_container
     radius: Theme.rounding.small
 
     WindowUtils {

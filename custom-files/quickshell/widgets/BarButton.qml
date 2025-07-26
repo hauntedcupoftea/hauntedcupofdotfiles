@@ -10,8 +10,8 @@ Item {
     property bool menuOpen: false
     property alias text: mainText.text
     property alias textColor: mainText.color
-    property color hoverColor: Theme.colors.surface_container
-    property color defaultColor: Theme.colors.surface
+    property color hoverColor: Theme.colors.surface_container_highest
+    property color defaultColor: Theme.colors.surface_container
     property color pressedColor: Theme.colors.primary
 
     property alias isMenuOpen: barButton.menuOpen

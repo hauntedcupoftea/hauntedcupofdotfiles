@@ -16,7 +16,7 @@ Rectangle {
     radius: Theme.rounding.small
     implicitWidth: sysTrayRow.width + (Theme.padding)
     implicitHeight: Theme.barHeight - (Theme.margin)
-    color: Theme.colors.surface
+    color: Theme.colors.surface_container
 
     property var filteredItems: SystemTray.items.values.filter(item => !Settings.ignoredTrayItems.includes(item.id))
     visible: filteredItems.length > 0
@@ -72,10 +72,10 @@ Rectangle {
                     radius: Theme.rounding.full
                     color: {
                         if (sysTrayButton.pressed)
-                            return Theme.colors.surface_container_high;
+                            return Theme.colors.surface_container_highest;
                         if (sysTrayButton.hovered)
-                            return Theme.colors.surface_container;
-                        return Theme.colors.surface_container_low;
+                            return Theme.colors.surface_container_high;
+                        return Theme.colors.surface_container;
                     }
 
                     border.width: sysTrayButton.modelData?.status === Status.NeedsAttention ? 2 : 0

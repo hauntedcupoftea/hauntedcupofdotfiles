@@ -73,21 +73,21 @@ Scope {
                 anchors.left: parent.left
                 implicitHeight: parent.height
                 implicitWidth: Theme.padding
-                color: Theme.colors.background
+                color: Theme.colors.surface
             }
 
             Rectangle {
                 anchors.bottom: parent.bottom
                 implicitWidth: parent.width
                 implicitHeight: Theme.padding
-                color: Theme.colors.background
+                color: Theme.colors.surface
             }
 
             Rectangle {
                 anchors.right: parent.right
                 implicitHeight: parent.height
                 implicitWidth: Theme.padding
-                color: Theme.colors.background
+                color: Theme.colors.surface
             }
         }
     }

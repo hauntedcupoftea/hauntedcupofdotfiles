@@ -70,7 +70,7 @@ PopupWindow {
             id: content
             anchors.centerIn: parent
             radius: Theme.rounding.small
-            color: Theme.colors.background
+            color: Theme.colors.surface_container_high
             border.width: 1
             border.color: Theme.colors.outline
 

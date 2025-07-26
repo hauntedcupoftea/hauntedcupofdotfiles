@@ -14,7 +14,7 @@ AbstractBarButton {
     implicitHeight: Theme.barHeight - (Theme.margin)
 
     background: Rectangle {
-        color: batteryIndicator.hovered ? Theme.colors.surface_container : Theme.colors.surface
+        color: batteryIndicator.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
         radius: Theme.rounding.small
     }
 

@@ -15,7 +15,7 @@ AbstractBarButton {
 
     background: Rectangle {
         anchors.fill: root
-        color: root.hovered ? Theme.colors.surface_container : Theme.colors.surface
+        color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
         radius: Theme.rounding.verysmall
     }
 

@@ -10,7 +10,7 @@ import qs.theme
 Rectangle {
     id: bar
     property var modelData
-    color: Theme.colors.background
+    color: Theme.colors.surface
 
     anchors {
         top: parent.top

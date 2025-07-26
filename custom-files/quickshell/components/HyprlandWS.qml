@@ -13,7 +13,7 @@ Rectangle {
     radius: Theme.rounding.small
     implicitWidth: hyprlandRow.width + (Theme.padding * 2)
     implicitHeight: Theme.barHeight - (Theme.margin)
-    color: Theme.colors.surface
+    color: Theme.colors.surface_container
     RowLayout {
         id: hyprlandRow
         anchors.centerIn: parent
@@ -45,7 +45,7 @@ Rectangle {
                         return Theme.colors.primary_container;
                     if (modelData.active)
                         return Theme.colors.secondary_container;
-                    return Theme.colors.surface_container;
+                    return Theme.colors.surface_container_low;
                 }
 
                 function getFillColor() {
@@ -88,7 +88,7 @@ Rectangle {
 
                 background: ClippingRectangle {
                     radius: Theme.rounding.full
-                    color: workspaceButton.hovered ? Theme.colors.surface_container_high : workspaceButton.getBgColor()
+                    color: workspaceButton.hovered ? Theme.colors.surface_container_highest : workspaceButton.getBgColor()
 
                     // Smooth color transitions
                     Behavior on color {

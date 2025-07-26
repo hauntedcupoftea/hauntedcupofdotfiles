@@ -61,7 +61,7 @@ AbstractBarButton {
         active: Audio.ready
         sourceComponent: Rectangle {
             radius: Theme.rounding.small
-            color: root.hovered ? Theme.colors.surface_container : Theme.colors.surface
+            color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
             Behavior on color {
                 ColorAnimation {
                     duration: 200
