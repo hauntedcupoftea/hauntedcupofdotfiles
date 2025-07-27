@@ -1,5 +1,5 @@
 { inputs, config, pkgs, ... }: {
-  imports = [ (inputs.kurukurubar + "/nixosModules/external/matugen") ];
+  imports = [ inputs.kurukurubar.nixosModules.matugen ];
   programs.matugen = {
     enable = true;
     wallpaper = ../../wallpapers/malenia.jpg;

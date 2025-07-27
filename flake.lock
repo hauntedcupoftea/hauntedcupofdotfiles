@@ -311,11 +311,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1753595562,
-        "narHash": "sha256-Ci88mAdtiP5RQkYmVhRUq69iYPMM7/lS9/mw+FnC7DE=",
+        "lastModified": 1753617834,
+        "narHash": "sha256-WEVfKrdIdu5CpppJ0Va3vzP0DKlS+ZTLbBjugMO2Drg=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "710771af3d1c8c3f86a9e5d562616973ed5f3f21",
+        "rev": "72cc1e3134a35005006f06640724319caa424737",
         "type": "github"
       },
       "original": {
@@ -694,23 +694,46 @@
       }
     },
     "kurukurubar": {
-      "flake": false,
+      "inputs": {
+        "mnw": "mnw",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "quickshell": [
+          "quickshell"
+        ]
+      },
       "locked": {
-        "lastModified": 1753566336,
-        "narHash": "sha256-AokmbMjY64DPn6SDkPHUmvEm4VNHitI3jqPadRgFX9A=",
+        "lastModified": 1753619781,
+        "narHash": "sha256-ejKb8NDTXJkyXp7Rb1dkg32CBi0x6PT5nF2TKck/7jM=",
         "owner": "Rexcrazy804",
         "repo": "Zaphkiel",
-        "rev": "9f24df03548e2ca3b6ef181bf660f29ca3abc801",
+        "rev": "e1a431ae9f7b359aedee18f4b44df01b4b28cf7a",
         "type": "github"
       },
       "original": {
         "owner": "Rexcrazy804",
-        "ref": "kurukuru-greeter",
+        "ref": "flake-bridge",
         "repo": "Zaphkiel",
         "type": "github"
       }
     },
     "mnw": {
+      "locked": {
+        "lastModified": 1748710831,
+        "narHash": "sha256-eZu2yH3Y2eA9DD3naKWy/sTxYS5rPK2hO7vj8tvUCSU=",
+        "owner": "Gerg-L",
+        "repo": "mnw",
+        "rev": "cff958a4e050f8d917a6ff3a5624bc4681c6187d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Gerg-L",
+        "repo": "mnw",
+        "type": "github"
+      }
+    },
+    "mnw_2": {
       "locked": {
         "lastModified": 1748710831,
         "narHash": "sha256-eZu2yH3Y2eA9DD3naKWy/sTxYS5rPK2hO7vj8tvUCSU=",
@@ -935,7 +958,7 @@
         "flake-compat": "flake-compat_2",
         "flake-parts": "flake-parts_2",
         "flake-utils": "flake-utils",
-        "mnw": "mnw",
+        "mnw": "mnw_2",
         "nixpkgs": [
           "nixpkgs"
         ],

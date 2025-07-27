@@ -59,8 +59,9 @@
     };
 
     kurukurubar = {
-      url = "github:Rexcrazy804/Zaphkiel/kurukuru-greeter";
-      flake = false;
+      url = "github:Rexcrazy804/Zaphkiel/flake-bridge";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.quickshell.follows = "quickshell";
     };
   };
   outputs =
