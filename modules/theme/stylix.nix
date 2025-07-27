@@ -39,7 +39,7 @@ in
       } else {
         base00 = background;
         base01 = surface_container;
-        base02 = surface_container_highest;
+        base02 = surface_container_high;
         base03 = outline_variant;
         base04 = on_surface_variant;
         base05 = on_surface;
@@ -50,7 +50,7 @@ in
         base0A = secondary;
         base0B = primary;
         base0C = primary_fixed;
-        base0D = surface_tint;
+        base0D = primary_container;
         base0E = tertiary_fixed;
         base0F = on_error; # Changed from on_error_container (was white)
       };
