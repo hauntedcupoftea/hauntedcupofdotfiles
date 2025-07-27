@@ -4,7 +4,7 @@
     enable = true;
     wallpaper = ../../wallpapers/malenia.jpg;
     variant = "dark";
-    contrast = 0.16;
+    contrast = 0.10;
     type = "scheme-fidelity";
     package = pkgs.matugen;
   };

@@ -704,16 +704,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1753619781,
+        "lastModified": 1753620098,
         "narHash": "sha256-ejKb8NDTXJkyXp7Rb1dkg32CBi0x6PT5nF2TKck/7jM=",
         "owner": "Rexcrazy804",
         "repo": "Zaphkiel",
-        "rev": "e1a431ae9f7b359aedee18f4b44df01b4b28cf7a",
+        "rev": "4c42afa775d4214376fe8ee39d7e6f0c30bd065e",
         "type": "github"
       },
       "original": {
         "owner": "Rexcrazy804",
-        "ref": "flake-bridge",
         "repo": "Zaphkiel",
         "type": "github"
       }
