@@ -1,11 +1,11 @@
 { inputs, config, pkgs, ... }: {
-  imports = [ inputs.kurukurubar.nixosModules.matugen ];
+  imports = [ inputs.matugen.nixosModules.default ];
   programs.matugen = {
     enable = true;
     wallpaper = ../../wallpapers/malenia.jpg;
     variant = "dark";
-    contrast = 0.10;
-    type = "scheme-fidelity";
+    contrast = 0.24;
+    type = "scheme-vibrant";
     package = pkgs.matugen;
   };
 
