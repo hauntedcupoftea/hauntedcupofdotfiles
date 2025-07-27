@@ -50,7 +50,7 @@ in
         base0A = secondary;
         base0B = primary;
         base0C = primary_fixed;
-        base0D = primary_container;
+        base0D = secondary_fixed;
         base0E = tertiary_fixed;
         base0F = on_error; # Changed from on_error_container (was white)
       };
