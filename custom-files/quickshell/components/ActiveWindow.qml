@@ -13,7 +13,7 @@ import qs.components.internal as Private
 Rectangle {
     id: root
     implicitHeight: Theme.barHeight - Theme.margin
-    implicitWidth: windowContent.width + (Theme.padding * 2)
+    implicitWidth: windowContent.width + Theme.padding
     color: Theme.colors.surface_container
     radius: Theme.rounding.small
 
@@ -40,14 +40,16 @@ Rectangle {
 
     RowLayout {
         id: windowContent
-        anchors.centerIn: root
+        anchors.left: root.left
+        anchors.top: root.top
+        anchors.topMargin: Theme.margin / 2
 
         Rectangle {
             id: windowIcon
             implicitHeight: Theme.barHeight - (Theme.margin * 2)
             implicitWidth: implicitHeight
             radius: Theme.rounding.full
-            color: Theme.colors.surface_container
+            color: Theme.colors.surface_dim
 
             Loader {
                 active: root.showIcon
