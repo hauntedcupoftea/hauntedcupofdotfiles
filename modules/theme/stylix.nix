@@ -25,7 +25,7 @@ in
       base03 = on_surface_variant;
       base04 = outline;
       base05 = on_surface;
-      base06 = surface_container_highest;
+      base06 = on_primary_container;
       base07 = primary_fixed;
       base08 = error;
       base09 = tertiary;
