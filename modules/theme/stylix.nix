@@ -17,7 +17,7 @@ in
     polarity = currentPolarity;
     image = ../../wallpapers/malenia.jpg;
 
-    # https://github.com/make-42/stylix/blob/matugen-clean-diff-rebuild/stylix/palette.nix
+    # heavily modified but inspo from https://github.com/make-42/stylix/blob/matugen-clean-diff-rebuild/stylix/palette.nix
     base16Scheme = with matugenTheme; {
       base00 = background;
       base01 = surface_container;
@@ -28,13 +28,13 @@ in
       base06 = on_background;
       base07 = primary_container;
       base08 = error;
-      base09 = on_primary_container;
+      base09 = tertiary_fixed;
       base0A = tertiary;
-      base0B = secondary;
-      base0C = secondary_fixed;
-      base0D = tertiary_fixed;
-      base0E = primary;
-      base0F = on_error;
+      base0B = secondary_fixed;
+      base0C = secondary;
+      base0D = primary;
+      base0E = primary_fixed;
+      base0F = error_container;
     };
     cursor = {
       name = "Bibata-Modern-Classic";
