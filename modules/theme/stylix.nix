@@ -18,42 +18,24 @@ in
     image = ../../wallpapers/malenia.jpg;
 
     # https://github.com/make-42/stylix/blob/matugen-clean-diff-rebuild/stylix/palette.nix
-    base16Scheme = with matugenTheme;
-      if currentPolarity == "light" then {
-        base00 = background;
-        base01 = surface_container;
-        base02 = primary_container;
-        base03 = outline;
-        base04 = on_surface_variant;
-        base05 = on_surface;
-        base06 = surface_container_highest;
-        base07 = surface_dim;
-        base08 = error;
-        base09 = tertiary;
-        base0A = on_tertiary_container;
-        base0B = secondary;
-        base0C = primary_container;
-        base0D = primary;
-        base0E = tertiary_container;
-        base0F = on_error_container;
-      } else {
-        base00 = background;
-        base01 = surface_container;
-        base02 = primary_container;
-        base03 = outline;
-        base04 = on_surface_variant;
-        base05 = on_surface;
-        base06 = surface_container_highest;
-        base07 = surface_bright;
-        base08 = error;
-        base09 = tertiary;
-        base0A = tertiary_container;
-        base0B = secondary;
-        base0C = secondary_fixed;
-        base0D = primary;
-        base0E = tertiary_fixed;
-        base0F = on_error;
-      };
+    base16Scheme = with matugenTheme; {
+      base00 = background;
+      base01 = surface_container;
+      base02 = surface_bright;
+      base03 = outline;
+      base04 = on_secondary_container;
+      base05 = on_surface;
+      base06 = on_background;
+      base07 = primary_container;
+      base08 = error;
+      base09 = on_primary_container;
+      base0A = tertiary;
+      base0B = secondary;
+      base0C = secondary_fixed;
+      base0D = tertiary_fixed;
+      base0E = primary;
+      base0F = on_error;
+    };
     cursor = {
       name = "Bibata-Modern-Classic";
       package = pkgs.bibata-cursors;
