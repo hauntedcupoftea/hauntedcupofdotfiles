@@ -22,39 +22,38 @@ in
       if currentPolarity == "light" then {
         base00 = background;
         base01 = surface_container;
-        base02 = surface_container_highest;
+        base02 = primary_container;
         base03 = outline;
         base04 = on_surface_variant;
         base05 = on_surface;
-        base06 = surface_dim; # Changed from on_secondary_fixed (was white)
-        base07 = surface_container_low; # Changed from on_primary_container (was white)
+        base06 = surface_container_highest;
+        base07 = surface_dim;
         base08 = error;
-        base09 = on_tertiary;
-        base0A = on_secondary_container;
-        base0B = on_secondary_fixed_variant;
-        base0C = surface_bright; # Changed from on_primary_fixed (was white)
-        base0D = surface_tint;
-        base0E = surface_container_high; # Changed from on_tertiary_fixed (was white)
+        base09 = tertiary;
+        base0A = on_tertiary_container;
+        base0B = secondary;
+        base0C = primary_container;
+        base0D = primary;
+        base0E = tertiary_container;
         base0F = on_error_container;
       } else {
         base00 = background;
         base01 = surface_container;
-        base02 = surface_container_high;
-        base03 = outline_variant;
+        base02 = primary_container;
+        base03 = outline;
         base04 = on_surface_variant;
         base05 = on_surface;
-        base06 = secondary_fixed;
-        base07 = surface_bright; # Changed from on_primary_container (was white)
+        base06 = surface_container_highest;
+        base07 = surface_bright;
         base08 = error;
         base09 = tertiary;
-        base0A = secondary;
-        base0B = primary;
-        base0C = primary_fixed;
-        base0D = secondary_fixed;
+        base0A = tertiary_container;
+        base0B = secondary;
+        base0C = secondary_fixed;
+        base0D = primary;
         base0E = tertiary_fixed;
-        base0F = on_error; # Changed from on_error_container (was white)
+        base0F = on_error;
       };
-
     cursor = {
       name = "Bibata-Modern-Classic";
       package = pkgs.bibata-cursors;
