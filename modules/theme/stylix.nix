@@ -32,8 +32,8 @@ in
       base0A = tertiary;
       base0B = secondary;
       base0C = secondary_fixed;
-      base0D = primary;
-      base0E = primary_fixed;
+      base0D = on_primary;
+      base0E = primary;
       base0F = error_container;
     };
     cursor = {
