@@ -30,8 +30,8 @@ in
       base08 = error;
       base09 = tertiary_fixed;
       base0A = tertiary;
-      base0B = secondary;
-      base0C = secondary_fixed;
+      base0B = secondary_fixed;
+      base0C = secondary;
       base0D = on_primary;
       base0E = primary;
       base0F = error_container;
