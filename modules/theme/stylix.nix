@@ -34,7 +34,7 @@ in
       base0C = secondary;
       base0D = error;
       base0E = primary;
-      base0F = on_background;
+      base0F = inverse_primary;
     };
     cursor = {
       name = "Bibata-Modern-Classic";
