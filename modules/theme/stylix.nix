@@ -16,7 +16,7 @@ in
   stylix = {
     enable = true;
     polarity = currentPolarity;
-    image = ../../wallpapers/malenia.jpg;
+    image = ../../wallpapers/fern.png;
 
     # heavily modified but inspo from https://github.com/make-42/stylix/blob/matugen-clean-diff-rebuild/stylix/palette.nix
     base16Scheme = {
