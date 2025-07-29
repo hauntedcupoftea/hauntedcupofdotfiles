@@ -27,14 +27,14 @@ in
       base05 = on_surface;
       base06 = on_primary_container;
       base07 = primary_fixed;
-      base08 = inverse_primary;
+      base08 = on_error_container;
       base09 = tertiary;
       base0A = primary_container;
       base0B = secondary_fixed;
-      base0C = error;
-      base0D = secondary;
+      base0C = secondary;
+      base0D = error;
       base0E = primary;
-      base0F = on_error_container;
+      base0F = on_background;
     };
     cursor = {
       name = "Bibata-Modern-Classic";
