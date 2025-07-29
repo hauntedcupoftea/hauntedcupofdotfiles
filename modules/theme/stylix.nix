@@ -1,10 +1,10 @@
 { inputs, pkgs, config, ... }:
 let
   currentPolarity = config.programs.matugen.variant;
-  matugenTheme =
-    if currentPolarity == "dark"
-    then config.programs.matugen.theme.colors.dark
-    else config.programs.matugen.theme.colors.light;
+  # matugenTheme =
+  #   if currentPolarity == "dark"
+  #   then config.programs.matugen.theme.colors.dark
+  #   else config.programs.matugen.theme.colors.light;
 
 in
 {
@@ -19,23 +19,23 @@ in
     image = ../../wallpapers/malenia.jpg;
 
     # heavily modified but inspo from https://github.com/make-42/stylix/blob/matugen-clean-diff-rebuild/stylix/palette.nix
-    override = with matugenTheme; {
-      base00 = background;
-      base01 = surface_container;
-      base02 = surface_bright;
-      base03 = outline;
-      base04 = on_surface_variant;
-      base05 = on_surface;
-      base06 = secondary_fixed;
-      base07 = on_primary_container;
-      # base08 = on_error_container;
-      # base09 = tertiary_fixed;
-      # base0A = primary_fixed;
-      # base0B = secondary_fixed;
-      # base0C = secondary;
-      # base0D = tertiary;
-      # base0E = primary;
-      # base0F = inverse_primary;
+    base16Scheme = {
+      base00 = "1e1e2e";
+      base01 = "181825";
+      base02 = "313244";
+      base03 = "45475a";
+      base04 = "585b70";
+      base05 = "cdd6f4";
+      base06 = "f5e0dc";
+      base07 = "b4befe";
+      base08 = "f38ba8";
+      base09 = "fab387";
+      base0A = "f9e2af";
+      base0B = "a6e3a1";
+      base0C = "94e2d5";
+      base0D = "89b4fa";
+      base0E = "cba6f7";
+      base0F = "f2cdcd";
     };
     cursor = {
       name = "Bibata-Modern-Classic";
