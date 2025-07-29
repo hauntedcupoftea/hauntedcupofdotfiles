@@ -2,7 +2,7 @@
   imports = [ inputs.matugen.nixosModules.default ];
   programs.matugen = {
     enable = true;
-    wallpaper = ../../wallpapers/fern.png;
+    wallpaper = ../../wallpapers/malenia.jpg;
     variant = "dark";
     # contrast = 0.24;
     type = "scheme-rainbow";

@@ -16,7 +16,7 @@ in
   stylix = {
     enable = true;
     polarity = currentPolarity;
-    image = ../../wallpapers/fern.png;
+    image = ../../wallpapers/malenia.jpg;
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/material-darker.yaml";
 
