@@ -18,8 +18,10 @@ in
     polarity = currentPolarity;
     image = ../../wallpapers/fern.png;
 
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/material-darker.yaml";
+
     # heavily modified but inspo from https://github.com/make-42/stylix/blob/matugen-clean-diff-rebuild/stylix/palette.nix
-    base16Scheme = with matugenTheme; {
+    override = with matugenTheme; {
       base00 = background;
       base01 = surface_container;
       base02 = surface_bright;
@@ -28,14 +30,14 @@ in
       base05 = on_surface;
       base06 = on_primary_container;
       base07 = primary_fixed;
-      base08 = on_error_container;
-      base09 = tertiary;
-      base0A = primary_fixed;
-      base0B = secondary_fixed;
-      base0C = secondary;
-      base0D = error;
-      base0E = primary;
-      base0F = tertiary_container;
+      # base08 = on_error_container;
+      # base09 = tertiary;
+      # base0A = primary_fixed;
+      # base0B = secondary_fixed;
+      # base0C = secondary;
+      # base0D = error;
+      # base0E = primary;
+      # base0F = tertiary_container;
     };
     cursor = {
       name = "Bibata-Modern-Classic";
