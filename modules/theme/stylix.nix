@@ -27,11 +27,11 @@ in
       base05 = on_surface;
       base06 = on_primary_container;
       base07 = primary_fixed;
-      base08 = error;
+      base08 = inverse_primary;
       base09 = tertiary;
       base0A = primary_container;
       base0B = secondary_fixed;
-      base0C = inverse_primary;
+      base0C = error;
       base0D = secondary;
       base0E = primary;
       base0F = on_error_container;
