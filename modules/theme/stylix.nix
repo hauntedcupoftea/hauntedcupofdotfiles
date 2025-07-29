@@ -26,14 +26,14 @@ in
       base03 = outline;
       base04 = on_surface_variant;
       base05 = on_surface;
-      base06 = on_primary_container;
-      base07 = primary_fixed;
+      base06 = secondary_fixed;
+      base07 = on_primary_container;
       base08 = on_error_container;
-      base09 = tertiary;
+      base09 = tertiary_fixed;
       base0A = primary_fixed;
       base0B = secondary_fixed;
       base0C = secondary;
-      base0D = error;
+      base0D = tertiary;
       base0E = primary;
       base0F = inverse_primary;
     };
