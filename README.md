@@ -20,6 +20,7 @@ PLEASE NOTE that it is NOT RECOMMENDED to use this if you don't know what you ar
 
 ## Wallpaper Credits
 
+- Fern: [nest_virgo](https://www.instagram.com/p/C0Sh_5gP-xu/)
 - Malenia: [Espen Olsen Saetervik](https://x.com/VideoArtGame/status/1698002847575769189)
   -# This is the only source I could find that credits this image, I cannot find the artist, if you know who they are, please tell me so i can credit them.
 
