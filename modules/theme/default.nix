@@ -1,7 +1,7 @@
 { ... }: {
   imports = [
-    # ./stylix.nix
-    ./catppuccin.nix
+    ./stylix.nix
+    # ./catppuccin.nix
     ./matugen.nix
   ];
 }

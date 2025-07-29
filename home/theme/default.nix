@@ -1,6 +1,6 @@
 { ... }: {
   imports = [
-    ./catppuccin.nix
+    # ./catppuccin.nix
     ./gtk.nix
     ./matugen.nix
   ];
