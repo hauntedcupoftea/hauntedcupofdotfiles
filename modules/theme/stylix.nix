@@ -1,9 +1,6 @@
 { inputs, pkgs, config, ... }:
 let
-  # Define polarity in one place
-  currentPolarity = config.programs.matugen.variant; # Change this to "light" to switch everything
-
-  # Select the right matugen theme based on polarity
+  currentPolarity = config.programs.matugen.variant;
   matugenTheme =
     if currentPolarity == "dark"
     then config.programs.matugen.theme.colors.dark
@@ -11,7 +8,11 @@ let
 
 in
 {
-  imports = [ inputs.stylix.nixosModules.stylix ./matugen.nix ];
+  imports = [
+    inputs.stylix.nixosModules.stylix
+    ./matugen.nix
+  ];
+
   stylix = {
     enable = true;
     polarity = currentPolarity;
