@@ -26,7 +26,7 @@ in
       base01 = surface_container;
       base02 = surface_bright;
       base03 = outline;
-      base04 = on_surface_variant;
+      # base04 = on_surface_variant;
       # base05 = on_surface;
       # base06 = on_primary_container;
       # base07 = on_primary_container;
@@ -34,10 +34,10 @@ in
       # base09 = tertiary_fixed;
       # base0A = primary_fixed;
       # base0B = secondary_fixed;
-      # base0C = secondary;
+      base0C = tertiary;
       base0D = secondary;
       base0E = primary;
-      base0F = tertiary;
+      base0F = error_container;
     };
     cursor = {
       name = "Bibata-Modern-Classic";
