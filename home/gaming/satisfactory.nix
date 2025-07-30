@@ -1,3 +1,6 @@
 { pkgs, ... }: {
-  home.packages = [ pkgs.satisfactorymodmanager ];
+  home.packages = [
+    # pkgs.satisfactorymodmanager
+    pkgs.ficsit-cli
+  ];
 }
