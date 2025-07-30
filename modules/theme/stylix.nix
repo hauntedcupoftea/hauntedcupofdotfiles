@@ -29,7 +29,7 @@ in
       base04 = on_surface_variant;
       base05 = on_surface;
       base06 = on_primary_container;
-      base07 = primary_fixed;
+      # base07 = primary_fixed;
       # base08 = on_error_container;
       # base09 = tertiary;
       # base0A = primary_fixed;
