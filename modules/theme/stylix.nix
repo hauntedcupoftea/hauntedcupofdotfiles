@@ -26,8 +26,8 @@ in
       base01 = surface_container;
       base02 = surface_bright;
       base03 = outline;
-      base04 = on_surface_variant;
-      base05 = secondary;
+      base04 = secondary;
+      base05 = on_secondary_container;
       # base06 = on_primary_container;
       # base07 = on_primary_container;
       # base08 = on_error_container;
