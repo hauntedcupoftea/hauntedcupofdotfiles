@@ -34,8 +34,8 @@ in
       # base09 = tertiary;
       # base0A = primary_fixed;
       # base0B = secondary_fixed;
-      base0C = secondary;
-      # base0D = error;
+      # base0C = secondary;
+      base0D = secondary;
       base0E = primary;
       # base0F = tertiary_container;
     };
