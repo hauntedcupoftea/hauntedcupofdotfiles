@@ -37,7 +37,7 @@ in
       base0C = secondary;
       base0D = tertiary;
       base0E = primary;
-      base0F = error;
+      base0F = on_error_container;
     };
     cursor = {
       name = "Bibata-Modern-Classic";
