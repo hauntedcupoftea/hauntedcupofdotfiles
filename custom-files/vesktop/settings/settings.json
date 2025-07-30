@@ -8,7 +8,9 @@
     "# https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css"
   ],
   "eagerPatches": false,
-  "enabledThemes": [],
+  "enabledThemes": [
+    "stylix.css"
+  ],
   "enableReactDevtools": false,
   "frameless": false,
   "transparent": false,
