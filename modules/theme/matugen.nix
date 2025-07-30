@@ -5,7 +5,7 @@
     wallpaper = ../../wallpapers/malenia.jpg;
     variant = "dark";
     # contrast = 0.24;
-    type = "scheme-rainbow";
+    type = "scheme-vibrant";
   };
 
   home-manager.extraSpecialArgs = {
