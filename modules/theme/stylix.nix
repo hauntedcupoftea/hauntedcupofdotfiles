@@ -42,11 +42,11 @@ in
     base16Scheme = with matugenTheme; {
       base00 = background;
       base01 = surface_container;
-      base02 = surface_bright;
-      base03 = outline;
-      base04 = secondary;
-      base05 = on_secondary_container;
-      base06 = on_primary_container;
+      base02 = surface_container_high;
+      base03 = surface_bright;
+      base04 = outline;
+      base05 = on_surface;
+      base06 = on_background;
       base07 = on_primary_container;
       base08 = error_container;
       base09 = tertiary_container;
