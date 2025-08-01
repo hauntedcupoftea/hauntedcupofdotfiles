@@ -52,8 +52,8 @@ in
       base09 = tertiary;
       base0A = tertiary_fixed;
       base0B = inverse_primary;
-      base0C = secondary;
-      base0D = primary_container;
+      base0C = on_primary;
+      base0D = secondary;
       base0E = primary;
       base0F = on_error;
     };
