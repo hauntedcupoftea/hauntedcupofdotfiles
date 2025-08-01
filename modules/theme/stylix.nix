@@ -43,7 +43,7 @@ in
       base00 = background;
       base01 = surface_container;
       base02 = surface_bright;
-      base03 = on_surface_variant;
+      base03 = primary_container;
       base04 = outline;
       base05 = on_surface_variant;
       base06 = on_background;
