@@ -52,7 +52,7 @@ in
       base09 = tertiary;
       base0A = tertiary_fixed;
       base0B = secondary;
-      base0C = secondary_container;
+      base0C = inverse_primary;
       base0D = primary_container;
       base0E = primary;
       base0F = on_error;
