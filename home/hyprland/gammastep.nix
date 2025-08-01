@@ -1,6 +1,6 @@
 { lib, config, ... }: {
   services.gammastep = {
-    enable = true;
+    enable = false; # temporarily turning this off
     tray = false;
     provider = "geoclue2"; # Automatically finds your location for sunset/sunrise
     settings = {
