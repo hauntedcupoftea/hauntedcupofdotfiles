@@ -45,7 +45,7 @@ in
       base02 = surface_bright;
       base03 = on_surface_variant;
       base04 = outline;
-      base05 = on_surface;
+      base05 = on_surface_variant;
       base06 = on_background;
       base07 = on_primary_container;
       base08 = error;
