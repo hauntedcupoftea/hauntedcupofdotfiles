@@ -105,6 +105,7 @@ AbstractBarButton {
                     Layout.maximumWidth: 400
                     text: `${Player.active?.trackTitle}`
                     color: Theme.colors.on_surface
+                    wrapMode: Text.WordWrap
                 }
                 Text {
                     Layout.maximumWidth: 400
