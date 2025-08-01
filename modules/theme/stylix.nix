@@ -51,8 +51,8 @@ in
       base08 = error;
       base09 = tertiary;
       base0A = tertiary_fixed;
-      base0B = secondary;
-      base0C = inverse_primary;
+      base0B = inverse_primary;
+      base0C = secondary;
       base0D = primary_container;
       base0E = primary;
       base0F = on_error;
