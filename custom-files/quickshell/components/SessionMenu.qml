@@ -10,8 +10,8 @@ BarButton {
     Layout.rightMargin: Theme.padding
 
     text: "󰐥"
-    textColor: Theme.colors.error
-    pressedColor: Theme.colors.error_container
+    textColor: Theme.colors.error_container
+    pressedColor: Theme.colors.error
 
     Private.SessionMenuPopout {
         popupOpen: sessionMenu.isMenuOpen
