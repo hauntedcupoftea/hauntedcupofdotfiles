@@ -45,6 +45,10 @@ PopupWindow {
                 anchors.left: parent.left
                 anchors.margins: Theme.padding
                 Text {
+                    text: `${Battery.formatETA(Battery.estimatedTime)}`
+                    color: Theme.colors.on_surface_variant
+                }
+                Text {
                     id: textSample
                     text: PowerProfile.toString(Battery.activeProfile)
                     color: Theme.colors.primary
