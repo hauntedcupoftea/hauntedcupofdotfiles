@@ -38,7 +38,7 @@ AbstractBarButton {
         ClippingRectangle {
             id: batteryCan
             radius: Theme.rounding.unsharpenmore
-            color: Theme.colors.surface_container
+            color: Theme.colors.secondary_container
             implicitWidth: Theme.padding * 2
             implicitHeight: batteryIndicator.height - (Theme.padding)
 
@@ -58,7 +58,7 @@ AbstractBarButton {
                     if (Battery.isLow)
                         return Theme.colors.error;
                     if (Battery.isCharging)
-                        return Theme.colors.primary;
+                        return Theme.colors.primary_container;
                     return Theme.colors.secondary;
                 }
 
