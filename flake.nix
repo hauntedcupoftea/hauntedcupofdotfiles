@@ -59,7 +59,7 @@
     };
 
     kurukurubar = {
-      url = "github:Rexcrazy804/Zaphkiel/centralization";
+      url = "github:Rexcrazy804/Zaphkiel";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.quickshell.follows = "quickshell";
     };
