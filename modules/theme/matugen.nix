@@ -9,6 +9,6 @@
   };
 
   home-manager.extraSpecialArgs = {
-    matugenTheme = config.programs.matugen.theme.files;
+    matugenTheme = config.programs.matugen.theme;
   };
 }
