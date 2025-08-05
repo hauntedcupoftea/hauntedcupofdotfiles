@@ -19,9 +19,9 @@ AbstractBarButton {
     implicitHeight: Theme.barHeight - (Theme.margin)
     implicitWidth: Theme.playerWidth + Theme.font.large // add font width to get bar to 100px
 
-    property bool focusOutput: false
-    property real outputAlpha: focusOutput ? 0.9 : 0.45
-    property real inputAlpha: focusOutput ? 0.45 : 0.9
+    property bool focusOutput: true
+    property real outputAlpha: focusOutput ? 0.8 : 0.45
+    property real inputAlpha: focusOutput ? 0.45 : 0.8
     property string focusedIcon: focusOutput ? Audio.defaultOutput?.audio.muted ? "󰝟" : "󰕾" : Audio.defaultInput?.audio.muted ? "󰍭" : "󰍬"
 
     MouseArea {
@@ -95,9 +95,9 @@ AbstractBarButton {
                     color: Theme.colors.surface_container
                     Rectangle {
                         anchors.left: parent.left
-                        anchors.top: parent.top
+                        anchors.right: parent.right
                         anchors.bottom: parent.bottom
-                        implicitWidth: bg.width * Audio.defaultOutput.audio.volume
+                        implicitHeight: bg.height * Audio.defaultOutput.audio.volume
                         color: Qt.alpha(Theme.colors.primary, root.outputAlpha)
 
                         Behavior on opacity {
@@ -110,9 +110,9 @@ AbstractBarButton {
                     }
                     Rectangle {
                         anchors.left: parent.left
-                        anchors.top: parent.top
+                        anchors.right: parent.right
                         anchors.bottom: parent.bottom
-                        implicitWidth: root.width * Audio.defaultInput.audio.volume
+                        implicitHeight: bg.height * Audio.defaultInput.audio.volume
                         color: Qt.alpha(Theme.colors.secondary, root.inputAlpha)
                     }
                 }
