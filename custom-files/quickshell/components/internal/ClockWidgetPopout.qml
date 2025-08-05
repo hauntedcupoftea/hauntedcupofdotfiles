@@ -1,26 +1,35 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell
+import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Controls
-
+import QtQuick.Layouts
 import qs.theme
 
-// import "../../services"
-
-// here we will implement some sort of calendar display + a pomodoro timer.
 PopupWindow {
     id: root
     property var powerButton
     property bool popupOpen
+
     anchor {
         item: powerButton
-        rect: Qt.rect(0, powerButton.height + Theme.padding, 0, 0)
+        rect: Qt.rect(Theme.padding / 4, powerButton.height + Theme.padding, 0, 0)
         gravity: Edges.Bottom | Edges.Right
     }
-    color: "transparent"
 
-    implicitWidth: 512
-    implicitHeight: 900
+    color: "transparent"
+    implicitWidth: 400
+    implicitHeight: 600
     visible: popupOpen
+
+    HyprlandFocusGrab {
+        active: root.visible
+        windows: [root]
+        onCleared: {
+            root.powerButton.action.trigger();
+        }
+    }
 
     Rectangle {
         anchors.fill: parent
@@ -28,24 +37,28 @@ PopupWindow {
         color: Theme.colors.surface_container_high
         border {
             width: 1
-            color: Theme.colors.outline
+            color: Theme.colors.outline_variant
         }
-        MouseArea {
+
+        ScrollView {
             anchors.fill: parent
-            hoverEnabled: true
-            acceptedButtons: Qt.NoButton
-            onExited: {
-                root.powerButton.action.trigger();
-            }
-            MonthGrid {
-                id: textSample
-                anchors.fill: parent
-                font {
-                    family: Theme.font.family
-                    pixelSize: Theme.font.normal
-                    weight: 800
+            anchors.margins: Theme.padding
+
+            ColumnLayout {
+                width: parent.width
+                spacing: 16
+
+                // WeatherWidget {
+                //     Layout.fillWidth: true
+                //     Layout.preferredHeight: 200
+                // }
+
+                CalendarWidget {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 400
                 }
             }
         }
     }
 }
+// }
