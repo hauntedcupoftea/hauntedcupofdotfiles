@@ -8,7 +8,7 @@
     ./hyprpaper.nix
     ./mako.nix
     # ./osd.nix # swayosd is weird. i'll write my own.
-    ./waybar.nix
+    # ./waybar.nix # goodbye
     ./walker.nix
     ./wleave.nix
     # ./xdph.nix
