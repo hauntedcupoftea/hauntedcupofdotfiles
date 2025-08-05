@@ -23,17 +23,17 @@
       };
 
       color = {
-        background = "${matugenTheme.colors.dark.surface-container-lowest}";
+        background = "${matugenTheme.colors.dark.surface_container_lowest}";
         gradient = true;
         gradientColors = [
           "${matugenTheme.colors.dark.primary}"
           "${matugenTheme.colors.dark.secondary}"
           "${matugenTheme.colors.dark.tertiary}"
-          "${matugenTheme.colors.dark.primary-container}"
-          "${matugenTheme.colors.dark.secondary-container}"
-          "${matugenTheme.colors.dark.tertiary-container}"
-          "${matugenTheme.colors.dark.on-primary-container}"
-          "${matugenTheme.colors.dark.on-secondary-container}"
+          "${matugenTheme.colors.dark.primary_container}"
+          "${matugenTheme.colors.dark.secondary_container}"
+          "${matugenTheme.colors.dark.tertiary_container}"
+          "${matugenTheme.colors.dark.on_primary_container}"
+          "${matugenTheme.colors.dark.on_secondary_container}"
         ];
       };
 
