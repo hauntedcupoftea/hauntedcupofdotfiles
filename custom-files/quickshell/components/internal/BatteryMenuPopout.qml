@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Services.UPower
 import QtQuick
 import QtQuick.Layouts
@@ -23,6 +24,14 @@ PopupWindow {
     implicitHeight: content.height + (Theme.padding * 2)
     visible: popupOpen
 
+    HyprlandFocusGrab {
+        active: root.visible
+        windows: [root]
+        onCleared: {
+            root.powerButton.action.trigger();
+        }
+    }
+
     Rectangle {
         anchors.fill: parent
         radius: Theme.rounding.verysmall
@@ -32,96 +41,88 @@ PopupWindow {
             color: Theme.colors.outline
         }
 
-        MouseArea {
-            anchors.fill: parent
-            hoverEnabled: true
-            acceptedButtons: Qt.NoButton
-            onExited: {
-                root.powerButton.action.trigger();
+        ColumnLayout {
+            id: content
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.margins: Theme.padding
+            Text {
+                text: `${Battery.formatETA(Battery.estimatedTime)}`
+                color: Theme.colors.on_surface_variant
             }
-            ColumnLayout {
-                id: content
-                anchors.top: parent.top
-                anchors.left: parent.left
-                anchors.margins: Theme.padding
-                Text {
-                    text: `${Battery.formatETA(Battery.estimatedTime)}`
-                    color: Theme.colors.on_surface_variant
+            Text {
+                id: textSample
+                text: PowerProfile.toString(Battery.activeProfile)
+                color: Theme.colors.primary
+                font {
+                    family: Theme.font.family
+                    pixelSize: Theme.font.normal
+                    weight: 800
                 }
-                Text {
-                    id: textSample
-                    text: PowerProfile.toString(Battery.activeProfile)
-                    color: Theme.colors.primary
-                    font {
-                        family: Theme.font.family
-                        pixelSize: Theme.font.normal
-                        weight: 800
-                    }
-                }
-                RowLayout {
-                    id: profileSelector
-                    Repeater {
-                        model: [
-                            {
-                                profile: PowerProfile.PowerSaver,
-                                icon: "󰌪",
-                                color: Theme.colors.primary
-                            },
-                            {
-                                profile: PowerProfile.Balanced,
-                                icon: "󰘮",
-                                color: Theme.colors.secondary
-                            },
-                            {
-                                profile: PowerProfile.Performance,
-                                icon: "󰓅",
-                                color: Theme.colors.error
+            }
+            RowLayout {
+                id: profileSelector
+                Repeater {
+                    model: [
+                        {
+                            profile: PowerProfile.PowerSaver,
+                            icon: "󰌪",
+                            color: Theme.colors.primary
+                        },
+                        {
+                            profile: PowerProfile.Balanced,
+                            icon: "󰘮",
+                            color: Theme.colors.secondary
+                        },
+                        {
+                            profile: PowerProfile.Performance,
+                            icon: "󰓅",
+                            color: Theme.colors.error
+                        }
+                    ]
+
+                    Button {
+                        id: selectorRoot
+                        required property var modelData
+                        implicitWidth: 48
+                        implicitHeight: 48
+                        background: Rectangle {
+                            radius: Theme.rounding.small
+                            color: {
+                                if (mouseArea.pressed)
+                                    return Theme.colors.surface_container_high;
+                                if (mouseArea.containsMouse)
+                                    return Theme.colors.surface_container;
+                                if (Battery.activeProfile === selectorRoot.modelData.profile)
+                                    return selectorRoot.modelData.color + "40";
+                                return Theme.colors.surface;
                             }
-                        ]
 
-                        Button {
-                            id: selectorRoot
-                            required property var modelData
-                            implicitWidth: 48
-                            implicitHeight: 48
-                            background: Rectangle {
-                                radius: Theme.rounding.small
-                                color: {
-                                    if (mouseArea.pressed)
-                                        return Theme.colors.surface_container_high;
-                                    if (mouseArea.containsMouse)
-                                        return Theme.colors.surface_container;
-                                    if (Battery.activeProfile === selectorRoot.modelData.profile)
-                                        return selectorRoot.modelData.color + "40";
-                                    return Theme.colors.surface;
-                                }
-
-                                border.width: Battery.activeProfile === selectorRoot.modelData.profile ? 2 : 0
-                                border.color: selectorRoot.modelData.color
-                                Behavior on color {
-                                    ColorAnimation {
-                                        duration: 150
-                                    }
+                            border.width: Battery.activeProfile === selectorRoot.modelData.profile ? 2 : 0
+                            border.color: selectorRoot.modelData.color
+                            Behavior on color {
+                                ColorAnimation {
+                                    duration: 150
                                 }
                             }
+                        }
 
-                            MouseArea {
-                                id: mouseArea
-                                anchors.fill: parent
-                                hoverEnabled: true
+                        MouseArea {
+                            id: mouseArea
+                            anchors.fill: parent
+                            hoverEnabled: true
 
-                                onClicked: {
-                                    // Use your Battery service's setProfile function
-                                    Battery.setProfile(selectorRoot.modelData.profile);
-                                }
+                            onClicked: {
+                                // Use your Battery service's setProfile function
+                                Battery.setProfile(selectorRoot.modelData.profile);
                             }
+                        }
 
-                            Text {
-                                anchors.centerIn: parent
-                                text: selectorRoot.modelData.icon
-                                font.pixelSize: 18
-                                color: Battery.activeProfile === selectorRoot.modelData.profile ? selectorRoot.modelData.color : Theme.colors.on_surface
-                            }
+                        Text {
+                            anchors.centerIn: parent
+                            text: selectorRoot.modelData.icon
+                            font.pixelSize: 18
+                            color: Battery.activeProfile === selectorRoot.modelData.profile ? selectorRoot.modelData.color : Theme.colors.on_surface
                         }
                     }
                 }

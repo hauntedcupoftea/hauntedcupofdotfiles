@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Hyprland
 import QtQuick
 
 import qs.theme
@@ -20,6 +21,14 @@ PopupWindow {
     implicitHeight: 240
     visible: popupOpen
 
+    HyprlandFocusGrab {
+        active: root.visible
+        windows: [root]
+        onCleared: {
+            root.powerButton.action.trigger();
+        }
+    }
+
     Rectangle {
         anchors.fill: parent
         radius: Theme.rounding.verysmall
@@ -28,23 +37,15 @@ PopupWindow {
             width: 1
             color: Theme.colors.outline
         }
-        MouseArea {
+        Text {
+            id: textSample
             anchors.fill: parent
-            hoverEnabled: true
-            acceptedButtons: Qt.NoButton
-            onExited: {
-                root.powerButton.action.trigger();
-            }
-            Text {
-                id: textSample
-                anchors.fill: parent
-                text: root.networkText
-                color: Theme.colors.primary
-                font {
-                    family: Theme.font.family
-                    pixelSize: Theme.font.normal
-                    weight: 800
-                }
+            text: root.networkText
+            color: Theme.colors.primary
+            font {
+                family: Theme.font.family
+                pixelSize: Theme.font.normal
+                weight: 800
             }
         }
     }

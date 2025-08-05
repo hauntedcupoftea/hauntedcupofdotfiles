@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import Quickshell
+import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -20,6 +21,14 @@ PopupWindow {
 
     QsMenuOpener {
         id: dummy
+    }
+
+    HyprlandFocusGrab {
+        active: root.visible
+        windows: [root]
+        onCleared: {
+            root.close();
+        }
     }
 
     anchor {

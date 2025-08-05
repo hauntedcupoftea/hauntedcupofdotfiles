@@ -1,6 +1,7 @@
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
+import Quickshell.Hyprland
 
 import qs.theme
 import qs.config
@@ -31,6 +32,14 @@ PopupWindow {
         }
     }
 
+    HyprlandFocusGrab {
+        active: root.visible
+        windows: [root]
+        onCleared: {
+            root.powerButton.action.trigger();
+        }
+    }
+
     onPopupOpenChanged: {
         root.hoveredAction = "Session Menu";
     }
@@ -49,118 +58,109 @@ PopupWindow {
             color: Theme.colors.outline
         }
 
-        MouseArea {
-            anchors.fill: parent
-            hoverEnabled: true
-            acceptedButtons: Qt.NoButton
-            onExited: {
-                root.powerButton.action.trigger();
-            }
+        ColumnLayout {
+            id: sessionMenuColumn
 
-            ColumnLayout {
-                id: sessionMenuColumn
+            spacing: Theme.padding
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.topMargin: Theme.padding
+            anchors.leftMargin: Theme.padding
+            anchors.rightMargin: Theme.padding
+            GridLayout {
+                id: sessionMenuGrid
+                Layout.alignment: Qt.AlignCenter
+                columnSpacing: Theme.padding * 2
+                rowSpacing: Theme.padding * 2
+                columns: 3
 
-                spacing: Theme.padding
-                anchors.top: parent.top
-                anchors.left: parent.left
-                anchors.topMargin: Theme.padding
-                anchors.leftMargin: Theme.padding
-                anchors.rightMargin: Theme.padding
-                GridLayout {
-                    id: sessionMenuGrid
+                SessionMenuButton {
+                    buttonIcon: "󰍃"
+                    buttonText: "Logout"
                     Layout.alignment: Qt.AlignCenter
-                    columnSpacing: Theme.padding * 2
-                    rowSpacing: Theme.padding * 2
-                    columns: 3
-
-                    SessionMenuButton {
-                        buttonIcon: "󰍃"
-                        buttonText: "Logout"
-                        Layout.alignment: Qt.AlignCenter
-                        command: ["uwsm", "stop"]
-                        onHoveredChanged: {
-                            if (hovered)
-                                root.hoveredAction = this.buttonText;
-                            else
-                                root.hoveredAction = root.getRandomSessionMessage();
-                        }
-                    }
-                    SessionMenuButton {
-                        buttonIcon: "󰜉"
-                        buttonText: "Reboot"
-                        Layout.alignment: Qt.AlignCenter
-                        command: ["systemctl", "reboot"]
-                        onHoveredChanged: {
-                            if (hovered)
-                                root.hoveredAction = this.buttonText;
-                            else
-                                root.hoveredAction = root.getRandomSessionMessage();
-                        }
-                    }
-                    SessionMenuButton {
-                        buttonIcon: "󰐥"
-                        buttonText: "Shutdown"
-                        Layout.alignment: Qt.AlignCenter
-                        command: ["systemctl", "poweroff"]
-                        onHoveredChanged: {
-                            if (hovered)
-                                root.hoveredAction = this.buttonText;
-                            else
-                                root.hoveredAction = root.getRandomSessionMessage();
-                        }
-                    }
-                    SessionMenuButton {
-                        buttonIcon: "󰌾"
-                        buttonText: "Lock"
-                        Layout.alignment: Qt.AlignCenter
-                        command: ["loginctl", "lock-session"]
-                        onHoveredChanged: {
-                            if (hovered)
-                                root.hoveredAction = this.buttonText;
-                            else
-                                root.hoveredAction = root.getRandomSessionMessage();
-                        }
-                    }
-                    SessionMenuButton {
-                        buttonIcon: "󰤄"
-                        buttonText: "Hibernate"
-                        Layout.alignment: Qt.AlignCenter
-                        command: ["systemctl", "hibernate"]
-                        onHoveredChanged: {
-                            if (hovered)
-                                root.hoveredAction = this.buttonText;
-                            else
-                                root.hoveredAction = root.getRandomSessionMessage();
-                        }
-                    }
-                    SessionMenuButton {
-                        buttonIcon: "󰜗"
-                        buttonText: "Suspend"
-                        command: ["systemctl", "suspend"]
-                        Layout.alignment: Qt.AlignCenter
-                        onHoveredChanged: {
-                            if (hovered)
-                                root.hoveredAction = this.buttonText;
-                            else
-                                root.hoveredAction = root.getRandomSessionMessage();
-                        }
+                    command: ["uwsm", "stop"]
+                    onHoveredChanged: {
+                        if (hovered)
+                            root.hoveredAction = this.buttonText;
+                        else
+                            root.hoveredAction = root.getRandomSessionMessage();
                     }
                 }
-
-                Text {
-                    id: sessionMenuText
+                SessionMenuButton {
+                    buttonIcon: "󰜉"
+                    buttonText: "Reboot"
                     Layout.alignment: Qt.AlignCenter
-                    Layout.maximumWidth: sessionMenuGrid.width
-                    text: root.hoveredAction
-                    color: Theme.colors.on_surface_variant
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                    wrapMode: Text.WordWrap
-                    Layout.minimumHeight: Theme.font.normal * 4
-                    font {
-                        family: Theme.font.family
-                        pixelSize: Theme.font.normal
+                    command: ["systemctl", "reboot"]
+                    onHoveredChanged: {
+                        if (hovered)
+                            root.hoveredAction = this.buttonText;
+                        else
+                            root.hoveredAction = root.getRandomSessionMessage();
                     }
+                }
+                SessionMenuButton {
+                    buttonIcon: "󰐥"
+                    buttonText: "Shutdown"
+                    Layout.alignment: Qt.AlignCenter
+                    command: ["systemctl", "poweroff"]
+                    onHoveredChanged: {
+                        if (hovered)
+                            root.hoveredAction = this.buttonText;
+                        else
+                            root.hoveredAction = root.getRandomSessionMessage();
+                    }
+                }
+                SessionMenuButton {
+                    buttonIcon: "󰌾"
+                    buttonText: "Lock"
+                    Layout.alignment: Qt.AlignCenter
+                    command: ["loginctl", "lock-session"]
+                    onHoveredChanged: {
+                        if (hovered)
+                            root.hoveredAction = this.buttonText;
+                        else
+                            root.hoveredAction = root.getRandomSessionMessage();
+                    }
+                }
+                SessionMenuButton {
+                    buttonIcon: "󰤄"
+                    buttonText: "Hibernate"
+                    Layout.alignment: Qt.AlignCenter
+                    command: ["systemctl", "hibernate"]
+                    onHoveredChanged: {
+                        if (hovered)
+                            root.hoveredAction = this.buttonText;
+                        else
+                            root.hoveredAction = root.getRandomSessionMessage();
+                    }
+                }
+                SessionMenuButton {
+                    buttonIcon: "󰜗"
+                    buttonText: "Suspend"
+                    command: ["systemctl", "suspend"]
+                    Layout.alignment: Qt.AlignCenter
+                    onHoveredChanged: {
+                        if (hovered)
+                            root.hoveredAction = this.buttonText;
+                        else
+                            root.hoveredAction = root.getRandomSessionMessage();
+                    }
+                }
+            }
+
+            Text {
+                id: sessionMenuText
+                Layout.alignment: Qt.AlignCenter
+                Layout.maximumWidth: sessionMenuGrid.width
+                text: root.hoveredAction
+                color: Theme.colors.on_surface_variant
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                wrapMode: Text.WordWrap
+                Layout.minimumHeight: Theme.font.normal * 4
+                font {
+                    family: Theme.font.family
+                    pixelSize: Theme.font.normal
                 }
             }
         }
