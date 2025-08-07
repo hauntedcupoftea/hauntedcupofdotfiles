@@ -20,6 +20,7 @@
 
       output = {
         method = "noncurses";
+        waveform = true;
         orientation = "bottom";
         channels = "stereo";
       };
