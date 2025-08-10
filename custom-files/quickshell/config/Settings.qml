@@ -19,4 +19,5 @@ QtObject {
     // speed of scrolling text
     property real pixelsPerSecond: 120
     property int visualizerBars: 16
+    property int visualizerFPS: 60
 }
