@@ -1,5 +1,6 @@
 pragma ComponentBehavior: Bound
 import QtQuick
+import QtQuick.Layouts
 // import QtQuick.Layouts
 
 import qs.components
@@ -30,7 +31,9 @@ Rectangle {
             anchors.left: parent.left
             spacing: Theme.padding
 
-            OSButton {}
+            OSButton {
+                Layout.leftMargin: Theme.padding
+            }
             ClockWidget {
                 id: clockwidget
             }
