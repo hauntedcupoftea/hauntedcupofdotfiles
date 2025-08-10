@@ -68,7 +68,7 @@ Item {
                 var baseLevel = 0.75;
                 var waveHeight = height * 0.75;
 
-                var liquidColor = Qt.alpha(Theme.colors.primary, 0.5);
+                var liquidColor = Theme.colors.tertiary;
                 ctx.fillStyle = liquidColor;
                 ctx.beginPath();
 
