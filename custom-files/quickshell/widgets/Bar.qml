@@ -30,6 +30,7 @@ Rectangle {
             anchors.left: parent.left
             spacing: Theme.padding
 
+            OSButton {}
             ClockWidget {
                 id: clockwidget
             }
