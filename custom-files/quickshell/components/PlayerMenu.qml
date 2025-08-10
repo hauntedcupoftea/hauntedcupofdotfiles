@@ -20,6 +20,15 @@ AbstractBarButton {
     property string playerIcon: Player.active && Player.active.playbackState == MprisPlaybackState.Playing ? "󰐊" : "󰏤"
 
     MouseArea {
+        id: swapFocus
+        anchors.fill: parent
+        acceptedButtons: Qt.MiddleButton
+        onPressed: {
+            Player.active.raise();
+        }
+    }
+
+    MouseArea {
         id: toggleMute
         anchors.fill: parent
         acceptedButtons: Qt.RightButton
@@ -56,27 +65,12 @@ AbstractBarButton {
                     color: Theme.colors.secondary
                     text: root.playerIcon
                 }
-                ClippingRectangle {
-                    id: bg
+                Private.Visualizer {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     implicitWidth: Theme.playerWidth
-                    radius: Theme.rounding.verysmall
-                    color: Theme.colors.surface_container
-                    Rectangle {
-                        anchors.left: parent.left
-                        anchors.top: parent.top
-                        anchors.bottom: parent.bottom
-                        implicitWidth: bg.width * Player.percentageProgress
-                        color: Qt.alpha(Theme.colors.primary, 0.75)
-                    }
-                    Private.ScrollingText {
-                        anchors.centerIn: parent
-                        scrollingText: Player.active && qsTr(`${Player.active.trackArtist} - ${Player.active.trackTitle}`)
-                        animate: Player.active && Player.active.isPlaying
-                        // DEBUG
-                        // onScrollingTextChanged: print(JSON.stringify(Player.active.metadata, null, 2))
-                    }
+                    progress: Player.percentageProgress || 0
+                    isPlaying: Player.active?.isPlaying || false
                 }
             }
         }
@@ -101,11 +95,13 @@ AbstractBarButton {
             }
             ColumnLayout {
                 id: trackInfo
-                Private.StyledText {
+                Private.ScrollingText {
+                    Layout.fillWidth: true
+                    Layout.minimumHeight: Theme.font.normal
                     Layout.maximumWidth: 400
-                    text: `${Player.active?.trackTitle}`
-                    color: Theme.colors.on_surface
-                    wrapMode: Text.WordWrap
+                    Layout.minimumWidth: 128
+                    scrollingText: Player.active && qsTr(`${Player.active.trackTitle}`)
+                    animate: Player.active && Player.active.isPlaying
                 }
                 Text {
                     Layout.maximumWidth: 400
@@ -117,7 +113,7 @@ AbstractBarButton {
                 }
                 Text {
                     Layout.maximumWidth: 400
-                    text: `${Player.active?.trackAlbum}`
+                    text: Player.active?.trackAlbum || ""
                     color: Theme.colors.on_surface_variant
                     font.family: Theme.font.family
                     font.pixelSize: Theme.font.small

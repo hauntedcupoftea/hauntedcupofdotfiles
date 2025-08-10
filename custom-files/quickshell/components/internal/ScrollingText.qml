@@ -1,15 +1,13 @@
 import QtQuick
-// import QtQuick.Effects
 import Quickshell.Widgets
-
 import qs.theme
+import qs.config
 
 ClippingRectangle {
     id: root
-    anchors.fill: parent
     property string scrollingText
     property bool animate
-    radius: Theme.rounding.small
+
     color: "transparent"
 
     Text {
@@ -20,6 +18,7 @@ ClippingRectangle {
         text: root.scrollingText
         color: Theme.colors.on_surface
         verticalAlignment: Qt.AlignVCenter
+
         font {
             family: Theme.font.family
             pixelSize: Theme.font.large
@@ -31,7 +30,10 @@ ClippingRectangle {
             from: root.width - Theme.padding
             to: -1 * movingText.width
             loops: Animation.Infinite
-            duration: 7500
+            duration: {
+                var distance = Math.abs(root.width - Theme.padding) + movingText.width;
+                return (distance / Settings.pixelsPerSecond) * 1000;
+            }
         }
     }
 }
