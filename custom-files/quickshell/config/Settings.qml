@@ -16,4 +16,7 @@ QtObject {
     readonly property list<string> ignoredTrayItems: ["spotify-client"]
     readonly property int trayMenuWidth: 70
     readonly property real volumeChange: 5
+    // speed of scrolling text
+    property real pixelsPerSecond: 120
+    property int visualizerBars: 16
 }

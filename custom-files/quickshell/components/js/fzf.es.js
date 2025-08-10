@@ -1,8 +1,39 @@
-/** @license
- * fzf v0.5.2
- * Copyright (c) 2021 Ajit
- * Licensed under BSD 3-Clause
- */
+.pragma library
+
+/*
+https://github.com/ajitid/fzf-for-js
+
+BSD 3-Clause License
+
+Copyright (c) 2021, Ajit
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
 const normalized = {
   216: "O",
   223: "s",
@@ -622,7 +653,7 @@ function calculateScore(caseSensitive, normalize, text, pattern, sidx, eidx, wit
   }
   return [score, pos];
 }
-const fuzzyMatchV1 = (caseSensitive, normalize, forward, text, pattern, withPos, slab2) => {
+function fuzzyMatchV1(caseSensitive, normalize, forward, text, pattern, withPos, slab2) {
   if (pattern.length === 0) {
     return [{ start: 0, end: 0, score: 0 }, null];
   }
@@ -1144,11 +1175,10 @@ function getBasicMatchIter(scoreMap, queryRunes, caseSensitive) {
     if (scoreMap[scoreKey] === void 0) {
       scoreMap[scoreKey] = [];
     }
-    scoreMap[scoreKey].push({
+    scoreMap[scoreKey].push(Object.assign({
       item: this.items[idx],
-      ...match,
       positions: positions != null ? positions : /* @__PURE__ */ new Set()
-    });
+    }, match));
   };
 }
 function getExtendedMatchIter(scoreMap, pattern) {
@@ -1206,56 +1236,6 @@ function extendedMatch(query) {
   }
   return getResultFromScoreMap(scoreMap, this.opts.limit);
 }
-const isNode = typeof require !== "undefined" && typeof window === "undefined";
-function asyncMatcher(token, len, iter2, onFinish) {
-  return new Promise((resolve, reject) => {
-    const INCREMENT = 1e3;
-    let i = 0, end = Math.min(INCREMENT, len);
-    const step = () => {
-      if (token.cancelled)
-        return reject("search cancelled");
-      for (; i < end; ++i) {
-        iter2(i);
-      }
-      if (end < len) {
-        end = Math.min(end + INCREMENT, len);
-        isNode ? setImmediate(step) : setTimeout(step);
-      } else {
-        resolve(onFinish());
-      }
-    };
-    step();
-  });
-}
-function asyncBasicMatch(query, token) {
-  const { queryRunes, caseSensitive } = buildPatternForBasicMatch(
-    query,
-    this.opts.casing,
-    this.opts.normalize
-  );
-  const scoreMap = {};
-  return asyncMatcher(
-    token,
-    this.runesList.length,
-    getBasicMatchIter.bind(this)(scoreMap, queryRunes, caseSensitive),
-    () => getResultFromScoreMap(scoreMap, this.opts.limit)
-  );
-}
-function asyncExtendedMatch(query, token) {
-  const pattern = buildPatternForExtendedMatch(
-    Boolean(this.opts.fuzzy),
-    this.opts.casing,
-    this.opts.normalize,
-    query
-  );
-  const scoreMap = {};
-  return asyncMatcher(
-    token,
-    this.runesList.length,
-    getExtendedMatchIter.bind(this)(scoreMap, pattern),
-    () => getResultFromScoreMap(scoreMap, this.opts.limit)
-  );
-}
 const defaultOpts = {
   limit: Infinity,
   selector: (v) => v,
@@ -1264,11 +1244,12 @@ const defaultOpts = {
   fuzzy: "v2",
   tiebreakers: [],
   sort: true,
-  forward: true
+  forward: true,
+  match: basicMatch
 };
-class BaseFinder {
+class Finder {
   constructor(list, ...optionsTuple) {
-    this.opts = { ...defaultOpts, ...optionsTuple[0] };
+    this.opts = Object.assign(defaultOpts, optionsTuple[0]);
     this.items = list;
     this.runesList = list.map((item) => strToRunes(this.opts.selector(item).normalize()));
     this.algoFn = exactMatchNaive;
@@ -1281,16 +1262,6 @@ class BaseFinder {
         break;
     }
   }
-}
-const syncDefaultOpts = {
-  ...defaultOpts,
-  match: basicMatch
-};
-class SyncFinder extends BaseFinder {
-  constructor(list, ...optionsTuple) {
-    super(list, ...optionsTuple);
-    this.opts = { ...syncDefaultOpts, ...optionsTuple[0] };
-  }
   find(query) {
     if (query.length === 0 || this.items.length === 0)
       return this.items.slice(0, this.opts.limit).map(createResultItemWithEmptyPos);
@@ -1299,33 +1270,15 @@ class SyncFinder extends BaseFinder {
     return postProcessResultItems(result, this.opts);
   }
 }
-const asyncDefaultOpts = {
-  ...defaultOpts,
-  match: asyncBasicMatch
+function createResultItemWithEmptyPos(item) {
+  return ({
+    item,
+    start: -1,
+    end: -1,
+    score: 0,
+    positions: /* @__PURE__ */ new Set()
+  })
 };
-class AsyncFinder extends BaseFinder {
-  constructor(list, ...optionsTuple) {
-    super(list, ...optionsTuple);
-    this.opts = { ...asyncDefaultOpts, ...optionsTuple[0] };
-    this.token = { cancelled: false };
-  }
-  async find(query) {
-    this.token.cancelled = true;
-    this.token = { cancelled: false };
-    if (query.length === 0 || this.items.length === 0)
-      return this.items.slice(0, this.opts.limit).map(createResultItemWithEmptyPos);
-    query = query.normalize();
-    let result = await this.opts.match.bind(this)(query, this.token);
-    return postProcessResultItems(result, this.opts);
-  }
-}
-const createResultItemWithEmptyPos = (item) => ({
-  item,
-  start: -1,
-  end: -1,
-  score: 0,
-  positions: /* @__PURE__ */ new Set()
-});
 function postProcessResultItems(result, opts) {
   if (opts.sort) {
     const { selector } = opts;
@@ -1352,16 +1305,3 @@ function byLengthAsc(a, b, selector) {
 function byStartAsc(a, b) {
   return a.start - b.start;
 }
-class Fzf {
-  constructor(list, ...optionsTuple) {
-    this.finder = new SyncFinder(list, ...optionsTuple);
-    this.find = this.finder.find.bind(this.finder);
-  }
-}
-class AsyncFzf {
-  constructor(list, ...optionsTuple) {
-    this.finder = new AsyncFinder(list, ...optionsTuple);
-    this.find = this.finder.find.bind(this.finder);
-  }
-}
-export { AsyncFzf, Fzf, asyncBasicMatch, asyncExtendedMatch, basicMatch, byLengthAsc, byStartAsc, extendedMatch };
