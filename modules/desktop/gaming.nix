@@ -9,6 +9,9 @@
       gamescopeSession.enable = true;
       extraCompatPackages = [ pkgs.proton-ge-bin ];
       protontricks.enable = true;
+      package = pkgs.steam.override {
+        extraBwrapArgs = [ "--unsetenv TZ" ]; # fix for incorrect timezone
+      };
     };
 
     gamemode = {
