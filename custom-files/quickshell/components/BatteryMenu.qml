@@ -39,7 +39,7 @@ AbstractBarButton {
             id: batteryCan
             radius: Theme.rounding.unsharpenmore
             color: Theme.colors.secondary_container
-            implicitWidth: Theme.padding * 2
+            implicitWidth: Theme.margin * 3
             implicitHeight: batteryIndicator.height - (Theme.padding)
 
             // Fill rectangle that shows battery percentage
@@ -85,8 +85,8 @@ AbstractBarButton {
                         return Theme.colors.error;
                     }
                     if (Battery.percentage > 0.44)
-                        return Theme.colors.on_primary;
-                    return Theme.colors.on_surface;
+                        return Theme.colors.on_secondary;
+                    return Theme.colors.on_secondary_container;
                 }
             }
         }

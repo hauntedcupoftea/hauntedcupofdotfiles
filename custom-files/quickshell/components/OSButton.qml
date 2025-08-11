@@ -21,7 +21,7 @@ AbstractBarButton {
         id: osText
         text: ""
         anchors.centerIn: parent
-        color: Theme.colors.primary
+        color: Theme.colors.secondary
         animate: false
         weight: 500
         font.pixelSize: Theme.font.large
