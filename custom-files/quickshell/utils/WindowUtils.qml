@@ -60,7 +60,7 @@ QtObject {
         }
 
         // Special case for Zellij: extract path after second dash
-        const zellijMatch = formatted.match(/^Zellij\s*\([^)]+\)\s*-\s*(.+)$/);
+        const zellijMatch = formatted.match(/\|(.+)/);
         if (zellijMatch) {
             return zellijMatch[1].trim();
         }
