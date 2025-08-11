@@ -12,12 +12,13 @@ Singleton {
     property PwNode defaultInput: Pipewire.defaultAudioSource
     property list<PwNode> outputList: Pipewire.nodes.values.filter(n => n.isSink)
     property list<PwNode> inputList: Pipewire.nodes.values.filter(n => !n.isSink)
+
     // TODO: add channel list for applications (volume mixer)
 
     function changeOutputVolume(volume: real) {
         if (defaultOutput?.ready && defaultOutput?.audio) {
             defaultOutput.audio.muted = false;
-            defaultOutput.audio.volume += volume;
+            defaultOutput.audio.volume = Math.max(0, Math.min(1, defaultOutput.audio.volume + volume));
         }
     }
 
@@ -29,7 +30,7 @@ Singleton {
     function changeInputVolume(volume: real) {
         if (defaultInput?.ready && defaultInput?.audio) {
             defaultInput.audio.muted = false;
-            defaultInput.audio.volume += volume;
+            defaultInput.audio.volume = Math.max(0, Math.min(1, defaultInput.audio.volume + volume));
         }
     }
 
