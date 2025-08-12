@@ -29,5 +29,5 @@ PLEASE NOTE that it is NOT RECOMMENDED to use this if you don't know what you ar
 - [Vimjoyer](https://www.youtube.com/@vimjoyer) for making the switch from windows + wsl to NixOS easier for a wretch like me =D
 - [fazzi](https://gitlab.com/fazzi/nixohess) for providing an extremely cool way of organizing a flake that i will slowly inch towards + wleave configuration and icons
 - [soramane](https://github.com/caelestia-dots/shell) for inspiring quickshell layout + some of the functionalities
-- [Rexiel](https://github.com/Rexcrazy804) for pointing out factual errors in the warning above
+- [Rexiel](https://github.com/Rexcrazy804) for teaching me true nixlang and kurukuruDM
 - All the flake providers and home manager contributors. We stand on the shoulders of giants, so we may one day see the sun for ourselves
