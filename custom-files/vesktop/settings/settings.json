@@ -71,7 +71,7 @@
       "enabled": false
     },
     "WebRichPresence (arRPC)": {
-      "enabled": false
+      "enabled": true
     },
     "BANger": {
       "enabled": false
