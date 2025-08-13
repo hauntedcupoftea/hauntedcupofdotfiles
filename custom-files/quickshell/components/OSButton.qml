@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Controls
 import Quickshell
-import Quickshell.Widgets
 
 import qs.widgets
 import qs.theme
@@ -13,18 +12,19 @@ AbstractBarButton {
     implicitWidth: osText.implicitWidth + (Theme.padding * 2)
     implicitHeight: Theme.barHeight - (Theme.margin)
 
-    background: ClippingRectangle {
+    background: Rectangle {
         id: bg
-        color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.secondary_container
+        color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
         radius: Theme.rounding.small
 
         Heartbeat {
-            anchors.fill: parent
-            systemActivity: 0.0
-            hovered: root.hovered
+            anchors.centerIn: bg
+            width: parent.width
+            minWidth: osText.height + Theme.margin
+            maxWidth: parent.width
+            height: root.height - Theme.padding
         }
     }
-
     Private.StyledText {
         id: osText
         text: ""
