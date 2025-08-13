@@ -12,5 +12,6 @@
   home.packages = with pkgs; [
     wf-recorder # screenrec
     slurp # region selector
+    lm_sensors
   ];
 }
