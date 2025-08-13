@@ -32,7 +32,8 @@
     overskride # bluetooth but good
     peazip # winrar but good
     remmina # rdp but good
-    gparted # disk mgmt
+    whatsie # whatsapp
+    tparted # partition mgmt
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
