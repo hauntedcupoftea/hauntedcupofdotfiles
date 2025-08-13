@@ -34,6 +34,7 @@
     remmina # rdp but good
     whatsie # whatsapp
     tparted # partition mgmt
+    parted # maybe we need this
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
