@@ -35,6 +35,7 @@
     whatsie # whatsapp
     tparted # partition mgmt
     parted # maybe we need this
+    inetutils
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
