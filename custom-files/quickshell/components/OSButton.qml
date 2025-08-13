@@ -16,23 +16,15 @@ AbstractBarButton {
         id: bg
         color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
         radius: Theme.rounding.small
-
-        Heartbeat {
-            anchors.centerIn: bg
-            width: parent.width
-            minWidth: osText.height + Theme.margin
-            maxWidth: parent.width
-            height: root.height - Theme.padding
-        }
     }
-    Private.StyledText {
+
+    Heartbeat {
         id: osText
-        text: ""
         anchors.centerIn: parent
-        color: root.hovered ? Theme.colors.secondary : Theme.colors.on_secondary
-        animate: false
-        weight: 500
+        text: ""
+        color: Theme.colors.secondary
         font.pixelSize: Theme.font.large
+        font.weight: 500
     }
 
     action: Action {
