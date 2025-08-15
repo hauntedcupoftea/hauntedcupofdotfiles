@@ -150,7 +150,7 @@ in
 
       # Startup applications
       exec-once = [
-        "qs -p ~/hauntedcupofdotfiles/custom-files/quickshell/" # temp quickshell hack
+        # "qs -p ~/hauntedcupofdotfiles/custom-files/quickshell/" # temp quickshell hack (does not work lmao)
         "uwsm app -- clipse -listen"
         "uwsm app -- gnome-keyring-daemon --start --components=pkcs11,secrets"
       ];
