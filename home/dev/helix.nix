@@ -1,16 +1,18 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   home.packages = with pkgs; [
     helix
 
-    # docker/compose files
-    # docker-compose-langserver
-    # docker-langserver
+    # general
+    harper
 
     # Python, Rust, TypeScript & JavaScript in their respective files.
     # HTML/CSS/MD
     marksman
     markdown-oxide
     vscode-langservers-extracted
+
+    # fish
+    fish-lsp
 
     # TOML
     taplo
@@ -22,8 +24,9 @@
     lldb_20
 
     # Nix
-    nil # Nix Language Server
-    nixpkgs-fmt # A popular formatter for Nix (alternative to nixfmt-classic)
+    nixd
+    nil # Nix Language Servers
+    alejandra # A popular formatter for Nix (alternative to nixfmt-classic)
 
     # Svelte
     svelte-language-server # Svelte LSP
@@ -41,120 +44,297 @@
         auto-format = true;
         end-of-line-diagnostics = "hint";
         cursor-shape = {
-          normal = "block";
-          insert = "bar";
+          normal = "bar";
+          insert = "block";
           select = "underline";
         };
+        soft-wrap.enable = true;
         inline-diagnostics = {
           cursor-line = "warning";
+        };
+        indent-guides = {
+          character = "|";
+          render = true;
         };
       };
     };
 
     # Language specific configurations
     languages = {
-      language-server.nil-ls = {
-        command = "${pkgs.nil}/bin/nil";
-      };
+      language-server = {
+        nixd = {
+          command = "nixd";
+          args = [
+            "--semantic-tokens"
+            "--inlay-hints"
+          ];
+        };
 
-      language-server.pyright = {
-        command = "pyright-langserver";
-        args = [ "--stdio" ];
-      };
+        nil-ls = {
+          command = "${pkgs.nil}/bin/nil";
+        };
 
-      language-server.ruff = {
-        command = "ruff";
-        args = [ "server" ];
-      };
+        harper-ls = {
+          command = "harper-ls";
+          args = [ "--stdio" ];
+        };
 
-      language-server.qmlls = {
-        args = [ "-E" ];
-        command = "qmlls";
-      };
+        basedpyright = {
+          command = "basedpyright-langserver";
+          args = [ "--stdio" ];
+        };
 
-      language-server.rust-analyzer-ls = {
-        command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
-      };
+        dprint = {
+          command = lib.getExe pkgs.dprint;
+          args = [ "lsp" ];
+        };
 
-      language-server.typescript-ls = {
-        command = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server";
-        args = [ "--stdio" ];
-      };
+        deno-lsp = {
+          command = lib.getExe pkgs.deno;
+          args = [ "lsp" ];
+          environment.NO_COLOR = "1";
+          config.deno = {
+            enable = true;
+            lint = true;
+            unstable = true;
+            suggest = {
+              completeFunctionCalls = false;
+              imports = { hosts."https://deno.land" = true; };
+            };
+            inlayHints = {
+              enumMemberValues.enabled = true;
+              functionLikeReturnTypes.enabled = true;
+              parameterNames.enabled = "all";
+              parameterTypes.enabled = true;
+              propertyDeclarationTypes.enabled = true;
+              variableTypes.enabled = true;
+            };
+          };
+        };
+        ruff = {
+          command = "ruff";
+          args = [ "server" ];
+        };
 
-      language-server.svelte-ls = {
-        command = "${pkgs.svelte-language-server}/bin/svelteserver";
-        args = [ "--stdio" ];
+        qmlls = {
+          args = [ "-E" ];
+          command = "qmlls";
+        };
+
+        rust-analyzer-ls = {
+          command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
+        };
+
+        tailwindcss-ls = {
+          command = lib.getExe pkgs.tailwindcss-language-server;
+          args = [ "--stdio" ];
+        };
+
+        tinymist = {
+          command = lib.getExe pkgs.tinymist;
+          config = {
+            exportPdf = "onType";
+            outputPath = "$root/target/$dir/$name";
+            formatterMode = "typstyle";
+            formatterPrintWidth = 80;
+          };
+        };
+
+        typescript-ls = {
+          command = lib.getExe pkgs.nodePackages.typescript-language-server;
+          args = [ "--stdio" ];
+          config = {
+            typescript-language-server.source = {
+              addMissingImports.ts = true;
+              fixAll.ts = true;
+              organizeImports.ts = true;
+              removeUnusedImports.ts = true;
+              sortImports.ts = true;
+            };
+            plugins = [
+              {
+                name = "@vue/typescript-plugin";
+                location = "${pkgs.vue-language-server}/lib/node_modules/@vue/language-server";
+                languages = [ "vue" ];
+              }
+            ];
+          };
+        };
+
+        svelte-ls = {
+          command = "${pkgs.svelte-language-server}/bin/svelteserver";
+          args = [ "--stdio" ];
+        };
+        uwu-colors = {
+          command = "${pkgs.uwu-colors}/bin/uwu_colors";
+        };
+        vscode-css-language-server = {
+          command = "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-css-language-server";
+          args = [ "--stdio" ];
+          config = {
+            provideFormatter = true;
+            css.validate.enable = true;
+            scss.validate.enable = true;
+          };
+        };
       };
 
       # language-specific configurations
-      language = [
-        # --- Nix ---
-        {
-          name = "nix";
-          auto-format = true;
-          formatter = {
-            command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
+      language =
+        let
+          deno = lang: {
+            command = lib.getExe pkgs.deno;
+            args = [ "fmt" "-" "--ext" lang ];
           };
-          indent = { tab-width = 2; unit = "  "; };
-          language-servers = [ "nil-ls" ];
-        }
+        in
+        [
+          # --- Nix ---
+          {
+            name = "nix";
+            language-servers = [ "nixd" "harper-ls" ];
+            formatter.command = "alejandra";
+            auto-format = true;
+          }
 
-        # --- Python ---
-        {
-          name = "python";
-          auto-format = true;
-          formatter = {
-            command = "${pkgs.black}/bin/black";
-            args = [ "--quiet" "-" ];
-          };
-          indent = { tab-width = 4; unit = "    "; };
-          language-servers = [ "pyright" "ruff" ];
-        }
+          # --- Markdown ---
+          {
+            name = "markdown";
+            language-servers = [ "marksman" "harper-ls" ];
+            formatter = deno "md";
+            auto-format = true;
+          }
 
-        # --- Rust ---
-        {
-          name = "rust";
-          auto-format = true;
-          formatter = {
-            command = "rustfmt";
-            args = [ "--emit=stdout" ];
-          };
-          indent = { tab-width = 4; unit = "    "; };
-          language-servers = [ "rust-analyzer-ls" ];
-        }
+          # --- Python ---
+          {
+            name = "python";
+            language-servers = [
+              "basedpyright"
+              "ruff"
+              "harper-ls"
+            ];
+            formatter = {
+              command = "ruff";
+              args = [ "format" "-" ];
+            };
+            auto-format = true;
+          }
 
-        # --- TypeScript ---
-        {
-          name = "typescript";
-          auto-format = true;
-          # formatter = {
-          #   command = "${pkgs.nodePackages.prettier}/bin/prettier";
-          #   args = [ "--parser" "typescript" "--stdin-filepath" "%" ];
-          # };
-          indent = { tab-width = 2; unit = "  "; };
-          language-servers = [ "typescript-ls" ];
-        }
+          # --- Rust ---
+          {
+            name = "rust";
+            auto-format = true;
+            formatter = {
+              command = "rustfmt";
+              args = [ "--emit=stdout" ];
+            };
+            language-servers = [ "rust-analyzer-ls" "harper-ls" ];
+          }
 
-        # --- Svelte ---
-        {
-          name = "svelte";
-          auto-format = true;
-          # formatter = {
-          #   command = "${pkgs.nodePackages.prettier}/bin/prettier";
-          #   args = [ "--stdin-filepath" "%" ];
-          # };
-          indent = { tab-width = 2; unit = "  "; };
-          language-servers = [ "svelte-ls" ];
-        }
+          # --- TypeScript ---
+          {
+            name = "typescript";
+            auto-format = true;
+            language-servers = [ "typescript-ls" "harper-ls" ];
+            formatter = deno "ts";
+          }
 
-        # --- QML ---
-        {
-          name = "qml";
-          auto-format = true;
-          indent = { tab-width = 4; unit = "    "; };
-          language-servers = [ "qmlls" ];
-        }
-      ];
+          # --- JavaScript ---
+          {
+            name = "javascript";
+            auto-format = true;
+            language-servers = [ "typescript-ls" "harper-ls" ];
+            formatter = deno "js";
+          }
+
+          # --- JSX ---
+          {
+            name = "jsx";
+            auto-format = true;
+            language-servers = [ "typescript-ls" ];
+            formatter = deno "jsx";
+          }
+
+          # --- TSX ---
+          {
+            name = "tsx";
+            auto-format = true;
+            language-servers = [ "typescript-ls" ];
+            formatter = deno "tsx";
+          }
+
+          # --- Svelte ---
+          {
+            name = "svelte";
+            auto-format = true;
+            language-servers = [ "typescript-ls" "svelte-ls" "tailwindcss-ls" "uwu-colors" ];
+            formatter = deno "svelte";
+          }
+
+          # --- HTML ---
+          {
+            name = "html";
+            auto-format = true;
+            language-servers = [ "vscode-html-language-server" "tailwindcss-ls" "uwu-colors" ];
+            formatter = deno "html";
+          }
+
+          # --- CSS ---
+          {
+            name = "css";
+            auto-format = true;
+            language-servers = [ "vscode-css-language-server" "tailwindcss-ls" "uwu-colors" ];
+          }
+
+          # --- SCSS ---
+          {
+            name = "scss";
+            auto-format = true;
+            language-servers = [ "vscode-css-language-server" "tailwindcss-ls" "uwu-colors" ];
+          }
+
+          # --- JSON ---
+          {
+            name = "json";
+            auto-format = true;
+            language-servers = [ "vscode-json-language-server" ];
+            formatter = deno "json";
+          }
+
+          # --- TOML ---
+          {
+            name = "toml";
+            auto-format = true;
+            language-servers = [ "taplo-lsp" ];
+          }
+
+          # --- YAML ---
+          {
+            name = "yaml";
+            auto-format = true;
+            language-servers = [ "yaml-language-server" ];
+          }
+
+          # --- Fish ---
+          {
+            name = "fish";
+            auto-format = true;
+            language-servers = [ "fish-lsp" ];
+          }
+
+          # --- Typst ---
+          {
+            name = "typst";
+            auto-format = true;
+            language-servers = [ "tinymist" "harper-ls" ];
+          }
+
+          # --- QML ---
+          {
+            name = "qml";
+            auto-format = true;
+            language-servers = [ "qmlls" "uwu-colors" ];
+          }
+        ];
     };
   };
 }
