@@ -65,7 +65,8 @@ Singleton {
 
     // Function to set specific profile
     function setProfile(profile) {
-        print(profile);
+        // DEBUG
+        // print(profile);
         PowerProfiles.profile = profile;
     }
 

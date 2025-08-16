@@ -113,7 +113,6 @@ PopupWindow {
                             hoverEnabled: true
 
                             onClicked: {
-                                // Use your Battery service's setProfile function
                                 Battery.setProfile(selectorRoot.modelData.profile);
                             }
                         }
