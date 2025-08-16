@@ -13,7 +13,7 @@ QtObject {
     readonly property string ellipsisChar: "…"
     readonly property string desktopTitle: "Desktop"
     readonly property string unknownTitle: "Unknown"
-    readonly property string steamIcon: "󰺷"
+    readonly property string steamIcon: ""
     readonly property string emptyIcon: ""
     readonly property string unknownIcon: ""
 
