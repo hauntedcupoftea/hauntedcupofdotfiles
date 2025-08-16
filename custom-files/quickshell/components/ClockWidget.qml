@@ -37,11 +37,11 @@ AbstractBarButton {
         Column {
             spacing: Theme.margin / 2
             Private.StyledText {
-                text: "📅 Today: " + Time.time
+                text: Time.date
                 color: Theme.colors.on_surface
             }
             Private.StyledText {
-                text: "🌤️ Weather: 22°C Sunny"
+                text: `${Weather.icon} ${Weather.temp} (${Weather.feelsLike}) ${Weather.description}`
                 color: Theme.colors.on_surface_variant
             }
             Private.StyledText {
