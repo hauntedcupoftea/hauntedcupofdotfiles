@@ -17,8 +17,16 @@
     kitty
     waybar
     libnotify
+
+    # Wi-Fi
     networkmanagerapplet
+    impala
+
+    # audio
     pwvucontrol
+    sonusmix
+    alsa-utils
+
     wl-clipboard
     clipse
     playerctl
