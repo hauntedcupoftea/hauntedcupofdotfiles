@@ -1,10 +1,14 @@
-{ inputs, pkgs, ... }: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   # Enable Hyprland at the system level
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.default;
     withUWSM = true;
-    xwayland.enable = true; # kinda needed for electron apps sadly
+    xwayland.enable = true; # Kinda needed for electron apps sadly
   };
 
   # Ensure necessary packages are installed
@@ -14,7 +18,7 @@
     waybar
     libnotify
     networkmanagerapplet
-    pavucontrol
+    pwvucontrol
     wl-clipboard
     clipse
     playerctl
@@ -29,8 +33,8 @@
     gtk4
   ];
 
-  # these are actually tied to both nvidia and hyprland in part,
-  # so PLEASE consult the hyprland wiki before building this on non novideo systems
+  # These are actually tied to both Nvidia and Hyprland in part,
+  # so PLEASE consult the Hyprland wiki before building this on non novideo systems
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     LIBVA_DRIVER_NAME = "nvidia";
