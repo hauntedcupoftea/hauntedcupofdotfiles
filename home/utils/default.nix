@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   imports = [
     ./btop.nix
     ./eza.nix
@@ -10,8 +10,8 @@
   ];
 
   home.packages = with pkgs; [
-    wf-recorder # screenrec
+    wf-recorder # screen recording
     slurp # region selector
-    lm_sensors
+    lm_sensors # sensor data
   ];
 }
