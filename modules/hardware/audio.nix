@@ -1,5 +1,4 @@
-{ ...
-}: {
+{...}: {
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -8,7 +7,8 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable = true; # You have this commented, which is fine
+    jack.enable = true;
+    wireplumber.enable = true;
 
     # Add WirePlumber extra configuration here
     wireplumber.extraConfig."51-disable-mic-agc" = {
@@ -16,7 +16,7 @@
       "monitor.alsa.rules" = [
         {
           # This matches all ALSA input devices (microphones)
-          matches = [{ "node.name" = "~alsa_input.*"; }];
+          matches = [{"node.name" = "~alsa_input.*";}];
           actions = {
             "update-props" = {
               "webrtc.audio.processing" = {
