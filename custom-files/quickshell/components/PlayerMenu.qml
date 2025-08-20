@@ -4,7 +4,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import Quickshell.Widgets
 import Quickshell.Services.Mpris
 import Quickshell
 
@@ -18,6 +17,7 @@ AbstractBarButton {
     implicitHeight: Theme.barHeight - (Theme.margin)
     implicitWidth: playerRow.width + Theme.margin * 2
     property string playerIcon: Player.active && Player.active.playbackState == MprisPlaybackState.Playing ? "󰐊" : "󰏤"
+    visible: Player.active
 
     MouseArea {
         id: swapFocus
@@ -40,16 +40,14 @@ AbstractBarButton {
         }
     }
 
-    background: Loader {
-        active: Player.active
-        sourceComponent: Rectangle {
-            radius: Theme.rounding.small
-            color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
-            Behavior on color {
-                ColorAnimation {
-                    duration: 200
-                    easing.type: Easing.OutQuad
-                }
+    background: Rectangle {
+        radius: Theme.rounding.small
+        color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
+
+        Behavior on color {
+            ColorAnimation {
+                duration: 200
+                easing.type: Easing.OutQuad
             }
         }
     }
