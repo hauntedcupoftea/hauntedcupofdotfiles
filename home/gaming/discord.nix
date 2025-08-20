@@ -12,8 +12,12 @@
   programs.vesktop = {
     enable = true;
     settings = {
-      arrpc = true;
+      customTitleBar = false;
+      disableMinSize = true;
+      arRPC = true;
+      hardwareVideoAcceleration = true;
       hardwareAcceleration = true;
+      splashThemeing = true;
     };
   };
 
@@ -25,9 +29,6 @@
     "${config.xdg.configHome}/vesktop/settings" = {
       source = ../../custom-files/vesktop/settings;
       recursive = true;
-    };
-    "${config.xdg.configHome}/vesktop/settings.json" = {
-      source = ../../custom-files/vesktop/settings.json;
     };
   };
 
