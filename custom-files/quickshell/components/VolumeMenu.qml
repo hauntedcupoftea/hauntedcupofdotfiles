@@ -17,7 +17,8 @@ import "internal" as Private
 AbstractBarButton {
     id: root
     implicitHeight: Theme.barHeight - (Theme.margin)
-    implicitWidth: Theme.playerWidth + Theme.font.large // add font width to get bar to 100px
+    implicitWidth: content.width + Theme.margin * 2
+    visible: Audio.ready
 
     property bool focusOutput: true
     property real outputAlpha: focusOutput ? 0.8 : 0.45
@@ -57,64 +58,62 @@ AbstractBarButton {
         onTriggered: print("No action assigned yet")
     }
 
-    background: Loader {
-        active: Audio.ready
-        sourceComponent: Rectangle {
-            radius: Theme.rounding.small
-            color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
-            Behavior on color {
-                ColorAnimation {
-                    duration: 200
-                    easing.type: Easing.OutQuad
-                }
+    background: Rectangle {
+        radius: Theme.rounding.small
+        color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
+        Behavior on color {
+            ColorAnimation {
+                duration: 200
+                easing.type: Easing.OutQuad
             }
+        }
 
-            border {
-                width: 2
-                color: (root.focusOutput && Audio.defaultOutput.audio.muted) || Audio.defaultInput.audio.muted ? Theme.colors.error : Theme.colors.surface_container
-            }
+        border {
+            width: 2
+            color: (root.focusOutput && Audio.defaultOutput.audio.muted) || Audio.defaultInput.audio.muted ? Theme.colors.error : Theme.colors.surface_container
+        }
 
-            RowLayout {
-                anchors.fill: parent
-                anchors.margins: Theme.margin
-                Text {
-                    Layout.minimumWidth: Theme.font.large
-                    horizontalAlignment: Qt.AlignHCenter
-                    font {
-                        family: Theme.font.family
-                        pixelSize: Theme.font.large
-                    }
-                    color: root.focusOutput ? Theme.colors.primary : Theme.colors.secondary
-                    text: root.focusedIcon
+        RowLayout {
+            id: content
+            anchors.centerIn: parent
+            anchors.margins: Theme.margin
+            Text {
+                Layout.minimumWidth: Theme.font.large
+                horizontalAlignment: Qt.AlignHCenter
+                font {
+                    family: Theme.font.family
+                    pixelSize: Theme.font.large
                 }
-                ClippingRectangle {
-                    id: bg
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-                    radius: Theme.rounding.verysmall
-                    color: Theme.colors.surface_container
-                    Rectangle {
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        anchors.bottom: parent.bottom
-                        implicitHeight: bg.height * Audio.defaultOutput.audio.volume
-                        color: Qt.alpha(Theme.colors.primary, root.outputAlpha)
+                color: root.focusOutput ? Theme.colors.primary : Theme.colors.secondary
+                text: root.focusedIcon
+            }
+            ClippingRectangle {
+                id: bg
+                Layout.fillHeight: true
+                Layout.preferredWidth: Theme.playerWidth
+                radius: Theme.rounding.verysmall
+                color: Theme.colors.surface_container
+                Rectangle {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.bottom: parent.bottom
+                    implicitHeight: bg.height * Audio.defaultOutput.audio.volume
+                    color: Qt.alpha(Theme.colors.primary, root.outputAlpha)
 
-                        Behavior on opacity {
-                            NumberAnimation {
-                                duration: Theme.anims.duration.large
-                                easing.type: Easing.BezierSpline
-                                easing.bezierCurve: Theme.anims.curve.standard
-                            }
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: Theme.anims.duration.large
+                            easing.type: Easing.BezierSpline
+                            easing.bezierCurve: Theme.anims.curve.standard
                         }
                     }
-                    Rectangle {
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        anchors.bottom: parent.bottom
-                        implicitHeight: bg.height * Audio.defaultInput.audio.volume
-                        color: Qt.alpha(Theme.colors.secondary, root.inputAlpha)
-                    }
+                }
+                Rectangle {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.bottom: parent.bottom
+                    implicitHeight: bg.height * Audio.defaultInput.audio.volume
+                    color: Qt.alpha(Theme.colors.secondary, root.inputAlpha)
                 }
             }
         }
