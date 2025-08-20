@@ -33,9 +33,12 @@ Rectangle {
         const toplevel = ToplevelManager.activeToplevel;
         if (DesktopEntries.byId(toplevel.appId))
             return Quickshell.iconPath(DesktopEntries.byId(toplevel.appId).icon);
-        const heuristicLookup = DesktopEntries.heuristicLookup(toplevel.appId);
+        const heuristicLookup = DesktopEntries.heuristicLookup(toplevel.title);
         if (heuristicLookup)
-            return Quickshell.iconPath(DesktopEntries.byId(heuristicLookup).icon);
+            return Quickshell.iconPath(heuristicLookup.icon);
+        // const title = DesktopEntries.byId(toplevel.title);
+        // if (title)
+        //     return Quickshell.iconPath(title.icon);
         return null;
     }
 
