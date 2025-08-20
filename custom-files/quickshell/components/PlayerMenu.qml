@@ -16,7 +16,7 @@ import "internal" as Private
 AbstractBarButton {
     id: root
     implicitHeight: Theme.barHeight - (Theme.margin)
-    implicitWidth: Theme.playerWidth + Theme.font.large
+    implicitWidth: playerRow.width + Theme.margin * 2
     property string playerIcon: Player.active && Player.active.playbackState == MprisPlaybackState.Playing ? "󰐊" : "󰏤"
 
     MouseArea {
@@ -51,28 +51,35 @@ AbstractBarButton {
                     easing.type: Easing.OutQuad
                 }
             }
+        }
+    }
 
-            RowLayout {
-                anchors.fill: parent
-                anchors.margins: Theme.margin
-                Text {
-                    Layout.minimumWidth: Theme.font.large
-                    horizontalAlignment: Qt.AlignHCenter
-                    font {
-                        family: Theme.font.family
-                        pixelSize: Theme.font.large
-                    }
-                    color: Theme.colors.secondary
-                    text: root.playerIcon
-                }
-                Private.Visualizer {
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-                    implicitWidth: Theme.playerWidth
-                    progress: Player.percentageProgress || 0
-                    isPlaying: Player.active?.isPlaying || false
-                }
+    RowLayout {
+        id: playerRow
+        anchors.centerIn: parent
+        Text {
+            Layout.minimumWidth: Theme.font.large
+            horizontalAlignment: Qt.AlignHCenter
+            font {
+                family: Theme.font.family
+                pixelSize: Theme.font.large
             }
+            color: Theme.colors.secondary
+            text: root.playerIcon
+        }
+        Private.ScrollingText {
+            Layout.minimumHeight: Theme.font.large * 1.3
+            Layout.maximumWidth: 256
+            Layout.minimumWidth: 128
+            scrollingText: Player.active && qsTr(`${Player.active.trackArtist} - ${Player.active.trackTitle}`)
+            animate: Player.active && Player.active.isPlaying
+        }
+        Private.Visualizer {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            implicitWidth: Theme.playerWidth
+            progress: Player.percentageProgress || 0
+            isPlaying: Player.active?.isPlaying || false
         }
     }
 
