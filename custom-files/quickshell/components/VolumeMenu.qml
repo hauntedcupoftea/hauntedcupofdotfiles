@@ -146,10 +146,11 @@ AbstractBarButton {
         targetWidget: root
         triggerTarget: true
         position: Qt.rect(root.width / 2, root.height + Theme.padding, 0, 0)
-        blockShow: true
 
         Text {
-            text: JSON.stringify(Audio.defaultInput, null, 2)
+            width: 400
+            wrapMode: Text.WordWrap
+            text: `Current Input: ${Audio.defaultInput.description} (${Audio.defaultInput.audio.volume.toFixed(2) * 100}%)\n\nCurrent Output:${Audio.defaultOutput.description} (${Audio.defaultOutput.audio.volume.toFixed(2) * 100}%)`
             color: Theme.colors.on_surface
         }
     }
