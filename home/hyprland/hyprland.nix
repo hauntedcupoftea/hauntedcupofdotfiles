@@ -1,11 +1,10 @@
-{ lib
-, inputs
-, ...
-}:
-let
-  isGE66Raider = builtins.hasAttr "Anand-GE66-Raider" (inputs.self.nixosConfigurations or { });
-in
 {
+  lib,
+  inputs,
+  ...
+}: let
+  isGE66Raider = builtins.hasAttr "Anand-GE66-Raider" (inputs.self.nixosConfigurations or {});
+in {
   home.sessionVariables = {
     HYPRSHOT_DIR = "Pictures";
   };
@@ -85,11 +84,9 @@ in
           # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
           builtins.concatLists (builtins.genList
             (
-              i:
-              let
+              i: let
                 ws = i + 1;
-              in
-              [
+              in [
                 "$mod, code:1${toString i}, workspace, ${toString ws}"
                 "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
               ]
@@ -148,9 +145,9 @@ in
         "center, class:^(kitty)$,title:^(Save File|Select Directory|Select File)$"
       ];
 
-      # Startup applications
+      # Start-up applications
       exec-once = [
-        # "qs -p ~/hauntedcupofdotfiles/custom-files/quickshell/" # temp quickshell hack (does not work lmao)
+        "uwsm app -- qs -p ~/hauntedcupofdotfiles/custom-files/quickshell/" # temporary quickshell hack (does not work lmao)
         "uwsm app -- clipse -listen"
         "uwsm app -- gnome-keyring-daemon --start --components=pkcs11,secrets"
       ];
