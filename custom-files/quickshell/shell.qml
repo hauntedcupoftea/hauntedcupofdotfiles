@@ -1,5 +1,5 @@
 import Quickshell
-import "widgets"
+import qs.widgets
 
 ShellRoot {
     Background {}
