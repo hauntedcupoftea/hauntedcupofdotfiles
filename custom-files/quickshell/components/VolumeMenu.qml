@@ -70,7 +70,7 @@ AbstractBarButton {
 
         border {
             width: 2
-            color: (root.focusOutput && Audio.defaultOutput.audio.muted) || Audio.defaultInput.audio.muted ? Theme.colors.error : Theme.colors.surface_container
+            color: (root.focusOutput && Audio.defaultOutput?.audio.muted) || Audio.defaultInput?.audio.muted ? Theme.colors.error : Theme.colors.surface_container
         }
 
         RowLayout {
@@ -97,7 +97,7 @@ AbstractBarButton {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.bottom: parent.bottom
-                    implicitHeight: bg.height * Audio.defaultOutput.audio.volume
+                    implicitHeight: bg.height * Audio.defaultOutput?.audio.volume
                     color: Qt.alpha(Theme.colors.primary, root.outputAlpha)
 
                     Behavior on opacity {
@@ -112,7 +112,7 @@ AbstractBarButton {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.bottom: parent.bottom
-                    implicitHeight: bg.height * Audio.defaultInput.audio.volume
+                    implicitHeight: bg.height * Audio.defaultInput?.audio.volume
                     color: Qt.alpha(Theme.colors.secondary, root.inputAlpha)
                 }
             }
@@ -149,7 +149,7 @@ AbstractBarButton {
         Text {
             width: 400
             wrapMode: Text.WordWrap
-            text: `Current Input: ${Audio.defaultInput.description} (${Audio.defaultInput.audio.volume.toFixed(2) * 100}%)\n\nCurrent Output:${Audio.defaultOutput.description} (${Audio.defaultOutput.audio.volume.toFixed(2) * 100}%)`
+            text: `Current Input: ${Audio.defaultInput?.description} (${Audio.defaultInput?.audio.volume.toFixed(2) * 100}%)\n\nCurrent Output:${Audio.defaultOutput?.description} (${Audio.defaultOutput?.audio.volume.toFixed(2) * 100}%)`
             color: Theme.colors.on_surface
         }
     }
