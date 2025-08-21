@@ -37,7 +37,7 @@ AbstractBarButton {
         Column {
             spacing: Theme.margin / 2
             Private.StyledText {
-                text: Time.date
+                text: Time.currentDate
                 color: Theme.colors.on_surface
             }
             Private.StyledText {
@@ -55,4 +55,6 @@ AbstractBarButton {
         popupOpen: root.menuOpen
         powerButton: root
     }
+
+    Component.onCompleted: print(Notify.centerItems)
 }
