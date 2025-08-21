@@ -65,7 +65,8 @@ QtObject {
             return zellijMatch[1].trim();
         }
 
-        formatted = formatted.replace(/\s*-\s*.*$/, "") // Remove everything after " - "
+        formatted = formatted
+        // .replace(/\s*-\s*.*$/, "") // Remove everything after " - "
         .replace(/\s*—\s*.*$/, "")                      // Remove everything after " — "
         .replace(/\s*\|\s*.*$/, "")                     // Remove everything after " | "
         .replace(/\s*\(\d+\)$/, "")                     // Remove trailing numbers in parentheses
