@@ -78,7 +78,7 @@ Singleton {
     onLocChanged: Requests.get(`https://wttr.in/${loc}?format=j1`, text => {
         const json = JSON.parse(text);
         // DEBUG
-        console.info(JSON.stringify(json, null, 2));
+        // console.info(JSON.stringify(json, null, 2));
         cc = json.current_condition[0];
         forecast = json.weather;
     })
