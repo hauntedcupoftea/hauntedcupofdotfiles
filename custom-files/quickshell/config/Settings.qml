@@ -14,7 +14,7 @@ QtObject {
     readonly property list<string> sessionMessages: ["Session Menu", "pwease don't go ;-;", "I'll miss you if you leave...", "Are you sure you want to exit?", "We'll be waiting for your return!", "i will literally cut myself again if you leave", "Don't leave me, I'm scared.", "You're not allowed to leave.", "If you go, you'll regret it."]
     // edit this to choose which (problematic) tray icons are ignored by ID
     readonly property list<string> ignoredTrayItems: ["spotify-client"]
-    readonly property int trayMenuWidth: 70
+    readonly property int notificationWidth: 400
     readonly property real volumeChange: 5
     // speed of scrolling text
     property real pixelsPerSecond: 120

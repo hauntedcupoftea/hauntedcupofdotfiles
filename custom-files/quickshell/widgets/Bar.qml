@@ -75,9 +75,8 @@ Rectangle {
                 id: sysTray
             }
 
-            Text {
-                text: Notify.items.length
-                color: Theme.colors.on_surface
+            NotificationCenter {
+                id: notifications
             }
 
             SessionMenu {
