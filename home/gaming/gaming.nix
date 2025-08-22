@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     mangohud
     protonup-qt
@@ -11,6 +11,7 @@
     winetricks
     goverlay
     samrewritten
+    r2modman
     vulkan-tools
   ];
 
