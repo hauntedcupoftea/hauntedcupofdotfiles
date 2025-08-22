@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   imports = [
     ./gammastep.nix
     ./hyprland.nix
@@ -6,7 +6,7 @@
     # ./wofi.nix # use either this or walker.
     ./hyprlock.nix
     ./hyprpaper.nix
-    ./mako.nix
+    # ./mako.nix # shilling gaming.
     # ./osd.nix # swayosd is weird. i'll write my own.
     # ./waybar.nix # goodbye
     ./walker.nix
