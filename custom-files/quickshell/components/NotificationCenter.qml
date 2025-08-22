@@ -6,7 +6,7 @@ import "internal" as Private
 
 AbstractBarButton {
     id: root
-    implicitWidth: indicator.width + Theme.padding
+    implicitWidth: indicator.width + (Theme.padding * 2)
     implicitHeight: Theme.barHeight - Theme.margin
 
     MouseArea {
