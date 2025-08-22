@@ -55,6 +55,4 @@ AbstractBarButton {
         popupOpen: root.menuOpen
         powerButton: root
     }
-
-    Component.onCompleted: print(Notify.centerItems)
 }
