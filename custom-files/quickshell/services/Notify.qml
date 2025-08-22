@@ -10,6 +10,15 @@ import qs.services
 
 Singleton {
     id: root
+    property string indicatorIcon: {
+        if (root.doNotDisturb) {
+            return "󱏪";
+        }
+        if (root.items.length > 0) {
+            return "󰅸";
+        }
+        return "󰂜";
+    }
 
     component NotificationItem: QtObject {
         id: notifItem
@@ -18,6 +27,7 @@ Singleton {
         property Notification n: null
         property double received: new Date().getTime()
         property string receivedString: root.formatTimeAgo(received)
+        readonly property bool canReply: n.hasInlineReply
         readonly property string summary: n.summary
         readonly property string body: n.body
         readonly property string appIcon: n.appIcon
@@ -46,6 +56,8 @@ Singleton {
             }
         }
 
+        Component.onCompleted: print(n.hasInlineReply)
+
         readonly property Connections conn: Connections {
             target: notifItem.n.Retainable
 
@@ -54,14 +66,13 @@ Singleton {
             }
 
             function onAboutToDestroy(): void {
-                // notifItem.n.dismiss(); // this is problematic for discord notifications somehow
                 notifItem.destroy();
             }
         }
     }
 
     property list<NotificationItem> items: []
-    property list<NotificationItem> popups: items.filter(n => n.popup)
+    property list<NotificationItem> popups: items.filter(n => n && n.popup)
 
     // Configuration
     property bool doNotDisturb: false
@@ -88,10 +99,11 @@ Singleton {
 
         onNotification: notification => {
             notification.tracked = true;
-            root.items.push(notifWrap.createObject(root, {
-                popup: true,
-                n: notification
-            }));
+            if (notification)
+                root.items.unshift(notifWrap.createObject(root, {
+                    popup: true,
+                    n: notification
+                }));
         }
     }
 
@@ -102,9 +114,22 @@ Singleton {
             for (const notif of root.items)
                 notif.popup = false;
         }
+
+        function clearNotifications(): void {
+            root.items = [];
+        }
+
         function toggleDND(): void {
             root.doNotDisturb = !root.doNotDisturb;
         }
+    }
+
+    function toggleDND() {
+        root.doNotDisturb = !root.doNotDisturb;
+    }
+
+    function clearNotifications() {
+        root.items = [];
     }
 
     function formatTimeAgo(timestamp: double): string {
