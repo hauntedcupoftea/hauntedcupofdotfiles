@@ -1,7 +1,7 @@
-{ ... }: {
+{...}: {
   # Mako configuration
   services.mako = {
-    enable = true;
+    enable = false; # turn this on if want mako
     settings = {
       actions = true;
       history = true;
