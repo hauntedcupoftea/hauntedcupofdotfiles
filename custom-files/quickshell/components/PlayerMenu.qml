@@ -66,6 +66,7 @@ AbstractBarButton {
             text: root.playerIcon
         }
         Private.ScrollingText {
+            Layout.alignment: Qt.AlignVCenter
             Layout.minimumHeight: Theme.font.large * 1.3
             Layout.maximumWidth: 256
             Layout.minimumWidth: 128

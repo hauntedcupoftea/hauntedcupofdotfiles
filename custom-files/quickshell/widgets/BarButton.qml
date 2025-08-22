@@ -47,7 +47,7 @@ Item {
 
         background: Rectangle {
             id: buttonBackground
-            radius: Theme.rounding.verysmall
+            radius: Theme.rounding.small
             color: toggleButton.hovered ? barButton.hoverColor : barButton.defaultColor
 
             states: State {

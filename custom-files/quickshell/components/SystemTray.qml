@@ -72,9 +72,9 @@ Rectangle {
                     radius: Theme.rounding.full
                     color: {
                         if (sysTrayButton.pressed)
-                            return Theme.colors.surface_container_highest;
+                            return Theme.colors.surface_bright;
                         if (sysTrayButton.hovered)
-                            return Theme.colors.surface_container_high;
+                            return Theme.colors.surface_container_highest;
                         return Theme.colors.surface_container;
                     }
 
