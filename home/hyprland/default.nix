@@ -6,8 +6,7 @@
     # ./wofi.nix # use either this or walker.
     ./hyprlock.nix
     ./hyprpaper.nix
-    ./mako.nix # I have disabled this.
-    # ./osd.nix # swayosd is weird. i'll write my own.
+    # ./mako.nix # I have disabled this.
     # ./waybar.nix # goodbye
     ./walker.nix
     ./wleave.nix
