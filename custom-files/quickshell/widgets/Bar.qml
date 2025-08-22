@@ -5,6 +5,7 @@ import QtQuick.Layouts
 
 import qs.components
 import qs.theme
+import qs.services
 
 // import qs.services
 
@@ -72,6 +73,11 @@ Rectangle {
 
             SystemTray {
                 id: sysTray
+            }
+
+            Text {
+                text: Notify.items.length
+                color: Theme.colors.on_surface
             }
 
             SessionMenu {
