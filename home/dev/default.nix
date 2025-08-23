@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   imports = [
     # ./ags.nix
     ./git.nix
@@ -17,6 +17,7 @@
     geckodriver # selenium-like browser automation for firefox
     zrok # self hosted ngrok
     zathura # pdf viewer
+    gh # github-cli
   ];
 
   # my preferred, feel free to change:
