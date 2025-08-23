@@ -146,7 +146,7 @@ in {
 
       # Start-up applications
       exec-once = [
-        "notify-send Welcome"
+        "uwsm app -- qs -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/"
         "uwsm app -- clipse -listen"
         "uwsm app -- gnome-keyring-daemon --start --components=pkcs11,secrets"
       ];
