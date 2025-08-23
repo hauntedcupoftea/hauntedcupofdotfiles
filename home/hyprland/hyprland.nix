@@ -147,7 +147,7 @@ in {
 
       # Start-up applications
       exec-once = [
-        "uwsm app -- qs -p ~/hauntedcupofdotfiles/custom-files/quickshell/" # temporary quickshell hack (does not work lmao)
+        "uwsm app -- qs -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/" # temporary quickshell hack (does not work lmao)
         "uwsm app -- clipse -listen"
         "uwsm app -- gnome-keyring-daemon --start --components=pkcs11,secrets"
       ];
