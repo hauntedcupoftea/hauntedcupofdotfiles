@@ -78,10 +78,9 @@ in {
 
           # Alt Mods (color pickers, calculator, etc.)
           "$altMod, c, exec, uwsm app -- hyprpicker -a"
-          # "$altMod, space, exec, uwsm app -- $terminal --class kalker -e kalker -r --no-leading-eq"
         ]
         ++ (
-          # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
+          # Binds $mod + [shift +] {1...9} to [move to] workspace {1...9}
           builtins.concatLists (builtins.genList
             (
               i: let
@@ -147,7 +146,7 @@ in {
 
       # Start-up applications
       exec-once = [
-        "uwsm app -- qs -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/" # temporary quickshell hack (does not work lmao)
+        "uwsm app -- qs -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/"
         "uwsm app -- clipse -listen"
         "uwsm app -- gnome-keyring-daemon --start --components=pkcs11,secrets"
       ];
