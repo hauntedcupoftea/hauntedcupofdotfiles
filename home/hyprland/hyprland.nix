@@ -50,8 +50,7 @@ in {
           "$mod, B, togglefloating"
           "$mod, V, exec, uwsm app -- $terminal --class clipse -e 'clipse'"
           # walker-binds
-          "$mod, space, exec, uwsm app -- walker" # standard run
-          "$mod, tab, exec, uwsm app -- walker -n --modules windows" # window picker
+          "$mod, space, exec, uwsm app -- sherlock" # standard run
 
           # Move focus
           "$mod, h, movefocus, l"
