@@ -56,13 +56,11 @@ Singleton {
             }
         }
 
-        Component.onCompleted: print(n.hasInlineReply)
-
         readonly property Connections conn: Connections {
             target: notifItem.n.Retainable
 
             function onDropped(): void {
-                root.items.splice(root.items.indexOf(notifItem), 1); // remove from list
+                root.items.splice(root.items.indexOf(notifItem), 1);
             }
 
             function onAboutToDestroy(): void {
