@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   programs.sherlock = {
-    package = pkgs.sherlock;
+    package = pkgs.sherlock-launcher;
     enable = true;
     systemd.enable = true;
     aliases = {
