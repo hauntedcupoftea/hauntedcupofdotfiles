@@ -47,16 +47,17 @@ PopupWindow {
             color: Theme.colors.outline
         }
 
-        ColumnLayout {
-            id: content
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.right: parent.right
+        ListView {
+            id: notificationList
+
+            anchors.fill: parent
             anchors.margins: Theme.padding
             spacing: Theme.padding
+            model: Notify.items
+            orientation: ListView.Vertical
 
-            RowLayout {
-                Layout.fillWidth: true
+            header: RowLayout {
+                implicitWidth: Settings.notificationWidth
 
                 Text {
                     Layout.alignment: Qt.AlignLeft
@@ -96,98 +97,88 @@ PopupWindow {
                     }
                 }
             }
+            delegate: NotificationCard {
+                required property var modelData
+                required property int index
 
-            ListView {
-                id: notificationList
-                implicitWidth: Settings.notificationWidth
+                n: modelData
+            }
 
-                model: Notify.items
-                spacing: Theme.padding / 2
-                interactive: count > 3
-
-                delegate: NotificationCard {
-                    required property var modelData
-                    required property int index
-
-                    n: modelData
-                }
-
-                add: Transition {
-                    ParallelAnimation {
-                        NumberAnimation {
-                            property: "height"
-                            from: 0
-                            duration: 250
-                            easing.type: Easing.OutBack
-                        }
-                        NumberAnimation {
-                            property: "opacity"
-                            from: 0
-                            to: 1
-                            duration: 200
-                            easing.type: Easing.OutCubic
-                        }
-                        NumberAnimation {
-                            property: "scale"
-                            from: 0.8
-                            to: 1
-                            duration: 250
-                            easing.type: Easing.OutBack
-                        }
-                    }
-                }
-
-                remove: Transition {
-                    ParallelAnimation {
-                        NumberAnimation {
-                            property: "height"
-                            to: 0
-                            duration: 200
-                            easing.type: Easing.InCubic
-                        }
-                        NumberAnimation {
-                            property: "opacity"
-                            to: 0
-                            duration: 150
-                            easing.type: Easing.InCubic
-                        }
-                        NumberAnimation {
-                            property: "scale"
-                            to: 0.8
-                            duration: 200
-                            easing.type: Easing.InCubic
-                        }
-                    }
-                }
-
-                displaced: Transition {
+            add: Transition {
+                ParallelAnimation {
                     NumberAnimation {
-                        properties: "x,y"
+                        property: "height"
+                        from: 0
+                        duration: 250
+                        easing.type: Easing.OutBack
+                    }
+                    NumberAnimation {
+                        property: "opacity"
+                        from: 0
+                        to: 1
                         duration: 200
                         easing.type: Easing.OutCubic
                     }
+                    NumberAnimation {
+                        property: "scale"
+                        from: 0.8
+                        to: 1
+                        duration: 250
+                        easing.type: Easing.OutBack
+                    }
                 }
             }
-            ColumnLayout {
-                visible: Notify.items.length === 0
-                spacing: Theme.padding
-                Layout.alignment: Qt.AlignCenter
 
-                StyledText {
-                    Layout.alignment: Qt.AlignHCenter
-                    text: "󰂜"
-                    font.pixelSize: 48
-                    color: Theme.colors.on_surface_variant
-                    opacity: 0.4
+            remove: Transition {
+                ParallelAnimation {
+                    NumberAnimation {
+                        property: "height"
+                        to: 0
+                        duration: 200
+                        easing.type: Easing.InCubic
+                    }
+                    NumberAnimation {
+                        property: "opacity"
+                        to: 0
+                        duration: 150
+                        easing.type: Easing.InCubic
+                    }
+                    NumberAnimation {
+                        property: "scale"
+                        to: 0.8
+                        duration: 200
+                        easing.type: Easing.InCubic
+                    }
                 }
+            }
 
-                Text {
-                    Layout.alignment: Qt.AlignHCenter
-                    text: "No notifications"
-                    color: Theme.colors.on_surface_variant
-                    opacity: 0.6
-                    font.pixelSize: Theme.font.normal
+            displaced: Transition {
+                NumberAnimation {
+                    properties: "x,y"
+                    duration: 200
+                    easing.type: Easing.OutCubic
                 }
+            }
+        }
+        ColumnLayout {
+            visible: Notify.items.length === 0
+            spacing: Theme.padding
+            Layout.alignment: Qt.AlignCenter
+
+            StyledText {
+                Layout.alignment: Qt.AlignHCenter
+                text: "󰂜"
+                font.pixelSize: 48
+                color: Theme.colors.on_surface_variant
+                opacity: 0.4
+            }
+
+            Text {
+                Layout.alignment: Qt.AlignHCenter
+                text: "No notifications"
+                color: Theme.colors.on_surface_variant
+                opacity: 0.6
+                font.pixelSize: Theme.font.normal
             }
         }
     }
