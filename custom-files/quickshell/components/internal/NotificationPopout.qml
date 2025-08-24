@@ -67,12 +67,8 @@ PopupWindow {
                     font.pixelSize: Theme.font.larger
                 }
 
-                Item {
-                    Layout.fillWidth: true
-                }
-
                 Rectangle {
-                    Layout.preferredHeight: 32
+                    Layout.preferredHeight: 28
                     Layout.preferredWidth: clearAllText.implicitWidth + Theme.padding * 2
                     radius: Theme.rounding.small
                     color: clearAllMouseArea.containsMouse ? Theme.colors.secondary : Theme.colors.secondary_container
@@ -161,9 +157,9 @@ PopupWindow {
             }
         }
         ColumnLayout {
+            anchors.centerIn: parent
             visible: Notify.items.length === 0
             spacing: Theme.padding
-            Layout.alignment: Qt.AlignCenter
 
             StyledText {
                 Layout.alignment: Qt.AlignHCenter
