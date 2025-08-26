@@ -1,11 +1,12 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [
-    git
-    gh
-    # yaziPlugins.gitui
-  ];
+{ pkgs, ... }: {
+  home.packages = with pkgs; [ gitui ];
 
   programs.gitui = {
-    enable = false; # https://github.com/gitui-org/gitui/issues/2702
+    enable = true;
   };
+
+  # catppuccin.gitui = {
+  #   enable = true;
+  #   flavor = "mocha";
+  # };
 }
