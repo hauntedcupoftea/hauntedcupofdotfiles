@@ -89,6 +89,11 @@
           args = ["--stdio"];
         };
 
+        dprint = {
+          command = lib.getExe pkgs.dprint;
+          args = ["lsp"];
+        };
+
         deno-lsp = {
           command = lib.getExe pkgs.deno;
           args = ["lsp"];
@@ -265,7 +270,7 @@
           name = "svelte";
           auto-format = true;
           language-servers = ["typescript-ls" "svelte-ls" "tailwindcss-ls" "uwu-colors"];
-          formatter = deno "svelte";
+          # formatter = deno "svelte"; # I don't think we need this.
         }
 
         # --- HTML ---
