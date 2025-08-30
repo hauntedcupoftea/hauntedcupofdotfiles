@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   imports = [
     # ./gnome.nix # fallback
     # ./appimage.nix
@@ -9,5 +9,6 @@
     ./podman.nix
     ./teamviewer.nix
     ./xdg.nix
+    ./mail.nix
   ];
 }
