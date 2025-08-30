@@ -33,7 +33,6 @@
     overskride # bluetooth but good
     peazip # winrar but good
     remmina # rdp but good
-    whatsie # whatsapp
     tparted # partition mgmt
     parted # maybe we need this
     inetutils
