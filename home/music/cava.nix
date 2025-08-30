@@ -1,6 +1,4 @@
-{ matugenTheme
-, ...
-}: {
+{matugenTheme, ...}: {
   programs.cava = {
     enable = true;
     settings = {
@@ -26,16 +24,16 @@
       };
 
       color = {
-        background = "'#${matugenTheme.colors.dark.surface_container_lowest}'";
+        background = "'#${matugenTheme.colors.surface_container_lowest.default}'";
         gradient = true;
-        gradient_color_1 = "'#${matugenTheme.colors.dark.primary}'";
-        gradient_color_2 = "'#${matugenTheme.colors.dark.secondary}'";
-        gradient_color_3 = "'#${matugenTheme.colors.dark.tertiary}'";
-        gradient_color_4 = "'#${matugenTheme.colors.dark.primary_container}'";
-        gradient_color_5 = "'#${matugenTheme.colors.dark.secondary_container}'";
-        gradient_color_6 = "'#${matugenTheme.colors.dark.tertiary_container}'";
-        gradient_color_7 = "'#${matugenTheme.colors.dark.on_secondary_container}'";
-        gradient_color_8 = "'#${matugenTheme.colors.dark.on_primary_container}'";
+        gradient_color_1 = "'#${matugenTheme.colors.primary.default}'";
+        gradient_color_2 = "'#${matugenTheme.colors.secondary.default}'";
+        gradient_color_3 = "'#${matugenTheme.colors.tertiary.default}'";
+        gradient_color_4 = "'#${matugenTheme.colors.primary_container.default}'";
+        gradient_color_5 = "'#${matugenTheme.colors.secondary_container.default}'";
+        gradient_color_6 = "'#${matugenTheme.colors.tertiary_container.default}'";
+        gradient_color_7 = "'#${matugenTheme.colors.on_secondary_container.default}'";
+        gradient_color_8 = "'#${matugenTheme.colors.on_primary_container.default}'";
       };
 
       smoothing = {
