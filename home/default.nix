@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   imports = [
     ./dev
     ./gaming
@@ -20,6 +20,7 @@
   home.packages = with pkgs; [
     grimblast # ss
     hyprshot # ss
+    flameshot # better ss maybe
     wget # utility for downloading
     git # version control
     brightnessctl # brightness control
