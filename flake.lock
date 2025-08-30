@@ -704,15 +704,15 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1756557950,
-        "narHash": "sha256-OTAZCJWQQDq+fEW8r7yX3QqihnN8ju37ojnq+rYlBns=",
-        "owner": "InioX",
+        "lastModified": 1756569559,
+        "narHash": "sha256-Wqwlup7NEuVnwg0iA2VODTYRqAHT66vCuuISKBJ6BYI=",
+        "owner": "hauntedcupoftea",
         "repo": "matugen",
-        "rev": "4a9ca876d9b3c93398a6af51135ef38f83af2f0e",
+        "rev": "541582e2dc02ebf86d4b4b109fafa494e867a507",
         "type": "github"
       },
       "original": {
-        "owner": "InioX",
+        "owner": "hauntedcupoftea",
         "repo": "matugen",
         "type": "github"
       }

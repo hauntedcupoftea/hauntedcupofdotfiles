@@ -1,13 +1,12 @@
-{ inputs, pkgs, config, ... }:
-let
-  currentPolarity = config.programs.matugen.variant;
-  matugenTheme =
-    if currentPolarity == "dark"
-    then config.programs.matugen.theme.colors.dark
-    else config.programs.matugen.theme.colors.light;
-
-in
 {
+  inputs,
+  pkgs,
+  config,
+  ...
+}: let
+  currentPolarity = config.programs.matugen.variant;
+  matugenTheme = config.programs.matugen.theme.colors;
+in {
   imports = [
     inputs.stylix.nixosModules.stylix
     ./matugen.nix
@@ -40,22 +39,22 @@ in
 
     # heavily modified but inspo from https://github.com/make-42/stylix/blob/matugen-clean-diff-rebuild/stylix/palette.nix
     base16Scheme = with matugenTheme; {
-      base00 = background;
-      base01 = surface_container;
-      base02 = surface_container_high;
-      base03 = surface_bright;
-      base04 = outline;
-      base05 = on_surface_variant;
-      base06 = on_background;
-      base07 = on_primary_container;
-      base08 = error;
-      base09 = tertiary;
-      base0A = tertiary_fixed;
-      base0B = inverse_primary;
-      base0C = on_primary;
-      base0D = secondary;
-      base0E = primary;
-      base0F = on_error;
+      base00 = background."${currentPolarity}";
+      base01 = surface_container."${currentPolarity}";
+      base02 = surface_container_high."${currentPolarity}";
+      base03 = surface_bright."${currentPolarity}";
+      base04 = outline."${currentPolarity}";
+      base05 = on_surface_variant."${currentPolarity}";
+      base06 = on_background."${currentPolarity}";
+      base07 = on_primary_container."${currentPolarity}";
+      base08 = error."${currentPolarity}";
+      base09 = tertiary."${currentPolarity}";
+      base0A = tertiary_fixed."${currentPolarity}";
+      base0B = inverse_primary."${currentPolarity}";
+      base0C = on_primary."${currentPolarity}";
+      base0D = secondary."${currentPolarity}";
+      base0E = primary."${currentPolarity}";
+      base0F = on_error."${currentPolarity}";
     };
 
     cursor = {
