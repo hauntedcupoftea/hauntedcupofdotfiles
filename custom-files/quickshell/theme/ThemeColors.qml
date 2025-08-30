@@ -30,7 +30,7 @@ QtObject {
     }
 
     function getColor(name, fallbackColor = "#000000") {
-        const colorValue = themeView?.colors?.[root._polarityString]?.[name];
+        const colorValue = themeView?.colors?.[name].default;
         return Qt.color(colorValue ? "#" + colorValue : fallbackColor);
     }
 
