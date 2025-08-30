@@ -89,10 +89,11 @@
           args = ["--stdio"];
         };
 
-        dprint = {
-          command = lib.getExe pkgs.dprint;
-          args = ["lsp"];
-        };
+        # this is broken for unknown reasons.
+        # dprint = {
+        #   command = lib.getExe pkgs.dprint;
+        #   args = ["lsp"];
+        # };
 
         deno-lsp = {
           command = lib.getExe pkgs.deno;
