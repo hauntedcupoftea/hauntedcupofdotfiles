@@ -24,7 +24,7 @@
     };
 
     matugen = {
-      url = "github:InioX/matugen";
+      url = "github:hauntedcupoftea/matugen";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -64,48 +64,47 @@
       inputs.quickshell.follows = "quickshell";
     };
   };
-  outputs =
-    { self
-    , nixpkgs
-    , rust-overlay
-    , ...
-    } @ inputs:
-    let
-      # Import custom packages overlay from pkgs directory
-      customPackagesOverlay = import ./pkgs { inherit inputs; };
+  outputs = {
+    self,
+    nixpkgs,
+    rust-overlay,
+    ...
+  } @ inputs: let
+    # Import custom packages overlay from pkgs directory
+    customPackagesOverlay = import ./pkgs {inherit inputs;};
 
-      # Function to create pkgs with all overlays
-      mkPkgs = system: import nixpkgs {
+    # Function to create pkgs with all overlays
+    mkPkgs = system:
+      import nixpkgs {
         inherit system;
         overlays = [
           rust-overlay.overlays.default
           customPackagesOverlay
         ];
       };
-    in
-    {
-      # Add packages output for easier testing
-      packages.x86_64-linux = {
-        hyprland-preview-share-picker = (mkPkgs "x86_64-linux").hyprland-preview-share-picker;
-        default = self.packages.x86_64-linux.hyprland-preview-share-picker;
-      };
+  in {
+    # Add packages output for easier testing
+    packages.x86_64-linux = {
+      hyprland-preview-share-picker = (mkPkgs "x86_64-linux").hyprland-preview-share-picker;
+      default = self.packages.x86_64-linux.hyprland-preview-share-picker;
+    };
 
-      nixosConfigurations = {
-        "Anand-GE66-Raider" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs;
-          };
-          modules = [
-            {
-              nixpkgs.overlays = [
-                rust-overlay.overlays.default
-                customPackagesOverlay
-              ];
-            }
-            ./hosts/ge66-raider
-          ];
+    nixosConfigurations = {
+      "Anand-GE66-Raider" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs;
         };
+        modules = [
+          {
+            nixpkgs.overlays = [
+              rust-overlay.overlays.default
+              customPackagesOverlay
+            ];
+          }
+          ./hosts/ge66-raider
+        ];
       };
     };
+  };
 }

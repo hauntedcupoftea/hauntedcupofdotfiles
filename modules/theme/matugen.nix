@@ -1,6 +1,7 @@
 {
   inputs,
   config,
+  pkgs,
   ...
 }: {
   imports = [inputs.matugen.nixosModules.default];
@@ -10,6 +11,7 @@
     variant = "dark";
     # contrast = 0.24;
     type = "scheme-rainbow";
+    package = inputs.matugen.packages.${pkgs.system}.default;
   };
 
   home-manager.extraSpecialArgs = {
