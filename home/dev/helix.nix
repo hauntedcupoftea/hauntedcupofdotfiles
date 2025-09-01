@@ -229,7 +229,7 @@
           auto-format = true;
           formatter = {
             command = "rustfmt";
-            args = ["--emit=stdout"];
+            args = ["--emit=stdout --edition=2024"];
           };
           language-servers = ["rust-analyzer-ls" "harper-ls"];
         }
