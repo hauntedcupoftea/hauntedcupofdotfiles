@@ -36,6 +36,7 @@
     tparted # partition mgmt
     parted # maybe we need this
     inetutils
+    zapzap
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
