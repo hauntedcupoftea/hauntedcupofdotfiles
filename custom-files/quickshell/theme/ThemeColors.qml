@@ -1,6 +1,6 @@
 import QtQuick
 import Quickshell.Io
-import "../config"
+import qs.config
 
 QtObject {
     id: root
@@ -9,9 +9,254 @@ QtObject {
 
     property var themeView: {
         "colors": {
-            "dark": {},
-            "light": {}
-        }
+            "background": {
+                "dark": "1a1a1a",
+                "light": "ffffff",
+                "default": "1a1a1a"
+            },
+            "error": {
+                "dark": "ff6b6b",
+                "light": "d32f2f",
+                "default": "ff6b6b"
+            },
+            "error_container": {
+                "dark": "4a0000",
+                "light": "ffebee",
+                "default": "4a0000"
+            },
+            "inverse_on_surface": {
+                "dark": "f5f5f5",
+                "light": "212121",
+                "default": "f5f5f5"
+            },
+            "inverse_primary": {
+                "dark": "3f51b5",
+                "light": "c5cae9",
+                "default": "3f51b5"
+            },
+            "inverse_surface": {
+                "dark": "f5f5f5",
+                "light": "212121",
+                "default": "f5f5f5"
+            },
+            "on_background": {
+                "dark": "e0e0e0",
+                "light": "212121",
+                "default": "e0e0e0"
+            },
+            "on_error": {
+                "dark": "000000",
+                "light": "ffffff",
+                "default": "000000"
+            },
+            "on_error_container": {
+                "dark": "ffcdd2",
+                "light": "b71c1c",
+                "default": "ffcdd2"
+            },
+            "on_primary": {
+                "dark": "ffffff",
+                "light": "ffffff",
+                "default": "ffffff"
+            },
+            "on_primary_container": {
+                "dark": "e8eaf6",
+                "light": "1a237e",
+                "default": "e8eaf6"
+            },
+            "on_primary_fixed": {
+                "dark": "1a237e",
+                "light": "1a237e",
+                "default": "1a237e"
+            },
+            "on_primary_fixed_variant": {
+                "dark": "303f9f",
+                "light": "303f9f",
+                "default": "303f9f"
+            },
+            "on_secondary": {
+                "dark": "ffffff",
+                "light": "ffffff",
+                "default": "ffffff"
+            },
+            "on_secondary_container": {
+                "dark": "f3e5f5",
+                "light": "4a148c",
+                "default": "f3e5f5"
+            },
+            "on_secondary_fixed": {
+                "dark": "4a148c",
+                "light": "4a148c",
+                "default": "4a148c"
+            },
+            "on_secondary_fixed_variant": {
+                "dark": "7b1fa2",
+                "light": "7b1fa2",
+                "default": "7b1fa2"
+            },
+            "on_surface": {
+                "dark": "e0e0e0",
+                "light": "212121",
+                "default": "e0e0e0"
+            },
+            "on_surface_variant": {
+                "dark": "bdbdbd",
+                "light": "616161",
+                "default": "bdbdbd"
+            },
+            "on_tertiary": {
+                "dark": "ffffff",
+                "light": "ffffff",
+                "default": "ffffff"
+            },
+            "on_tertiary_container": {
+                "dark": "fce4ec",
+                "light": "880e4f",
+                "default": "fce4ec"
+            },
+            "on_tertiary_fixed": {
+                "dark": "880e4f",
+                "light": "880e4f",
+                "default": "880e4f"
+            },
+            "on_tertiary_fixed_variant": {
+                "dark": "ad1457",
+                "light": "ad1457",
+                "default": "ad1457"
+            },
+            "outline": {
+                "dark": "757575",
+                "light": "9e9e9e",
+                "default": "757575"
+            },
+            "outline_variant": {
+                "dark": "424242",
+                "light": "e0e0e0",
+                "default": "424242"
+            },
+            "primary": {
+                "dark": "7986cb",
+                "light": "3f51b5",
+                "default": "7986cb"
+            },
+            "primary_container": {
+                "dark": "303f9f",
+                "light": "e8eaf6",
+                "default": "303f9f"
+            },
+            "primary_fixed": {
+                "dark": "e8eaf6",
+                "light": "e8eaf6",
+                "default": "e8eaf6"
+            },
+            "primary_fixed_dim": {
+                "dark": "7986cb",
+                "light": "7986cb",
+                "default": "7986cb"
+            },
+            "scrim": {
+                "dark": "000000",
+                "light": "000000",
+                "default": "000000"
+            },
+            "secondary": {
+                "dark": "ba68c8",
+                "light": "9c27b0",
+                "default": "ba68c8"
+            },
+            "secondary_container": {
+                "dark": "7b1fa2",
+                "light": "f3e5f5",
+                "default": "7b1fa2"
+            },
+            "secondary_fixed": {
+                "dark": "f3e5f5",
+                "light": "f3e5f5",
+                "default": "f3e5f5"
+            },
+            "secondary_fixed_dim": {
+                "dark": "ba68c8",
+                "light": "ba68c8",
+                "default": "ba68c8"
+            },
+            "shadow": {
+                "dark": "000000",
+                "light": "000000",
+                "default": "000000"
+            },
+            "surface": {
+                "dark": "1a1a1a",
+                "light": "ffffff",
+                "default": "1a1a1a"
+            },
+            "surface_bright": {
+                "dark": "2a2a2a",
+                "light": "ffffff",
+                "default": "2a2a2a"
+            },
+            "surface_container": {
+                "dark": "1e1e1e",
+                "light": "f5f5f5",
+                "default": "1e1e1e"
+            },
+            "surface_container_high": {
+                "dark": "242424",
+                "light": "eeeeee",
+                "default": "242424"
+            },
+            "surface_container_highest": {
+                "dark": "2a2a2a",
+                "light": "e8e8e8",
+                "default": "2a2a2a"
+            },
+            "surface_container_low": {
+                "dark": "181818",
+                "light": "fafafa",
+                "default": "181818"
+            },
+            "surface_container_lowest": {
+                "dark": "121212",
+                "light": "ffffff",
+                "default": "121212"
+            },
+            "surface_dim": {
+                "dark": "1a1a1a",
+                "light": "e0e0e0",
+                "default": "1a1a1a"
+            },
+            "surface_tint": {
+                "dark": "7986cb",
+                "light": "3f51b5",
+                "default": "7986cb"
+            },
+            "surface_variant": {
+                "dark": "424242",
+                "light": "f5f5f5",
+                "default": "424242"
+            },
+            "tertiary": {
+                "dark": "f48fb1",
+                "light": "e91e63",
+                "default": "f48fb1"
+            },
+            "tertiary_container": {
+                "dark": "ad1457",
+                "light": "fce4ec",
+                "default": "ad1457"
+            },
+            "tertiary_fixed": {
+                "dark": "fce4ec",
+                "light": "fce4ec",
+                "default": "fce4ec"
+            },
+            "tertiary_fixed_dim": {
+                "dark": "f48fb1",
+                "light": "f48fb1",
+                "default": "f48fb1"
+            }
+        },
+        "is_dark_mode": true,
+        "mode": "Dark"
     }
 
     readonly property FileView themeFile: FileView {
