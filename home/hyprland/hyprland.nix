@@ -28,7 +28,7 @@ in {
 
       general = {
         gaps_in = 6;
-        gaps_out = "8,16,16,16";
+        gaps_out = "8";
       };
 
       misc = {
