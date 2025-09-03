@@ -14,10 +14,11 @@
 
   home.packages = with pkgs; [
     bruno # api testing tool that works on plaintext
-    geckodriver # selenium-like browser automation for firefox
+    geckodriver # Selenium-like browser automation for Firefox
     zrok # self hosted ngrok
-    zathura # pdf viewer
-    gh # github-cli
+    zathura # PDF viewer
+    gh # GitHub-cli
+    figma-linux # UI design
   ];
 
   # my preferred, feel free to change:
