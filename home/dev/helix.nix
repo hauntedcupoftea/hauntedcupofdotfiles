@@ -62,6 +62,20 @@
           render = true;
         };
       };
+      keys = {
+        normal = {
+          space = {
+            # https://github.com/helix-editor/helix/wiki/Recipes#advanced-file-explorer-with-yazi
+            e = [
+              ":sh rm -f /tmp/unique-file-h21a434"
+              ":insert-output yazi '%{buffer_name}' --chooser-file=/tmp/unique-file-h21a434"
+              ":insert-output echo \"x1b[?1049h\" > /dev/tty"
+              ":open %sh{cat /tmp/unique-file-h21a434}"
+              ":redraw"
+            ];
+          };
+        };
+      };
     };
 
     # Language specific configurations
@@ -88,12 +102,6 @@
           command = "basedpyright-langserver";
           args = ["--stdio"];
         };
-
-        # this is broken for unknown reasons.
-        # dprint = {
-        #   command = lib.getExe pkgs.dprint;
-        #   args = ["lsp"];
-        # };
 
         deno-lsp = {
           command = lib.getExe pkgs.deno;
@@ -191,11 +199,16 @@
           command = lib.getExe pkgs.deno;
           args = ["fmt" "-" "--ext" lang];
         };
+
+        prettier = lang: {
+          command = lib.getExe pkgs.nodePackages.prettier;
+          args = ["--parser" lang];
+        };
       in [
         # --- Nix ---
         {
           name = "nix";
-          language-servers = ["nixd" "harper-ls"];
+          language-servers = ["nixd" "harper-ls" "nil-ls"];
           formatter.command = "alejandra";
           auto-format = true;
         }
@@ -271,7 +284,7 @@
           name = "svelte";
           auto-format = true;
           language-servers = ["typescript-ls" "svelte-ls" "tailwindcss-ls" "uwu-colors"];
-          # formatter = deno "svelte"; # I don't think we need this.
+          formatter = prettier "svelte";
         }
 
         # --- HTML ---
@@ -340,4 +353,17 @@
       ];
     };
   };
+
+  home.file.".config/helix/yazi-picker.sh".source = pkgs.writeShellScript "yazi-picker" ''
+    paths=$(yazi "$2" --chooser-file=/dev/stdout | while read -r; do printf "%q " "$REPLY"; done)
+
+    if [[ -n "$paths" ]]; then
+    	zellij action toggle-floating-panes
+    	zellij action write 27 # send <Escape> key
+    	zellij action write-chars ":$1 $paths"
+    	zellij action write 13 # send <Enter> key
+    else
+    	zellij action toggle-floating-panes
+    fi
+  '';
 }
