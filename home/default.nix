@@ -11,6 +11,7 @@
     ./terminals
     ./theme
     ./utils
+    ./mpv.nix
     ./xdg.nix
     ./zen-browser.nix
   ];
@@ -36,7 +37,6 @@
     parted # maybe we need this
     inetutils
     zapzap # WhatsApp
-    mpv
   ];
 
   home.sessionVariables = {
