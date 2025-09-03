@@ -12,11 +12,10 @@
     ./theme
     ./utils
     ./xdg.nix
-    # ./editors
     ./zen-browser.nix
   ];
 
-  # TODO: Organize this better
+  # TO-DO: Organize this better
   home.packages = with pkgs; [
     grimblast # ss
     hyprshot # ss
@@ -29,30 +28,16 @@
     easyeffects # eq and shit
     btop # system resource monitor
     fastfetch # cool sysinfo monitor
-    obsidian # notetaking
-    overskride # bluetooth but good
+    obsidian # note-taking
+    overskride # Bluetooth but good
     peazip # winrar but good
     remmina # rdp but good
     tparted # partition mgmt
     parted # maybe we need this
     inetutils
-    zapzap
+    zapzap # WhatsApp
+    mpv
   ];
-
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-  };
 
   home.sessionVariables = {
     BROWSER = "zen";

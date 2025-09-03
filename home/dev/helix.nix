@@ -5,6 +5,7 @@
 }: {
   home.packages = with pkgs; [
     helix
+    scooter
 
     # general
     harper
@@ -72,8 +73,17 @@
               ":insert-output echo \"x1b[?1049h\" > /dev/tty"
               ":open %sh{cat /tmp/unique-file-h21a434}"
               ":redraw"
+              ":set mouse false"
+              ":set mouse true"
             ];
           };
+          esc = ["collapse_selection" "keep_primary_selection"];
+          "C-r" = [
+            ":write-all"
+            ":insert-output scooter >/dev/tty"
+            ":redraw"
+            ":reload-all"
+          ];
         };
       };
     };
@@ -353,17 +363,4 @@
       ];
     };
   };
-
-  home.file.".config/helix/yazi-picker.sh".source = pkgs.writeShellScript "yazi-picker" ''
-    paths=$(yazi "$2" --chooser-file=/dev/stdout | while read -r; do printf "%q " "$REPLY"; done)
-
-    if [[ -n "$paths" ]]; then
-    	zellij action toggle-floating-panes
-    	zellij action write 27 # send <Escape> key
-    	zellij action write-chars ":$1 $paths"
-    	zellij action write 13 # send <Enter> key
-    else
-    	zellij action toggle-floating-panes
-    fi
-  '';
 }

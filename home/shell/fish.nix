@@ -1,10 +1,12 @@
-{ ... }: {
+{pkgs, ...}: {
   programs.fish = {
     enable = true;
     loginShellInit = "";
     interactiveShellInit = ''
       set fish_greeting # disable greeting
       starship init fish | source
+
+      bind \cz 'fg 2>/dev/null; commandline -f repaint'
     '';
     shellAliases = {
       ll = "ls -la";
@@ -13,20 +15,19 @@
     };
     functions = {
       y = ''
-        	set tmp (mktemp -t "yazi-cwd.XXXXXX")
-         	yazi $argv --cwd-file="$tmp"
-         	if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-         		builtin cd -- "$cwd"
-         	end
-         	rm -f -- "$tmp"
+        set tmp (mktemp -t "yazi-cwd.XXXXXX")
+        	yazi $argv --cwd-file="$tmp"
+        	if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+        		builtin cd -- "$cwd"
+        	end
+        	rm -f -- "$tmp"
       '';
     };
   };
 
   # catppuccin.fish.enable = true;
 
-  # this is potentially dangerous (enable after ags i think)
-  # home.sessionVariables = {
-  #   SHELL = "${pkgs.fish}/bin/fish";
-  # };
+  home.sessionVariables = {
+    SHELL = "${pkgs.fish}/bin/fish";
+  };
 }
