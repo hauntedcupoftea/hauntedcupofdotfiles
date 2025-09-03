@@ -6,6 +6,7 @@ import QtQuick
 
 import qs.components.internal as Private
 import qs.theme
+import qs.config
 
 Scope {
     id: bgScope
@@ -34,42 +35,47 @@ Scope {
             }
 
             Private.Corner {
+                visible: Settings.envelopeScreen || Settings.roundedBar
                 rotation: 0
-                x: Theme.padding
+                x: Settings.envelopeScreen ? Theme.padding : 0
                 anchors.bottom: parent.bottom
-                anchors.bottomMargin: Theme.padding
+                anchors.bottomMargin: Settings.envelopeScreen ? Theme.padding : 0
                 implicitHeight: Theme.padding
                 implicitWidth: Theme.padding
             }
 
             Private.Corner {
+                visible: Settings.envelopeScreen || Settings.roundedBar
                 rotation: 270
                 anchors.right: parent.right
-                anchors.rightMargin: Theme.padding
+                anchors.rightMargin: Settings.envelopeScreen ? Theme.padding : 0
                 anchors.bottom: parent.bottom
-                anchors.bottomMargin: Theme.padding
+                anchors.bottomMargin: Settings.envelopeScreen ? Theme.padding : 0
                 implicitHeight: Theme.padding
                 implicitWidth: Theme.padding
             }
 
             Private.Corner {
+                visible: Settings.envelopeScreen || Settings.roundedBar
                 rotation: 90
-                x: Theme.padding
+                x: Settings.envelopeScreen ? Theme.padding : 0
                 y: Theme.barHeight + Theme.debugOffsetHeight
                 implicitHeight: Theme.padding
                 implicitWidth: Theme.padding
             }
 
             Private.Corner {
+                visible: Settings.envelopeScreen || Settings.roundedBar
                 rotation: 180
                 anchors.right: parent.right
-                anchors.rightMargin: Theme.padding
+                anchors.rightMargin: Settings.envelopeScreen ? Theme.padding : 0
                 y: Theme.barHeight + Theme.debugOffsetHeight
                 implicitHeight: Theme.padding
                 implicitWidth: Theme.padding
             }
 
             Rectangle {
+                visible: Settings.envelopeScreen
                 anchors.left: parent.left
                 implicitHeight: parent.height
                 implicitWidth: Theme.padding
@@ -77,6 +83,7 @@ Scope {
             }
 
             Rectangle {
+                visible: Settings.envelopeScreen
                 anchors.bottom: parent.bottom
                 implicitWidth: parent.width
                 implicitHeight: Theme.padding
@@ -84,6 +91,7 @@ Scope {
             }
 
             Rectangle {
+                visible: Settings.envelopeScreen
                 anchors.right: parent.right
                 implicitHeight: parent.height
                 implicitWidth: Theme.padding

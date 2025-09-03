@@ -20,4 +20,6 @@ QtObject {
     property real pixelsPerSecond: 120
     property int visualizerBars: 16
     property int visualizerFPS: 60
+    property bool envelopeScreen: false
+    property bool roundedBar: true
 }
