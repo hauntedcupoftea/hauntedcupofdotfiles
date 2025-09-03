@@ -83,6 +83,8 @@
             ":insert-output scooter >/dev/tty"
             ":redraw"
             ":reload-all"
+            ":set mouse false"
+            ":set mouse true"
           ];
         };
       };
