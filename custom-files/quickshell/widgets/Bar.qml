@@ -12,6 +12,8 @@ import qs.services
 Rectangle {
     id: bar
     property var modelData
+    property real screenHeight
+    property real screenWidth
     color: Theme.colors.surface
 
     anchors {
@@ -32,6 +34,8 @@ Rectangle {
             anchors.left: parent.left
             spacing: Theme.padding
 
+            Component.onCompleted: print(bar.screenHeight, bar.screenWidth)
+
             OSButton {
                 Layout.leftMargin: Theme.padding
             }
@@ -43,19 +47,20 @@ Rectangle {
             }
         }
 
-        PlayerMenu {
-            id: player
-            anchors.right: hyprgaming.left
-            anchors.rightMargin: Theme.padding * 2
-        }
-        HyprlandWS {
-            id: hyprgaming
+        BarGroup {
+            id: centerPanel
             anchors.centerIn: parent
-        }
-        VolumeMenu {
-            id: volumeGaming
-            anchors.left: hyprgaming.right
-            anchors.leftMargin: Theme.padding * 2
+            spacing: Theme.padding
+            PlayerMenu {
+                id: player
+            }
+            HyprlandWS {
+                id: hyprgaming
+                Layout.alignment: Qt.AlignCenter
+            }
+            VolumeMenu {
+                id: volumeGaming
+            }
         }
 
         BarGroup {

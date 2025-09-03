@@ -32,6 +32,8 @@ Scope {
 
             Bar {
                 id: mainBar
+                screenHeight: (bgpanel.screen.height - Theme.barHeight - (Theme.padding * 2))
+                screenWidth: (bgpanel.screen.width - (Theme.padding * 2))
             }
 
             Private.Corner {
