@@ -65,14 +65,14 @@ AbstractBarButton {
             color: Theme.colors.secondary
             text: root.playerIcon
         }
-        Private.ScrollingText {
-            Layout.alignment: Qt.AlignVCenter
-            Layout.minimumHeight: Theme.font.large * 1.3
-            Layout.maximumWidth: 256
-            Layout.minimumWidth: 128
-            scrollingText: Player.active && qsTr(`${Player.active.trackArtist} - ${Player.active.trackTitle}`)
-            animate: Player.active && Player.active.isPlaying
-        }
+        // Private.ScrollingText {
+        //     Layout.alignment: Qt.AlignVCenter
+        //     Layout.minimumHeight: Theme.font.large * 1.3
+        //     Layout.maximumWidth: 256
+        //     Layout.minimumWidth: 128
+        //     scrollingText: Player.active && qsTr(`${Player.active.trackArtist} - ${Player.active.trackTitle}`)
+        //     animate: Player.active && Player.active.isPlaying
+        // }
         Private.Visualizer {
             Layout.fillHeight: true
             Layout.fillWidth: true
