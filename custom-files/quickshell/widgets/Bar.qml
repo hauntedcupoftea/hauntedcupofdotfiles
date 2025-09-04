@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 // import QtQuick.Layouts
 
 import qs.components
@@ -35,6 +36,10 @@ Rectangle {
             spacing: Theme.padding
             screenHeight: bar.screenHeight
             screenWidth: bar.screenWidth
+            gravity: Edges.Bottom | Edges.Right
+            position: Qt.rect(Theme.padding, Theme.barHeight + Theme.padding, 0, 0)
+            widthRatio: 0.3
+            heightRatio: 1
 
             Component.onCompleted: print(bar.screenHeight, bar.screenWidth)
 
@@ -56,6 +61,10 @@ Rectangle {
             screenHeight: bar.screenHeight
             screenWidth: bar.screenWidth
             spacing: Theme.padding
+            widthRatio: 0.3
+            heightRatio: 1
+            gravity: Edges.Bottom
+            position: Qt.rect(0.05 * bar.screenWidth, Theme.barHeight + Theme.padding, 0, 0)
             PlayerMenu {
                 id: player
             }
@@ -75,6 +84,10 @@ Rectangle {
             screenHeight: bar.screenHeight
             screenWidth: bar.screenWidth
             spacing: Theme.padding
+            gravity: Edges.Bottom
+            position: Qt.rect(Theme.padding, Theme.barHeight + Theme.padding, 0, 0)
+            widthRatio: 0.3
+            heightRatio: 1
 
             ConnectivityMenu {
                 id: connectivityMenu
