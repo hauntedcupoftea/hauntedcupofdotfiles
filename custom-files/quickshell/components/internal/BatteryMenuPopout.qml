@@ -1,5 +1,4 @@
 import Quickshell
-import Quickshell.Hyprland
 import Quickshell.Services.UPower
 import QtQuick
 import QtQuick.Layouts
@@ -10,27 +9,9 @@ import qs.services
 
 PopupWindow {
     id: root
-    property var powerButton
-    property bool popupOpen
     property string networkText: JSON.stringify(Network.availableNetworks, null, 2)
-    anchor {
-        item: powerButton
-        rect: Qt.rect(powerButton.width / 2, powerButton.height + Theme.padding, 0, 0)
-        gravity: Edges.Bottom
-    }
+    property string sidebarTitle: "Battery Settings"
     color: "transparent"
-
-    implicitWidth: content.width + (Theme.padding * 2)
-    implicitHeight: content.height + (Theme.padding * 2)
-    visible: popupOpen
-
-    HyprlandFocusGrab {
-        active: root.visible
-        windows: [root]
-        onCleared: {
-            root.powerButton.action.trigger();
-        }
-    }
 
     Rectangle {
         anchors.fill: parent

@@ -1,22 +1,17 @@
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
-import Quickshell.Hyprland
 import qs.theme
 import qs.config
 import qs.services
 
 PopupWindow {
     id: root
-    required property var powerButton
-    required property bool popupOpen
 
     implicitWidth: Settings.notificationWidth + (Theme.padding * 2)
     implicitHeight: 600
 
     anchor {
-        item: powerButton
-        rect: Qt.rect(powerButton.width, powerButton.height + Theme.padding, 0, 0)
         gravity: Edges.Bottom | Edges.Left // qmllint disable
     }
     color: "transparent"
@@ -27,16 +22,6 @@ PopupWindow {
             easing.type: Easing.OutCubic
         }
     }
-
-    HyprlandFocusGrab {
-        active: root.visible
-        windows: [root]
-        onCleared: {
-            root.powerButton.action.trigger();
-        }
-    }
-
-    visible: popupOpen
 
     Rectangle {
         anchors.fill: parent

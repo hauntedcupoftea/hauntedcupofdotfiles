@@ -1,28 +1,20 @@
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
-import Quickshell.Hyprland
 
 import qs.theme
 import qs.config
 
 PopupWindow {
     id: root
-    required property var powerButton
-    required property bool popupOpen
     property string hoveredAction: "Session Menu"
     property list<string> sessionMessages: Settings.sessionMessages
 
     function getRandomSessionMessage(messages) {
         const randomIndex = Math.floor(Math.random() * sessionMessages.length);
+        nameReset.running = true;
         return sessionMessages[randomIndex];
     }
-    anchor {
-        item: powerButton
-        rect: Qt.rect(powerButton.width, powerButton.height + Theme.padding, 0, 0)
-        gravity: Edges.Bottom | Edges.Left // qmllint disable
-    }
-
     color: "transparent"
 
     Behavior on height {
@@ -32,21 +24,12 @@ PopupWindow {
         }
     }
 
-    HyprlandFocusGrab {
-        active: root.visible
-        windows: [root]
-        onCleared: {
-            root.powerButton.action.trigger();
-        }
+    Timer {
+        id: nameReset
+        interval: 2500
+        running: false
+        onTriggered: root.hoveredAction = "Session Menu"
     }
-
-    onPopupOpenChanged: {
-        root.hoveredAction = "Session Menu";
-    }
-
-    implicitWidth: sessionMenuColumn.width + (Theme.padding * 2)
-    implicitHeight: sessionMenuColumn.height + (Theme.padding * 2)
-    visible: popupOpen
 
     Rectangle {
         anchors.fill: parent

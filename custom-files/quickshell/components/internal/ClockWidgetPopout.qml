@@ -1,35 +1,13 @@
-pragma ComponentBehavior: Bound
-
 import Quickshell
-import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+
 import qs.theme
 
 PopupWindow {
     id: root
-    property var powerButton
-    property bool popupOpen
-
-    anchor {
-        item: powerButton
-        rect: Qt.rect(Theme.padding / 4, powerButton.height + Theme.padding, 0, 0)
-        gravity: Edges.Bottom | Edges.Right
-    }
-
     color: "transparent"
-    implicitWidth: 400
-    implicitHeight: 600
-    visible: popupOpen
-
-    HyprlandFocusGrab {
-        active: root.visible
-        windows: [root]
-        onCleared: {
-            root.powerButton.action.trigger();
-        }
-    }
 
     Rectangle {
         anchors.fill: parent

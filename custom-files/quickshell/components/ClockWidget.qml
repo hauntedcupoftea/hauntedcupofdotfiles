@@ -32,7 +32,6 @@ AbstractBarButton {
         triggerTarget: true
         position: Qt.rect(Theme.padding, root.height + Theme.padding, 0, 0)
         expandDirection: Edges.Bottom | Edges.Right
-        blockShow: root.menuOpen
 
         Column {
             spacing: Theme.margin / 2
@@ -51,8 +50,5 @@ AbstractBarButton {
         }
     }
 
-    Private.ClockWidgetPopout {
-        popupOpen: root.menuOpen
-        powerButton: root
-    }
+    sidebarComponent: Private.ClockWidgetPopout {}
 }

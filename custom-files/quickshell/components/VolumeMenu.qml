@@ -20,6 +20,10 @@ AbstractBarButton {
     implicitWidth: content.width + Theme.margin * 2
     visible: Audio.ready
 
+    sidebarComponent: Rectangle {
+        color: Theme.colors.secondary
+    }
+
     property bool focusOutput: true
     property real outputAlpha: focusOutput ? 0.8 : 0.45
     property real inputAlpha: focusOutput ? 0.45 : 0.8

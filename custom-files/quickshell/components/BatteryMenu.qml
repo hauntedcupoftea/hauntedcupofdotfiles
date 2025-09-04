@@ -104,9 +104,7 @@ AbstractBarButton {
         }
     }
 
-    Private.BatteryMenuPopout {
+    sidebarComponent: Private.BatteryMenuPopout {
         id: popout
-        popupOpen: batteryIndicator.menuOpen
-        powerButton: batteryIndicator
     }
 }

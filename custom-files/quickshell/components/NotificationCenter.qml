@@ -30,8 +30,5 @@ AbstractBarButton {
         textColor: Theme.colors.tertiary
     }
 
-    Private.NotificationPopout {
-        powerButton: root
-        popupOpen: root.menuOpen
-    }
+    sidebarComponent: Private.NotificationPopout {}
 }
