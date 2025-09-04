@@ -11,13 +11,24 @@ PopupWindow {
     id: container
 
     property var barGroup
+    property var anchorItem
+    property var gravity
+    property rect position
     required property string sidebarTitle
     required property real screenHeight
     required property real screenWidth
+    required property real widthRatio
+    required property real heightRatio
     color: "transparent"
 
-    implicitWidth: screenWidth / 5
-    implicitHeight: screenHeight
+    implicitWidth: screenWidth * widthRatio
+    implicitHeight: screenHeight * heightRatio
+
+    anchor {
+        item: anchorItem
+        rect: position
+        gravity: gravity
+    }
 
     Rectangle {
         id: bg
@@ -26,6 +37,23 @@ PopupWindow {
         radius: Theme.rounding.normal
         border.width: 1
         border.color: Theme.colors.outline_variant
+
+        scale: container.visible ? 1.0 : 0.95
+        opacity: container.visible ? 1.0 : 0.0
+
+        Behavior on scale {
+            NumberAnimation {
+                duration: 200
+                easing.type: Easing.OutCubic
+            }
+        }
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 200
+                easing.type: Easing.OutCubic
+            }
+        }
     }
 
     // Focus management
@@ -53,7 +81,6 @@ PopupWindow {
             color: Theme.colors.on_surface
         }
 
-        // Close button
         Button {
             id: closeButton
             anchors.right: parent.right
@@ -79,91 +106,29 @@ PopupWindow {
     }
 
     // Content area
-    ScrollView {
+    ListView {
+        id: contentRepeater
         anchors.top: header.bottom
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: Theme.padding
-
-        Column {
-            id: contentColumn
-            width: parent.width
-            spacing: Theme.padding
-
-            Repeater {
-                id: contentRepeater
-                model: container.barGroup ? container.barGroup.sidebarComponents : []
-
-                delegate: Item {
-                    id: sidebarItem
-                    width: contentColumn.width
-                    height: sectionLoader.item ? sectionLoader.implicitHeight : 0
-                    required property var modelData
-
-                    Rectangle {
-                        id: sectionHeader
-                        anchors.top: parent.top
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        height: sidebarItem.modelData.sidebarTitle ? 30 : 0
-                        visible: sidebarItem.modelData.sidebarTitle !== undefined
-                        color: Theme.colors.surface_variant
-                        radius: Theme.rounding.small
-
-                        Text {
-                            anchors.left: parent.left
-                            anchors.leftMargin: Theme.padding
-                            anchors.verticalCenter: parent.verticalCenter
-                            text: sidebarItem.modelData.sidebarTitle || ""
-                            font.pixelSize: Theme.font.normal
-                            font.weight: 500
-                            color: Theme.colors.on_surface_variant
-                        }
-                    }
-
-                    // Component content
-                    Loader {
-                        id: sectionLoader
-                        anchors.top: sectionHeader.bottom
-                        anchors.topMargin: sectionHeader.visible ? Theme.padding / 2 : 0
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-
-                        sourceComponent: sidebarItem.modelData.sidebarComponent
-
-                        onLoaded: {
-                            // Pass sidebarData to the loaded component
-                            if (item && sidebarItem.modelData.sidebarData) {
-                                for (let key in sidebarItem.modelData.sidebarData) {
-                                    if (item.hasOwnProperty(key)) {
-                                        item[key] = sidebarItem.modelData.sidebarData[key];
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    function getSidebarTitle() {
-        switch (position) {
-        case "left":
-            return "System & Session";
-        case "right":
-            return "Status & Notifications";
-        case "center":
-            return "Media & Volume";
-        default:
-            return "Controls";
-        }
+        model: container.barGroup ? container.barGroup.sidebarComponents : []
     }
 
     function rebuildContent() {
         // Force model refresh
+        let oldModel = contentRepeater.model;
         contentRepeater.model = null;
-        contentRepeater.model = barGroup ? barGroup.sidebarComponents : [];
+        contentRepeater.model = oldModel;
+    }
+
+    // Debug: Log when visibility changes
+    onVisibleChanged: {
+        console.log("SidebarContainer visibility changed:", visible, "for", sidebarTitle);
+        if (visible) {
+            console.log("Components registered:", barGroup ? barGroup.sidebarComponents.length : 0);
+            console.info(barGroup.sidebarComponents);
+        }
     }
 }
