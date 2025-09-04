@@ -9,7 +9,7 @@ import "internal" as Private
 
 AbstractBarButton {
     id: root
-    sidebarComponent: Private.SessionMenuPopout {}
+    sidebarComponent: "session-menu"
 
     implicitWidth: osText.implicitWidth + (Theme.padding * 2)
     implicitHeight: Theme.barHeight - (Theme.margin)

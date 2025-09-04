@@ -20,9 +20,7 @@ AbstractBarButton {
     implicitWidth: content.width + Theme.margin * 2
     visible: Audio.ready
 
-    sidebarComponent: Rectangle {
-        color: Theme.colors.secondary
-    }
+    sidebarComponent: "basic-rectangle"
 
     property bool focusOutput: true
     property real outputAlpha: focusOutput ? 0.8 : 0.45
@@ -56,10 +54,6 @@ AbstractBarButton {
             else
                 Audio.toggleInputMute();
         }
-    }
-
-    action: Action {
-        onTriggered: print("No action assigned yet")
     }
 
     background: Rectangle {

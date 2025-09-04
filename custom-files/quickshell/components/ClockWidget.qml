@@ -50,5 +50,5 @@ AbstractBarButton {
         }
     }
 
-    sidebarComponent: Private.ClockWidgetPopout {}
+    sidebarComponent: "calendar"
 }

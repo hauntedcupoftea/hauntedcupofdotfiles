@@ -19,9 +19,7 @@ AbstractBarButton {
     property string playerIcon: Player.active && Player.active.playbackState == MprisPlaybackState.Playing ? "󰐊" : "󰏤"
     visible: Player.active
 
-    sidebarComponent: Rectangle {
-        color: Theme.colors.primary_container
-    }
+    sidebarComponent: "basic-rectangle"
 
     MouseArea {
         id: swapFocus

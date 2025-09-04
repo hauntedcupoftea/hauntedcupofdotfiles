@@ -4,7 +4,8 @@ import QtQuick.Controls
 Button {
     id: barButton
 
-    required property Component sidebarComponent
+    required property string sidebarComponent
+    property bool menuOpen: false
 
     signal requestSidebarToggle
 
@@ -19,6 +20,14 @@ Button {
         return null;
     }
 
+    // Connect to parent BarGroup's sidebar toggle signal
+    onRequestSidebarToggle: {
+        let parentGroup = findParentBarGroup();
+        if (parentGroup && parentGroup.toggleSidebar) {
+            parentGroup.toggleSidebar();
+        }
+    }
+
     // Safer component registration
     Component.onCompleted: {
         if (sidebarComponent) {
@@ -29,14 +38,20 @@ Button {
         }
     }
 
+    Component.onDestruction: {
+        if (sidebarComponent) {
+            let parentGroup = findParentBarGroup();
+            if (parentGroup && parentGroup.unregisterSidebarComponent) {
+                parentGroup.unregisterSidebarComponent(barButton);
+            }
+        }
+    }
+
     action: Action {
         id: toggleMenuAction
         onTriggered: {
             if (barButton.sidebarComponent) {
-                let parentGroup = barButton.findParentBarGroup();
-                if (parentGroup && parentGroup.toggleSidebar) {
-                    barButton.requestSidebarToggle();
-                }
+                barButton.requestSidebarToggle();
             }
         }
     }

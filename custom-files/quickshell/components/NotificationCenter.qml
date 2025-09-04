@@ -3,6 +3,7 @@ import qs.widgets
 import qs.services
 import qs.theme
 import "internal" as Private
+import qs.sidebar
 
 AbstractBarButton {
     id: root
@@ -30,5 +31,5 @@ AbstractBarButton {
         textColor: Theme.colors.tertiary
     }
 
-    sidebarComponent: Private.NotificationPopout {}
+    sidebarComponent: "notification-manager"
 }

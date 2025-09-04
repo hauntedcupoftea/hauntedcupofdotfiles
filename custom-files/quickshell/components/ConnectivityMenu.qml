@@ -24,7 +24,7 @@ AbstractBarButton {
         radius: Theme.rounding.small
     }
 
-    sidebarComponent: Private.ConnectivityMenuPopout {}
+    sidebarComponent: "connectivity-menu"
 
     Private.ToolTipPopup {
         id: connectivityToolTip
