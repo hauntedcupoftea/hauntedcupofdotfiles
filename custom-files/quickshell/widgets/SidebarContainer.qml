@@ -11,9 +11,14 @@ PopupWindow {
     id: container
 
     property var barGroup
-    property string position: "left" // "left", "right", "center"
-
+    required property string sidebarTitle
+    required property real screenHeight
+    required property real screenWidth
     color: "transparent"
+
+    implicitWidth: screenWidth / 5
+    implicitHeight: screenHeight
+
     Rectangle {
         id: bg
         anchors.fill: parent
@@ -22,10 +27,6 @@ PopupWindow {
         border.width: 1
         border.color: Theme.colors.outline_variant
     }
-
-    // Size based on position
-    implicitWidth: position === "center" ? 500 : 350
-    implicitHeight: Math.min(600, contentColumn.implicitHeight + (Theme.padding * 2))
 
     // Focus management
     HyprlandFocusGrab {
@@ -46,7 +47,7 @@ PopupWindow {
 
         Text {
             anchors.centerIn: parent
-            text: container.getSidebarTitle()
+            text: container.sidebarTitle
             font.pixelSize: Theme.font.large
             font.weight: 600
             color: Theme.colors.on_surface
@@ -69,7 +70,7 @@ PopupWindow {
             Text {
                 anchors.centerIn: parent
                 text: "×"
-                font.pixelSize: 16
+                font.pixelSize: Theme.font.normal
                 color: closeButton.hovered ? Theme.colors.on_error_container : Theme.colors.on_surface
             }
 
@@ -106,7 +107,7 @@ PopupWindow {
                         anchors.left: parent.left
                         anchors.right: parent.right
                         height: sidebarItem.modelData.sidebarTitle ? 30 : 0
-                        visible: sidebarItem.modelData.sidebarTitle
+                        visible: sidebarItem.modelData.sidebarTitle !== undefined
                         color: Theme.colors.surface_variant
                         radius: Theme.rounding.small
 

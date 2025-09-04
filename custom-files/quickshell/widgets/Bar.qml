@@ -5,7 +5,6 @@ import QtQuick.Layouts
 
 import qs.components
 import qs.theme
-import qs.services
 
 // import qs.services
 
@@ -31,8 +30,11 @@ Rectangle {
 
         BarGroup {
             id: leftPanel
+            sidebarTitle: "Left"
             anchors.left: parent.left
             spacing: Theme.padding
+            screenHeight: bar.screenHeight
+            screenWidth: bar.screenWidth
 
             Component.onCompleted: print(bar.screenHeight, bar.screenWidth)
 
@@ -49,7 +51,10 @@ Rectangle {
 
         BarGroup {
             id: centerPanel
+            sidebarTitle: "Center"
             anchors.centerIn: parent
+            screenHeight: bar.screenHeight
+            screenWidth: bar.screenWidth
             spacing: Theme.padding
             PlayerMenu {
                 id: player
@@ -65,7 +70,10 @@ Rectangle {
 
         BarGroup {
             id: rightPanel
+            sidebarTitle: "Right"
             anchors.right: parent.right
+            screenHeight: bar.screenHeight
+            screenWidth: bar.screenWidth
             spacing: Theme.padding
 
             ConnectivityMenu {
@@ -82,10 +90,6 @@ Rectangle {
 
             NotificationCenter {
                 id: notifications
-            }
-
-            SessionMenu {
-                id: sessionMenu
             }
         }
     }

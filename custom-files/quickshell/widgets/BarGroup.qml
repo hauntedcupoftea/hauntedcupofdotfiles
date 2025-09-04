@@ -2,45 +2,62 @@ import QtQuick
 import QtQuick.Layouts
 
 RowLayout {
-    id: exclusiveLayout
-    property var menuItems: []
+    id: barGroup
 
-    function registerMenu(menuItem) {
-        if (menuItems.indexOf(menuItem) === -1) {
-            menuItems.push(menuItem);
-            if (menuItem.requestOpen) {
-                menuItem.requestOpen.connect(() => openMenu(menuItem));
-            }
+    required property string sidebarTitle
+    required property real screenHeight
+    required property real screenWidth
+    property var sidebarComponents: []
+    property alias sidebar: sidebarContainer
+
+    signal sidebarToggleRequested
+
+    onSidebarToggleRequested: toggleSidebar()
+
+    SidebarContainer {
+        id: sidebarContainer
+        sidebarTitle: barGroup.sidebarTitle
+        screenHeight: barGroup.screenHeight
+        screenWidth: barGroup.screenWidth
+        barGroup: barGroup
+        visible: false
+    }
+
+    function registerSidebarComponent(component) {
+        if (sidebarComponents.indexOf(component) === -1) {
+            sidebarComponents.push(component);
+            // Sort by priority and rebuild
+            sidebarComponents.sort((a, b) => (a.sidebarPriority || 0) - (b.sidebarPriority || 0));
+            sidebarContainer.rebuildContent();
         }
     }
 
-    function openMenu(targetMenu) {
-        // Close all menus first
-        for (let i = 0; i < menuItems.length; i++) {
-            let menu = menuItems[i];
-            if (menu !== targetMenu && menu.forceClose) {
-                menu.forceClose();
-            }
+    function unregisterSidebarComponent(component) {
+        const index = sidebarComponents.indexOf(component);
+        if (index > -1) {
+            sidebarComponents.splice(index, 1);
+            sidebarContainer.rebuildContent();
         }
     }
 
-    // Function to close all menus
-    function closeAllMenus() {
-        for (let i = 0; i < menuItems.length; i++) {
-            let menu = menuItems[i];
-            if (menu.forceClose) {
-                menu.forceClose();
-            }
-        }
+    function toggleSidebar() {
+        sidebarContainer.visible = !sidebarContainer.visible;
     }
 
-    // Auto-register children when they're added
+    function showSidebar() {
+        sidebarContainer.visible = true;
+    }
+
+    function hideSidebar() {
+        sidebarContainer.visible = false;
+    }
+
     onChildrenChanged: {
+        sidebarComponents = [];
         for (let i = 0; i < children.length; i++) {
             let child = children[i];
-            // Check if this child has menu-like properties
-            if (child.requestOpen !== undefined && child.forceClose !== undefined) {
-                registerMenu(child);
+            if (child.sidebarComponent !== undefined) {
+                registerSidebarComponent(child);
             }
         }
     }
