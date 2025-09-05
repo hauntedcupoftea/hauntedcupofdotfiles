@@ -6,15 +6,12 @@ import QtQuick
 import QtQuick.Layouts
 import qs.theme
 
-import qs.config
-
 Rectangle {
     id: notificationDelegate
 
     required property var n
 
-    implicitWidth: Settings.notificationWidth
-    implicitHeight: cardLayout.height + Theme.padding * 2
+    implicitHeight: cardLayout.height + (Theme.padding * 2)
     radius: Theme.rounding.verysmall
     color: Theme.colors.surface
     border.width: 1
@@ -22,8 +19,11 @@ Rectangle {
 
     RowLayout {
         id: cardLayout
-        anchors.centerIn: parent
-        width: Settings.notificationWidth - (Theme.padding * 2)
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.margins: Theme.padding
+        implicitWidth: notificationDelegate.width
         spacing: Theme.padding
 
         // App icon
