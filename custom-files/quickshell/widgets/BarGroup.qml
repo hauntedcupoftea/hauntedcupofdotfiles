@@ -44,6 +44,8 @@ Item {
 
     function registerSidebarComponent(component) {
         if (sidebarComponents.indexOf(component) === -1) {
+            if (sidebarComponents.includes(component.sidebarComponent))
+                return;
             sidebarComponents.push(component.sidebarComponent);
             // Sort by priority and rebuild
             sidebarComponents.sort((a, b) => (a.sidebarPriority || 0) - (b.sidebarPriority || 0));
