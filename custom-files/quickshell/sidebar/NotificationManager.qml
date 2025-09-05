@@ -1,15 +1,14 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 
 import qs.theme
-import qs.config
 import qs.services
 import qs.components.internal
 
 Rectangle {
-    anchors.fill: parent
-    implicitHeight: 600
-    implicitWidth: 500
+    id: root
     radius: Theme.rounding.verysmall
     color: Theme.colors.surface_container_high
     border {
@@ -32,11 +31,11 @@ Rectangle {
         model: Notify.items
         orientation: ListView.Vertical
 
-        header: RowLayout {
-            implicitWidth: Settings.notificationWidth
-
+        header: Item {
+            implicitWidth: parent.width
+            implicitHeight: 32
             Text {
-                Layout.alignment: Qt.AlignLeft
+                anchors.left: parent.left
                 text: "Notifications"
                 font.weight: Font.Medium
                 color: Theme.colors.on_surface_variant
@@ -44,8 +43,9 @@ Rectangle {
             }
 
             Rectangle {
-                Layout.preferredHeight: 28
-                Layout.preferredWidth: clearAllText.implicitWidth + Theme.padding * 2
+                anchors.right: parent.right
+                implicitHeight: clearAllText.implicitHeight + Theme.margin
+                implicitWidth: clearAllText.implicitWidth + Theme.padding * 2
                 radius: Theme.rounding.small
                 color: clearAllMouseArea.containsMouse ? Theme.colors.secondary : Theme.colors.secondary_container
                 border.width: 1
@@ -72,6 +72,7 @@ Rectangle {
         delegate: NotificationCard {
             required property var modelData
             required property int index
+            width: notificationList.width
 
             n: modelData
         }

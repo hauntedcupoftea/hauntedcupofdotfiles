@@ -2,10 +2,12 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
 
 import qs.theme
+import qs.sidebar
 
 PopupWindow {
     id: container
@@ -105,23 +107,39 @@ PopupWindow {
         }
     }
 
-    // Content area
-    ListView {
-        id: contentRepeater
+    // Content area // TODO: replace with delegatechooser
+    // ListView {
+    //     id: contentRepeater
+    //     anchors.top: header.bottom
+    //     anchors.bottom: parent.bottom
+    //     anchors.left: parent.left
+    //     anchors.right: parent.right
+    //     anchors.margins: Theme.padding
+    //     model: container.barGroup ? container.barGroup.sidebarComponents : []
+    // }
+    //
+    ColumnLayout {
         anchors.top: header.bottom
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
+        anchors.bottom: bg.bottom
+        anchors.left: bg.left
+        anchors.right: bg.right
         anchors.margins: Theme.padding
-        model: container.barGroup ? container.barGroup.sidebarComponents : []
+        NotificationManager {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
+        SessionMenu {
+            Layout.minimumHeight: 150
+            Layout.fillWidth: true
+        }
     }
 
-    function rebuildContent() {
-        // Force model refresh
-        let oldModel = contentRepeater.model;
-        contentRepeater.model = null;
-        contentRepeater.model = oldModel;
-    }
+    // function rebuildContent() {
+    //     // Force model refresh
+    //     let oldModel = contentRepeater.model;
+    //     contentRepeater.model = null;
+    //     contentRepeater.model = oldModel;
+    // }
 
     // Debug: Log when visibility changes
     onVisibleChanged: {
