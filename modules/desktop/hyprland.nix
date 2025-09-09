@@ -24,7 +24,7 @@
 
     # audio
     pwvucontrol
-    sonusmix
+    # sonusmix
     alsa-utils
 
     wl-clipboard
