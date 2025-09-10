@@ -33,7 +33,8 @@
     overskride # Bluetooth but good
     peazip # winrar but good
     remmina # rdp but good
-    tparted # partition mgmt
+    gparted # run with sudo -E
+    btrfs-progs # for btrfs
     parted # maybe we need this
     inetutils
     zapzap # WhatsApp
