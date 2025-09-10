@@ -23,7 +23,7 @@
 
   # my preferred, feel free to change:
   home.sessionVariables = {
-    DEV_WORKDIR = "/mnt/media/Code/";
-    SECURITY_PROJECT = "/mnt/media/Code/K2O2/security-management";
+    DEV_WORKDIR = "/shared/Code/";
+    SECURITY_PROJECT = "/shared/Code/K2O2/security-management";
   };
 }
