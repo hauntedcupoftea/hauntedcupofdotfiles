@@ -18,7 +18,6 @@
     zrok # self hosted ngrok
     zathura # PDF viewer
     gh # GitHub-cli
-    figma-linux # UI design
   ];
 
   # my preferred, feel free to change:

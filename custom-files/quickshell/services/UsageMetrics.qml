@@ -44,7 +44,7 @@ Singleton {
             CPU_TEMP=$(sensors | grep -E '(Package id 0|Tdie|Tctl):' | head -n 1 | awk '{print $4}' | sed 's/+//;s/°C//')
 
             # Storage
-            DF_OUTPUT=$(df -k | grep '^/dev/' | awk '{used+=$3; total+=$2} END {print used, total}')
+            DF_OUTPUT=$(df -k | grep '^/dev/' | awk '!seen[$1]++ {used+=$3; total+=$2} END {print used, total}')
             STORAGE_USED=$(echo $DF_OUTPUT | awk '{print $1}')
             STORAGE_TOTAL=$(echo $DF_OUTPUT | awk '{print $2}')
 
