@@ -8,27 +8,7 @@ import qs.components.internal
 
 Rectangle {
     id: root
-    property string hoveredAction: "Session Menu"
-    property list<string> sessionMessages: Settings.sessionMessages
 
-    function getRandomSessionMessage(messages) {
-        const randomIndex = Math.floor(Math.random() * sessionMessages.length);
-        nameReset.running = true;
-        return sessionMessages[randomIndex];
-    }
-    Behavior on height {
-        NumberAnimation {
-            duration: 200 // milliseconds
-            easing.type: Easing.OutCubic
-        }
-    }
-
-    Timer {
-        id: nameReset
-        interval: 2500
-        running: false
-        onTriggered: root.hoveredAction = "Session Menu"
-    }
     radius: Theme.rounding.verysmall
     color: Theme.colors.surface_container_high
 
@@ -37,11 +17,27 @@ Rectangle {
         color: Theme.colors.outline
     }
 
+    property string hoveredAction: "Session Menu"
+    property list<string> sessionMessages: Settings.sessionMessages
+
+    function getRandomSessionMessage(messages) {
+        const randomIndex = Math.floor(Math.random() * sessionMessages.length);
+        nameReset.running = true;
+        return sessionMessages[randomIndex];
+    }
+
+    Timer {
+        id: nameReset
+        interval: 2500
+        running: false
+        onTriggered: root.hoveredAction = "Session Menu"
+    }
+
     ColumnLayout {
         id: sessionMenuColumn
 
         spacing: Theme.padding
-        anchors.centerIn: parent
+        anchors.fill: parent
         RowLayout {
             id: sessionMenuGrid
             Layout.alignment: Qt.AlignCenter
@@ -125,7 +121,7 @@ Rectangle {
         Text {
             id: sessionMenuText
             Layout.alignment: Qt.AlignCenter
-            Layout.maximumWidth: sessionMenuGrid.width
+            Layout.fillWidth: true
             text: root.hoveredAction
             color: Theme.colors.on_surface_variant
             horizontalAlignment: Text.AlignHCenter

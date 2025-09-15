@@ -11,6 +11,7 @@ Rectangle {
     id: root
     radius: Theme.rounding.verysmall
     color: Theme.colors.surface_container_high
+
     border {
         width: 1
         color: Theme.colors.outline
