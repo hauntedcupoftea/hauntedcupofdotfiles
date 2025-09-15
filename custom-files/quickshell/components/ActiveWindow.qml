@@ -7,15 +7,20 @@ import Quickshell.Hyprland
 import Quickshell.Wayland
 
 import qs.theme
+import qs.widgets
 import qs.utils
 import qs.components.internal as Private
 
-Rectangle {
+AbstractBarButton {
     id: root
     implicitHeight: Theme.barHeight - Theme.margin
-    implicitWidth: windowContent.width + Theme.padding
-    color: Theme.colors.surface_container
-    radius: Theme.rounding.small
+    implicitWidth: windowContent.width + (Theme.padding * 2)
+    background: Rectangle {
+        anchors.fill: root
+        color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
+        radius: Theme.rounding.verysmall
+    }
+    sidebarComponent: "to-do"
 
     WindowUtils {
         id: utils
@@ -33,24 +38,28 @@ Rectangle {
         const toplevel = ToplevelManager.activeToplevel;
         if (DesktopEntries.byId(toplevel.appId))
             return Quickshell.iconPath(DesktopEntries.byId(toplevel.appId).icon);
+        const title = DesktopEntries.byId(toplevel.title);
+        if (title)
+            return Quickshell.iconPath(title.icon);
         const heuristicLookup = DesktopEntries.heuristicLookup(toplevel.title);
         if (heuristicLookup)
             return Quickshell.iconPath(heuristicLookup.icon);
-        // const title = DesktopEntries.byId(toplevel.title);
-        // if (title)
-        //     return Quickshell.iconPath(title.icon);
         return null;
     }
 
     RowLayout {
         id: windowContent
-        anchors.left: root.left
-        anchors.top: root.top
-        anchors.topMargin: Theme.margin / 2
+        spacing: Theme.padding
+        anchors {
+            top: parent.top
+            left: parent.left
+            bottom: parent.bottom
+            margins: Theme.margin
+        }
 
         Rectangle {
             id: windowIcon
-            implicitHeight: Theme.barHeight - (Theme.margin * 2)
+            implicitHeight: Theme.barIconSize
             implicitWidth: implicitHeight
             radius: Theme.rounding.full
             color: Theme.colors.surface_dim

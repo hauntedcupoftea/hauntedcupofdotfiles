@@ -214,7 +214,7 @@ Rectangle {
             Layout.preferredHeight: 24
             Layout.alignment: Qt.AlignTop
             radius: 12
-            color: closeMouseArea.containsMouse ? Theme.colors.error_container : "transparent"
+            color: closeMouseArea.containsMouse ? Theme.colors.error_container : Theme.colors.surface_container_high
 
             StyledText {
                 anchors.centerIn: parent
