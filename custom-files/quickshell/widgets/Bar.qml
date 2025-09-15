@@ -61,10 +61,10 @@ Rectangle {
             screenHeight: bar.screenHeight
             screenWidth: bar.screenWidth
             spacing: Theme.padding
-            widthRatio: 0.3
-            heightRatio: 1
+            widthRatio: 0.4
+            heightRatio: 0.6
             gravity: Edges.Bottom
-            position: Qt.rect(0.05 * bar.screenWidth, Theme.barHeight + Theme.padding, 0, 0)
+            position: Qt.rect(0.5 * centerPanel.width, Theme.barHeight + Theme.padding, 0, 0)
             PlayerMenu {
                 id: player
             }
