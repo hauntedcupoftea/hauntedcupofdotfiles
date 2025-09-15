@@ -2,7 +2,6 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
 
@@ -71,7 +70,7 @@ PopupWindow {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        height: 40
+        height: Theme.barHeight
         color: Theme.colors.surface_container_high
         radius: Theme.rounding.normal
 
@@ -88,18 +87,18 @@ PopupWindow {
             anchors.right: parent.right
             anchors.rightMargin: Theme.padding
             anchors.verticalCenter: parent.verticalCenter
-            width: 24
-            height: 24
+            width: Theme.barHeight - Theme.padding
+            height: Theme.barHeight - Theme.padding
 
             background: Rectangle {
-                color: closeButton.hovered ? Theme.colors.error_container : "transparent"
+                color: closeButton.hovered ? Theme.colors.error_container : Theme.colors.surface_container_low
                 radius: Theme.rounding.small
             }
 
             Text {
                 anchors.centerIn: parent
-                text: "×"
-                font.pixelSize: Theme.font.normal
+                text: "󰅖"
+                font.pixelSize: Theme.font.large
                 color: closeButton.hovered ? Theme.colors.on_error_container : Theme.colors.on_surface
             }
 
@@ -107,46 +106,89 @@ PopupWindow {
         }
     }
 
-    // Content area // TODO: replace with delegatechooser
-    // ListView {
-    //     id: contentRepeater
-    //     anchors.top: header.bottom
-    //     anchors.bottom: parent.bottom
-    //     anchors.left: parent.left
-    //     anchors.right: parent.right
-    //     anchors.margins: Theme.padding
-    //     model: container.barGroup ? container.barGroup.sidebarComponents : []
-    // }
-    //
-    ColumnLayout {
+    ListView {
+        id: contentRepeater
         anchors.top: header.bottom
-        anchors.bottom: bg.bottom
-        anchors.left: bg.left
-        anchors.right: bg.right
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
         anchors.margins: Theme.padding
-        NotificationManager {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-        }
-        SessionMenu {
-            Layout.minimumHeight: 150
-            Layout.fillWidth: true
+        spacing: Theme.padding
+
+        model: container.barGroup ? container.barGroup.sidebarComponents : []
+        delegate: DelegateChooser {
+            DelegateChoice {
+                roleValue: "notification-manager"
+                NotificationManager {
+                    height: contentRepeater.height * 0.7
+                    width: contentRepeater.width
+                }
+            }
+            DelegateChoice {
+                roleValue: "session-menu"
+                SessionMenu {
+                    height: 150
+                    width: contentRepeater.width
+                }
+            }
+            DelegateChoice {
+                roleValue: "calendar"
+                Calendar {
+                    height: 400 + (Theme.margin * 2)
+                    width: contentRepeater.width
+                }
+            }
+            DelegateChoice {
+                roleValue: "battery-menu"
+                Rectangle {
+                    height: 120
+                    width: contentRepeater.width
+                    color: Theme.colors.primary_container
+                    radius: Theme.rounding.verysmall
+                    Text {
+                        anchors.centerIn: parent
+                        text: "battery-menu placeholder"
+                        color: Theme.colors.on_primary_container
+                    }
+                }
+            }
+            DelegateChoice {
+                roleValue: "connectivity-menu"
+                Rectangle {
+                    height: 120
+                    width: contentRepeater.width
+                    color: Theme.colors.secondary_container
+                    radius: Theme.rounding.verysmall
+                    Text {
+                        anchors.centerIn: parent
+                        text: "connectivity-menu placeholder"
+                        color: Theme.colors.on_secondary_container
+                    }
+                }
+            }
+            DelegateChoice {
+                roleValue: "to-do"
+                Rectangle {
+                    height: 120
+                    width: contentRepeater.width
+                    color: Theme.colors.tertiary_container
+                    radius: Theme.rounding.verysmall
+                    Text {
+                        anchors.centerIn: parent
+                        text: "to-do placeholder"
+                        color: Theme.colors.on_tertiary_container
+                    }
+                }
+            }
         }
     }
-
-    // function rebuildContent() {
-    //     // Force model refresh
-    //     let oldModel = contentRepeater.model;
-    //     contentRepeater.model = null;
-    //     contentRepeater.model = oldModel;
-    // }
 
     // Debug: Log when visibility changes
-    onVisibleChanged: {
-        console.log("SidebarContainer visibility changed:", visible, "for", sidebarTitle);
-        if (visible) {
-            console.log("Components registered:", barGroup ? barGroup.sidebarComponents.length : 0);
-            console.info(barGroup.sidebarComponents);
-        }
-    }
+    // onVisibleChanged: {
+    //     console.log("SidebarContainer visibility changed:", visible, "for", sidebarTitle);
+    //     if (visible) {
+    //         console.log("Components registered:", barGroup ? barGroup.sidebarComponents.length : 0);
+    //         console.info(barGroup.sidebarComponents);
+    //     }
+    // }
 }
