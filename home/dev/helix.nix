@@ -27,6 +27,7 @@
 
     # llvm DAP
     lldb_20
+    clang-tools
 
     # Nix
     nixd
@@ -93,18 +94,6 @@
     # Language specific configurations
     languages = {
       language-server = {
-        nixd = {
-          command = "nixd";
-          args = [
-            "--semantic-tokens"
-            "--inlay-hints"
-          ];
-        };
-
-        nil-ls = {
-          command = "${pkgs.nil}/bin/nil";
-        };
-
         harper-ls = {
           command = "harper-ls";
           args = ["--stdio"];
@@ -113,6 +102,11 @@
         basedpyright = {
           command = "basedpyright-langserver";
           args = ["--stdio"];
+        };
+
+        clangd-ls = {
+          command = "clangd";
+          args = ["--compile-commands-dir=build"];
         };
 
         deno-lsp = {
@@ -137,14 +131,27 @@
             };
           };
         };
-        ruff = {
-          command = "ruff";
-          args = ["server"];
+
+        nixd = {
+          command = "nixd";
+          args = [
+            "--semantic-tokens"
+            "--inlay-hints"
+          ];
+        };
+
+        nil-ls = {
+          command = lib.getExe pkgs.nil;
         };
 
         qmlls = {
           args = ["-E"];
           command = "qmlls";
+        };
+
+        ruff = {
+          command = "ruff";
+          args = ["server"];
         };
 
         rust-analyzer-ls = {
@@ -177,13 +184,6 @@
               removeUnusedImports.ts = true;
               sortImports.ts = true;
             };
-            plugins = [
-              {
-                name = "@vue/typescript-plugin";
-                location = "${pkgs.vue-language-server}/lib/node_modules/@vue/language-server";
-                languages = ["vue"];
-              }
-            ];
           };
         };
 
@@ -191,9 +191,11 @@
           command = "${pkgs.svelte-language-server}/bin/svelteserver";
           args = ["--stdio"];
         };
+
         uwu-colors = {
           command = "${pkgs.uwu-colors}/bin/uwu_colors";
         };
+
         vscode-css-language-server = {
           command = "${pkgs.nodePackages.vscode-langservers-extracted}/bin/vscode-css-language-server";
           args = ["--stdio"];
@@ -217,6 +219,17 @@
           args = ["--parser" lang];
         };
       in [
+        # --- C++ ---
+        {
+          name = "cpp";
+          language-servers = ["clangd-ls"];
+          auto-format = true;
+          formatter = {
+            command = "clang-format";
+            args = ["--style=Google"];
+          };
+        }
+
         # --- Nix ---
         {
           name = "nix";
@@ -356,6 +369,7 @@
           auto-format = true;
           language-servers = ["tinymist" "harper-ls"];
         }
+
         # --- QML ---
         {
           name = "qml";
