@@ -31,6 +31,7 @@ Rectangle {
         spacing: Theme.padding
         model: Notify.items
         orientation: ListView.Vertical
+        clip: true
 
         header: Item {
             implicitWidth: parent.width
@@ -136,7 +137,7 @@ Rectangle {
     }
     ColumnLayout {
         anchors.centerIn: parent
-        visible: Notify.items.length === 0
+        visible: Notify.items.count === 0
         spacing: Theme.padding
 
         StyledText {

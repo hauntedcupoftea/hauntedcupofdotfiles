@@ -14,7 +14,7 @@ Singleton {
         if (root.doNotDisturb) {
             return "󱏪";
         }
-        if (root.items.length > 0) {
+        if (itemsModel.count > 0) {
             return "󰅸";
         }
         return "󰂜";
@@ -60,7 +60,13 @@ Singleton {
             target: notifItem.n.Retainable
 
             function onDropped(): void {
-                root.items.splice(root.items.indexOf(notifItem), 1);
+                // Find and remove the item from the model
+                for (let i = 0; i < itemsModel.count; i++) {
+                    if (itemsModel.get(i).notifItem === notifItem) {
+                        itemsModel.remove(i);
+                        break;
+                    }
+                }
             }
 
             function onAboutToDestroy(): void {
@@ -69,8 +75,25 @@ Singleton {
         }
     }
 
-    property list<NotificationItem> items: []
-    property list<NotificationItem> popups: items.filter(n => n && n.popup)
+    // Use ListModel instead of list<NotificationItem>
+    ListModel {
+        id: itemsModel
+    }
+
+    // Expose the model for ListView
+    property alias items: itemsModel
+
+    // Helper property to get popup items
+    property var popups: {
+        let popupList = [];
+        for (let i = 0; i < itemsModel.count; i++) {
+            let item = itemsModel.get(i);
+            if (item && item.notifItem && item.notifItem.popup) {
+                popupList.push(item.notifItem);
+            }
+        }
+        return popupList;
+    }
 
     // Configuration
     property bool doNotDisturb: false
@@ -97,11 +120,16 @@ Singleton {
 
         onNotification: notification => {
             notification.tracked = true;
-            if (notification)
-                root.items.unshift(notifWrap.createObject(root, {
+            if (notification) {
+                let notifItem = notifWrap.createObject(root, {
                     popup: true,
                     n: notification
-                }));
+                });
+
+                itemsModel.insert(0, {
+                    "notifItem": notifItem
+                });
+            }
         }
     }
 
@@ -109,12 +137,17 @@ Singleton {
         target: "notify"
 
         function clearPopup(): void {
-            for (const notif of root.items)
-                notif.popup = false;
+            // Update popup status for all items
+            for (let i = 0; i < itemsModel.count; i++) {
+                let item = itemsModel.get(i);
+                if (item && item.notifItem) {
+                    item.notifItem.popup = false;
+                }
+            }
         }
 
         function clearNotifications(): void {
-            root.items = [];
+            root.clearNotifications();
         }
 
         function toggleDND(): void {
@@ -127,7 +160,8 @@ Singleton {
     }
 
     function clearNotifications() {
-        root.items = [];
+        // Clear the model properly to trigger animations
+        itemsModel.clear();
     }
 
     function formatTimeAgo(timestamp: double): string {

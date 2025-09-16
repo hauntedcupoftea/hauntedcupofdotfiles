@@ -3,7 +3,6 @@ import qs.widgets
 import qs.services
 import qs.theme
 import "internal" as Private
-import qs.sidebar
 
 AbstractBarButton {
     id: root
@@ -27,7 +26,7 @@ AbstractBarButton {
     Private.StyledText {
         id: indicator
         anchors.centerIn: root
-        text: `${Notify.indicatorIcon} ${Notify.items.length}`
+        text: `${Notify.indicatorIcon} ${Notify.items.count}`
         textColor: Theme.colors.tertiary
     }
 
