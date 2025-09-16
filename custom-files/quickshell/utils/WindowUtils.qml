@@ -108,7 +108,7 @@ QtObject {
         const targetLength = maxLength || maxTitleLength;
         if (!text || text.length <= targetLength)
             return text;
-        return text.substring(0, targetLength - ellipsisLength) + ellipsisChar;
+        return text.substring(0, targetLength - ellipsisLength).trim() + ellipsisChar;
     }
 
     /**
