@@ -1,6 +1,7 @@
-{ inputs
-, pkgs
-, ...
+{
+  inputs,
+  pkgs,
+  ...
 }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
@@ -12,8 +13,8 @@
     isNormalUser = true;
     description = "Anand Chauhan";
     shell = pkgs.fish; # we will use the bash fix
-    extraGroups = [ "networkmanager" "wheel" "openrazer" "plugdev" "gamemode" "input" ];
-    packages = [ ];
+    extraGroups = ["networkmanager" "wheel" "openrazer" "plugdev" "gamemode" "input" "dialout"];
+    packages = [];
   };
 
   home-manager = {
@@ -38,5 +39,5 @@
     };
   };
 
-  nix.settings.trusted-users = [ "tea" ];
+  nix.settings.trusted-users = ["tea"];
 }

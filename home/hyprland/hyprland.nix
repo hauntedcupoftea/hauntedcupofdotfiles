@@ -84,9 +84,13 @@ in {
             (
               i: let
                 ws = i + 1;
+                numpadCode = "KP_" + toString (i + 1);
               in [
                 "$mod, code:1${toString i}, workspace, ${toString ws}"
                 "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+
+                "$mod, ${numpadCode}, workspace, ${toString ws}"
+                "$mod SHIFT, ${numpadCode}, movetoworkspace, ${toString ws}"
               ]
             )
             9)
