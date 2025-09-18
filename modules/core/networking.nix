@@ -35,6 +35,7 @@
   # This will let us install better wifi drivers supposedly
   hardware.enableRedistributableFirmware = true;
 
+  services.blueman.enable = true;
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true; # turns on bluetooth controllers on boot
