@@ -84,13 +84,13 @@ in {
             (
               i: let
                 ws = i + 1;
-                numpadCode = "KP_" + toString (i + 1);
+                # numpadCode = "KP_" + toString (i + 1);
               in [
                 "$mod, code:1${toString i}, workspace, ${toString ws}"
                 "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
 
-                "$mod, ${numpadCode}, workspace, ${toString ws}"
-                "$mod SHIFT, ${numpadCode}, movetoworkspace, ${toString ws}"
+                # "$mod, ${numpadCode}, workspace, ${toString ws}"
+                # "$mod SHIFT, ${numpadCode}, movetoworkspace, ${toString ws}"
               ]
             )
             9)
@@ -152,6 +152,7 @@ in {
         "uwsm app -- qs -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/"
         "uwsm app -- clipse -listen"
         "uwsm app -- gnome-keyring-daemon --start --components=pkcs11,secrets"
+        "uwsm app -- zmkbatx"
       ];
     };
   };
