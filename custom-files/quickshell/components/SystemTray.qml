@@ -56,15 +56,17 @@ Rectangle {
                     position: Qt.rect(sysTrayButton.width / 2, Theme.barHeight - Theme.margin, 0, 0)
                     blockShow: trayMenu.visible
 
-                    Private.StyledText {
-                        text: sysTrayButton.modelData?.tooltipTitle || sysTrayButton.modelData?.title || ""
-                        color: Theme.colors.on_surface_variant
-                        font.pixelSize: Theme.font.normal
-                    }
-                    Private.StyledText {
-                        text: sysTrayButton.modelData?.tooltipDescription ?? ""
-                        color: Theme.colors.on_surface_variant
-                        font.pixelSize: Theme.font.small
+                    Column {
+                        Private.StyledText {
+                            text: sysTrayButton.modelData?.tooltipTitle || sysTrayButton.modelData?.title || ""
+                            color: Theme.colors.on_surface_variant
+                            font.pixelSize: Theme.font.normal
+                        }
+                        Private.StyledText {
+                            text: sysTrayButton.modelData?.tooltipDescription ?? ""
+                            color: Theme.colors.on_surface_variant
+                            font.pixelSize: Theme.font.small
+                        }
                     }
                 }
 
