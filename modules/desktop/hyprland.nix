@@ -1,4 +1,6 @@
 {
+  lib,
+  config,
   inputs,
   pkgs,
   ...
@@ -15,7 +17,6 @@
   environment.systemPackages = with pkgs; [
     hyprland
     kitty
-    waybar
     libnotify
 
     # Wi-Fi
@@ -24,7 +25,6 @@
 
     # audio
     pwvucontrol
-    # sonusmix
     alsa-utils
 
     wl-clipboard
@@ -41,9 +41,8 @@
     gtk4
   ];
 
-  # These are actually tied to both Nvidia and Hyprland in part,
-  # so PLEASE consult the Hyprland wiki before building this on non novideo systems
-  environment.sessionVariables = {
+  # novideo setup
+  environment.sessionVariables = lib.mkIf (builtins.elem "nvidia" config.services.xserver.videoDrivers) {
     NIXOS_OZONE_WL = "1";
     LIBVA_DRIVER_NAME = "nvidia";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
