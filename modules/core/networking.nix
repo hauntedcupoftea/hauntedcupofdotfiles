@@ -10,7 +10,10 @@
     # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
     networkmanager = {
       enable = true;
-      wifi.backend = "iwd";
+      wifi = {
+        backend = "iwd";
+        powersave = false;
+      };
     };
     # enableIPv6 = true;
     # Configure network proxy if necessary

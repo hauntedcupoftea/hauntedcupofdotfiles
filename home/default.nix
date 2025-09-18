@@ -38,6 +38,7 @@
     parted # maybe we need this
     inetutils
     zapzap # WhatsApp
+    zmkBATx # split kb battery
   ];
 
   home.sessionVariables = {
