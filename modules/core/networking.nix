@@ -26,6 +26,9 @@
         Settings = {
           AutoConnect = true;
         };
+        DriverQuirks = {
+          PowerSaveDisable = "*";
+        };
       };
     };
   };
