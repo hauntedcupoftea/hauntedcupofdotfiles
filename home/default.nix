@@ -39,6 +39,7 @@
     inetutils
     zapzap # WhatsApp
     zmkBATx # split kb battery
+    kdePackages.okular # pdf editor
   ];
 
   home.sessionVariables = {
