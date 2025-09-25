@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   programs.lazydocker.enable = true;
 
   services.podman = {
@@ -9,8 +9,7 @@
     packages = with pkgs; [
       podman-tui
       dive
-      docker-compose
-      podman-desktop
+      podman-compose
     ];
   };
 }
