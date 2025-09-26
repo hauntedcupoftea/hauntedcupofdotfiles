@@ -61,7 +61,7 @@ Rectangle {
             screenHeight: bar.screenHeight
             screenWidth: bar.screenWidth
             spacing: Theme.padding
-            widthRatio: 0.4
+            widthRatio: 0.5
             heightRatio: 0.6
             gravity: Edges.Bottom
             position: Qt.rect(0.5 * centerPanel.width, Theme.barHeight + Theme.padding, 0, 0)
@@ -84,8 +84,8 @@ Rectangle {
             screenHeight: bar.screenHeight
             screenWidth: bar.screenWidth
             spacing: Theme.padding
-            gravity: Edges.Bottom
-            position: Qt.rect(Theme.padding, Theme.barHeight + Theme.padding, 0, 0)
+            gravity: Edges.Bottom | Edges.Right
+            position: Qt.rect(rightPanel.width - Theme.padding, Theme.barHeight + Theme.padding, 0, 0)
             widthRatio: 0.3
             heightRatio: 1
 
