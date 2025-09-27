@@ -61,7 +61,6 @@ Item {
 
     function toggleSidebar() {
         sidebarContainer.visible = !sidebarContainer.visible;
-        print("toggled");
     }
 
     function showSidebar() {

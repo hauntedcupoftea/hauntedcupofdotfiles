@@ -41,8 +41,6 @@ Rectangle {
             widthRatio: 0.3
             heightRatio: 1
 
-            Component.onCompleted: print(bar.screenHeight, bar.screenWidth)
-
             OSButton {
                 Layout.leftMargin: Theme.padding
             }
