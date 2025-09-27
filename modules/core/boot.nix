@@ -1,6 +1,4 @@
-{ pkgs
-, ...
-}: {
+{pkgs, ...}: {
   boot = {
     # Enable GRUB
     loader.grub = {
@@ -13,12 +11,13 @@
       configurationLimit = 8;
     };
 
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_zen;
+    kernelModules = ["nvme"];
 
     loader.efi.canTouchEfiVariables = true;
     plymouth.enable = true;
 
     # Add NTFS support
-    supportedFilesystems = [ "ntfs" ];
+    supportedFilesystems = ["ntfs"];
   };
 }
