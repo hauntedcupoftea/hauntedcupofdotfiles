@@ -10,6 +10,7 @@ Singleton {
     property var cc
     property var forecast
     property bool isLoading: false
+    property string locationName
 
     readonly property string icon: cc ? weatherIcons[cc.weatherCode] : "󰧠"
     readonly property string description: cc?.weatherDesc[0].value ?? qsTr("Weather unavailable")
@@ -106,6 +107,7 @@ Singleton {
 
                     if (newLoc !== root.loc) {
                         root.loc = newLoc;
+                        root.locationName = `${locationData.city}, ${locationData.region} (${locationData.country})`;
                         timer.restart();
                     }
                 } catch (e) {
@@ -147,6 +149,8 @@ Singleton {
     }
 
     onLocChanged: {
+        print(loc);
+
         if (loc) {
             fetchWeather();
         }
