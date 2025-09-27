@@ -1,16 +1,23 @@
-{ pkgs
-, ...
+{
+  pkgs,
+  inputs,
+  ...
 }: {
+  imports = [
+    inputs.nix-gaming.nixosModules.platformOptimizations
+  ];
   programs = {
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = false;
       gamescopeSession.enable = true;
-      extraCompatPackages = [ pkgs.proton-ge-bin ];
+      extraCompatPackages = [pkgs.proton-ge-bin];
+      # nix-gaming
+      platformOptimizations.enable = true;
       protontricks.enable = true;
       package = pkgs.steam.override {
-        extraBwrapArgs = [ "--unsetenv TZ" ]; # fix for incorrect timezone
+        extraBwrapArgs = ["--unsetenv TZ"]; # fix for incorrect timezone
       };
     };
 
