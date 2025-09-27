@@ -10,7 +10,7 @@
     # ./waybar.nix # goodbye
     # ./walker.nix
     ./sherlock.nix
-    ./wleave.nix
+    # ./wleave.nix
     # ./xdph.nix
   ];
 }
