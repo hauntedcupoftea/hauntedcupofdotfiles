@@ -40,6 +40,7 @@
     zapzap # WhatsApp
     zmkBATx # split kb battery
     kdePackages.okular # pdf editor
+    pinta # paint
   ];
 
   home.sessionVariables = {
