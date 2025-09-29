@@ -94,6 +94,7 @@ AbstractBarButton {
         triggerTarget: true
         position: Qt.rect(root.width / 2, root.height + Theme.padding, 0, 0)
         blockShow: !Player.active
+        visible: Player.active.trackTitle
 
         RowLayout {
             spacing: 12
