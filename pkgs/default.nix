@@ -1,9 +1,7 @@
-{ inputs }:
-
-final: prev:
-{
+{inputs}: final: prev: {
   # Custom packages - add new packages here
-  hyprland-preview-share-picker = final.callPackage ./hyprland-preview-share-picker.nix { };
+  hyprland-preview-share-picker = final.callPackage ./hyprland-preview-share-picker.nix {};
+  dungeondraft = final.callPackage ./dungeondraft.nix {};
 
   # Add more packages like this:
   # my-other-package = final.callPackage ./my-other-package.nix { };

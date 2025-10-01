@@ -41,6 +41,7 @@
     zmkBATx # split kb battery
     kdePackages.okular # pdf editor
     pinta # paint
+    dungeondraft # custom derivation
   ];
 
   home.sessionVariables = {

@@ -86,6 +86,7 @@
     # Add packages output for easier testing
     packages.x86_64-linux = {
       hyprland-preview-share-picker = (mkPkgs "x86_64-linux").hyprland-preview-share-picker;
+      dungeondraft = (mkPkgs "x86_64-linux").dungeondraft;
       default = self.packages.x86_64-linux.hyprland-preview-share-picker;
     };
 
