@@ -5,7 +5,7 @@
     systemd.enable = true;
     aliases = {
       "NixOS Wiki" = {
-        exec = "firefox https://nixos.wiki/index.php?search=%s";
+        exec = "zen https://nixos.wiki/index.php?search=%s";
         icon = "nixos";
         keywords = "nix wiki docs";
         name = "NixOS Wiki";
