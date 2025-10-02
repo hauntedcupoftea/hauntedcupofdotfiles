@@ -61,6 +61,9 @@ stdenv.mkDerivation (finalAttrs: {
     substituteInPlace $out/share/applications/Dungeondraft.desktop \
       --replace "Exec=/opt/Dungeondraft/Dungeondraft.x86_64" "Exec=Dungeondraft"
 
+    substituteInPlace $out/share/applications/Dungeondraft.desktop \
+      --replace /opt/ $out/opt/
+
     ln -s $out/opt/Dungeondraft/Dungeondraft.x86_64 $out/bin/Dungeondraft
     runHook postInstall
   '';
