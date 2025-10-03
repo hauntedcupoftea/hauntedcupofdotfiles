@@ -1,6 +1,7 @@
 {
   lib,
   inputs,
+  pkgs,
   ...
 }: let
   isGE66Raider = builtins.hasAttr "Anand-GE66-Raider" (inputs.self.nixosConfigurations or {});
@@ -45,9 +46,9 @@ in {
       bind =
         [
           "$mod, return, exec, uwsm app -- $terminal"
-          "$mod, M, exec, uwsm app -- wleave"
           "$mod, C, killactive"
           "$mod, B, togglefloating"
+          "$mod, F, fullscreen"
           "$mod, V, exec, uwsm app -- $terminal --class clipse -e 'clipse'"
           # walker-binds
           "$mod, space, exec, uwsm app -- sherlock" # standard run
@@ -58,7 +59,7 @@ in {
           "$mod, k, movefocus, u"
           "$mod, l, movefocus, r"
 
-          "$mod, F, exec, uwsm app -- zen-twilight" # bro i cannot decipher whether zen or zen-beta is the way to go.
+          "$mod, Z, exec, uwsm app -- zen-twilight" # bro i cannot decipher whether zen or zen-beta is the way to go.
           "$mod, E, exec, uwsm app -- $terminal -e yazi"
           # Screenshot a region (freezing)
           ", Print, exec, uwsm app -- grimblast copy area --notify"
@@ -80,20 +81,23 @@ in {
         ]
         ++ (
           # Binds $mod + [shift +] {1...9} to [move to] workspace {1...9}
-          builtins.concatLists (builtins.genList
-            (
-              i: let
-                ws = i + 1;
-                # numpadCode = "KP_" + toString (i + 1);
-              in [
-                "$mod, code:1${toString i}, workspace, ${toString ws}"
-                "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+          let
+            keymap = ["m" "comma" "period" "j" "k" "l" "u" "i" "o"];
+          in
+            builtins.concatLists (builtins.genList
+              (
+                i: let
+                  ws = i + 1;
+                  key = builtins.elemAt keymap i;
+                in [
+                  "$mod, code:1${toString i}, workspace, ${toString ws}"
+                  "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
 
-                # "$mod, ${numpadCode}, workspace, ${toString ws}"
-                # "$mod SHIFT, ${numpadCode}, movetoworkspace, ${toString ws}"
-              ]
-            )
-            9)
+                  "$mod, ${key}, workspace, ${toString ws}"
+                  "$mod SHIFT, ${key}, movetoworkspace, ${toString ws}"
+                ]
+              )
+              9)
         );
 
       bindm = [
@@ -149,11 +153,45 @@ in {
 
       # Start-up applications
       exec-once = [
-        "uwsm app -- qs -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/"
+        # "uwsm app -- qs -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/"
         "uwsm app -- clipse -listen"
         "uwsm app -- gnome-keyring-daemon --start --components=pkcs11,secrets"
-        "uwsm app -- zmkbatx"
+        # "uwsm app -- zmkbatx"
       ];
+    };
+  };
+
+  systemd.user.services = {
+    qs = {
+      Unit = {
+        Description = "QuickShell Service";
+      };
+
+      Service = {
+        ExecStart = "${lib.getExe pkgs.uwsm} app -- qs -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/";
+        Restart = "on-failure";
+      };
+
+      Install = {
+        WantedBy = ["default.target"];
+      };
+    };
+
+    zmkbatx = {
+      Unit = {
+        Description = "ZMK Battery Status";
+        After = ["qs.service"];
+        Requires = ["qs.service"];
+      };
+
+      Service = {
+        ExecStart = "${lib.getExe pkgs.uwsm} app -- zmkbatx";
+        Restart = "on-failure";
+      };
+
+      Install = {
+        WantedBy = ["default.target"];
+      };
     };
   };
 }
