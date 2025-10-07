@@ -8,6 +8,7 @@
     ./hyprland.nix
     ./podman.nix
     ./teamviewer.nix
+    ./tailscale.nix
     ./xdg.nix
     ./mail.nix
   ];
