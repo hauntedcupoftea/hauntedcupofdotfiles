@@ -26,10 +26,10 @@
       source = ../../custom-files/vesktop/themes;
       recursive = true;
     };
-    "${config.xdg.configHome}/vesktop/settings" = {
-      source = ../../custom-files/vesktop/settings;
-      recursive = true;
-    };
+    # "${config.xdg.configHome}/vesktop/settings" = {
+    #   source = ../../custom-files/vesktop/settings;
+    #   recursive = true;
+    # };
   };
 
   # for discord RPC
