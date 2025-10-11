@@ -1,88 +1,80 @@
 {
-  lib,
   stdenv,
+  lib,
   requireFile,
   dpkg,
   autoPatchelfHook,
   makeWrapper,
-  zenity,
-  xdg-utils,
-  xdg-desktop-portal,
-  alsa-lib,
   libGL,
   libkrb5,
-  pulseaudio,
-  udev,
   xorg,
   zlib,
+  alsa-lib,
+  udev,
+  zenity,
 }:
-stdenv.mkDerivation (finalAttrs: {
-  pname = "dungeondraft";
+stdenv.mkDerivation rec {
+  pname = "Dungeondraft";
   version = "1.2.0.1";
 
   src = requireFile {
-    name = "Dungeondraft-${finalAttrs.version}-Linux64.deb";
+    name = "Dungeondraft-${version}-Linux64.deb";
     url = "https://dungeondraft.net/";
     hash = "sha256-UvvUCQ1RkhwBPMet/zD0JjI7DPbF4ixzOX85Fi3v/BE=";
   };
+  sourceRoot = ".";
+  unpackCmd = "${dpkg}/bin/dpkg-deb -x $curSrc .";
+
+  dontConfigure = true;
+  dontBuild = true;
 
   nativeBuildInputs = [
-    dpkg
     autoPatchelfHook
     makeWrapper
   ];
-
   buildInputs = [
-    alsa-lib
     libGL
     libkrb5
-    pulseaudio
-    udev
-    zlib
-    xorg.libX11
     xorg.libXcursor
+    xorg.libX11
     xorg.libXext
+    xorg.libXrandr
     xorg.libXi
     xorg.libXinerama
-    xorg.libXrandr
-    xorg.libXrender
+    zlib
   ];
-
-  unpackCmd = "${dpkg}/bin/dpkg-deb -x $src .";
-  sourceRoot = ".";
-  dontConfigure = true;
-  dontBuild = true;
 
   installPhase = ''
     runHook preInstall
     mkdir -p $out/bin
     cp -R usr/share opt $out/
-
-    substituteInPlace $out/share/applications/Dungeondraft.desktop \
-      --replace "Exec=/opt/Dungeondraft/Dungeondraft.x86_64" "Exec=Dungeondraft"
-
-    substituteInPlace $out/share/applications/Dungeondraft.desktop \
-      --replace /opt/ $out/opt/
-
-    ln -s $out/opt/Dungeondraft/Dungeondraft.x86_64 $out/bin/Dungeondraft
+    mkdir -p $out/share/icons/hicolor/256x256/apps
+    mv $out/opt/Dungeondraft/Dungeondraft.png $out/share/icons/hicolor/256x256/apps/Dungeondraft.png
+    ln -s $out/opt/Dungeondraft/Dungeondraft.x86_64 $out/bin/Dungeondraft.x86_64
+    substituteInPlace \
+      $out/share/applications/Dungeondraft.desktop \
+        --replace-warn /opt/Dungeondraft/ "" \
+        --replace-warn Dungeondraft.png Dungeondraft \
+        --replace-warn /opt/Dungeondraft $out/opt/Dungeondraft
     runHook postInstall
   '';
-
+  postInstall = ''
+    wrapProgram $out/bin/Dungeondraft.x86_64 \
+      --prefix PATH : ${lib.makeBinPath [zenity]}
+  '';
   postFixup = ''
-    wrapProgram $out/bin/Dungeondraft \
-      --prefix PATH : ${lib.makeBinPath [
-      zenity
-      xdg-utils
-      xdg-desktop-portal
-    ]}
+    patchelf \
+      --add-needed ${udev}/lib/libudev.so.1 \
+      --add-needed ${alsa-lib}/lib/libasound.so.2 \
+      $out/opt/Dungeondraft/Dungeondraft.x86_64
   '';
 
   meta = {
     homepage = "https://dungeondraft.net/";
-    description = "A mapmaking tool for Tabletop Roleplaying Games, designed for battlemap scale";
+    description = "Mapmaking tool for Tabletop Roleplaying Games, designed for battlemap scale";
     license = lib.licenses.unfree;
     platforms = ["x86_64-linux"];
-    maintainers = with lib.maintainers; [jsusk];
     sourceProvenance = with lib.sourceTypes; [binaryNativeCode];
+    mainProgram = "Dungeondraft.x86_64";
   };
-})
+}
