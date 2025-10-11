@@ -54,12 +54,13 @@ stdenv.mkDerivation rec {
         mkdir -p $out/bin
         mkdir -p $out/share/applications
         mkdir -p $out/share/icons/hicolor/256x256/apps
+        mkdir -p $out/opt
 
         # Copy application files
         cp -R opt/Dungeondraft $out/opt/
 
-        # Copy icon to proper location
-        cp $out/opt/Dungeondraft/Dungeondraft.png $out/share/icons/hicolor/256x256/apps/Dungeondraft.png
+        # Copy icon to proper location (from source, not $out)
+        cp opt/Dungeondraft/Dungeondraft.png $out/share/icons/hicolor/256x256/apps/Dungeondraft.png
 
         # Create wrapper script with proper PATH
         makeWrapper $out/opt/Dungeondraft/Dungeondraft.x86_64 $out/bin/dungeondraft \
