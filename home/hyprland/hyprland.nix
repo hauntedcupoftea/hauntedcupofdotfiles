@@ -51,7 +51,7 @@ in {
           "$mod, F, fullscreen"
           "$mod, V, exec, uwsm app -- $terminal --class clipse -e 'clipse'"
           # walker-binds
-          "$mod, space, exec, uwsm app -- sherlock" # standard run
+          "$mod, space, exec, uwsm app -- walker" # standard run
 
           # Move focus
           "$mod, h, movefocus, l"
@@ -153,10 +153,8 @@ in {
 
       # Start-up applications
       exec-once = [
-        # "uwsm app -- qs -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/"
         "uwsm app -- clipse -listen"
         "uwsm app -- gnome-keyring-daemon --start --components=pkcs11,secrets"
-        # "uwsm app -- zmkbatx"
       ];
     };
   };
