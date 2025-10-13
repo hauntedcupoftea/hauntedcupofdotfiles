@@ -14,7 +14,7 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
 
-    walker.url = "github:abenz1267/walker/0.13.26";
+    walker.url = "github:abenz1267/walker";
 
     rust-overlay.url = "github:oxalica/rust-overlay";
 
