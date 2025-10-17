@@ -27,8 +27,7 @@
 
   programs.walker = {
     enable = true;
-    runAsService = false;
-    package = pkgs.walker;
+    runAsService = true;
 
     # This is Walker's main configuration
     config = {
