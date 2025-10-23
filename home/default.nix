@@ -42,6 +42,7 @@
     kdePackages.okular # pdf editor
     pinta # paint
     dungeondraft # custom derivation
+    qbittorrent-enhanced
   ];
 
   home.sessionVariables = {
