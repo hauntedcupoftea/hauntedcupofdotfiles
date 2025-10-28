@@ -43,6 +43,8 @@
     pinta # paint
     dungeondraft # custom derivation
     qbittorrent-enhanced
+    localsend
+    kdePackages.kdeconnect-kde
   ];
 
   home.sessionVariables = {

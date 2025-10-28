@@ -3,19 +3,16 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     nh.url = "github:nix-community/nh";
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
     hypr-contrib.url = "github:hyprwm/contrib";
-
     hyprpicker.url = "github:hyprwm/hyprpicker";
-
     nix-gaming.url = "github:fufexan/nix-gaming";
-
     hyprland.url = "github:hyprwm/Hyprland";
-
     walker.url = "github:abenz1267/walker";
-
     rust-overlay.url = "github:oxalica/rust-overlay";
 
     stylix = {
@@ -61,51 +58,73 @@
     kurukurubar = {
       url = "github:Rexcrazy804/Zaphkiel";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.quickshell.follows = "quickshell";
+    };
+
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
   };
-  outputs = {
+  outputs = inputs @ {
     self,
+    flake-parts,
     nixpkgs,
+    nix-on-droid,
     rust-overlay,
     ...
-  } @ inputs: let
-    # Import custom packages overlay from pkgs directory
-    customPackagesOverlay = import ./pkgs {inherit inputs;};
+  }: let
+    customOverlay = import ./pkgs {inherit inputs;};
 
-    # Function to create pkgs with all overlays
     mkPkgs = system:
       import nixpkgs {
         inherit system;
         overlays = [
           rust-overlay.overlays.default
-          customPackagesOverlay
+          customOverlay
         ];
       };
-  in {
-    # Add packages output for easier testing
-    packages.x86_64-linux = {
-      hyprland-preview-share-picker = (mkPkgs "x86_64-linux").hyprland-preview-share-picker;
-      dungeondraft = (mkPkgs "x86_64-linux").dungeondraft;
-      default = self.packages.x86_64-linux.hyprland-preview-share-picker;
-    };
+  in
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux" "aarch64-linux"];
 
-    nixosConfigurations = {
-      "Anand-GE66-Raider" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
+      # TODO: change this to callpackage to make this file smaller
+      perSystem = {system, ...}: let
+        pkgs = mkPkgs system;
+      in {
+        _module.args.pkgs = pkgs;
+        packages = {
+          dungeondraft = pkgs.dungeondraft;
+          hyprland-preview-share-picker = pkgs.hyprland-preview-share-picker;
+          default = pkgs.dungeondraft;
         };
-        modules = [
-          {
-            nixpkgs.overlays = [
-              rust-overlay.overlays.default
-              customPackagesOverlay
+      };
+
+      flake = {
+        nixosConfigurations = {
+          "Anand-GE66-Raider" = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = {
+              inherit inputs;
+            };
+            modules = [
+              {
+                nixpkgs.overlays = [
+                  rust-overlay.overlays.default
+                  customOverlay
+                ];
+              }
+              ./hosts/ge66-raider
             ];
-          }
-          ./hosts/ge66-raider
-        ];
+          };
+        };
+
+        "nix-on-droid-configurations" = {
+          "tab-s8-plus" = nix-on-droid.lib.nixOnDroidConfiguration {
+            system = "aarch64-linux";
+            specialArgs = {inherit inputs;};
+            modules = [./hosts/tab-s8-plus];
+          };
+        };
       };
     };
-  };
 }
