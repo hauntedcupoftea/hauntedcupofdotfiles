@@ -107,6 +107,7 @@
               inherit inputs;
             };
             pkgs = import nixpkgs {
+              config.allowUnfree = true;
               system = "x86_64-linux";
               overlays = [
                 rust-overlay.overlays.default
@@ -121,7 +122,6 @@
 
         nixOnDroidConfigurations = {
           default = nix-on-droid.lib.nixOnDroidConfiguration {
-            system = "aarch64-linux";
             modules = [
               ./hosts/tab-s8-plus
             ];
@@ -129,6 +129,7 @@
               inherit inputs;
             };
             pkgs = import nixpkgs {
+              config.allowUnfree = true;
               system = "aarch64-linux";
               overlays = [
                 nix-on-droid.overlays.default
