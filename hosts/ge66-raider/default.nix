@@ -21,6 +21,7 @@
 
   # Host-specific overrides can go here
   networking.hostName = "Anand-GE66-Raider";
+  documentation.nixos.enable = false;
 
   # This value determines the NixOS release
   system.stateVersion = "24.11";
