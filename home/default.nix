@@ -45,6 +45,8 @@
     qbittorrent-enhanced
     localsend
     kdePackages.kdeconnect-kde
+    wf-recorder # screen recording
+    slurp # region selector
   ];
 
   home.sessionVariables = {

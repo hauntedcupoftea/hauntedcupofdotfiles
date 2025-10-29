@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     nh.url = "github:nix-community/nh";
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -62,15 +62,15 @@
 
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs = inputs @ {
-    self,
     flake-parts,
     nixpkgs,
     nix-on-droid,
     rust-overlay,
+    home-manager,
     ...
   }: let
     customOverlay = import ./pkgs {inherit inputs;};
@@ -106,23 +106,38 @@
             specialArgs = {
               inherit inputs;
             };
+            pkgs = import nixpkgs {
+              system = "x86_64-linux";
+              overlays = [
+                rust-overlay.overlays.default
+                customOverlay
+              ];
+            };
             modules = [
-              {
-                nixpkgs.overlays = [
-                  rust-overlay.overlays.default
-                  customOverlay
-                ];
-              }
               ./hosts/ge66-raider
             ];
           };
         };
 
-        "nix-on-droid-configurations" = {
-          "tab-s8-plus" = nix-on-droid.lib.nixOnDroidConfiguration {
+        nixOnDroidConfigurations = {
+          default = nix-on-droid.lib.nixOnDroidConfiguration {
             system = "aarch64-linux";
-            specialArgs = {inherit inputs;};
-            modules = [./hosts/tab-s8-plus];
+            modules = [
+              ./hosts/tab-s8-plus
+            ];
+            extraSpecialArgs = {
+              inherit inputs;
+            };
+            pkgs = import nixpkgs {
+              system = "aarch64-linux";
+              overlays = [
+                nix-on-droid.overlays.default
+                rust-overlay.overlays.default
+              ];
+            };
+
+            # set path to home-manager flake
+            home-manager-path = home-manager.outPath;
           };
         };
       };
