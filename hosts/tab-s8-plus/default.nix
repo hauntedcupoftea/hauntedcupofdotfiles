@@ -37,7 +37,8 @@
   time.timeZone = "Asia/Kolkata";
 
   user = {
-    userName = "tea";
+    # apparently this is read-only?
+    # userName = "tea";
     shell = "${pkgs.fish}/bin/fish";
   };
 
