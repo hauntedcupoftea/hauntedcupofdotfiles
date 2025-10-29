@@ -1,12 +1,6 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     # core config
-    ../../modules/core/nix.nix
     ../../modules/core/shells.nix
   ];
 
