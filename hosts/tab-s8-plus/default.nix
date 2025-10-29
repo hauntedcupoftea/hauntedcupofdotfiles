@@ -5,6 +5,7 @@
     fastfetchMinimal
     hostname
     curl
+    openssh
 
     # Some common stuff that people expect to have
     #procps
@@ -31,8 +32,14 @@
   # Backup etc files instead of failing to activate generation if a file already exists in /etc
   environment.etcBackupExtension = ".bak";
 
+  terminal.font = "${pkgs.nerd-fonts.fira-code}/share/fonts/truetype/NerdFonts/FiraCode/FiraCodeNerdFont-Regular.ttf";
   # Locale because nix-on-droid hates me
   time.timeZone = "Asia/Kolkata";
+
+  user = {
+    userName = "tea";
+    shell = "${pkgs.fish}/bin/fish";
+  };
 
   # Read the changelog before changing this value
   system.stateVersion = "24.05";
