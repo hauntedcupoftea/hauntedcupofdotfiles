@@ -7,7 +7,6 @@
   imports = [
     # core config
     ../../modules/core/nix.nix
-    ../../modules/core/locale.nix
     ../../modules/core/shells.nix
   ];
 
@@ -42,6 +41,9 @@
 
   # Backup etc files instead of failing to activate generation if a file already exists in /etc
   environment.etcBackupExtension = ".bak";
+
+  # Locale because nix-on-droid hates me
+  time.timeZone = "Asia/Kolkata";
 
   # Read the changelog before changing this value
   system.stateVersion = "24.05";
