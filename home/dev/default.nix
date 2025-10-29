@@ -2,6 +2,7 @@
   imports = [
     # ./ags.nix
     ./git.nix
+    ./firefox.nix
     ./nvf.nix
     ./helix.nix
     ./py.nix
@@ -14,7 +15,6 @@
 
   home.packages = with pkgs; [
     bruno # api testing tool that works on plaintext
-    geckodriver # Selenium-like browser automation for Firefox
     zrok # self hosted ngrok
     zathura # PDF viewer
     gh # GitHub-cli
