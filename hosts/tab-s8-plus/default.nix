@@ -1,9 +1,4 @@
 {pkgs, ...}: {
-  imports = [
-    # core config
-    ../../modules/core/shells.nix
-  ];
-
   environment.packages = with pkgs; [
     gh
     git
