@@ -134,9 +134,11 @@ in {
         "1,persistent:true,monitor:DP-2"
         "2,persistent:true,monitor:DP-2"
         "3,persistent:true,monitor:DP-2"
-        "4,persistent:true,monitor:eDP-1"
-        "5,persistent:true,monitor:eDP-1"
-        "6,persistent:true,monitor:eDP-1"
+        # "4,persistent:true,monitor:eDP-1"
+        # "5,persistent:true,monitor:eDP-1"
+        # "6,persistent:true,monitor:eDP-1"
+        "4,persistent:true,monitor:DP-2"
+        "5,persistent:true,monitor:DP-2"
       ];
 
       # Window Rules
