@@ -1,4 +1,4 @@
-{...}: {
+{lib, ...}: {
   imports = [
     ../../home/shell
     ../../home/utils
@@ -11,6 +11,8 @@
   ];
 
   programs.helix.settings = {theme = "catppuccin_mocha";};
+  # force zellij off on android
+  programs.zellij.enable = lib.mkForce false;
 
   home.stateVersion = "24.05";
 }
