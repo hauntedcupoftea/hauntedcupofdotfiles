@@ -6,6 +6,7 @@
     ./misc
     ./yazi.nix
     ./zoxide.nix
+    ./ssh.nix
   ];
 
   home.packages = with pkgs; [
