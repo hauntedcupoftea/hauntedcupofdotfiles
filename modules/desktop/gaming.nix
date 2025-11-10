@@ -16,7 +16,9 @@
       # nix-gaming
       platformOptimizations.enable = true;
       protontricks.enable = true;
-      package = pkgs.steam-millennium;
+      package = pkgs.steam.override {
+        extraBwrapArgs = ["--unsetenv TZ"];
+      };
     };
 
     gamemode = {

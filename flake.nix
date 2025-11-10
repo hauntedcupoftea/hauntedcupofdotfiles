@@ -13,7 +13,7 @@
     walker.url = "github:abenz1267/walker";
 
     nix-gaming.url = "github:fufexan/nix-gaming";
-    millennium.url = "git+https://github.com/SteamClientHomebrew/Millennium";
+    # millennium.url = "git+https://github.com/SteamClientHomebrew/Millennium";
     rust-overlay.url = "github:oxalica/rust-overlay";
 
     stylix = {
@@ -72,7 +72,7 @@
     nix-on-droid,
     rust-overlay,
     home-manager,
-    millennium,
+    # millennium,
     ...
   }: let
     customOverlay = import ./pkgs {inherit inputs;};
@@ -91,7 +91,7 @@
               config.allowUnfree = true;
               system = "x86_64-linux";
               overlays = [
-                millennium.overlays.default
+                # millennium.overlays.default
                 rust-overlay.overlays.default
                 customOverlay
               ];
