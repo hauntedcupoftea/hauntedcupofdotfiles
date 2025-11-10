@@ -3,16 +3,17 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     nh.url = "github:nix-community/nh";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     hypr-contrib.url = "github:hyprwm/contrib";
     hyprpicker.url = "github:hyprwm/hyprpicker";
-    nix-gaming.url = "github:fufexan/nix-gaming";
     hyprland.url = "github:hyprwm/Hyprland";
     walker.url = "github:abenz1267/walker";
+
+    nix-gaming.url = "github:fufexan/nix-gaming";
+    millennium.url = "git+https://github.com/SteamClientHomebrew/Millennium";
     rust-overlay.url = "github:oxalica/rust-overlay";
 
     stylix = {
@@ -71,33 +72,13 @@
     nix-on-droid,
     rust-overlay,
     home-manager,
+    millennium,
     ...
   }: let
     customOverlay = import ./pkgs {inherit inputs;};
-
-    mkPkgs = system:
-      import nixpkgs {
-        inherit system;
-        overlays = [
-          rust-overlay.overlays.default
-          customOverlay
-        ];
-      };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux"];
-
-      # TODO: change this to callpackage to make this file smaller
-      perSystem = {system, ...}: let
-        pkgs = mkPkgs system;
-      in {
-        _module.args.pkgs = pkgs;
-        packages = {
-          dungeondraft = pkgs.dungeondraft;
-          hyprland-preview-share-picker = pkgs.hyprland-preview-share-picker;
-          default = pkgs.dungeondraft;
-        };
-      };
 
       flake = {
         nixosConfigurations = {
@@ -110,6 +91,7 @@
               config.allowUnfree = true;
               system = "x86_64-linux";
               overlays = [
+                millennium.overlays.default
                 rust-overlay.overlays.default
                 customOverlay
               ];
@@ -137,7 +119,6 @@
               ];
             };
 
-            # set path to home-manager flake
             home-manager-path = home-manager.outPath;
           };
         };

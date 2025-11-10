@@ -16,9 +16,7 @@
       # nix-gaming
       platformOptimizations.enable = true;
       protontricks.enable = true;
-      package = pkgs.steam.override {
-        extraBwrapArgs = ["--unsetenv TZ"]; # fix for incorrect timezone
-      };
+      package = pkgs.steam-millennium;
     };
 
     gamemode = {
@@ -31,7 +29,6 @@
       capSysNice = true;
       args = [
         "--backend sdl"
-        # "--rt"
       ];
     };
   };
