@@ -152,6 +152,10 @@ in {
         "stayfocused, class:^(kitty)$,title:^(Save File|Select Directory|Select File)$"
         "size 1200 800, class:^(kitty)$,title:^(Save File|Select Directory|Select File)$"
         "center, class:^(kitty)$,title:^(Save File|Select Directory|Select File)$"
+        # gaming
+        "content game, initialClass:steam_app_.*"
+        "fullscreenstate 2 2, initialClass:steam_app_.*"
+        "workspace 2, initialClass:steam_app_.*"
       ];
 
       # Start-up applications
