@@ -104,7 +104,7 @@ Rectangle {
                 columnSpacing: 0
 
                 Repeater {
-                    model: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+                    model: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
                     Rectangle {
                         id: dayLabels
