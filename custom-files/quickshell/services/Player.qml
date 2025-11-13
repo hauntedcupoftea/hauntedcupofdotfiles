@@ -8,12 +8,18 @@ Singleton {
     id: root
 
     readonly property list<MprisPlayer> playerList: Mpris.players.values
-    readonly property MprisPlayer active: selectedPlayer ?? playerList[0] ?? null
-    property MprisPlayer selectedPlayer
+    readonly property MprisPlayer active: selectedPlayer ?? null
+    property int activeIndex: 0
+    property MprisPlayer selectedPlayer: playerList[activeIndex] ?? null
+
     readonly property real percentageProgress: {
         if (!active || !active?.length)
             return 0;
         return active.position / (active.length);
+    }
+
+    function selectPlayer(delta: int) {
+        activeIndex = (activeIndex + delta + playerList.length) % playerList.length;
     }
 
     FrameAnimation {

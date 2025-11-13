@@ -3,4 +3,5 @@ import qs.widgets
 
 ShellRoot {
     Background {}
+    LockRoot {}
 }

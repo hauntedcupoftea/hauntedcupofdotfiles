@@ -28,8 +28,13 @@ AbstractBarButton {
         onPressed: {
             Player.active.raise();
         }
-    }
 
+        onWheel: event => {
+            var delta = event.angleDelta.y / 120;
+            Player.selectPlayer(delta);
+            console.log(`Changed player to ${Player.active.desktopEntry ?? Player.active.dbusName}`);
+        }
+    }
     MouseArea {
         id: toggleMute
         anchors.fill: parent

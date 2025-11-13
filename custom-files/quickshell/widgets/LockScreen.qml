@@ -5,14 +5,13 @@ import qs.services
 
 Rectangle {
     id: root
-    required property LockContext context
     readonly property ColorGroup colors: Window.active ? palette.active : palette.inactive
 
     color: colors.window
 
     Button {
         text: "Its not working, let me out"
-        onClicked: context.unlocked()
+        onClicked: LockContext.unlock()
     }
 
     Label {
@@ -25,11 +24,9 @@ Rectangle {
             topMargin: 100
         }
 
-        // The native font renderer tends to look nicer at large sizes.
         renderType: Text.NativeRendering
         font.pointSize: 80
 
-        // updates the clock every second
         Timer {
             running: true
             repeat: true
@@ -60,19 +57,19 @@ Rectangle {
                 padding: 10
 
                 focus: true
-                enabled: !root.context.unlockInProgress
+                enabled: !LockContext.unlockInProgress
                 echoMode: TextInput.Password
                 inputMethodHints: Qt.ImhSensitiveData
 
-                onTextChanged: root.context.currentText = this.text
+                onTextChanged: LockContext.currentText = this.text
 
-                onAccepted: root.context.tryUnlock()
+                onAccepted: LockContext.tryUnlock()
 
                 Connections {
-                    target: root.context
+                    target: LockContext
 
                     function onCurrentTextChanged() {
-                        passwordBox.text = root.context.currentText;
+                        passwordBox.text = LockContext.currentText;
                     }
                 }
             }
@@ -83,13 +80,13 @@ Rectangle {
 
                 focusPolicy: Qt.NoFocus
 
-                enabled: !root.context.unlockInProgress && root.context.currentText !== ""
-                onClicked: root.context.tryUnlock()
+                enabled: !LockContext.unlockInProgress && LockContext.currentText !== ""
+                onClicked: LockContext.tryUnlock()
             }
         }
 
         Label {
-            visible: root.context.showFailure
+            visible: LockContext.showFailure
             text: "Incorrect password"
         }
     }

@@ -1,8 +1,11 @@
+pragma Singleton
+
 import QtQuick
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.Pam
 
-Scope {
+Singleton {
     id: root
     signal unlocked
     signal failed
@@ -10,6 +13,12 @@ Scope {
     property string currentText: ""
     property bool unlockInProgress: false
     property bool showFailure: false
+    property bool locked: false
+
+    function unlock() {
+        root.locked = false;
+        root.unlocked();
+    }
 
     onCurrentTextChanged: showFailure = false
 
@@ -19,6 +28,14 @@ Scope {
 
         root.unlockInProgress = true;
         pam.start();
+    }
+
+    IpcHandler {
+        target: "lockscreen"
+
+        function lock(): void {
+            root.locked = true;
+        }
     }
 
     PamContext {
@@ -33,6 +50,7 @@ Scope {
         onCompleted: result => {
             if (result == PamResult.Success) {
                 root.unlocked();
+                root.locked = false;
             } else {
                 root.currentText = "";
                 root.showFailure = true;
