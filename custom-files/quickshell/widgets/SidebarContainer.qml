@@ -42,19 +42,19 @@ PopupWindow {
         scale: container.visible ? 1.0 : 0.95
         opacity: container.visible ? 1.0 : 0.0
 
-        Behavior on scale {
-            NumberAnimation {
-                duration: 200
-                easing.type: Easing.OutCubic
-            }
-        }
+        // Behavior on scale {
+        //     NumberAnimation {
+        //         duration: 200
+        //         easing.type: Easing.OutCubic
+        //     }
+        // }
 
-        Behavior on opacity {
-            NumberAnimation {
-                duration: 200
-                easing.type: Easing.OutCubic
-            }
-        }
+        // Behavior on opacity {
+        //     NumberAnimation {
+        //         duration: 200
+        //         easing.type: Easing.OutCubic
+        //     }
+        // }
     }
 
     // Focus management

@@ -10,8 +10,18 @@ Singleton {
     readonly property list<MprisPlayer> playerList: Mpris.players.values
     readonly property MprisPlayer active: selectedPlayer ?? null
     property int activeIndex: 0
+    property string playerName: selectedPlayer?.desktopEntry ?? null
     property MprisPlayer selectedPlayer: playerList[activeIndex] ?? null
 
+    onPlayerListChanged: {
+        if (playerName) {
+            const index = playerList.findIndex(item => item.desktopEntry === playerName);
+            activeIndex = index !== -1 ? index : 0;
+        } else {
+            activeIndex = 0;
+        }
+    }
+    onPlayerNameChanged: print(playerName)
     readonly property real percentageProgress: {
         if (!active || !active?.length)
             return 0;

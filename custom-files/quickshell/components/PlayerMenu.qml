@@ -99,7 +99,6 @@ AbstractBarButton {
         triggerTarget: true
         position: Qt.rect(root.width / 2, root.height + Theme.padding, 0, 0)
         blockShow: !Player.active
-        visible: Player.active.trackTitle
 
         RowLayout {
             spacing: 12
@@ -135,7 +134,7 @@ AbstractBarButton {
                 }
                 Text {
                     Layout.maximumWidth: 400
-                    text: MprisPlaybackState.toString(Player.active?.playbackState)
+                    text: `${MprisPlaybackState.toString(Player.active?.playbackState)} | ${Player.playerName || Player.active.dbusName}`
                     color: Theme.colors.on_surface_variant
                     font.family: Theme.font.family
                     font.pixelSize: Theme.font.small

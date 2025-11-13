@@ -1,4 +1,6 @@
 import qs.services
+import qs.components
+
 import Quickshell.Wayland
 import QtQuick
 
