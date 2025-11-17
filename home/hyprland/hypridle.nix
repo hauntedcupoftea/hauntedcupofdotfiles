@@ -28,7 +28,7 @@
         }
         {
           timeout = 300; # 5 minutes
-          on-timeout = "loginctl lock-session";
+          on-timeout = "${lib.getExe inputs.quickshell.packages.${pkgs.system}.default} -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/ ipc lockscreen lock";
         }
 
         {
