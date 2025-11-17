@@ -10,7 +10,7 @@ Rectangle {
     id: root
     color: Theme.colors.background
     property int length: passwordBox.length
-    property list<string> charShapes: ['󰠖', '', '󱓻', '󰜡', '󰮊', '󰝬', '󰜁']
+    property list<string> charShapes: ['', '󱓻', '󰜡', '󰮊', '󰝬', '󰜁']
 
     // Gradient overlay for depth
     Rectangle {
@@ -27,10 +27,8 @@ Rectangle {
         }
     }
 
-    // Clock
     Label {
         id: clock
-        property var date: new Date()
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: parent.top
@@ -38,24 +36,16 @@ Rectangle {
         }
         renderType: Text.NativeRendering
         font.pointSize: 90
-        font.weight: Font.Light
+        font.weight: Font.DemiBold
         color: Theme.colors.on_background
 
-        Timer {
-            running: true
-            repeat: true
-            interval: 1000
-            onTriggered: clock.date = new Date()
-        }
-
         text: {
-            const hours = clock.date.getHours().toString().padStart(2, '0');
-            const minutes = clock.date.getMinutes().toString().padStart(2, '0');
+            const hours = Time.rawtime.getHours().toString().padStart(2, '0');
+            const minutes = Time.rawtime.getMinutes().toString().padStart(2, '0');
             return `${hours}:${minutes}`;
         }
     }
 
-    // Date
     Label {
         anchors {
             horizontalCenter: parent.horizontalCenter
@@ -68,7 +58,7 @@ Rectangle {
         text: {
             const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            return `${days[clock.date.getDay()]}, ${months[clock.date.getMonth()]} ${clock.date.getDate()}`;
+            return `${days[Time.rawtime.getDay()]}, ${months[Time.rawtime.getMonth()]} ${Time.rawtime.getDate()}`;
         }
     }
 
@@ -222,7 +212,7 @@ Rectangle {
                     anchors.centerIn: parent
                     text: "×"
                     font.pointSize: 24
-                    color: Theme.colors.on_surface
+                    color: Theme.colors.on_error_container
                 }
 
                 MouseArea {
@@ -343,40 +333,6 @@ Rectangle {
                     duration: 50
                 }
             }
-        }
-    }
-
-    Rectangle {
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            bottom: parent.bottom
-            bottomMargin: 40
-        }
-        implicitWidth: emergencyLabel.implicitWidth + 40
-        implicitHeight: 45
-        radius: 22.5
-        color: emergencyMouseArea.pressed ? Theme.colors.surface_container_highest : Theme.colors.surface_container
-        border.color: Theme.colors.outline_variant
-        border.width: 1
-
-        Behavior on color {
-            ColorAnimation {
-                duration: 100
-            }
-        }
-
-        Label {
-            id: emergencyLabel
-            anchors.centerIn: parent
-            text: "Emergency unlock"
-            color: Theme.colors.on_surface_variant
-            font.pointSize: 11
-        }
-
-        MouseArea {
-            id: emergencyMouseArea
-            anchors.fill: parent
-            onClicked: LockContext.unlock()
         }
     }
 }

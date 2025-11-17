@@ -1,10 +1,11 @@
-import Quickshell
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 
 import qs.theme
 import qs.config
 import qs.components.internal
+import qs.services
 
 Rectangle {
     id: root
@@ -83,7 +84,10 @@ Rectangle {
                 buttonIcon: "󰌾"
                 buttonText: "Lock"
                 Layout.alignment: Qt.AlignCenter
-                command: ["loginctl", "lock-session"]
+                action: Action {
+                    onTriggered: LockContext.locked = true
+                }
+                command: ["notify-send", "quickshell", "Session Locked"]
                 onHoveredChanged: {
                     if (hovered)
                         root.hoveredAction = this.buttonText;
