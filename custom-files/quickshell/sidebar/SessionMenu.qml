@@ -50,10 +50,13 @@ Rectangle {
                 Layout.alignment: Qt.AlignCenter
                 command: ["uwsm", "stop"]
                 onHoveredChanged: {
-                    if (hovered)
+                    if (hovered) {
                         root.hoveredAction = this.buttonText;
-                    else
+                        nameReset.running = false;
+                    } else {
                         root.hoveredAction = root.getRandomSessionMessage();
+                        nameReset.running = true;
+                    }
                 }
             }
             SessionMenuButton {
