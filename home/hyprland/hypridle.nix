@@ -10,7 +10,7 @@
     settings = {
       general = {
         lock_cmd = "pidof hyprlock || hyprlock";
-        before_sleep_cmd = "${lib.getExe inputs.quickshell.packages.${pkgs.system}.default} -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/ ipc lockscreen lock";
+        before_sleep_cmd = "${lib.getExe inputs.quickshell.packages.${pkgs.system}.default} -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/ ipc call lockscreen lock";
 
         after_sleep_cmd = "hyprctl dispatch dpms on";
       };
@@ -28,7 +28,7 @@
         }
         {
           timeout = 300; # 5 minutes
-          on-timeout = "${lib.getExe inputs.quickshell.packages.${pkgs.system}.default} -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/ ipc lockscreen lock";
+          on-timeout = "${lib.getExe inputs.quickshell.packages.${pkgs.system}.default} -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/ ipc call lockscreen lock";
         }
 
         {
