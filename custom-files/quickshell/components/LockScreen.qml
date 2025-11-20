@@ -95,13 +95,6 @@ Rectangle {
                 onTextChanged: LockContext.currentText = this.text
                 onAccepted: LockContext.tryUnlock()
                 focus: true
-
-                Connections {
-                    target: LockContext
-                    function onCurrentTextChanged() {
-                        passwordBox.text = LockContext.currentText;
-                    }
-                }
             }
 
             Row {

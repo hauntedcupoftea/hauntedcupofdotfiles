@@ -3,7 +3,7 @@
     mangohud
     protonup-qt
     protonplus
-    # lutris
+    lutris
     bottles
     heroic
     dualsensectl
