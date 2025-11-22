@@ -23,5 +23,9 @@ QtObject {
     readonly property int barIconSize: 20
     readonly property int trayIconSize: 16
     readonly property int playerWidth: 52
+    readonly property int notificationIconSize: 40
+    readonly property int notificationBadgeHeight: 28
+    readonly property int notificationActionHeight: 32
     readonly property int debugOffsetHeight: Settings.debug ? 36 : 0
+    readonly property int maximumTooltipWidth: 400
 }

@@ -48,11 +48,11 @@ Singleton {
         }
 
         onCompleted: result => {
+            root.currentText = "";
             if (result == PamResult.Success) {
                 root.unlocked();
                 root.locked = false;
             } else {
-                root.currentText = "";
                 root.showFailure = true;
             }
 

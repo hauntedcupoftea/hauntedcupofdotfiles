@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
@@ -10,22 +12,29 @@ import qs.config
 import "internal" as Private
 
 Rectangle {
-    radius: Theme.rounding.small
-    implicitWidth: hyprlandRow.width + (Theme.padding * 2)
-    implicitHeight: Theme.barHeight - (Theme.margin)
+    radius: Theme.rounding.pillMedium
+    implicitWidth: hyprlandRow.width + Theme.padding * 2
+    implicitHeight: Theme.barHeight - Theme.margin
+
     color: Theme.colors.surface_container
+
+    border.width: 2
+    border.color: Qt.alpha(Theme.colors.outline, 0.3)
+
     RowLayout {
         id: hyprlandRow
         anchors.centerIn: parent
         spacing: Theme.margin
+
         Repeater {
             model: ScriptModel {
                 values: Hyprland.workspaces.values.filter(workspace => workspace.id >= 0)
             }
+
             Button {
                 id: workspaceButton
                 required property HyprlandWorkspace modelData
-                implicitHeight: Theme.barHeight - (Theme.margin * 2)
+                implicitHeight: Theme.barHeight - Theme.margin * 2
                 implicitWidth: Theme.barHeight
 
                 property real fillPercentage: {
@@ -40,7 +49,6 @@ Rectangle {
                     if (modelData.urgent && urgencyFlash.flashOn) {
                         return Theme.colors.error_container;
                     }
-
                     if (modelData.focused)
                         return Theme.colors.primary_container;
                     if (modelData.active)
@@ -52,7 +60,6 @@ Rectangle {
                     if (modelData.urgent && urgencyFlash.flashOn) {
                         return Theme.colors.error;
                     }
-
                     if (modelData.focused) {
                         return Theme.colors.primary;
                     } else if (modelData.active) {
@@ -62,14 +69,9 @@ Rectangle {
                     }
                 }
 
-                // DEBUG
-                // Component.onCompleted: {
-                //     console.log("Workspace:", workspaceButton.modelData.name, "Windows:", workspaceButton.modelData.toplevels?.values?.length || 0, "Fill:", fillPercentage, "Active:", modelData.active, "Focused:", modelData.focused);
-                // }
-
                 Timer {
                     id: urgencyFlash
-                    interval: 600
+                    interval: Theme.anims.duration.large
                     repeat: true
                     running: workspaceButton.modelData.urgent
 
@@ -88,35 +90,112 @@ Rectangle {
 
                 background: ClippingRectangle {
                     radius: Theme.rounding.full
-                    color: workspaceButton.hovered ? Theme.colors.surface_container_highest : workspaceButton.getBgColor()
 
-                    // Smooth color transitions
+                    color: workspaceButton.getBgColor()
+
+                    border.width: 2
+                    border.color: workspaceButton.hovered ? workspaceButton.getFillColor() : Qt.alpha(workspaceButton.getFillColor(), 0.5)
+
+                    Behavior on border.color {
+                        ColorAnimation {
+                            duration: Theme.anims.duration.small
+                            easing.type: Easing.OutQuad
+                        }
+                    }
+
                     Behavior on color {
                         ColorAnimation {
-                            duration: 200
+                            duration: Theme.anims.duration.small
                             easing.type: Easing.OutQuad
                         }
                     }
 
                     Rectangle {
+                        id: fillRect
                         anchors.left: parent.left
                         anchors.right: parent.right
                         anchors.bottom: parent.bottom
                         height: parent.height * workspaceButton.fillPercentage
-                        color: workspaceButton.hovered ? Theme.colors.secondary_container : workspaceButton.getFillColor()
 
-                        // Smooth transitions for fill
+                        color: workspaceButton.getFillColor()
+
                         Behavior on height {
                             NumberAnimation {
-                                duration: 250
-                                easing.type: Easing.OutQuad
+                                duration: Theme.anims.duration.normal
+                                easing.type: Easing.OutBack
                             }
                         }
 
                         Behavior on color {
                             ColorAnimation {
-                                duration: 200
+                                duration: Theme.anims.duration.small
                                 easing.type: Easing.OutQuad
+                            }
+                        }
+
+                        Rectangle {
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                            anchors.top: parent.top
+                            height: 2
+                            visible: workspaceButton.fillPercentage > 0.05
+                            color: Qt.lighter(parent.color, 1.3)
+                            opacity: 0.8
+
+                            SequentialAnimation on opacity {
+                                running: workspaceButton.modelData.active || workspaceButton.modelData.focused
+                                loops: Animation.Infinite
+                                NumberAnimation {
+                                    to: 0.3
+                                    duration: 1500
+                                    easing.type: Easing.InOutQuad
+                                }
+                                NumberAnimation {
+                                    to: 0.8
+                                    duration: 1500
+                                    easing.type: Easing.InOutQuad
+                                }
+                            }
+                        }
+
+                        Repeater {
+                            model: workspaceButton.fillPercentage > 0.3 ? 3 : 0
+
+                            Rectangle {
+                                id: wsrect
+                                required property int index
+                                width: Theme.margin
+                                height: Theme.margin
+                                radius: Theme.rounding.full
+                                color: Qt.alpha(Qt.lighter(fillRect.color, 1.5), 0.4)
+
+                                x: Math.random() * (fillRect.width - width)
+                                y: fillRect.height - height - (index * Theme.margin * 2)
+
+                                SequentialAnimation on y {
+                                    running: workspaceButton.fillPercentage > 0.3
+                                    loops: Animation.Infinite
+                                    NumberAnimation {
+                                        to: -wsrect.height
+                                        duration: 2000 + (wsrect.index * 500)
+                                        easing.type: Easing.InOutQuad
+                                    }
+                                    PropertyAction {
+                                        value: fillRect.height - wsrect.height - (wsrect.index * Theme.margin * 2)
+                                    }
+                                }
+
+                                SequentialAnimation on opacity {
+                                    running: workspaceButton.fillPercentage > 0.3
+                                    loops: Animation.Infinite
+                                    NumberAnimation {
+                                        to: 0
+                                        duration: 2000 + (wsrect.index * 500)
+                                    }
+                                    PropertyAction {
+                                        value: 0.4
+                                    }
+                                }
                             }
                         }
                     }
@@ -140,9 +219,15 @@ Rectangle {
                         return Theme.colors.on_surface;
                     }
 
+                    font.weight: workspaceButton.modelData.focused ? 700 : 500
+
+                    layer.enabled: true
+                    layer.smooth: true
+                    layer.textureSize: Qt.size(width * 2, height * 2)
+
                     Behavior on color {
                         ColorAnimation {
-                            duration: 200
+                            duration: Theme.anims.duration.small
                             easing.type: Easing.OutQuad
                         }
                     }
@@ -154,19 +239,6 @@ Rectangle {
                         workspaceButton.modelData.activate();
                     }
                 }
-
-                // i don't even know if i want a popup here. what would it even say?
-                // Private.ToolTipPopup {
-                //     expandDirection: Edges.Bottom
-                //     targetWidget: workspaceButton
-                //     triggerTarget: true
-                //     position: Qt.rect(workspaceButton.width / 2, workspaceButton.height + Theme.padding, 0, 0)
-
-                //     Private.StyledText {
-                //         text: "pee pee\npoo poo"
-
-                //     }
-                // }
             }
         }
     }

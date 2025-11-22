@@ -31,6 +31,10 @@ Item {
     ClippingRectangle {
         id: background
         anchors.fill: parent
+        border {
+            width: 1
+            color: Qt.alpha(Theme.colors.outline, 0.3)
+        }
         radius: Theme.rounding.verysmall
         color: Theme.colors.surface_container
 

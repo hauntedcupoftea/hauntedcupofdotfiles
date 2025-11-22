@@ -3,5 +3,3 @@
 - [ ] reformat bar layout (move session menu inside popout for os button, merge
       battery and connectivity or find something better, have notifications. be
       top right for 3 panels on each anchor of the bar :))
-- [ ] wait for [this issue](https://github.com/nixos/nixpkgs/issues/449386)
-      before adding lutris back

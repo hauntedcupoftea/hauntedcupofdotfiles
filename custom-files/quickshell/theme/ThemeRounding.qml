@@ -11,4 +11,8 @@ QtObject {
     property int full: 9999
     property int screenRounding: large
     property int windowRounding: 18
+    property int pillSmall: 16
+    property int pillMedium: 20
+    property int pillLarge: 24
+    property int notification: 18
 }

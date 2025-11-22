@@ -14,7 +14,7 @@ import "internal" as Private
 
 AbstractBarButton {
     id: root
-    implicitHeight: Theme.barHeight - (Theme.margin)
+    implicitHeight: Theme.barHeight - Theme.margin
     implicitWidth: playerRow.width + Theme.margin * 2
     property string playerIcon: Player.active && Player.active.playbackState == MprisPlaybackState.Playing ? "󰐊" : "󰏤"
     visible: Player.active
@@ -35,6 +35,7 @@ AbstractBarButton {
             console.log(`Changed player to ${Player.active.desktopEntry ?? Player.active.dbusName}`);
         }
     }
+
     MouseArea {
         id: toggleMute
         anchors.fill: parent
@@ -48,20 +49,26 @@ AbstractBarButton {
     }
 
     background: Rectangle {
-        radius: Theme.rounding.small
+        radius: Theme.rounding.pillMedium
         color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
 
         Behavior on color {
             ColorAnimation {
-                duration: 200
+                duration: Theme.anims.duration.small
                 easing.type: Easing.OutQuad
             }
         }
+
+        border.width: 2
+        border.color: Qt.alpha(Theme.colors.tertiary, 0.3)
     }
 
     RowLayout {
         id: playerRow
         anchors.centerIn: parent
+        spacing: Theme.margin
+
+        // Play/pause icon
         Text {
             Layout.minimumWidth: Theme.font.large
             horizontalAlignment: Qt.AlignHCenter
@@ -69,17 +76,26 @@ AbstractBarButton {
                 family: Theme.font.family
                 pixelSize: Theme.font.large
             }
-            color: Theme.colors.secondary
+            color: Player.active?.playbackState == MprisPlaybackState.Playing ? Theme.colors.tertiary : Theme.colors.on_surface_variant
             text: root.playerIcon
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: Theme.anims.duration.normal
+                    easing.type: Easing.OutQuad
+                }
+            }
+
+            // Bounce when toggling
+            scale: toggleMute.pressed ? 0.9 : 1.0
+            Behavior on scale {
+                NumberAnimation {
+                    duration: Theme.anims.duration.small
+                    easing.type: Easing.OutBack
+                }
+            }
         }
-        // Private.ScrollingText {
-        //     Layout.alignment: Qt.AlignVCenter
-        //     Layout.minimumHeight: Theme.font.large * 1.3
-        //     Layout.maximumWidth: 256
-        //     Layout.minimumWidth: 128
-        //     scrollingText: Player.active && qsTr(`${Player.active.trackArtist} - ${Player.active.trackTitle}`)
-        //     animate: Player.active && Player.active.isPlaying
-        // }
+
         Private.Visualizer {
             Layout.fillHeight: true
             Layout.fillWidth: true
@@ -101,44 +117,109 @@ AbstractBarButton {
         blockShow: !Player.active
 
         RowLayout {
-            spacing: 12
-            Image {
-                source: Player.active?.trackArtUrl || "" // qmllint disable
-                sourceSize: Qt.size(100, 100)
+            spacing: Theme.padding
+
+            Rectangle {
+                Layout.preferredWidth: 100
+                Layout.preferredHeight: 100
+                radius: Theme.rounding.pillMedium
+                color: Theme.colors.surface_variant
+                clip: true
+
+                border.width: 2
+                border.color: Qt.alpha(Theme.colors.tertiary, 0.5)
+
+                Image {
+                    anchors.fill: parent
+                    anchors.margins: parent.border.width
+                    source: new URL(Player.active?.trackArtUrl)
+                    fillMode: Image.PreserveAspectCrop
+
+                    Rectangle {
+                        anchors.fill: parent
+                        visible: parent.status !== Image.Ready
+                        color: Theme.colors.surface_container_high
+                        radius: Theme.rounding.pillSmall
+
+                        Text {
+                            anchors.centerIn: parent
+                            text: "󰝚"
+                            font.pixelSize: Theme.font.huge
+                            color: Theme.colors.on_surface_variant
+                            opacity: 0.5
+                        }
+                    }
+                }
             }
+
             ColumnLayout {
                 id: trackInfo
+                Layout.preferredWidth: 300
+                spacing: Theme.margin
+
                 Private.ScrollingText {
                     Layout.fillWidth: true
-                    Layout.minimumHeight: Theme.font.normal
-                    Layout.maximumWidth: 400
-                    Layout.minimumWidth: 128
-                    scrollingText: Player.active && qsTr(`${Player.active.trackTitle}`)
+                    Layout.minimumHeight: Theme.font.large
+                    Layout.maximumWidth: 300
+                    Layout.minimumWidth: 200
+                    scrollingText: Player.active ? qsTr(`${Player.active.trackTitle}`) : ""
                     animate: Player.active && Player.active.isPlaying
                 }
-                Text {
-                    Layout.maximumWidth: 400
-                    text: Player.active?.trackArtists || ""
-                    color: Theme.colors.on_surface_variant
-                    font.family: Theme.font.family
-                    font.pixelSize: Theme.font.small
-                    wrapMode: Text.WordWrap
+
+                Rectangle {
+                    Layout.preferredHeight: Theme.font.small + Theme.margin
+                    Layout.preferredWidth: artistText.width + (Theme.padding * 2)
+                    radius: Theme.rounding.small
+                    color: Theme.colors.primary_container
+                    border.width: 2
+                    border.color: Theme.colors.primary
+
+                    Text {
+                        id: artistText
+                        anchors.centerIn: parent
+                        text: Player.active?.trackArtists || "Unknown Artist"
+                        color: Theme.colors.on_primary_container
+                        font.family: Theme.font.family
+                        font.pixelSize: Theme.font.small
+                        font.weight: Font.Medium
+                    }
                 }
-                Text {
-                    Layout.maximumWidth: 400
-                    text: Player.active?.trackAlbum || ""
-                    color: Theme.colors.on_surface_variant
-                    font.family: Theme.font.family
-                    font.pixelSize: Theme.font.small
-                    wrapMode: Text.WordWrap
+
+                Rectangle {
+                    Layout.preferredHeight: Theme.font.smallest + Theme.margin
+                    Layout.preferredWidth: albumText.implicitWidth + (Theme.padding * 2)
+                    radius: Theme.rounding.small
+                    color: Qt.alpha(Theme.colors.secondary_container, 0.6)
+                    border.width: 1
+                    border.color: Qt.alpha(Theme.colors.secondary, 0.3)
+                    visible: Player.active?.trackAlbum
+
+                    Text {
+                        id: albumText
+                        anchors.centerIn: parent
+                        text: Player.active?.trackAlbum || ""
+                        color: Theme.colors.on_secondary_container
+                        font.family: Theme.font.family
+                        font.pixelSize: Theme.font.smallest
+                    }
                 }
-                Text {
-                    Layout.maximumWidth: 400
-                    text: `${MprisPlaybackState.toString(Player.active?.playbackState)} | ${Player.playerName || Player.active.dbusName}`
-                    color: Theme.colors.on_surface_variant
-                    font.family: Theme.font.family
-                    font.pixelSize: Theme.font.small
-                    wrapMode: Text.WordWrap
+
+                Rectangle {
+                    Layout.preferredHeight: Theme.font.smallest + Theme.margin
+                    Layout.preferredWidth: statusText.implicitWidth + Theme.padding
+                    radius: Theme.rounding.small
+                    color: Qt.alpha(Theme.colors.tertiary_container, 0.6)
+                    border.width: 1
+                    border.color: Qt.alpha(Theme.colors.tertiary, 0.3)
+
+                    Text {
+                        id: statusText
+                        anchors.centerIn: parent
+                        text: `${MprisPlaybackState.toString(Player.active?.playbackState)} • ${Player.playerName || Player.active.dbusName}`
+                        color: Theme.colors.on_tertiary_container
+                        font.family: Theme.font.family
+                        font.pixelSize: Theme.font.smallest
+                    }
                 }
             }
         }
