@@ -1,7 +1,6 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
 
 import Quickshell.Widgets
@@ -22,8 +21,8 @@ AbstractBarButton {
     sidebarComponent: "basic-rectangle"
 
     property bool focusOutput: true
-    property real outputAlpha: focusOutput ? 1.0 : 0.5
-    property real inputAlpha: focusOutput ? 0.5 : 1.0
+    property real outputAlpha: focusOutput ? 0.8 : 0.4
+    property real inputAlpha: focusOutput ? 0.4 : 0.8
     property string focusedIcon: focusOutput ? Audio.defaultOutput?.audio.muted ? "󰝟" : "󰕾" : Audio.defaultInput?.audio.muted ? "󰍭" : "󰍬"
 
     MouseArea {
@@ -164,45 +163,6 @@ AbstractBarButton {
                             easing.bezierCurve: Theme.anims.curve.standard
                         }
                     }
-
-                    Rectangle {
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        anchors.top: parent.top
-                        height: 2
-                        visible: outputFill.implicitHeight > 3
-
-                        gradient: Gradient {
-                            orientation: Gradient.Horizontal
-                            GradientStop {
-                                position: 0.0
-                                color: "transparent"
-                            }
-                            GradientStop {
-                                position: 0.5
-                                color: Qt.alpha(Theme.colors.on_primary, 0.5)
-                            }
-                            GradientStop {
-                                position: 1.0
-                                color: "transparent"
-                            }
-                        }
-
-                        SequentialAnimation on opacity {
-                            running: root.focusOutput
-                            loops: Animation.Infinite
-                            NumberAnimation {
-                                to: 0.3
-                                duration: 1200
-                                easing.type: Easing.InOutQuad
-                            }
-                            NumberAnimation {
-                                to: 1.0
-                                duration: 1200
-                                easing.type: Easing.InOutQuad
-                            }
-                        }
-                    }
                 }
 
                 Rectangle {
@@ -226,45 +186,6 @@ AbstractBarButton {
                             duration: Theme.anims.duration.large
                             easing.type: Easing.BezierSpline
                             easing.bezierCurve: Theme.anims.curve.standard
-                        }
-                    }
-
-                    Rectangle {
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        anchors.top: parent.top
-                        height: 2
-                        visible: inputFill.implicitHeight > 3
-
-                        gradient: Gradient {
-                            orientation: Gradient.Horizontal
-                            GradientStop {
-                                position: 0.0
-                                color: "transparent"
-                            }
-                            GradientStop {
-                                position: 0.5
-                                color: Qt.alpha(Theme.colors.on_secondary, 0.5)
-                            }
-                            GradientStop {
-                                position: 1.0
-                                color: "transparent"
-                            }
-                        }
-
-                        SequentialAnimation on opacity {
-                            running: !root.focusOutput
-                            loops: Animation.Infinite
-                            NumberAnimation {
-                                to: 0.3
-                                duration: 1200
-                                easing.type: Easing.InOutQuad
-                            }
-                            NumberAnimation {
-                                to: 1.0
-                                duration: 1200
-                                easing.type: Easing.InOutQuad
-                            }
                         }
                     }
                 }
