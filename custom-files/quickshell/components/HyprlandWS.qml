@@ -39,10 +39,9 @@ Rectangle {
 
                 property real fillPercentage: {
                     const windowCount = workspaceButton.modelData.toplevels ? (workspaceButton.modelData.toplevels.values ? workspaceButton.modelData.toplevels.values.length : 0) : 0;
-                    const threshold = Settings.windowsThreshold || 1;
                     if (modelData.hasFullscreen)
                         return 1;
-                    return Math.min(windowCount / threshold, 1.0);
+                    return windowCount / (windowCount + 1);
                 }
 
                 function getBgColor() {
@@ -164,17 +163,18 @@ Rectangle {
                             return Theme.colors.on_error_container;
                         }
                         if (workspaceButton.modelData.focused) {
-                            return Theme.colors.on_primary_container;
+                            return Theme.colors.on_primary;
                         }
                         if (workspaceButton.modelData.active) {
                             return Theme.colors.on_secondary_container;
                         }
-                        if (workspaceButton.fillPercentage > 0.5)
+                        if (workspaceButton.fillPercentage >= 0.5)
                             return Theme.colors.on_primary;
-                        return Theme.colors.surface;
+                        return Theme.colors.on_surface;
                     }
 
-                    font.weight: workspaceButton.modelData.focused ? 700 : 500
+                    font.weight: workspaceButton.hovered ? 800 : 400
+                    font.pixelSize: Theme.font.small
 
                     layer.enabled: true
                     layer.smooth: true
