@@ -63,9 +63,6 @@ Rectangle {
 
             color: Theme.colors.primary_container
 
-            border.width: 2
-            border.color: Theme.colors.primary
-
             Loader {
                 anchors.centerIn: appIconPill
                 active: notificationCard.n && notificationCard.n?.appIcon
@@ -114,14 +111,12 @@ Rectangle {
                     Layout.preferredWidth: timeBadge.implicitWidth + (Theme.padding * 4)
                     radius: Theme.rounding.pillSmall
                     color: Theme.colors.secondary_container
-                    border.width: 2
-                    border.color: Theme.colors.secondary
 
                     Text {
                         id: timeText
                         anchors.centerIn: parent
                         text: notificationCard.n?.receivedString || "now"
-                        font.pixelSize: Theme.font.smallest
+                        font.pixelSize: Theme.font.smaller
                         font.weight: Font.Medium
                         color: Theme.colors.on_secondary_container
                     }
@@ -201,7 +196,7 @@ Rectangle {
 
                     color: sendMouseArea.containsMouse ? Theme.colors.primary : Theme.colors.primary_container
 
-                    border.width: 2
+                    border.width: 1
                     border.color: Theme.colors.primary
 
                     StyledText {
@@ -239,9 +234,6 @@ Rectangle {
 
                         color: actionMouseArea.containsMouse ? Theme.colors.secondary : Theme.colors.secondary_container
 
-                        border.width: 2
-                        border.color: Theme.colors.secondary
-
                         scale: actionMouseArea.pressed ? 0.95 : 1.0
 
                         Behavior on scale {
@@ -278,11 +270,9 @@ Rectangle {
             // App name badge
             Rectangle {
                 Layout.preferredHeight: Theme.font.smallest + Theme.margin
-                Layout.preferredWidth: appNameText.implicitWidth + Theme.padding
-                radius: Theme.rounding.pillSmall
+                Layout.preferredWidth: appNameText.implicitWidth + (Theme.padding * 2)
+                radius: Theme.rounding.unsharpenmore
                 color: Theme.colors.tertiary_container
-                border.width: 2
-                border.color: Theme.colors.tertiary
                 visible: Boolean(notificationCard.n?.appName)
 
                 Text {

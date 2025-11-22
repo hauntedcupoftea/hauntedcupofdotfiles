@@ -89,12 +89,9 @@ Rectangle {
                 }
 
                 background: ClippingRectangle {
-                    radius: Theme.rounding.full
+                    radius: Theme.rounding.small
 
                     color: workspaceButton.getBgColor()
-
-                    border.width: 2
-                    border.color: workspaceButton.hovered ? workspaceButton.getFillColor() : Qt.alpha(workspaceButton.getFillColor(), 0.5)
 
                     Behavior on border.color {
                         ColorAnimation {
@@ -112,9 +109,8 @@ Rectangle {
 
                     Rectangle {
                         id: fillRect
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        anchors.bottom: parent.bottom
+                        anchors.centerIn: parent
+                        width: parent.width
                         height: parent.height * workspaceButton.fillPercentage
 
                         color: workspaceButton.getFillColor()
@@ -157,47 +153,6 @@ Rectangle {
                                 }
                             }
                         }
-
-                        Repeater {
-                            model: workspaceButton.fillPercentage > 0.3 ? 3 : 0
-
-                            Rectangle {
-                                id: wsrect
-                                required property int index
-                                width: Theme.margin
-                                height: Theme.margin
-                                radius: Theme.rounding.full
-                                color: Qt.alpha(Qt.lighter(fillRect.color, 1.5), 0.4)
-
-                                x: Math.random() * (fillRect.width - width)
-                                y: fillRect.height - height - (index * Theme.margin * 2)
-
-                                SequentialAnimation on y {
-                                    running: workspaceButton.fillPercentage > 0.3
-                                    loops: Animation.Infinite
-                                    NumberAnimation {
-                                        to: -wsrect.height
-                                        duration: 2000 + (wsrect.index * 500)
-                                        easing.type: Easing.InOutQuad
-                                    }
-                                    PropertyAction {
-                                        value: fillRect.height - wsrect.height - (wsrect.index * Theme.margin * 2)
-                                    }
-                                }
-
-                                SequentialAnimation on opacity {
-                                    running: workspaceButton.fillPercentage > 0.3
-                                    loops: Animation.Infinite
-                                    NumberAnimation {
-                                        to: 0
-                                        duration: 2000 + (wsrect.index * 500)
-                                    }
-                                    PropertyAction {
-                                        value: 0.4
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
 
@@ -216,7 +171,7 @@ Rectangle {
                         }
                         if (workspaceButton.fillPercentage > 0.5)
                             return Theme.colors.on_primary;
-                        return Theme.colors.on_surface;
+                        return Theme.colors.surface;
                     }
 
                     font.weight: workspaceButton.modelData.focused ? 700 : 500
