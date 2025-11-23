@@ -16,7 +16,7 @@ Rectangle {
     implicitWidth: hyprlandRow.width + Theme.padding * 2
     implicitHeight: Theme.barHeight - Theme.margin
 
-    color: Theme.colors.surface_container
+    color: Theme.colors.surface_container_low
 
     border.width: 2
     border.color: Qt.alpha(Theme.colors.outline, 0.3)
@@ -38,7 +38,7 @@ Rectangle {
                 implicitWidth: Theme.barHeight
 
                 property real fillPercentage: {
-                    const windowCount = workspaceButton.modelData.toplevels ? (workspaceButton.modelData.toplevels.values ? workspaceButton.modelData.toplevels.values.length : 0) : 0;
+                    const windowCount = Number(workspaceButton.modelData.toplevels.values.length);
                     if (modelData.hasFullscreen)
                         return 1;
                     return windowCount / (windowCount + 1);
@@ -49,23 +49,21 @@ Rectangle {
                         return Theme.colors.error_container;
                     }
                     if (modelData.focused)
-                        return Theme.colors.primary_container;
+                        return Qt.alpha(Theme.colors.primary_container, 0.8);
                     if (modelData.active)
-                        return Theme.colors.secondary_container;
-                    return Theme.colors.surface_container_low;
+                        return Qt.alpha(Theme.colors.secondary_container, 0.8);
+                    return Qt.alpha(Theme.colors.tertiary_container, 0.8);
                 }
 
                 function getFillColor() {
                     if (modelData.urgent && urgencyFlash.flashOn) {
                         return Theme.colors.error;
                     }
-                    if (modelData.focused) {
+                    if (modelData.focused)
                         return Theme.colors.primary;
-                    } else if (modelData.active) {
+                    if (modelData.active)
                         return Theme.colors.secondary;
-                    } else {
-                        return Theme.colors.tertiary;
-                    }
+                    return Theme.colors.tertiary;
                 }
 
                 Timer {
@@ -111,6 +109,7 @@ Rectangle {
                         anchors.centerIn: parent
                         width: parent.width
                         height: parent.height * workspaceButton.fillPercentage
+                        radius: Theme.rounding.pillSmall
 
                         color: workspaceButton.getFillColor()
 
@@ -127,51 +126,13 @@ Rectangle {
                                 easing.type: Easing.OutQuad
                             }
                         }
-
-                        Rectangle {
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            anchors.top: parent.top
-                            height: 2
-                            visible: workspaceButton.fillPercentage > 0.05
-                            color: Qt.lighter(parent.color, 1.3)
-                            opacity: 0.8
-
-                            SequentialAnimation on opacity {
-                                running: workspaceButton.modelData.active || workspaceButton.modelData.focused
-                                loops: Animation.Infinite
-                                NumberAnimation {
-                                    to: 0.3
-                                    duration: 1500
-                                    easing.type: Easing.InOutQuad
-                                }
-                                NumberAnimation {
-                                    to: 0.8
-                                    duration: 1500
-                                    easing.type: Easing.InOutQuad
-                                }
-                            }
-                        }
                     }
                 }
 
                 Private.StyledText {
                     text: workspaceButton.modelData.id
                     anchors.centerIn: parent
-                    color: {
-                        if (workspaceButton.modelData.urgent && urgencyFlash.flashOn) {
-                            return Theme.colors.on_error_container;
-                        }
-                        if (workspaceButton.modelData.focused) {
-                            return Theme.colors.on_primary;
-                        }
-                        if (workspaceButton.modelData.active) {
-                            return Theme.colors.on_secondary_container;
-                        }
-                        if (workspaceButton.fillPercentage >= 0.5)
-                            return Theme.colors.on_primary;
-                        return Theme.colors.on_surface;
-                    }
+                    color: Theme.colors.surface
 
                     font.weight: workspaceButton.hovered ? 800 : 400
                     font.pixelSize: Theme.font.small

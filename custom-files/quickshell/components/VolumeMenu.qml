@@ -135,17 +135,15 @@ AbstractBarButton {
                 Layout.fillHeight: true
                 Layout.preferredWidth: Theme.playerWidth
                 radius: Theme.rounding.pillSmall
-                color: 'transparent'
-
-                border.width: 1
-                border.color: Qt.alpha(Theme.colors.outline, 0.2)
+                color: Qt.alpha(Theme.colors.secondary_container, 0.8)
 
                 Rectangle {
                     id: outputFill
                     anchors.left: parent.left
-                    anchors.right: parent.right
+                    anchors.top: parent.top
                     anchors.bottom: parent.bottom
-                    implicitHeight: bg.height * (Audio.defaultOutput?.audio.volume || 0)
+                    implicitWidth: bg.width * Number(Audio.defaultOutput?.audio.volume)
+                    radius: Theme.rounding.pillSmall
 
                     color: Qt.alpha(Theme.colors.primary, root.outputAlpha)
 
@@ -168,9 +166,10 @@ AbstractBarButton {
                 Rectangle {
                     id: inputFill
                     anchors.left: parent.left
-                    anchors.right: parent.right
+                    anchors.top: parent.top
                     anchors.bottom: parent.bottom
-                    implicitHeight: bg.height * (Audio.defaultInput?.audio.volume || 0)
+                    implicitWidth: bg.width * Number(Audio.defaultInput?.audio.volume)
+                    radius: Theme.rounding.pillSmall
 
                     color: Qt.alpha(Theme.colors.secondary, root.inputAlpha)
 
