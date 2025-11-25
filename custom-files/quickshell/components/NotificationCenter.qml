@@ -21,6 +21,10 @@ AbstractBarButton {
     background: Rectangle {
         radius: Theme.rounding.small
         color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
+        border {
+            width: 2
+            color: Qt.alpha(Theme.colors.outline, 0.3)
+        }
     }
 
     Private.StyledText {

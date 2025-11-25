@@ -36,7 +36,7 @@ Item {
             color: Qt.alpha(Theme.colors.outline, 0.3)
         }
         radius: Theme.rounding.verysmall
-        color: Theme.colors.surface_container
+        color: Qt.alpha(Theme.colors.tertiary_container, 0.8)
 
         Canvas {
             id: liquidCanvas

@@ -13,10 +13,14 @@ import "internal" as Private
 
 Rectangle {
     id: systemTray
-    radius: Theme.rounding.small
-    implicitWidth: sysTrayRow.width + (Theme.padding)
+    radius: Theme.rounding.pillMedium
+    implicitWidth: sysTrayRow.width + (Theme.padding * 2)
     implicitHeight: Theme.barHeight - (Theme.margin)
     color: Theme.colors.surface_container
+    border {
+        width: 2
+        color: Qt.alpha(Theme.colors.secondary, 0.3)
+    }
 
     property var filteredItems: SystemTray.items.values.filter(item => !Settings.ignoredTrayItems.includes(item.id))
     visible: filteredItems.length > 0
@@ -32,7 +36,6 @@ Rectangle {
         anchors.centerIn: parent
         spacing: Theme.margin / 2
 
-        // universal pop-up
         Private.TrayMenu {
             id: trayMenu
             anchorItem: systemTray

@@ -19,7 +19,11 @@ AbstractBarButton {
     background: Rectangle {
         id: bg
         color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
-        radius: Theme.rounding.small
+        radius: Theme.rounding.pillSmall
+        border {
+            width: 2
+            color: Qt.alpha(Theme.colors.on_surface, 0.3)
+        }
     }
 
     Heartbeat {

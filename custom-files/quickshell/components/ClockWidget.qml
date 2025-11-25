@@ -1,6 +1,5 @@
 import QtQuick
 import Quickshell
-
 import qs.theme
 import qs.services
 import qs.widgets
@@ -9,12 +8,23 @@ import "internal" as Private
 AbstractBarButton {
     id: root
     implicitWidth: clockWidgetText.implicitWidth + (Theme.padding * 2)
-    implicitHeight: Theme.barHeight - (Theme.margin)
+    implicitHeight: Theme.barHeight - Theme.margin
 
     background: Rectangle {
         anchors.fill: root
         color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
-        radius: Theme.rounding.verysmall
+        radius: Theme.rounding.pillMedium
+        border {
+            width: 2
+            color: Qt.alpha(Theme.colors.primary, 0.3)
+        }
+
+        Behavior on color {
+            ColorAnimation {
+                duration: Theme.anims.duration.small
+                easing.type: Easing.OutQuad
+            }
+        }
     }
 
     Private.StyledText {
@@ -35,17 +45,24 @@ AbstractBarButton {
 
         Column {
             spacing: Theme.margin / 2
+
             Private.StyledText {
                 text: Time.currentDate
                 color: Theme.colors.on_surface
+                font.pixelSize: Theme.font.normal
             }
+
             Private.StyledText {
                 text: `${Weather.icon} ${Weather.temp} (${Weather.feelsLike}) ${Weather.description}`
                 color: Theme.colors.on_surface_variant
+                font.pixelSize: Theme.font.small
             }
+
             Private.StyledText {
                 text: "Click for calendar"
                 color: Theme.colors.on_surface_variant
+                font.pixelSize: Theme.font.small
+                opacity: 0.7
             }
         }
     }

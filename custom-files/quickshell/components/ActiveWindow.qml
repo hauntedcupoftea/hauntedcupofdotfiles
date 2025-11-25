@@ -5,7 +5,6 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Wayland
-
 import qs.theme
 import qs.widgets
 import qs.utils
@@ -15,11 +14,24 @@ AbstractBarButton {
     id: root
     implicitHeight: Theme.barHeight - Theme.margin
     implicitWidth: windowContent.width + (Theme.padding * 2)
+
     background: Rectangle {
         anchors.fill: root
+        radius: Theme.rounding.pillMedium
         color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
-        radius: Theme.rounding.verysmall
+        border {
+            width: 2
+            color: Qt.alpha(Theme.colors.secondary, 0.3)
+        }
+
+        Behavior on color {
+            ColorAnimation {
+                duration: Theme.anims.duration.small
+                easing.type: Easing.OutQuad
+            }
+        }
     }
+
     sidebarComponent: "to-do"
 
     WindowUtils {
@@ -50,12 +62,7 @@ AbstractBarButton {
     RowLayout {
         id: windowContent
         spacing: Theme.padding
-        anchors {
-            top: parent.top
-            left: parent.left
-            bottom: parent.bottom
-            margins: Theme.margin
-        }
+        anchors.centerIn: parent
 
         Rectangle {
             id: windowIcon
@@ -63,6 +70,23 @@ AbstractBarButton {
             implicitWidth: implicitHeight
             radius: Theme.rounding.full
             color: Theme.colors.surface_dim
+
+            scale: ToplevelManager.activeToplevel?.minimized ? 0.85 : 1.0
+            opacity: ToplevelManager.activeToplevel?.minimized ? 0.6 : 1.0
+
+            Behavior on scale {
+                NumberAnimation {
+                    duration: Theme.anims.duration.small
+                    easing.type: Easing.OutQuad
+                }
+            }
+
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: Theme.anims.duration.small
+                    easing.type: Easing.OutQuad
+                }
+            }
 
             Loader {
                 active: root.showIcon
@@ -89,10 +113,24 @@ AbstractBarButton {
             }
         }
 
+        Rectangle {
+            Layout.preferredWidth: 1
+            Layout.preferredHeight: Theme.barIconSize
+            color: Theme.colors.outline
+        }
+
         Private.StyledText {
             id: windowName
             text: root.windowTitle
             color: Theme.colors.on_surface
+            opacity: ToplevelManager.activeToplevel?.minimized ? 0.6 : 1.0
+
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: Theme.anims.duration.small
+                    easing.type: Easing.OutQuad
+                }
+            }
         }
     }
 }

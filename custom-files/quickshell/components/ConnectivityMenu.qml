@@ -16,12 +16,16 @@ AbstractBarButton {
         id: conText
         anchors.centerIn: connectivityMenu
         text: `${Network.status}  ${Bluetooth.status}`
-        textColor: Theme.colors.primary
+        textColor: Theme.colors.tertiary
     }
 
     background: Rectangle {
         color: connectivityMenu.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
-        radius: Theme.rounding.small
+        radius: Theme.rounding.pillMedium
+        border {
+            width: 2
+            color: Qt.alpha(Theme.colors.tertiary, 0.3)
+        }
     }
 
     sidebarComponent: "connectivity-menu"
