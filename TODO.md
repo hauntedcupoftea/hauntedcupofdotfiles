@@ -3,3 +3,4 @@
 - [ ] reformat bar layout (move session menu inside popout for os button, merge
       battery and connectivity or find something better, have notifications. be
       top right for 3 panels on each anchor of the bar :))
+- [ ] https://github.com/fufexan/nix-gaming/issues/318
