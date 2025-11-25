@@ -1,6 +1,10 @@
-{ inputs, pkgs, ... }: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs.kdePackages; [
-    inputs.quickshell.packages.${pkgs.system}.default
+    inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
     qtdeclarative
     qt5compat
     qtstyleplugin-kvantum

@@ -156,7 +156,7 @@
         };
 
         rust-analyzer-ls = {
-          command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
+          command = "rust-analyzer";
         };
 
         tailwindcss-ls = {
@@ -189,7 +189,7 @@
         };
 
         svelte-ls = {
-          command = "${pkgs.svelte-language-server}/bin/svelteserver";
+          command = "svelteserver";
           args = ["--stdio"];
         };
 
