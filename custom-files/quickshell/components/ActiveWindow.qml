@@ -117,6 +117,7 @@ AbstractBarButton {
             Layout.preferredWidth: 1
             Layout.preferredHeight: Theme.barIconSize
             color: Theme.colors.outline
+            radius: Theme.rounding.unsharpen
         }
 
         Private.StyledText {

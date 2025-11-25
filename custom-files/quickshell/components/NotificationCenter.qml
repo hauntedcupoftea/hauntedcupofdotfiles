@@ -19,7 +19,7 @@ AbstractBarButton {
     }
 
     background: Rectangle {
-        radius: Theme.rounding.small
+        radius: Theme.rounding.pillMedium
         color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
         border {
             width: 2
@@ -31,7 +31,7 @@ AbstractBarButton {
         id: indicator
         anchors.centerIn: root
         text: `${Notify.indicatorIcon} ${Notify.items.count}`
-        textColor: Theme.colors.tertiary
+        textColor: Notify.doNotDisturb ? Theme.colors.outline : Theme.colors.on_surface
     }
 
     sidebarComponent: "notification-manager"
