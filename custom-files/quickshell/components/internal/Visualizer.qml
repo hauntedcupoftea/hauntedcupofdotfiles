@@ -38,6 +38,17 @@ Item {
         radius: Theme.rounding.verysmall
         color: Qt.alpha(Theme.colors.tertiary_container, 0.8)
 
+        Rectangle {
+            anchors {
+                left: parent.left
+                top: parent.top
+                bottom: parent.bottom
+            }
+            width: parent.width * visualizer.progress
+            radius: Theme.rounding.pillMedium
+            color: Qt.alpha(Theme.colors.primary, 0.2)
+            visible: visualizer.progress > 0
+        }
         Canvas {
             id: liquidCanvas
             anchors.fill: parent
@@ -119,10 +130,6 @@ Item {
                 ctx.lineTo(0, height);
                 ctx.closePath();
                 ctx.fill();
-                if (visualizer.progress > 0) {
-                    ctx.fillStyle = Qt.alpha(Theme.colors.primary, 0.2);
-                    ctx.fillRect(0, 0, width * visualizer.progress, height);
-                }
             }
         }
     }
