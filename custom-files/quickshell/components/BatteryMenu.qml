@@ -58,7 +58,7 @@ AbstractBarButton {
 
         RowLayout {
             id: content
-            implicitWidth: Theme.playerWidth
+            implicitWidth: Theme.barHeight
             anchors.centerIn: parent
             anchors.margins: Theme.margin
             spacing: Theme.margin
@@ -92,7 +92,7 @@ AbstractBarButton {
             ClippingRectangle {
                 id: bg
                 Layout.fillHeight: true
-                Layout.preferredWidth: Theme.playerWidth
+                Layout.preferredWidth: Theme.barHeight
                 radius: Theme.rounding.pillSmall
                 color: Qt.alpha(Theme.colors.secondary_container, 0.8)
 
