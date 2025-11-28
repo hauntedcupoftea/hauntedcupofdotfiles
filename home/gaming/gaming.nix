@@ -12,6 +12,7 @@
     goverlay
     samrewritten
     r2modman
+    gale # might replace r2modman someday
     vulkan-tools
   ];
 
