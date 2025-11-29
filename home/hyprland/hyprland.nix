@@ -158,10 +158,10 @@ in {
         "workspace 2, initialClass:steam_app_.*"
       ];
 
-      # Start-up applications
       exec-once = [
         "uwsm app -- clipse -listen"
         "uwsm app -- gnome-keyring-daemon --start --components=pkcs11,secrets"
+        "uwsm app -- fcitx5 -d"
       ];
     };
   };

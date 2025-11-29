@@ -4,6 +4,7 @@
     ./appimage.nix
     ./fonts.nix
     ./gaming.nix
+    ./kb.nix
     ./xserver.nix
     ./hyprland.nix
     ./podman.nix
