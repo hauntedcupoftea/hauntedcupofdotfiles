@@ -132,7 +132,7 @@ AbstractBarButton {
                 Image {
                     anchors.fill: parent
                     anchors.margins: parent.border.width
-                    source: Player.active?.trackArtUrl
+                    source: qsTr(Player.active?.trackArtUrl)
                     fillMode: Image.PreserveAspectCrop
 
                     Rectangle {
@@ -192,7 +192,7 @@ AbstractBarButton {
                     color: Qt.alpha(Theme.colors.secondary_container, 0.6)
                     border.width: 1
                     border.color: Qt.alpha(Theme.colors.secondary, 0.3)
-                    visible: Player.active?.trackAlbum
+                    visible: Boolean(Player.active?.trackAlbum)
 
                     Text {
                         id: albumText
@@ -215,7 +215,7 @@ AbstractBarButton {
                     Text {
                         id: statusText
                         anchors.centerIn: parent
-                        text: `${MprisPlaybackState.toString(Player.active?.playbackState)} • ${Player.playerName || Player.active.dbusName}`
+                        text: `${MprisPlaybackState.toString(Player.active?.playbackState)} • ${Player.playerName || qsTr(Player.active.dbusName)}`
                         color: Theme.colors.on_tertiary_container
                         font.family: Theme.font.family
                         font.pixelSize: Theme.font.smallest

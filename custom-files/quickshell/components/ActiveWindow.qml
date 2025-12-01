@@ -8,6 +8,7 @@ import Quickshell.Wayland
 import qs.theme
 import qs.widgets
 import qs.utils
+import qs.services
 import qs.components.internal as Private
 
 AbstractBarButton {
@@ -19,14 +20,22 @@ AbstractBarButton {
         anchors.fill: root
         radius: Theme.rounding.pillMedium
         color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
+
         border {
             width: 2
-            color: Qt.alpha(Theme.colors.secondary, 0.3)
+            color: KeyboardLayout.isNonLatin ? Qt.alpha(Theme.colors.tertiary, 0.4) : Qt.alpha(Theme.colors.secondary, 0.3)
         }
 
         Behavior on color {
             ColorAnimation {
                 duration: Theme.anims.duration.small
+                easing.type: Easing.OutQuad
+            }
+        }
+
+        Behavior on border.color {
+            ColorAnimation {
+                duration: Theme.anims.duration.normal
                 easing.type: Easing.OutQuad
             }
         }
@@ -118,6 +127,7 @@ AbstractBarButton {
             Layout.preferredHeight: Theme.barIconSize
             color: Theme.colors.outline
             radius: Theme.rounding.unsharpen
+            opacity: 0.6
         }
 
         Private.StyledText {
@@ -132,6 +142,18 @@ AbstractBarButton {
                     easing.type: Easing.OutQuad
                 }
             }
+        }
+
+        Rectangle {
+            Layout.preferredWidth: 1
+            Layout.preferredHeight: Theme.barIconSize
+            color: Theme.colors.outline
+            radius: Theme.rounding.unsharpen
+            opacity: 0.6
+        }
+
+        Private.KbLayoutIndicator {
+            Layout.fillHeight: true
         }
     }
 }

@@ -141,7 +141,7 @@ Singleton {
                         root.forecast = json.weather || [];
                     } else {}
                 } catch (e) {
-                    print("weatherfetcher failed", e);
+                    print("weatherfetcher failed", e, text);
                     root.isLoading = false;
                 }
             }

@@ -38,30 +38,30 @@ Rectangle {
                 implicitWidth: Theme.barHeight
 
                 property real fillPercentage: {
-                    const windowCount = Number(workspaceButton.modelData.toplevels.values.length);
+                    const windowCount = Number(workspaceButton.modelData?.toplevels.values.length);
                     if (modelData.hasFullscreen)
                         return 1;
                     return windowCount / (windowCount + 1);
                 }
 
                 function getBgColor() {
-                    if (modelData.urgent && urgencyFlash.flashOn) {
+                    if (modelData?.urgent && urgencyFlash.flashOn) {
                         return Theme.colors.error_container;
                     }
-                    if (modelData.focused)
+                    if (modelData?.focused)
                         return Qt.alpha(Theme.colors.primary_container, 0.8);
-                    if (modelData.active)
+                    if (modelData?.active)
                         return Qt.alpha(Theme.colors.secondary_container, 0.8);
                     return Qt.alpha(Theme.colors.tertiary_container, 0.8);
                 }
 
                 function getFillColor() {
-                    if (modelData.urgent && urgencyFlash.flashOn) {
+                    if (modelData?.urgent && urgencyFlash.flashOn) {
                         return Theme.colors.error;
                     }
-                    if (modelData.focused)
+                    if (modelData?.focused)
                         return Theme.colors.primary;
-                    if (modelData.active)
+                    if (modelData?.active)
                         return Theme.colors.secondary;
                     return Theme.colors.tertiary;
                 }
@@ -70,7 +70,7 @@ Rectangle {
                     id: urgencyFlash
                     interval: Theme.anims.duration.large
                     repeat: true
-                    running: workspaceButton.modelData.urgent
+                    running: Boolean(workspaceButton.modelData?.urgent)
 
                     property bool flashOn: false
 
@@ -130,7 +130,7 @@ Rectangle {
                 }
 
                 Private.StyledText {
-                    text: workspaceButton.modelData.id
+                    text: Number(workspaceButton.modelData?.id)
                     anchors.centerIn: parent
                     color: Theme.colors.surface
 
