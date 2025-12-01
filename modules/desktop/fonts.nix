@@ -10,4 +10,10 @@
     material-symbols
     material-icons
   ];
+
+  environment.systemPackages = with pkgs; [
+    adwaita-icon-theme
+    hicolor-icon-theme
+    gnome-themes-extra
+  ];
 }
