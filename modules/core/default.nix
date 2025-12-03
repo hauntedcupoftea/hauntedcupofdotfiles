@@ -13,5 +13,6 @@
     ./shells.nix
     ./security.nix
     ./utils.nix
+    ./undervolt.nix
   ];
 }

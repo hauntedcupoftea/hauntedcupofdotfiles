@@ -67,8 +67,8 @@ Rectangle {
                 anchors.centerIn: appIconPill
                 active: notificationCard.n && notificationCard.n?.appIcon
                 sourceComponent: IconImage {
-                    source: Quickshell.iconPath(notificationCard.n.appIcon)
-                    implicitSize: Theme.barIconSize
+                    source: notificationCard.n.image || Quickshell.iconPath(notificationCard.n.appIcon)
+                    implicitSize: Theme.notificationImageSize
                 }
             }
             Loader {
