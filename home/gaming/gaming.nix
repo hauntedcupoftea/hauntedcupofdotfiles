@@ -12,7 +12,7 @@
     goverlay
     samrewritten
     r2modman
-    gale # might replace r2modman someday
+    # gale # might replace r2modman someday https://github.com/NixOS/nixpkgs/issues/468830
     vulkan-tools
   ];
 
