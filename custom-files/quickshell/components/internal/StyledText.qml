@@ -7,8 +7,9 @@ import qs.theme
 Text {
     id: root
 
-    property color textColor
+    property color textColor: Theme.colors.on_surface
     property int weight: 500
+    property int fontSize: Theme.font.normal
     property bool animate: false
     property string animateProp: "scale"
     property real animateFrom: 0
@@ -17,9 +18,9 @@ Text {
 
     renderType: Text.NativeRendering
     textFormat: Text.PlainText
-    color: textColor ?? Theme.colors.on_surface
+    color: textColor
     font.family: Theme.font.family
-    font.pixelSize: Theme.font.normal
+    font.pixelSize: fontSize
     font.weight: weight
 
     Behavior on color {

@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell
 import qs.theme
 import qs.services
@@ -7,7 +8,7 @@ import "internal" as Private
 
 AbstractBarButton {
     id: root
-    implicitWidth: clockWidgetText.implicitWidth + (Theme.padding * 2)
+    implicitWidth: windowContent.width + (Theme.padding * 2)
     implicitHeight: Theme.barHeight - Theme.margin
 
     background: Rectangle {
@@ -27,14 +28,32 @@ AbstractBarButton {
         }
     }
 
-    Private.StyledText {
-        id: clockWidgetText
-        text: Time.time
+    RowLayout {
+        id: windowContent
+        spacing: Theme.padding
         anchors.centerIn: parent
-        color: Theme.colors.primary
-        animate: false
-        weight: 500
-        font.pixelSize: Theme.font.large
+        Private.StyledText {
+            id: clockWidgetDate
+            text: Time.date
+            color: Theme.colors.primary
+            animate: false
+            weight: 500
+        }
+        Rectangle {
+            Layout.preferredWidth: 1
+            Layout.preferredHeight: Theme.barIconSize
+            color: Theme.colors.outline
+            radius: Theme.rounding.unsharpen
+            opacity: 0.6
+        }
+        Private.StyledText {
+            id: clockWidgetTime
+            text: Time.time
+            color: Theme.colors.primary
+            animate: false
+            weight: 500
+            font.pixelSize: Theme.font.normal
+        }
     }
 
     Private.ToolTipPopup {
