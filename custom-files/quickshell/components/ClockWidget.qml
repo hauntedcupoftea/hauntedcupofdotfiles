@@ -52,7 +52,6 @@ AbstractBarButton {
             color: Theme.colors.primary
             animate: false
             weight: 500
-            font.pixelSize: Theme.font.normal
         }
     }
 

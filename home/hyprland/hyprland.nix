@@ -49,6 +49,7 @@ in {
           "$mod, C, killactive"
           "$mod, B, togglefloating"
           "$mod, F, fullscreen"
+          "$mod, P, pin" # TODO: test
           "$mod, V, exec, uwsm app -- $terminal --class clipse -e 'clipse'"
           # walker-binds
           "$mod, space, exec, uwsm app -- walker" # standard run
