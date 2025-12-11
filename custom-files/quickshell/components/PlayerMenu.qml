@@ -126,8 +126,8 @@ AbstractBarButton {
                 color: Theme.colors.surface_variant
                 clip: true
 
-                border.width: 2
-                border.color: Qt.alpha(Theme.colors.tertiary, 0.5)
+                // border.width: 2
+                // border.color: Qt.alpha(Theme.colors.tertiary, 0.5)
 
                 Image {
                     anchors.fill: parent
@@ -167,13 +167,10 @@ AbstractBarButton {
                 }
 
                 Rectangle {
-                    Layout.preferredHeight: Theme.font.small + Theme.margin
+                    Layout.preferredHeight: artistText.height + Theme.margin
                     Layout.preferredWidth: artistText.width + (Theme.padding * 2)
-                    radius: Theme.rounding.small
+                    radius: Theme.rounding.pillSmall
                     color: Theme.colors.primary_container
-                    border.width: 2
-                    border.color: Theme.colors.primary
-
                     Text {
                         id: artistText
                         anchors.centerIn: parent
@@ -186,26 +183,24 @@ AbstractBarButton {
                 }
 
                 Rectangle {
-                    Layout.preferredHeight: Theme.font.smallest + Theme.margin
+                    Layout.preferredHeight: albumText.height + Theme.margin
                     Layout.preferredWidth: albumText.implicitWidth + (Theme.padding * 2)
                     radius: Theme.rounding.small
                     color: Qt.alpha(Theme.colors.secondary_container, 0.6)
-                    border.width: 1
-                    border.color: Qt.alpha(Theme.colors.secondary, 0.3)
-                    visible: Boolean(Player.active?.trackAlbum)
+                    // visible: Boolean(Player.active?.trackAlbum)
 
                     Text {
                         id: albumText
                         anchors.centerIn: parent
-                        text: Player.active?.trackAlbum || ""
+                        text: Player.active?.trackAlbum || "Unknown Album"
                         color: Theme.colors.on_secondary_container
                         font.family: Theme.font.family
-                        font.pixelSize: Theme.font.smallest
+                        font.pixelSize: Theme.font.small
                     }
                 }
 
                 Rectangle {
-                    Layout.preferredHeight: Theme.font.smallest + Theme.margin
+                    Layout.preferredHeight: statusText.height + Theme.margin
                     Layout.preferredWidth: statusText.implicitWidth + Theme.padding
                     radius: Theme.rounding.small
                     color: Qt.alpha(Theme.colors.tertiary_container, 0.6)
@@ -215,7 +210,8 @@ AbstractBarButton {
                     Text {
                         id: statusText
                         anchors.centerIn: parent
-                        text: `${MprisPlaybackState.toString(Player.active?.playbackState)} • ${Player.playerName || qsTr(Player.active.dbusName)}`
+                        wrapMode: Text.WordWrap
+                        text: `${MprisPlaybackState.toString(Player.active?.playbackState)} • ${qsTr(Player.playerName || Player.active.dbusName)}`
                         color: Theme.colors.on_tertiary_container
                         font.family: Theme.font.family
                         font.pixelSize: Theme.font.smallest
