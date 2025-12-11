@@ -1,6 +1,7 @@
 {pkgs, ...}: {
-  home.packages = [
-    pkgs.seahorse
+  home.packages = with pkgs; [
+    seahorse
+    libsecret
   ];
 
   services.gnome-keyring = {
