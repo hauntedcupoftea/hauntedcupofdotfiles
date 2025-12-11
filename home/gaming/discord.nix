@@ -6,7 +6,6 @@
   home.packages = with pkgs; [
     vesktop
     arrpc
-    legcord # testing
   ];
 
   programs.vesktop = {
@@ -26,14 +25,9 @@
       source = ../../custom-files/vesktop/themes;
       recursive = true;
     };
-    # "${config.xdg.configHome}/vesktop/settings" = {
-    #   source = ../../custom-files/vesktop/settings;
-    #   recursive = true;
-    # };
-  };
-
-  # for discord RPC
-  services.arrpc = {
-    enable = true;
+    "${config.xdg.configHome}/vesktop/settings" = {
+      source = ../../custom-files/vesktop/settings;
+      recursive = true;
+    };
   };
 }
