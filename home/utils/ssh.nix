@@ -2,8 +2,8 @@
   programs.ssh = {
     enable = true;
     matchBlocks = {
-      "ge66-nixos" = {
-        hostname = "203.212.222.186";
+      "ge66-nixos-ipv6" = {
+        hostname = "2402:e280:3dc7:5fa:ddbe:da66:4eb2:6e8a";
         port = 59994;
         user = "tea";
         identityFile = "~/.ssh/ssh-access";
