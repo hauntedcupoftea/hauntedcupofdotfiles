@@ -8,7 +8,7 @@
     ./py.nix
     ./podman.nix
     ./quickshell.nix
-    ./rust.nix
+    # ./rust.nix # BETTER IN DEVSHELLS
     ./ts.nix
     ./typst.nix
   ];
