@@ -1,12 +1,11 @@
-{ inputs
-, system
-, ...
-}:
-let
-  spicePkgs = inputs.spicetify-nix.legacyPackages.${system};
-in
 {
-  imports = [ inputs.spicetify-nix.homeManagerModules.default ];
+  inputs,
+  system,
+  ...
+}: let
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${system};
+in {
+  imports = [inputs.spicetify-nix.homeManagerModules.default];
 
   programs.spicetify = {
     enable = true;
@@ -22,10 +21,7 @@ in
     ];
     enabledCustomApps = with spicePkgs.apps; [
       lyricsPlus
-      betterLibrary
-      ncsVisualizer
       newReleases
-      reddit
     ];
     enabledSnippets = with spicePkgs.snippets; [
       rotatingCoverart

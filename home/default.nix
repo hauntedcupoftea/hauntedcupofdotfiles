@@ -44,9 +44,9 @@
     dungeondraft # custom derivation
     qbittorrent-enhanced
     localsend
-    kdePackages.kdeconnect-kde
     wf-recorder # screen recording
     slurp # region selector
+    element-desktop # matrix
   ];
 
   home.sessionVariables = {

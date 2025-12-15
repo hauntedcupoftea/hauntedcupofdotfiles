@@ -1,6 +1,6 @@
 {...}: {
   imports = [
-    # ./spicetify.nix
+    ./spicetify.nix
     ./cava.nix
     ./mpd.nix
     ./youtube-music.nix
