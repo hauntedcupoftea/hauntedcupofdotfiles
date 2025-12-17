@@ -129,18 +129,18 @@ in {
       monitor = lib.mkIf isGE66Raider [
         "DP-2, 2560x1440@164.96, 0x0, 1"
         # TODO: remove when monitor is fixed
-        # "eDP-1, 1920x1080@240, 2560x360, 1"
+        "eDP-1, 1920x1080@240, 2560x360, 1"
       ];
 
       workspace = lib.mkIf isGE66Raider [
         "1,persistent:true,monitor:DP-2"
         "2,persistent:true,monitor:DP-2"
         "3,persistent:true,monitor:DP-2"
-        # "4,persistent:true,monitor:eDP-1"
-        # "5,persistent:true,monitor:eDP-1"
-        # "6,persistent:true,monitor:eDP-1"
-        "4,persistent:true,monitor:DP-2"
-        "5,persistent:true,monitor:DP-2"
+        "4,persistent:true,monitor:eDP-1"
+        "5,persistent:true,monitor:eDP-1"
+        "6,persistent:true,monitor:eDP-1"
+        # "4,persistent:true,monitor:DP-2"
+        # "5,persistent:true,monitor:DP-2"
       ];
 
       # Window Rules
