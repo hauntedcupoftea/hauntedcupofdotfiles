@@ -119,19 +119,19 @@ AbstractBarButton {
         RowLayout {
             spacing: Theme.padding
 
+            // Album art
             Rectangle {
-                Layout.preferredWidth: 100
-                Layout.preferredHeight: 100
-                radius: Theme.rounding.pillMedium
+                Layout.preferredWidth: 80
+                Layout.preferredHeight: 80
+                radius: Theme.rounding.small
                 color: Theme.colors.surface_variant
                 clip: true
 
-                // border.width: 2
-                // border.color: Qt.alpha(Theme.colors.tertiary, 0.5)
+                border.width: 1
+                border.color: Qt.alpha(Theme.colors.outline_variant, 0.5)
 
                 Image {
                     anchors.fill: parent
-                    anchors.margins: parent.border.width
                     source: qsTr(Player.active?.trackArtUrl)
                     fillMode: Image.PreserveAspectCrop
 
@@ -139,14 +139,14 @@ AbstractBarButton {
                         anchors.fill: parent
                         visible: parent.status !== Image.Ready
                         color: Theme.colors.surface_container_high
-                        radius: Theme.rounding.pillSmall
+                        radius: parent.parent.radius
 
                         Text {
                             anchors.centerIn: parent
                             text: "󰝚"
                             font.pixelSize: Theme.font.huge
                             color: Theme.colors.on_surface_variant
-                            opacity: 0.5
+                            opacity: 0.3
                         }
                     }
                 }
@@ -154,67 +154,118 @@ AbstractBarButton {
 
             ColumnLayout {
                 id: trackInfo
-                Layout.preferredWidth: 300
-                spacing: Theme.margin
+                Layout.maximumWidth: 280
+                Layout.minimumWidth: 180
+                spacing: Theme.margin / 2
 
-                Private.ScrollingText {
+                // Title - conditionally scrolling or wrapping
+                Loader {
+                    id: titleLoader
                     Layout.fillWidth: true
-                    Layout.minimumHeight: Theme.font.large
-                    Layout.maximumWidth: 300
-                    Layout.minimumWidth: 200
-                    scrollingText: Player.active ? qsTr(`${Player.active.trackTitle}`) : ""
-                    animate: Player.active && Player.active.isPlaying
+                    Layout.minimumHeight: Theme.font.larger
+
+                    property string titleText: Player.active?.trackTitle || "Unknown Title"
+                    property bool needsScroll: {
+                        // Create temporary text to measure
+                        let temp = Qt.createQmlObject('import QtQuick; Text { font.family: "' + Theme.font.family + '"; font.pixelSize: ' + Theme.font.larger + '; font.weight: Font.DemiBold }', titleLoader);
+                        temp.text = titleText;
+                        let tooLong = temp.implicitWidth > 280;
+                        temp.destroy();
+                        return tooLong;
+                    }
+
+                    sourceComponent: needsScroll ? scrollingTitle : wrappingTitle
                 }
 
-                Rectangle {
-                    Layout.preferredHeight: artistText.height + Theme.margin
-                    Layout.preferredWidth: artistText.width + (Theme.padding * 2)
-                    radius: Theme.rounding.pillSmall
-                    color: Theme.colors.primary_container
-                    Text {
-                        id: artistText
-                        anchors.centerIn: parent
-                        text: Player.active?.trackArtists || "Unknown Artist"
-                        color: Theme.colors.on_primary_container
-                        font.family: Theme.font.family
-                        font.pixelSize: Theme.font.small
-                        font.weight: Font.Medium
+                Component {
+                    id: scrollingTitle
+                    Private.ScrollingText {
+                        scrollingText: titleLoader.titleText
+                        animate: Player.active?.isPlaying || false
+                        implicitHeight: Theme.font.larger * 1.2
                     }
                 }
 
-                Rectangle {
-                    Layout.preferredHeight: albumText.height + Theme.margin
-                    Layout.preferredWidth: albumText.implicitWidth + (Theme.padding * 2)
-                    radius: Theme.rounding.small
-                    color: Qt.alpha(Theme.colors.secondary_container, 0.6)
-                    // visible: Boolean(Player.active?.trackAlbum)
-
+                Component {
+                    id: wrappingTitle
                     Text {
-                        id: albumText
-                        anchors.centerIn: parent
-                        text: Player.active?.trackAlbum || "Unknown Album"
-                        color: Theme.colors.on_secondary_container
+                        text: titleLoader.titleText
+                        color: Theme.colors.on_surface
                         font.family: Theme.font.family
-                        font.pixelSize: Theme.font.small
-                    }
-                }
-
-                Rectangle {
-                    Layout.preferredHeight: statusText.height + Theme.margin
-                    Layout.preferredWidth: statusText.implicitWidth + Theme.padding
-                    radius: Theme.rounding.small
-                    color: Qt.alpha(Theme.colors.tertiary_container, 0.6)
-                    border.width: 1
-                    border.color: Qt.alpha(Theme.colors.tertiary, 0.3)
-
-                    Text {
-                        id: statusText
-                        anchors.centerIn: parent
+                        font.pixelSize: Theme.font.larger
+                        font.weight: Font.DemiBold
                         wrapMode: Text.WordWrap
-                        text: `${MprisPlaybackState.toString(Player.active?.playbackState)} • ${qsTr(Player.playerName || Player.active.dbusName)}`
-                        color: Theme.colors.on_tertiary_container
+                        elide: Text.ElideRight
+                        maximumLineCount: 2
+                    }
+                }
+
+                // Artist
+                Text {
+                    Layout.fillWidth: true
+                    text: Player.active?.trackArtists || "Unknown Artist"
+                    color: Theme.colors.primary
+                    font.family: Theme.font.family
+                    font.pixelSize: Theme.font.normal
+                    font.weight: Font.Medium
+                    wrapMode: Text.WordWrap
+                    maximumLineCount: 2
+                    elide: Text.ElideRight
+                }
+
+                // Album
+                Text {
+                    Layout.fillWidth: true
+                    text: Player.active?.trackAlbum || "Unknown Album"
+                    color: Theme.colors.on_surface_variant
+                    font.family: Theme.font.family
+                    font.pixelSize: Theme.font.small
+                    wrapMode: Text.WordWrap
+                    maximumLineCount: 1
+                    elide: Text.ElideRight
+                    opacity: 0.8
+                }
+
+                // Separator
+                Rectangle {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 1
+                    Layout.topMargin: Theme.margin / 4
+                    Layout.bottomMargin: Theme.margin / 4
+                    color: Theme.colors.outline_variant
+                    opacity: 0.3
+                }
+
+                // Status row
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: Theme.margin
+
+                    Text {
+                        text: {
+                            switch (Player.active?.playbackState) {
+                            case MprisPlaybackState.Playing:
+                                return "󰐊";
+                            case MprisPlaybackState.Paused:
+                                return "󰏤";
+                            case MprisPlaybackState.Stopped:
+                                return "󰓛";
+                            default:
+                                return "󰝚";
+                            }
+                        }
+                        color: Player.active?.playbackState == MprisPlaybackState.Playing ? Theme.colors.tertiary : Theme.colors.on_surface_variant
+                        font.pixelSize: Theme.font.normal
+                    }
+
+                    Text {
+                        Layout.fillWidth: true
+                        text: qsTr(Player.playerName || Player.active?.dbusName || "")
+                        color: Theme.colors.on_surface_variant
                         font.family: Theme.font.family
-                        font.pixelSize: Theme.font.smallest
+                        font.pixelSize: Theme.font.smaller
+                        elide: Text.ElideRight
+                        opacity: 0.7
                     }
                 }
             }
