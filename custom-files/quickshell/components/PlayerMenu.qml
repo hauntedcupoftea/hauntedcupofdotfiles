@@ -132,7 +132,7 @@ AbstractBarButton {
 
                 Image {
                     anchors.fill: parent
-                    source: qsTr(Player.active?.trackArtUrl)
+                    source: qsTr(Player.active?.trackArtUrl || "")
                     fillMode: Image.PreserveAspectCrop
 
                     Rectangle {

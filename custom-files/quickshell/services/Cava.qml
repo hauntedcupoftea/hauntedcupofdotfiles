@@ -40,7 +40,7 @@ Singleton {
         id: cavaProc
 
         running: true
-        command: ["sh", "-c", `printf '[general]\nframerate=${Settings.visualizerFPS}\nbars=${Settings.visualizerBars}\nsleep_timer=3\n[output]\nchannels=mono\nmethod=raw\nraw_target=/dev/stdout\ndata_format=ascii\nascii_max_range=100' | cava -p /dev/stdin`]
+        command: ["sh", "-c", `printf '[general]\nframerate=${Settings.visualizerFPS}\nbars=${Settings.visualizerBars}\nsleep_timer=3\nsmoothing_mode=integral\nintegral=75\ngravity=100\n[output]\nchannels=mono\nmethod=raw\nraw_target=/dev/stdout\ndata_format=ascii\nascii_max_range=100' | cava -p /dev/stdin`]
         stdout: SplitParser {
             onRead: data => {
                 if (root.refCount)

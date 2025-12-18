@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import Quickshell.Widgets
 import qs.services
@@ -10,126 +12,175 @@ Item {
     property real progress: 0.5
     property bool isPlaying: false
 
-    Component.onCompleted: {
-        if (isPlaying) {
-            Cava.addRef();
-        }
-    }
-
-    Component.onDestruction: {
-        Cava.removeRef();
-    }
-
-    onIsPlayingChanged: {
-        if (isPlaying) {
-            Cava.addRef();
-        } else {
-            Cava.removeRef();
-        }
-    }
+    // Resource management
+    Component.onCompleted: if (isPlaying)
+        Cava.addRef()
+    Component.onDestruction: Cava.removeRef()
+    onIsPlayingChanged: isPlaying ? Cava.addRef() : Cava.removeRef()
 
     ClippingRectangle {
         id: background
         anchors.fill: parent
         border {
             width: 1
-            color: Qt.alpha(Theme.colors.outline, 0.3)
+            color: Qt.alpha(Theme.colors.outline_variant, 0.4)
         }
         radius: Theme.rounding.verysmall
-        color: Qt.alpha(Theme.colors.tertiary_container, 0.8)
+        color: Theme.colors.surface_container
 
+        // Progress indicator - gradient overlay with subtle pulse
         Rectangle {
+            id: progressBar
             anchors {
                 left: parent.left
                 top: parent.top
                 bottom: parent.bottom
             }
             width: parent.width * visualizer.progress
-            radius: Theme.rounding.pillMedium
-            color: Qt.alpha(Theme.colors.primary, 0.2)
+            radius: Theme.rounding.verysmall
             visible: visualizer.progress > 0
+
+            gradient: Gradient {
+                orientation: Gradient.Horizontal
+                GradientStop {
+                    position: 0.0
+                    color: Qt.alpha(Theme.colors.primary, 0.25)
+                }
+                GradientStop {
+                    position: 0.7
+                    color: Qt.alpha(Theme.colors.primary, 0.15)
+                }
+                GradientStop {
+                    position: 1.0
+                    color: Qt.alpha(Theme.colors.primary, 0.05)
+                }
+            }
+
+            // Subtle animated shine effect when playing
+            Rectangle {
+                id: shine
+                anchors {
+                    top: parent.top
+                    bottom: parent.bottom
+                    right: parent.right
+                }
+                width: Theme.padding * 3
+                visible: visualizer.isPlaying && visualizer.progress > 0.05
+
+                gradient: Gradient {
+                    orientation: Gradient.Horizontal
+                    GradientStop {
+                        position: 0.0
+                        color: "transparent"
+                    }
+                    GradientStop {
+                        position: 0.5
+                        color: Qt.alpha(Theme.colors.primary, 0.3)
+                    }
+                    GradientStop {
+                        position: 1.0
+                        color: "transparent"
+                    }
+                }
+
+                opacity: 0.6
+                SequentialAnimation on opacity {
+                    running: shine.visible
+                    loops: Animation.Infinite
+                    NumberAnimation {
+                        to: 1.0
+                        duration: 1200
+                        easing.type: Easing.InOutCubic
+                    }
+                    NumberAnimation {
+                        to: 0.6
+                        duration: 1200
+                        easing.type: Easing.InOutCubic
+                    }
+                }
+            }
+
+            Behavior on width {
+                NumberAnimation {
+                    duration: Theme.anims.duration.normal
+                    easing.type: Easing.OutCubic
+                }
+            }
         }
-        Canvas {
-            id: liquidCanvas
+
+        // Bar container
+        Row {
+            id: barContainer
             anchors.fill: parent
+            anchors.margins: Theme.margin / 2
+            spacing: Theme.margin / 4
 
-            property var audioLevels: []
-            property real animationTime: 0
+            readonly property int barCount: Math.min(Settings.visualizerBars, 8)
 
-            Connections {
-                target: Cava
-                function onValuesChanged() {
-                    if (visualizer.isPlaying) {
-                        liquidCanvas.audioLevels = Cava.values;
-                        liquidCanvas.requestPaint();
+            Repeater {
+                model: barContainer.barCount
+
+                Item {
+                    id: pillRoot
+                    required property int index
+
+                    width: (barContainer.width - (barContainer.spacing * (barContainer.barCount - 1))) / barContainer.barCount
+                    height: barContainer.height
+
+                    // Get audio level, clamp to valid range
+                    readonly property real level: {
+                        if (!visualizer.isPlaying)
+                            return 0.0;
+                        const rawLevel = Cava.values[index] || 0;
+                        return Math.max(0.0, Math.min(rawLevel / 100.0, 1.0));
                     }
-                }
-            }
 
-            Timer {
-                running: visualizer.isPlaying
-                repeat: true
-                interval: 1000 / Settings.visualizerFPS
-                onTriggered: {
-                    liquidCanvas.animationTime += 0.15;
-                    liquidCanvas.requestPaint();
-                }
-            }
+                    // Background slot - slightly more visible for better visual feedback
+                    Rectangle {
+                        anchors.fill: parent
+                        radius: Theme.rounding.full
+                        color: Qt.alpha(Theme.colors.surface_variant, 0.3)
 
-            onPaint: {
-                var ctx = getContext("2d");
-                ctx.clearRect(0, 0, width, height);
+                        // Active bar - grows from center baseline
+                        Rectangle {
+                            id: barPill
+                            width: parent.width
+                            radius: parent.radius
+                            anchors {
+                                horizontalCenter: parent.horizontalCenter
+                                verticalCenter: parent.verticalCenter
+                            }
 
-                var baseLevel = 0.75;
-                var waveHeight = height * 0.75;
+                            // Minimum height ensures visibility even at low levels
+                            readonly property real minHeight: Theme.margin / 2
+                            height: Math.max(minHeight, parent.height * pillRoot.level)
 
-                var liquidColor = Theme.colors.tertiary;
-                ctx.fillStyle = liquidColor;
-                ctx.beginPath();
+                            // Color based on intensity
+                            color: {
+                                if (pillRoot.level > 0.8)
+                                    return Theme.colors.error;
+                                if (pillRoot.level > 0.5)
+                                    return Theme.colors.tertiary;
+                                return Theme.colors.secondary;
+                            }
 
-                ctx.moveTo(0, height);
-                ctx.lineTo(0, height * baseLevel);
+                            // Smooth spring animation for natural feel
+                            Behavior on height {
+                                SpringAnimation {
+                                    spring: 2.5
+                                    damping: 0.35
+                                    mass: 0.6
+                                }
+                            }
 
-                var points = Settings.visualizerBars;
-                for (var i = 0; i <= points; i++) {
-                    var x = (i / points) * width;
-                    var baseY = height * baseLevel;
-
-                    var wave = 0;
-                    if (visualizer.isPlaying && audioLevels && audioLevels.length > 0) {
-                        var audioIndex = Math.min(i, audioLevels.length - 1);
-                        var audioLevel = audioLevels[audioIndex] || 0;
-                        var normalizedAudio = audioLevel / 100.0;
-                        wave = normalizedAudio * waveHeight;
-
-                        if (i > 0 && i < points && audioLevels.length > i) {
-                            var prevLevel = (audioLevels[i - 1] || 0) / 100.0;
-                            var nextLevel = (audioLevels[i + 1] || audioLevels[i]) / 100.0;
-                            var smoothing = (prevLevel + normalizedAudio + nextLevel) / 3;
-                            wave = smoothing * waveHeight;
+                            Behavior on color {
+                                ColorAnimation {
+                                    duration: Theme.anims.duration.small
+                                }
+                            }
                         }
-                        var liquidMotion = Math.sin(animationTime * 0.5 + i * 0.2) * waveHeight * 0.1;
-                        wave += liquidMotion;
-                    } else if (visualizer.isPlaying) {
-                        var fakeLevel = Math.abs(Math.sin(animationTime + i * 0.5)) * (0.3 + Math.random() * 0.4);
-                        wave = fakeLevel * waveHeight;
-                    }
-
-                    var y = baseY - wave;
-
-                    if (i === 0) {
-                        ctx.lineTo(x, y);
-                    } else {
-                        var prevX = ((i - 1) / points) * width;
-                        var controlX = (prevX + x) / 2;
-                        ctx.quadraticCurveTo(controlX, y, x, y);
                     }
                 }
-
-                ctx.lineTo(width, height);
-                ctx.lineTo(0, height);
-                ctx.closePath();
-                ctx.fill();
             }
         }
     }

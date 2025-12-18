@@ -18,7 +18,7 @@ QtObject {
     readonly property real volumeChange: 5
     // speed of scrolling text
     property real pixelsPerSecond: 120
-    property int visualizerBars: 16
+    property int visualizerBars: 8
     property int visualizerFPS: 60
     property bool envelopeScreen: false
     property bool roundedBar: true
