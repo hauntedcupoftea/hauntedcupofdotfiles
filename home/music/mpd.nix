@@ -26,7 +26,7 @@
     genericName = "MPD Client";
     comment = "A modern, configurable terminal MPD client";
     exec = "rmpc";
-    icon = "multimedia-audio-player";
+    icon = "multimedia-player";
     terminal = true;
     type = "Application";
     categories = ["Audio" "AudioVideo" "Music" "Player" "ConsoleOnly"];
