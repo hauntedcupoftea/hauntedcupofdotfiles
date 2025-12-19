@@ -1,7 +1,8 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import Quickshell.Widgets
 
 import qs.widgets
 import qs.services
@@ -9,19 +10,36 @@ import qs.theme
 import "internal" as Private
 
 AbstractBarButton {
-    id: batteryIndicator
+    id: root
     implicitWidth: content.width + (Theme.margin * 2)
-    implicitHeight: Theme.barHeight - (Theme.margin)
+    implicitHeight: Theme.barHeight - Theme.margin
+
+    sidebarComponent: "battery-menu"
+
+    readonly property bool isCharging: Battery.isCharging
+    readonly property bool isCritical: Battery.isCritical || (Battery.isLowAndNotCharging)
+
+    readonly property color stateColor: {
+        if (isCritical)
+            return Theme.colors.error;
+        if (isCharging)
+            return Theme.colors.primary;
+        if (Battery.percentage < 0.3)
+            return Theme.colors.tertiary;
+        return Theme.colors.secondary;
+    }
+
+    readonly property real barHeight: Theme.barHeight - (Theme.margin * 2.5)
+    readonly property real barPadding: Theme.margin / 4
 
     background: Rectangle {
+        id: container
         radius: Theme.rounding.pillMedium
-
-        color: batteryIndicator.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
+        color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
 
         Behavior on color {
             ColorAnimation {
-                duration: Theme.anims.duration.small
-                easing.type: Easing.OutQuad
+                duration: 150
             }
         }
 
@@ -33,119 +51,111 @@ AbstractBarButton {
                 return Qt.alpha(Theme.colors.primary, 0.3);
             }
         }
+    }
 
-        Behavior on border.color {
-            ColorAnimation {
-                duration: Theme.anims.duration.small
-                easing.type: Easing.OutQuad
+    RowLayout {
+        id: content
+        anchors.centerIn: parent
+        anchors.margins: Theme.margin
+        spacing: Theme.margin
+
+        Text {
+            Layout.minimumWidth: Theme.font.large
+            horizontalAlignment: Qt.AlignHCenter
+            font {
+                family: Theme.font.family
+                pixelSize: Theme.font.large
+            }
+            color: root.stateColor
+            text: Battery.profileIcon
+
+            scale: root.pressed ? 0.9 : 1.0
+            Behavior on scale {
+                NumberAnimation {
+                    duration: 100
+                    easing.type: Easing.OutBack
+                }
             }
         }
 
-        SequentialAnimation on border.width {
-            running: (Battery.isCharging && !Battery.isFullyCharged)
-            loops: Animation.Infinite
-            NumberAnimation {
-                to: 3
-                duration: 800
-                easing.type: Easing.InOutQuad
+        Rectangle {
+            id: barTrack
+            Layout.preferredWidth: Theme.playerWidth
+            Layout.preferredHeight: root.barHeight
+            radius: Theme.rounding.pillSmall
+
+            color: Qt.alpha(root.stateColor, 0.12)
+            border.width: 1
+            border.color: Qt.alpha(root.stateColor, 0.2)
+
+            Private.StyledText {
+                anchors.centerIn: parent
+                text: Math.round(Battery.percentage * 100)
+                font.weight: Font.Bold
+                font.pixelSize: Theme.font.small
+                color: root.stateColor
             }
-            NumberAnimation {
-                to: 1
-                duration: 800
-                easing.type: Easing.InOutQuad
-            }
-        }
 
-        RowLayout {
-            id: content
-            implicitWidth: Theme.barHeight
-            anchors.centerIn: parent
-            anchors.margins: Theme.margin
-            spacing: Theme.margin
+            Rectangle {
+                id: fill
+                x: root.barPadding
+                y: root.barPadding
+                height: parent.height - (root.barPadding * 2)
+                radius: Math.max(0, parent.radius - root.barPadding)
+                color: root.stateColor
 
-            Text {
-                Layout.minimumWidth: Theme.font.large
-                horizontalAlignment: Qt.AlignHCenter
-                font {
-                    family: Theme.font.family
-                    pixelSize: Theme.font.large
-                }
-                color: Theme.colors.secondary
-                text: Battery.profileIcon
-
-                Behavior on color {
-                    ColorAnimation {
-                        duration: Theme.anims.duration.normal
-                        easing.type: Easing.OutQuad
-                    }
+                width: {
+                    let availableWidth = barTrack.width - (root.barPadding * 2);
+                    let target = availableWidth * Math.min(Math.max(Battery.percentage, 0.0), 1.0);
+                    return Battery.percentage > 0 ? Math.max(target, height) : 0;
                 }
 
-                scale: batteryIndicator.pressed ? 0.9 : 1.0
-                Behavior on scale {
+                Behavior on width {
                     NumberAnimation {
-                        duration: Theme.anims.duration.small
-                        easing.type: Easing.OutBack
+                        duration: 600
+                        easing.type: Easing.OutExpo
                     }
                 }
-            }
 
-            ClippingRectangle {
-                id: bg
-                Layout.fillHeight: true
-                Layout.preferredWidth: Theme.barHeight
-                radius: Theme.rounding.pillSmall
-                color: Qt.alpha(Theme.colors.secondary_container, 0.8)
+                Item {
+                    anchors.fill: parent
+                    clip: true
+
+                    Private.StyledText {
+                        width: barTrack.width
+                        height: barTrack.height
+                        x: -fill.x
+                        y: -fill.y
+
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+
+                        text: Math.round(Battery.percentage * 100)
+                        font.weight: Font.Bold
+                        font.pixelSize: Theme.font.small
+                        color: Theme.colors.surface
+                    }
+                }
 
                 Rectangle {
-                    id: batteryFill
-                    anchors.left: parent.left
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    implicitWidth: bg.width * Number(Battery.percentage)
-                    radius: Theme.rounding.pillSmall
+                    anchors.fill: parent
+                    radius: parent.radius
+                    color: "white"
+                    opacity: 0
+                    visible: root.isCharging
 
-                    color: {
-                        if (Battery.isCritical)
-                            return Theme.colors.error;
-                        if (Battery.isLow)
-                            return Theme.colors.error;
-                        if (Battery.isCharging)
-                            return Theme.colors.primary_container;
-                        return Theme.colors.secondary;
-                    }
-
-                    Behavior on implicitHeight {
+                    SequentialAnimation on opacity {
+                        running: root.isCharging
+                        loops: Animation.Infinite
                         NumberAnimation {
-                            duration: Theme.anims.duration.normal
-                            easing.type: Easing.OutBack
+                            to: 0.25
+                            duration: 1000
+                            easing.type: Easing.InOutSine
                         }
-                    }
-
-                    Behavior on opacity {
                         NumberAnimation {
-                            duration: Theme.anims.duration.large
-                            easing.type: Easing.BezierSpline
-                            easing.bezierCurve: Theme.anims.curve.standard
-                        }
-                    }
-                }
-
-                Private.StyledText {
-                    text: Number(Battery.percentage * 100)
-                    anchors.centerIn: parent
-                    color: Theme.colors.surface
-
-                    font.weight: 600
-                    font.pixelSize: Theme.font.small
-
-                    layer.enabled: true
-                    layer.smooth: true
-                    layer.textureSize: Qt.size(width * 2, height * 2)
-
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: Theme.anims.duration.small
-                            easing.type: Easing.OutQuad
+                            to: 0
+                            duration: 1000
+                            easing.type: Easing.InOutSine
                         }
                     }
                 }
@@ -155,15 +165,21 @@ AbstractBarButton {
 
     Private.ToolTipPopup {
         expandDirection: Edges.Bottom
-        triggerTarget: batteryIndicator
-        targetWidget: batteryIndicator
-        position: Qt.rect(batteryIndicator.width / 2, batteryIndicator.height + Theme.padding, 0, 0)
+        triggerTarget: root
+        targetWidget: root
+        position: Qt.rect(root.width / 2, root.height + Theme.padding, 0, 0)
 
-        Private.StyledText {
-            text: `${Battery.formatETA(Battery.estimatedTime)}`
-            color: Theme.colors.on_surface_variant
+        ColumnLayout {
+            spacing: 2
+            Private.StyledText {
+                text: root.isCharging ? "Plugged In" : (root.isCritical ? "Critical" : "Discharging")
+                font.weight: Font.Bold
+                color: root.stateColor
+            }
+            Private.StyledText {
+                text: Battery.formatETA(Battery.estimatedTime)
+                color: Theme.colors.on_surface_variant
+            }
         }
     }
-
-    sidebarComponent: "battery-menu"
 }

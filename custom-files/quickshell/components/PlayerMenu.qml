@@ -32,7 +32,6 @@ AbstractBarButton {
         onWheel: event => {
             var delta = event.angleDelta.y / 120;
             Player.selectPlayer(delta);
-            console.log(`Changed player to ${Player.active.desktopEntry ?? Player.active.dbusName}`);
         }
     }
 
@@ -166,10 +165,9 @@ AbstractBarButton {
 
                     property string titleText: Player.active?.trackTitle || "Unknown Title"
                     property bool needsScroll: {
-                        // Create temporary text to measure
                         let temp = Qt.createQmlObject('import QtQuick; Text { font.family: "' + Theme.font.family + '"; font.pixelSize: ' + Theme.font.larger + '; font.weight: Font.DemiBold }', titleLoader);
                         temp.text = titleText;
-                        let tooLong = temp.implicitWidth > 280;
+                        let tooLong = temp.width > 280;
                         temp.destroy();
                         return tooLong;
                     }
@@ -260,7 +258,7 @@ AbstractBarButton {
 
                     Text {
                         Layout.fillWidth: true
-                        text: qsTr(Player.playerName || Player.active?.dbusName || "")
+                        text: qsTr(Player.playerName || "")
                         color: Theme.colors.on_surface_variant
                         font.family: Theme.font.family
                         font.pixelSize: Theme.font.smaller

@@ -2,10 +2,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
-
-import Quickshell.Widgets
 import Quickshell
-
 import qs.theme
 import qs.services
 import qs.widgets
@@ -15,22 +12,38 @@ import "internal" as Private
 AbstractBarButton {
     id: root
     implicitHeight: Theme.barHeight - Theme.margin
-    implicitWidth: content.width + Theme.margin * 2
+    implicitWidth: content.width + (Theme.margin * 2)
     visible: Audio.ready
 
     sidebarComponent: "basic-rectangle"
 
     property bool focusOutput: true
-    property real outputAlpha: focusOutput ? 0.8 : 0.4
-    property real inputAlpha: focusOutput ? 0.4 : 0.8
-    property string focusedIcon: focusOutput ? Audio.defaultOutput?.audio.muted ? "󰝟" : "󰕾" : Audio.defaultInput?.audio.muted ? "󰍭" : "󰍬"
+
+    readonly property real barHeight: Theme.barHeight - (Theme.margin * 2.5)
+    readonly property real barWidth: Theme.playerWidth
+
+    property string focusedIcon: {
+        if (focusOutput) {
+            return Audio.defaultOutput?.audio.muted ? "󰝟" : "󰕾";
+        } else {
+            return Audio.defaultInput?.audio.muted ? "󰍭" : "󰍬";
+        }
+    }
 
     MouseArea {
-        id: swapFocus
+        id: interactionArea
         anchors.fill: parent
-        acceptedButtons: Qt.MiddleButton
-        onPressed: {
-            root.focusOutput = !root.focusOutput;
+        acceptedButtons: Qt.MiddleButton | Qt.RightButton
+
+        onPressed: mouse => {
+            if (mouse.button === Qt.MiddleButton)
+                root.focusOutput = !root.focusOutput;
+            if (mouse.button === Qt.RightButton) {
+                if (root.focusOutput)
+                    Audio.toggleOutputMute();
+                else
+                    Audio.toggleInputMute();
+            }
         }
 
         onWheel: event => {
@@ -42,152 +55,89 @@ AbstractBarButton {
         }
     }
 
-    MouseArea {
-        id: toggleMute
-        anchors.fill: parent
-        acceptedButtons: Qt.RightButton
-        onPressed: {
-            if (root.focusOutput)
-                Audio.toggleOutputMute();
-            else
-                Audio.toggleInputMute();
-        }
-    }
-
     background: Rectangle {
+        id: pillBackground
         radius: Theme.rounding.pillMedium
-
         color: root.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
 
         Behavior on color {
             ColorAnimation {
                 duration: Theme.anims.duration.small
-                easing.type: Easing.OutQuad
             }
         }
 
-        border {
-            width: 2
-            color: {
-                if ((root.focusOutput && Audio.defaultOutput?.audio.muted) || (!root.focusOutput && Audio.defaultInput?.audio.muted))
-                    return Theme.colors.error;
-                return Qt.alpha(Theme.colors.primary, 0.3);
-            }
+        border.width: 2
+        border.color: {
+            const isMuted = (root.focusOutput && Audio.defaultOutput?.audio.muted) || (!root.focusOutput && Audio.defaultInput?.audio.muted);
+            return isMuted ? Theme.colors.error : Qt.alpha(Theme.colors.tertiary, 0.3);
         }
 
         Behavior on border.color {
             ColorAnimation {
-                duration: Theme.anims.duration.small
-                easing.type: Easing.OutQuad
+                duration: 150
+            }
+        }
+    }
+
+    RowLayout {
+        id: content
+        anchors.centerIn: parent
+        anchors.margins: Theme.margin
+        spacing: Theme.margin
+
+        Text {
+            Layout.minimumWidth: Theme.font.large
+            horizontalAlignment: Qt.AlignHCenter
+            font {
+                family: Theme.font.family
+                pixelSize: Theme.font.large
+            }
+            color: root.focusOutput ? Theme.colors.primary : Theme.colors.secondary
+            text: root.focusedIcon
+
+            scale: interactionArea.pressed ? 0.9 : 1.0
+            Behavior on scale {
+                NumberAnimation {
+                    duration: 100
+                }
+            }
+            Behavior on color {
+                ColorAnimation {
+                    duration: 200
+                }
             }
         }
 
-        SequentialAnimation on border.width {
-            running: (root.focusOutput && Audio.defaultOutput?.audio.muted) || (!root.focusOutput && Audio.defaultInput?.audio.muted)
-            loops: Animation.Infinite
-            NumberAnimation {
-                to: 3
-                duration: 800
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                to: 1
-                duration: 800
-                easing.type: Easing.InOutQuad
-            }
-        }
+        Item {
+            id: volumebars
+            Layout.preferredWidth: root.barWidth
+            Layout.preferredHeight: root.barHeight
 
-        RowLayout {
-            id: content
-            implicitWidth: Theme.playerWidth
-            anchors.centerIn: parent
-            anchors.margins: Theme.margin
-            spacing: Theme.margin
+            property color inputColor: Audio.defaultInput?.audio.muted ? Theme.colors.error : Theme.colors.tertiary
+            property color outputColor: Audio.defaultOutput?.audio.muted ? Theme.colors.error : Theme.colors.primary
 
-            Text {
-                Layout.minimumWidth: Theme.font.large
-                horizontalAlignment: Qt.AlignHCenter
-                font {
-                    family: Theme.font.family
-                    pixelSize: Theme.font.large
-                }
-                color: root.focusOutput ? Theme.colors.primary : Theme.colors.secondary
-                text: root.focusedIcon
-
-                Behavior on color {
-                    ColorAnimation {
-                        duration: Theme.anims.duration.normal
-                        easing.type: Easing.OutQuad
-                    }
-                }
-
-                scale: toggleMute.pressed || swapFocus.pressed ? 0.9 : 1.0
-                Behavior on scale {
-                    NumberAnimation {
-                        duration: Theme.anims.duration.small
-                        easing.type: Easing.OutBack
-                    }
-                }
-            }
-
-            ClippingRectangle {
-                id: bg
-                Layout.fillHeight: true
-                Layout.preferredWidth: Theme.playerWidth
+            Private.ProgressBar {
+                anchors.fill: parent
+                value: Number(Audio.defaultInput?.audio.volume)
+                active: !(Audio.defaultInput?.audio.muted && root.focusOutput)
                 radius: Theme.rounding.pillSmall
-                color: Qt.alpha(Theme.colors.secondary_container, 0.8)
 
-                Rectangle {
-                    id: outputFill
-                    anchors.left: parent.left
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    implicitWidth: bg.width * Number(Audio.defaultOutput?.audio.volume)
-                    radius: Theme.rounding.pillSmall
+                backgroundColor: "transparent"
+                accentColor: Qt.alpha(volumebars.inputColor, root.focusOutput ? 0.3 : 0.8)
+                borderWidth: 1
+                borderColor: Qt.alpha(volumebars.inputColor, 0.1)
+            }
 
-                    color: Qt.alpha(Theme.colors.primary, root.outputAlpha)
+            Private.ProgressBar {
+                anchors.fill: parent
+                value: Number(Audio.defaultOutput?.audio.volume)
+                active: !Audio.defaultOutput?.audio.muted || root.focusOutput
+                radius: Theme.rounding.pillSmall
 
-                    Behavior on implicitHeight {
-                        NumberAnimation {
-                            duration: Theme.anims.duration.normal
-                            easing.type: Easing.OutBack
-                        }
-                    }
-
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: Theme.anims.duration.large
-                            easing.type: Easing.BezierSpline
-                            easing.bezierCurve: Theme.anims.curve.standard
-                        }
-                    }
-                }
-
-                Rectangle {
-                    id: inputFill
-                    anchors.left: parent.left
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    implicitWidth: bg.width * Number(Audio.defaultInput?.audio.volume)
-                    radius: Theme.rounding.pillSmall
-
-                    color: Qt.alpha(Theme.colors.secondary, root.inputAlpha)
-
-                    Behavior on implicitHeight {
-                        NumberAnimation {
-                            duration: Theme.anims.duration.normal
-                            easing.type: Easing.OutBack
-                        }
-                    }
-
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: Theme.anims.duration.large
-                            easing.type: Easing.BezierSpline
-                            easing.bezierCurve: Theme.anims.curve.standard
-                        }
-                    }
-                }
+                backgroundColor: "transparent"
+                accentColor: Qt.alpha(volumebars.outputColor, root.focusOutput ? 0.8 : 0.3)
+                borderWidth: 1
+                borderColor: Qt.alpha(volumebars.outputColor, 0.1)
             }
         }
     }
@@ -201,54 +151,33 @@ AbstractBarButton {
         ColumnLayout {
             spacing: Theme.margin / 2
 
-            Text {
+            Private.StyledText {
                 Layout.maximumWidth: Theme.maximumTooltipWidth
-                wrapMode: Text.WordWrap
                 text: `Output: ${Audio.defaultOutput?.description || "None"}`
-                color: Theme.colors.on_surface
-                font {
-                    family: Theme.font.family
-                    pixelSize: Theme.font.small
-                    weight: root.focusOutput ? Font.Bold : Font.Normal
-                }
+                font.weight: root.focusOutput ? Font.Bold : Font.Normal
             }
-
-            Text {
+            Private.StyledText {
                 text: `${(Audio.defaultOutput?.audio.volume.toFixed(2) * 100).toFixed(0)}%`
                 color: Theme.colors.primary
-                font {
-                    family: Theme.font.family
-                    pixelSize: Theme.font.small
-                    weight: Font.Medium
-                }
+                font.pixelSize: Theme.font.small
             }
 
             Rectangle {
-                Layout.maximumWidth: Theme.maximumTooltipWidth
+                Layout.fillWidth: true
                 implicitHeight: 1
                 color: Theme.colors.outline_variant
+                opacity: 0.3
             }
 
-            Text {
+            Private.StyledText {
                 Layout.maximumWidth: Theme.maximumTooltipWidth
-                wrapMode: Text.WordWrap
                 text: `Input: ${Audio.defaultInput?.description || "None"}`
-                color: Theme.colors.on_surface
-                font {
-                    family: Theme.font.family
-                    pixelSize: Theme.font.small
-                    weight: !root.focusOutput ? Font.Bold : Font.Normal
-                }
+                font.weight: !root.focusOutput ? Font.Bold : Font.Normal
             }
-
-            Text {
+            Private.StyledText {
                 text: `${(Audio.defaultInput?.audio.volume.toFixed(2) * 100).toFixed(0)}%`
                 color: Theme.colors.secondary
-                font {
-                    family: Theme.font.family
-                    pixelSize: Theme.font.small
-                    weight: Font.Medium
-                }
+                font.pixelSize: Theme.font.small
             }
         }
     }
