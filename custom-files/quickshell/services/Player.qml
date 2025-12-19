@@ -22,8 +22,14 @@ Singleton {
         }
     }
 
+    onActiveChanged: {
+        if (root.active) {
+            root.active.positionChanged();
+        }
+    }
+
     readonly property real percentageProgress: {
-        if (!active || !active?.length)
+        if (!active || !active?.lengthSupported)
             return 0;
         return active.position / (active.length);
     }
@@ -34,6 +40,8 @@ Singleton {
 
     FrameAnimation {
         running: root.active && root.active.playbackState == MprisPlaybackState.Playing
-        onTriggered: root.active.positionChanged()
+        onTriggered: if (root.active) {
+            root.active.positionChanged();
+        }
     }
 }

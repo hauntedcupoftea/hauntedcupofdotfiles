@@ -12,6 +12,7 @@ Item {
     property bool indeterminate: false
 
     property bool shimmerEnabled: true
+    property bool enableSmoothing: true
 
     property color backgroundColor: Theme.colors.surface_container
     property color accentColor: Theme.colors.primary
@@ -31,6 +32,11 @@ Item {
         radius: root.radius
         border.width: root.borderWidth
         border.color: root.borderColor
+
+        Item {
+            id: contentHook
+            anchors.fill: parent
+        }
     }
 
     Item {
@@ -46,7 +52,7 @@ Item {
         }
 
         Behavior on width {
-            enabled: !root.indeterminate
+            enabled: !root.indeterminate && root.enableSmoothing
             NumberAnimation {
                 duration: Theme.anims.duration.normal
                 easing.type: Easing.OutCubic
@@ -95,11 +101,6 @@ Item {
                     position: 1.0
                     color: Qt.alpha(root.accentColor, 0.1)
                 }
-            }
-
-            Item {
-                id: contentHook
-                anchors.fill: parent
             }
 
             Item {

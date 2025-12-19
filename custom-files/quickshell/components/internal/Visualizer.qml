@@ -9,6 +9,7 @@ ProgressBar {
     id: visualizer
     value: progress
     active: isPlaying
+    enableSmoothing: false
     property real progress: 0.5
     property bool isPlaying: false
 

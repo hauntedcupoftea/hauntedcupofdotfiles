@@ -99,7 +99,7 @@ AbstractBarButton {
             Layout.fillHeight: true
             Layout.fillWidth: true
             implicitWidth: Theme.playerWidth
-            progress: Player.percentageProgress || 0
+            progress: Player.percentageProgress
             isPlaying: Player.active?.isPlaying || false
         }
     }
