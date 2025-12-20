@@ -119,25 +119,26 @@ AbstractBarButton {
             Private.ProgressBar {
                 anchors.fill: parent
                 value: Number(Audio.defaultInput?.audio.volume)
-                active: !(Audio.defaultInput?.audio.muted && root.focusOutput)
+                active: true
                 radius: Theme.rounding.pillSmall
 
                 backgroundColor: "transparent"
                 accentColor: Qt.alpha(volumebars.inputColor, root.focusOutput ? 0.3 : 0.8)
                 borderWidth: 1
                 borderColor: Qt.alpha(volumebars.inputColor, 0.1)
+                shimmerEnabled: Boolean(Audio.defaultInput?.audio.muted)
             }
 
             Private.ProgressBar {
                 anchors.fill: parent
                 value: Number(Audio.defaultOutput?.audio.volume)
-                active: !Audio.defaultOutput?.audio.muted || root.focusOutput
+                active: true
                 radius: Theme.rounding.pillSmall
-
                 backgroundColor: "transparent"
                 accentColor: Qt.alpha(volumebars.outputColor, root.focusOutput ? 0.8 : 0.3)
                 borderWidth: 1
                 borderColor: Qt.alpha(volumebars.outputColor, 0.1)
+                shimmerEnabled: Boolean(Audio.defaultOutput?.audio.muted)
             }
         }
     }
