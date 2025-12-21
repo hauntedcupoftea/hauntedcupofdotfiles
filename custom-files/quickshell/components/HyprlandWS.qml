@@ -60,7 +60,7 @@ Rectangle {
                     if (windowCount === 0)
                         return 0;
 
-                    return Math.min(bgRect.height, (bgRect.height * 0.4) + (windowCount * 4));
+                    return bgRect.height * (windowCount / (windowCount + 1));
                 }
 
                 onClicked: modelData.activate()
