@@ -958,11 +958,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1766309867,
-        "narHash": "sha256-Ag8Ub72bLW39pqacByZijhC8PdmnR4zemdOA10o8XFY=",
+        "lastModified": 1766473305,
+        "narHash": "sha256-cux+wzRXheFtgZgJkBkigLCBmmlIFDrbQegDl/rjsjs=",
         "owner": "Rexcrazy804",
         "repo": "Zaphkiel",
-        "rev": "2e56a82859d2ed15aee6a7620b6ed6d67cb5160e",
+        "rev": "4fb0dd33e54be71c5051d49160fec3b4d552de31",
         "type": "github"
       },
       "original": {

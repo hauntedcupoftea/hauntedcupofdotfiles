@@ -18,6 +18,7 @@
     zrok # self hosted ngrok
     zathura # PDF viewer
     gh # GitHub-cli
+    sql-studio # dbms
   ];
 
   # my preferred, feel free to change:
