@@ -120,8 +120,8 @@ AbstractBarButton {
 
             // Album art
             Rectangle {
-                Layout.preferredWidth: 80
-                Layout.preferredHeight: 80
+                Layout.preferredWidth: 110
+                Layout.preferredHeight: 110
                 radius: Theme.rounding.small
                 color: Theme.colors.surface_variant
                 clip: true
@@ -132,7 +132,7 @@ AbstractBarButton {
                 Image {
                     anchors.fill: parent
                     source: qsTr(Player.active?.trackArtUrl || "")
-                    fillMode: Image.PreserveAspectCrop
+                    fillMode: Image.PreserveAspectFit
 
                     Rectangle {
                         anchors.fill: parent
