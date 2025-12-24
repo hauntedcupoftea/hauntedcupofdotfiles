@@ -67,6 +67,22 @@
       };
       keys = {
         normal = {
+          # https://github.com/helix-editor/helix/discussions/5764#discussioncomment-12968177
+          "A-j" = [
+            "extend_to_line_bounds"
+            "delete_selection"
+            "paste_after"
+            "select_mode"
+            "goto_line_start"
+            "normal_mode"
+          ]; # Move line(s) down
+          "A-k" = [
+            "extend_to_line_bounds"
+            "delete_selection"
+            "move_line_up"
+            "paste_before"
+            "flip_selections"
+          ]; # Move line(s) up
           space = {
             # https://github.com/helix-editor/helix/wiki/Recipes#advanced-file-explorer-with-yazi
             e = [
