@@ -68,7 +68,7 @@
       keys = {
         normal = {
           # https://github.com/helix-editor/helix/discussions/5764#discussioncomment-12968177
-          "A-j" = [
+          "C-j" = [
             "extend_to_line_bounds"
             "delete_selection"
             "paste_after"
@@ -76,7 +76,7 @@
             "goto_line_start"
             "normal_mode"
           ]; # Move line(s) down
-          "A-k" = [
+          "C-k" = [
             "extend_to_line_bounds"
             "delete_selection"
             "move_line_up"
