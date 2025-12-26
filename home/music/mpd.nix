@@ -12,12 +12,20 @@
   services = {
     mpd = {
       enable = true;
+      network = {
+        listenAddress = "::";
+      };
     };
     mpd-discord-rpc = {
       enable = true;
     };
-    mpd-mpris = {
+    mpdris2 = {
       enable = true;
+      multimediaKeys = true;
+      notifications = true;
+      mpd = {
+        host = "127.0.0.1";
+      };
     };
   };
 

@@ -16,6 +16,7 @@
 
     firewall = {
       enable = true;
+      allowedTCPPorts = [6600]; # for MPD
     };
 
     wireless.iwd = {

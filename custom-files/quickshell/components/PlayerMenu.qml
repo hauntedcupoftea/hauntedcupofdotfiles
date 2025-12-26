@@ -120,8 +120,8 @@ AbstractBarButton {
 
             // Album art
             Rectangle {
-                Layout.preferredWidth: 110
-                Layout.preferredHeight: 110
+                Layout.preferredWidth: 100
+                Layout.preferredHeight: 100
                 radius: Theme.rounding.small
                 color: Theme.colors.surface_variant
                 clip: true
