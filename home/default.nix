@@ -47,6 +47,7 @@
     wf-recorder # screen recording
     slurp # region selector
     element-desktop # matrix
+    desktop-file-utils # help me
   ];
 
   home.sessionVariables = {
