@@ -60,7 +60,7 @@ in {
           "$mod, k, movefocus, u"
           "$mod, l, movefocus, r"
 
-          "$mod, Z, exec, uwsm app -- zen-twilight" # bro i cannot decipher whether zen or zen-beta is the way to go.
+          "$mod, Z, exec, uwsm app -- zen" # bro i cannot decipher whether zen or zen-beta is the way to go.
           "$mod, E, exec, uwsm app -- $terminal -e yazi"
           # Screenshot a region (freezing)
           ", Print, exec, uwsm app -- grimblast copy area --notify"
