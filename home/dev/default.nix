@@ -8,6 +8,7 @@
     ./py.nix
     ./podman.nix
     ./quickshell.nix
+    ./game-dev.nix
     # ./rust.nix # BETTER IN DEVSHELLS
     ./ts.nix
     ./typst.nix
