@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Add systems to deduplicate it across hyprland, walker, nvf, stylix, etc.
     systems.url = "github:nix-systems/default";
 
     home-manager = {
@@ -22,7 +21,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Hyprland Ecosystem
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,7 +48,6 @@
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
       inputs.systems.follows = "systems";
       inputs.flake-parts.follows = "flake-parts";
     };
