@@ -10,9 +10,10 @@
     pulse.enable = true;
     jack.enable = true;
     wireplumber.enable = true;
-    lowLatency = {
-      enable = true;
-    };
+    # this might be causing crackling
+    # lowLatency = {
+    #   enable = true;
+    # };
 
     wireplumber.extraConfig."51-disable-mic-agc" = {
       "monitor.alsa.rules" = [
