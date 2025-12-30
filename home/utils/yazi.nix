@@ -9,11 +9,15 @@
     ripgrep
     imagemagick
     dragon-drop
+    trash-cli
   ];
 
   programs.yazi = {
     enable = true;
     enableFishIntegration = true;
+    plugins = {
+      "recycle-bin" = pkgs.yaziPlugins.recycle-bin;
+    };
     settings = {
       mgr = {
         linemode = "size";
@@ -33,6 +37,12 @@
         {
           on = "<C-n>";
           run = ''shell -- dragon-drop -x -i -T "$1"'';
+          desc = "Drag and drop selected files";
+        }
+        {
+          on = ["R" "b"];
+          run = ''plugin recycle-bin'';
+          desc = "Open recycle bin";
         }
       ];
     };
