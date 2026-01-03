@@ -6,5 +6,5 @@
     ./youtube-music.nix
   ];
 
-  home.packages = [pkgs.easytag];
+  home.packages = [pkgs.kid3-cli pkgs.kid3-qt];
 }
