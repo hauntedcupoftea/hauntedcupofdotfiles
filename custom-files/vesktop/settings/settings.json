@@ -80,7 +80,7 @@
             "showFolderIcon": 1
         },
         "BetterGifAltText": {
-            "enabled": false
+            "enabled": true
         },
         "BetterGifPicker": {
             "enabled": false
@@ -183,14 +183,15 @@
             "enableStickerBypass": true,
             "stickerSize": 160,
             "transformStickers": true,
-            "transformCompoundSentence": false,
+            "transformCompoundSentence": true,
             "enableStreamQualityBypass": true,
             "useHyperLinks": true,
             "hyperLinkText": "{{NAME}}",
             "disableEmbedPermissionCheck": false
         },
         "FakeProfileThemes": {
-            "enabled": false
+            "enabled": false,
+            "nitroFirst": true
         },
         "FavoriteEmojiFirst": {
             "enabled": false
@@ -278,7 +279,7 @@
             "showLastFmLogo": true
         },
         "LoadingQuotes": {
-            "enabled": false,
+            "enabled": true,
             "replaceEvents": true,
             "enablePluginPresetQuotes": true,
             "enableDiscordPresetQuotes": false,
@@ -286,7 +287,10 @@
             "additionalQuotesDelimiter": "|"
         },
         "MemberCount": {
-            "enabled": true
+            "enabled": true,
+            "memberList": true,
+            "toolTip": true,
+            "voiceActivity": true
         },
         "MentionAvatars": {
             "enabled": false
@@ -347,7 +351,7 @@
             "enabled": false
         },
         "NoTypingAnimation": {
-            "enabled": false
+            "enabled": true
         },
         "NoUnblockToJump": {
             "enabled": false
@@ -365,7 +369,12 @@
             "enabled": true
         },
         "OpenInApp": {
-            "enabled": false
+            "enabled": true,
+            "spotify": true,
+            "steam": true,
+            "epic": true,
+            "tidal": true,
+            "itunes": true
         },
         "OverrideForumDefaults": {
             "enabled": false
@@ -434,7 +443,8 @@
             "enabled": false
         },
         "Summaries": {
-            "enabled": false
+            "enabled": false,
+            "summaryExpiryThresholdDays": 3
         },
         "SendTimestamps": {
             "enabled": true,
@@ -509,7 +519,11 @@
             "enabled": false
         },
         "Translate": {
-            "enabled": false
+            "enabled": true,
+            "service": "google",
+            "deeplApiKey": "",
+            "autoTranslate": false,
+            "showAutoTranslateTooltip": true
         },
         "TypingIndicator": {
             "enabled": false
@@ -518,7 +532,7 @@
             "enabled": false
         },
         "Unindent": {
-            "enabled": false
+            "enabled": true
         },
         "UnlockedAvatarZoom": {
             "enabled": false
@@ -545,7 +559,19 @@
             "enabled": false
         },
         "VcNarrator": {
-            "enabled": false
+            "enabled": false,
+            "voice": "English (Caribbean)+Diogo espeak-ng",
+            "volume": 1,
+            "rate": 1,
+            "sayOwnName": false,
+            "latinOnly": false,
+            "joinMessage": "{{USER}} joined",
+            "leaveMessage": "{{USER}} left",
+            "moveMessage": "{{USER}} moved to {{CHANNEL}}",
+            "muteMessage": "{{USER}} muted",
+            "unmuteMessage": "{{USER}} unmuted",
+            "deafenMessage": "{{USER}} deafened",
+            "undeafenMessage": "{{USER}} undeafened"
         },
         "VencordToolbox": {
             "enabled": false
@@ -600,6 +626,9 @@
         },
         "WebContextMenus": {
             "enabled": true
+        },
+        "MoreQuickReactions": {
+            "enabled": false
         }
     },
     "uiElements": {
@@ -616,6 +645,6 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1765472209191
+        "settingsSyncVersion": 1767424638718
     }
 }
