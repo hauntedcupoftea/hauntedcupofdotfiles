@@ -10,6 +10,7 @@
     ./quickshell.nix
     ./game-dev.nix
     # ./rust.nix # BETTER IN DEVSHELLS
+    ./teamviewer.nix
     ./ts.nix
     ./typst.nix
   ];
