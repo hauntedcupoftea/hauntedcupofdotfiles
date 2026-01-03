@@ -1,23 +1,34 @@
-{ pkgs, config, ... }: {
+{
+  config,
+  inputs,
+  system,
+  ...
+}: {
   services.hyprpaper = {
     enable = true;
-    package = pkgs.hyprpaper;
+    package = inputs.hyprpaper.packages.${system}.default;
     settings = {
-      ipc = "on";
+      ipc = true;
+      splash = false;
 
       #!! you might need to change this, because i'm not pushing the wallpapers to github.
       preload = [
-        "${config.home.homeDirectory}/Wallpapers/wallpaper-elden-ring.jpg"
-        "${config.home.homeDirectory}/Wallpapers/wallpaper-fern.png"
-        "${config.home.homeDirectory}/Wallpapers/wallpaper-malenia.jpg"
+        "${config.home.homeDirectory}/Wallpapers/"
       ];
 
-      #!! change this
       wallpaper = [
-        "DP-2, ${config.home.homeDirectory}/Wallpapers/wallpaper-malenia.jpg"
-        "eDP-1, ${config.home.homeDirectory}/Wallpapers/wallpaper-fern.png"
+        {
+          monitor = "DP-2";
+          path = "${config.home.homeDirectory}/Wallpapers/";
+          timeout = 3600;
+        }
+        {
+          monitor = "eDP-1";
+          path = "${config.home.homeDirectory}/Wallpapers/";
+          timeout = 3600;
+        }
       ];
     };
   };
-  home.packages = [ pkgs.hyprpaper ];
+  home.packages = [inputs.hyprpaper.packages.${system}.default];
 }
