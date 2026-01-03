@@ -8,6 +8,7 @@
 in {
   home.sessionVariables = {
     HYPRSHOT_DIR = "Pictures";
+    XDG_CURRENT_DESKTOP = "Hyprland";
   };
 
   # catppuccin.hyprland = {
@@ -31,6 +32,8 @@ in {
         gaps_in = 6;
         gaps_out = "8";
       };
+
+      env = ["XDG_CURRENT_DESKTOP,Hyprland"];
 
       misc = {
         disable_hyprland_logo = true;
