@@ -36,8 +36,10 @@ in {
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
         focus_on_activate = true;
+        force_default_wallpaper = 0;
+        vfr = true; # Variable frame rate for better power consumption
+        vrr = 2; # Variable refresh rate (set to 1 if your monitor supports it)
       };
-
       decoration = {
         rounding = 8;
       };
@@ -46,7 +48,7 @@ in {
       bind =
         [
           "$mod, return, exec, uwsm app -- $terminal"
-          "$mod, C, killactive"
+          "$mod, Q, killactive"
           "$mod, B, togglefloating"
           "$mod, F, fullscreen"
           "$mod, P, pin" # TODO: test
@@ -117,7 +119,6 @@ in {
         ",XF86MonBrightnessDown, exec, brightnessctl s 10%-"
       ];
 
-      # playerctl binds
       bindl = [
         ", XF86AudioNext, exec, playerctl next"
         ", XF86AudioPause, exec, playerctl play-pause"
@@ -125,13 +126,15 @@ in {
         ", XF86AudioPrev, exec, playerctl previous"
       ];
 
-      # Monitor configuration (adjust as needed) (add your own config below)
-      monitor = lib.mkIf isGE66Raider [
-        "DP-2, 2560x1440@164.96, 0x0, 1"
-        # TODO: remove when monitor is fixed
-        "eDP-1, 1920x1080@240, 2560x360, 1"
+      monitor = lib.mkMerge [
+        (lib.mkIf isGE66Raider [
+          "DP-2, 2560x1440@165, 0x0, 1, vrr, 1"
+          "eDP-1, 1920x1080@240, 2560x360, 1"
+        ])
+        (lib.mkIf (!isGE66Raider) [
+          ",preferred,auto,1"
+        ])
       ];
-
       workspace = lib.mkIf isGE66Raider [
         "1,persistent:true,monitor:DP-2"
         "2,persistent:true,monitor:DP-2"
@@ -139,24 +142,43 @@ in {
         "4,persistent:true,monitor:eDP-1"
         "5,persistent:true,monitor:eDP-1"
         "6,persistent:true,monitor:eDP-1"
-        # "4,persistent:true,monitor:DP-2"
-        # "5,persistent:true,monitor:DP-2"
       ];
 
-      # Window Rules
       windowrule = [
-        "float,class:(clipse)"
-        "size 622 652,class:(clipse)"
-        "stayfocused,class:(clipse)"
-        # this is for hyprland termfilechooser
-        "float, class:^(kitty)$,title:^(Save File|Select Directory|Select File)$"
-        "stayfocused, class:^(kitty)$,title:^(Save File|Select Directory|Select File)$"
-        "size 1200 800, class:^(kitty)$,title:^(Save File|Select Directory|Select File)$"
-        "center, class:^(kitty)$,title:^(Save File|Select Directory|Select File)$"
-        # gaming
-        "content game, initialClass:steam_app_.*"
-        "fullscreenstate 2 2, initialClass:steam_app_.*"
-        "workspace 2, initialClass:steam_app_.*"
+        {
+          name = "clipse-float";
+          match.class = "clipse";
+          float = "on";
+          size = "652 652";
+          stay_focused = "on";
+          center = "on";
+        }
+        {
+          name = "termfilechooser";
+          match.class = "^(kitty)$";
+          match.title = "^(Save File|Select Directory|Select File)$";
+          float = "on";
+          stay_focused = "on";
+          size = "1200 800";
+          center = "on";
+        }
+        {
+          name = "steam-games";
+          match.initial_class = "steam_app_.*";
+          content = "game";
+          fullscreen_state = "2 2";
+          workspace = "2";
+          no_max_size = "on";
+          immediate = "on";
+        }
+        {
+          name = "polkit-float";
+          match.class = "^(polkit-gnome|polkit-kde|gcr-prompter)$";
+          float = "on";
+          size = "600 400";
+          center = "on";
+          stay_focused = "on";
+        }
       ];
 
       exec-once = [

@@ -18,6 +18,9 @@
     plugins = {
       "recycle-bin" = pkgs.yaziPlugins.recycle-bin;
     };
+    initLua = ''
+      require("recycle-bin"):setup()
+    '';
     settings = {
       mgr = {
         linemode = "size";
