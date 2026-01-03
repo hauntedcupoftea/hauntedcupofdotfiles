@@ -4,7 +4,6 @@
     protonup-qt
     protonplus
     lutris
-    bottles
     heroic
     dualsensectl
     wineWowPackages.stable

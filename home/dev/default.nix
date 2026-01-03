@@ -16,7 +16,7 @@
   ];
 
   home.packages = with pkgs; [
-    bruno # api testing tool that works on plaintext
+    requestly # api testing tool that works on plaintext
     zrok # self hosted ngrok
     zathura # PDF viewer
     gh # GitHub-cli
