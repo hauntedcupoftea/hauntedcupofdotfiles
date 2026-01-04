@@ -40,8 +40,7 @@ in {
         disable_splash_rendering = true;
         focus_on_activate = true;
         force_default_wallpaper = 0;
-        vfr = true; # Variable frame rate for better power consumption
-        vrr = 2; # Variable refresh rate (set to 1 if your monitor supports it)
+        vrr = 3; # Variable refresh rate (set to 1 if your monitor supports it)
       };
       decoration = {
         rounding = 8;
@@ -131,7 +130,7 @@ in {
 
       monitor = lib.mkMerge [
         (lib.mkIf isGE66Raider [
-          "DP-2, 2560x1440@165, 0x0, 1, vrr, 1"
+          "DP-2, 2560x1440@165, 0x0, 1, vrr, 3"
           "eDP-1, 1920x1080@240, 2560x360, 1"
         ])
         (lib.mkIf (!isGE66Raider) [

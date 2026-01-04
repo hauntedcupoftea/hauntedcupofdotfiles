@@ -1115,15 +1115,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1767386799,
-        "narHash": "sha256-0yls3KEkJeQXYL+tAN04dGp3iXOT26xLUknXwPcJ65g=",
-        "owner": "Rexcrazy804",
+        "lastModified": 1767533490,
+        "narHash": "sha256-LfprHfUHoT6Wwsqs7NEMSY6wiYocVuUw7MA1y3YSf2A=",
+        "owner": "hauntedcupoftea",
         "repo": "Zaphkiel",
-        "rev": "2790255ccba19bf1a2ecad6ba21e92092fef4b08",
+        "rev": "fc68f1936eac81e4c05b3eef1c8156bf4e3dcc37",
         "type": "github"
       },
       "original": {
-        "owner": "Rexcrazy804",
+        "owner": "hauntedcupoftea",
         "repo": "Zaphkiel",
         "type": "github"
       }
