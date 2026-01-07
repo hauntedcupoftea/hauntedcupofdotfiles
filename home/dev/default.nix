@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    # ./ags.nix
+    # ./ags.nix # we go quickshell now.
     ./git.nix
     ./firefox.nix
     ./nvf.nix
@@ -16,7 +16,8 @@
   ];
 
   home.packages = with pkgs; [
-    requestly # api testing tool that works on plaintext
+    requestly # another api testing tool that's kinda an industry standard?
+    bruno # api testing tool that works on plaintext
     zrok # self hosted ngrok
     zathura # PDF viewer
     gh # GitHub-cli

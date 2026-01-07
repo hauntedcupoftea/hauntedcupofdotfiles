@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   lib,
   ...
@@ -11,7 +10,8 @@
     # general
     harper
 
-    # Python, Rust, TypeScript & JavaScript in their respective files.
+    deno
+
     # HTML/CSS/Markdown
     marksman
     markdown-oxide
@@ -136,7 +136,7 @@
             unstable = true;
             suggest = {
               completeFunctionCalls = false;
-              imports = {hosts."https://deno.land" = true;};
+              imports.hosts."https://deno.land" = true;
             };
             inlayHints = {
               enumMemberValues.enabled = true;
@@ -175,6 +175,11 @@
           command = "rust-analyzer";
         };
 
+        svelte-ls = {
+          command = "svelteserver";
+          args = ["--stdio"];
+        };
+
         tailwindcss-ls = {
           command = lib.getExe pkgs.tailwindcss-language-server;
           args = ["--stdio"];
@@ -188,25 +193,6 @@
             formatterMode = "typstyle";
             formatterPrintWidth = 80;
           };
-        };
-
-        typescript-ls = {
-          command = lib.getExe pkgs.nodePackages.typescript-language-server;
-          args = ["--stdio"];
-          config = {
-            typescript-language-server.source = {
-              addMissingImports.ts = true;
-              fixAll.ts = true;
-              organizeImports.ts = true;
-              removeUnusedImports.ts = true;
-              sortImports.ts = true;
-            };
-          };
-        };
-
-        svelte-ls = {
-          command = "svelteserver";
-          args = ["--stdio"];
         };
 
         uwu-colors = {
@@ -229,11 +215,6 @@
         deno = lang: {
           command = lib.getExe pkgs.deno;
           args = ["fmt" "-" "--ext" lang];
-        };
-
-        prettier = lang: {
-          command = lib.getExe pkgs.nodePackages.prettier;
-          args = ["--parser" lang];
         };
       in [
         # --- C++ ---
@@ -266,11 +247,7 @@
         # --- Python ---
         {
           name = "python";
-          language-servers = [
-            "basedpyright"
-            "ruff"
-            "harper-ls"
-          ];
+          language-servers = ["basedpyright" "ruff" "harper-ls"];
           formatter = {
             command = "ruff";
             args = ["format" "-"];
@@ -292,41 +269,32 @@
         # --- TypeScript ---
         {
           name = "typescript";
+          roots = ["deno.json" "deno.jsonc" "package.json"];
+          file-types = ["ts" "tsx"];
           auto-format = true;
-          language-servers = ["typescript-ls" "harper-ls"];
+          language-servers = ["deno-lsp" "harper-ls"];
           formatter = deno "ts";
         }
 
         # --- JavaScript ---
         {
           name = "javascript";
+          roots = ["deno.json" "deno.jsonc" "package.json"];
+          file-types = ["js" "jsx"];
           auto-format = true;
-          language-servers = ["typescript-ls" "harper-ls"];
+          language-servers = ["deno-lsp" "harper-ls"];
           formatter = deno "js";
-        }
-
-        # --- JSX ---
-        {
-          name = "jsx";
-          auto-format = true;
-          language-servers = ["typescript-ls"];
-          formatter = deno "jsx";
-        }
-
-        # --- TSX ---
-        {
-          name = "tsx";
-          auto-format = true;
-          language-servers = ["typescript-ls"];
-          formatter = deno "tsx";
         }
 
         # --- Svelte ---
         {
           name = "svelte";
           auto-format = true;
-          language-servers = ["typescript-ls" "svelte-ls" "tailwindcss-ls" "uwu-colors"];
-          formatter = prettier "svelte";
+          language-servers = ["svelte-ls" "tailwindcss-ls" "uwu-colors"];
+          formatter = {
+            command = lib.getExe pkgs.deno;
+            args = ["fmt" "--unstable-component" "-" "--ext" "svelte"];
+          };
         }
 
         # --- HTML ---
