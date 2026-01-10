@@ -48,6 +48,7 @@
     slurp # region selector
     element-desktop # matrix
     desktop-file-utils # help me
+    lact
   ];
 
   home.sessionVariables = {
