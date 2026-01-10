@@ -11,5 +11,6 @@
 
   home.packages = with pkgs; [
     lm_sensors # sensor data
+    nload # network traffic
   ];
 }

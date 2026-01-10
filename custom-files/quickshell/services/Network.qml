@@ -3,166 +3,230 @@ pragma ComponentBehavior: Bound
 import Quickshell
 import Quickshell.Io
 import QtQuick
+import qs.config
 import "types" as Types
 
 Singleton {
     id: root
 
-    // type definitions
     readonly property Types.Network indicators: Types.Network {}
-
-    // network state
-    property bool hasEthernet: false
-    property bool hasWifi: false
-    property bool wifiEnabled: true
-    property string networkName: ""
-    property int signalStrength: 0
-    property int updateInterval: 1000
-
-    // available networks
     property var availableNetworks: []
 
-    // status - main indicator to use
     readonly property string status: {
-        if (!hasEthernet && !hasWifi)
+        if (!isConnected)
             return indicators.noNetwork;
-        if (hasEthernet)
+        if (primaryType === "ethernet")
             return indicators.ethernetEnabled;
         if (!wifiEnabled)
             return indicators.wifiOff;
-        if (hasWifi) {
-            if (signalStrength >= 80)
-                return indicators.wifiStrength4;
-            if (signalStrength >= 60)
-                return indicators.wifiStrength3;
-            if (signalStrength >= 40)
-                return indicators.wifiStrength2;
-            if (signalStrength >= 20)
-                return indicators.wifiStrength1;
-            return indicators.wifiAlert;
+        if (signalStrength >= 80)
+            return indicators.wifiStrength4;
+        if (signalStrength >= 60)
+            return indicators.wifiStrength3;
+        if (signalStrength >= 40)
+            return indicators.wifiStrength2;
+        if (signalStrength >= 20)
+            return indicators.wifiStrength1;
+        return indicators.wifiAlert;
+    }
+
+    property string primaryInterface: ""
+    property string primaryType: ""
+    property bool isConnected: false
+
+    property string ssid: ""
+    property int signalStrength: 0
+    property bool wifiEnabled: true
+
+    property real rxBytes: 0
+    property real txBytes: 0
+    property real rxRate: 0
+    property real txRate: 0  // bytes per second
+
+    property int historySize: Settings.visualizerBars
+    property var rxHistory: []
+    property var txHistory: []
+
+    property real maxRxRate: 1024 * 100 // Min floor 100 KB/s
+    property real maxTxRate: 1024 * 100
+
+    readonly property real rxNormalized: Math.min(rxRate / maxRxRate, 1.0)
+    readonly property real txNormalized: Math.min(txRate / maxTxRate, 1.0)
+
+    function getHistoryMax(arr, floor) {
+        let max = floor;
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] > max)
+                max = arr[i];
         }
-        return indicators.wifiOff;
+        return max;
     }
 
-    // Update function
-    function update() {
-        connectionTypeProcess.running = true;
-        networkNameProcess.running = true;
-        signalStrengthProcess.running = true;
-        wifiStateProcess.running = true;
-        availableNetworksProcess.running = true;
+    function resetHistory() {
+        rxHistory = new Array(historySize).fill(0);
+        txHistory = new Array(historySize).fill(0);
+        maxRxRate = 1024 * 100;
+        maxTxRate = 1024 * 100;
     }
 
-    // Timer for periodic updates
+    onHistorySizeChanged: resetHistory()
+    Component.onCompleted: resetHistory()
+
+    property real lastRxBytes: 0
+    property real lastTxBytes: 0
+    property int updateInterval: 1000
+
+    function formatRate(bytesPerSecond) {
+        const rate = Math.abs(bytesPerSecond);
+        if (rate >= 1024 * 1024 * 1024)
+            return `${(rate / (1024 * 1024 * 1024)).toFixed(1)} GB/s`;
+        if (rate >= 1024 * 1024)
+            return `${(rate / (1024 * 1024)).toFixed(1)} MB/s`;
+        if (rate >= 1024)
+            return `${(rate / 1024).toFixed(1)} KB/s`;
+        return `${rate.toFixed(0)} B/s`;
+    }
+
     Timer {
-        interval: 100  // Start quickly
+        interval: root.updateInterval
         running: true
         repeat: true
+        triggeredOnStart: true
+
         onTriggered: {
-            root.update();
-            interval = root.updateInterval;  // Then slow down
+            interfaceDetector.running = true;
+            if (root.primaryInterface) {
+                trafficReader.running = true;
+            }
+            if (root.primaryType === "wifi") {
+                wifiInfoReader.running = true;
+            }
         }
     }
 
-    // Check connection types (ethernet/wifi)
     Process {
-        id: connectionTypeProcess
-        command: ["nmcli", "-t", "-f", "NAME,TYPE,DEVICE", "connection", "show", "--active"]
+        id: interfaceDetector
+        command: ["sh", "-c", "ip route get 1.1.1.1 2>/dev/null | grep -oP 'dev \\K\\S+' | head -1"]
+        stdout: SplitParser {
+            onRead: data => {
+                const iface = data.trim();
+                if (iface && iface !== root.primaryInterface) {
+                    root.primaryInterface = iface;
+                    typeDetector.running = true;
+                    root.resetHistory();
+                }
+                root.isConnected = Boolean(iface);
+            }
+        }
+    }
 
-        property string buffer: ""
+    Process {
+        id: typeDetector
+        command: ["sh", "-c", `[ -d /sys/class/net/${root.primaryInterface}/wireless ] && echo "wifi" || echo "ethernet"`]
+        stdout: SplitParser {
+            onRead: data => root.primaryType = data.trim()
+        }
+    }
+
+    Process {
+        id: trafficReader
+        command: ["sh", "-c", `
+            RX=$(cat /sys/class/net/${root.primaryInterface}/statistics/rx_bytes 2>/dev/null || echo 0)
+            TX=$(cat /sys/class/net/${root.primaryInterface}/statistics/tx_bytes 2>/dev/null || echo 0)
+            echo "$RX $TX"
+        `]
 
         stdout: SplitParser {
             onRead: data => {
-                connectionTypeProcess.buffer += data;
-            }
-        }
+                const parts = data.trim().split(" ");
+                if (parts.length !== 2)
+                    return;
 
-        onExited: (exitCode, exitStatus) => {
-            if (exitCode !== 0) {
-                connectionTypeProcess.buffer = "";
-                return;
-            }
+                const rx = parseInt(parts[0]) || 0;
+                const tx = parseInt(parts[1]) || 0;
 
-            const lines = connectionTypeProcess.buffer.trim().split('\n');
-            let ethernet = false;
-            let wifi = false;
+                if (root.lastRxBytes > 0) {
+                    const interval = root.updateInterval / 1000.0;
+                    root.rxRate = (rx - root.lastRxBytes) / interval;
+                    root.txRate = (tx - root.lastTxBytes) / interval;
 
-            lines.forEach(line => {
-                if (line.includes("ethernet") || line.includes("802-3-ethernet")) {
-                    ethernet = true;
-                } else if (line.includes("wireless") || line.includes("802-11-wireless")) {
-                    wifi = true;
+                    let newRxHistory = root.rxHistory.slice(1).concat([root.rxRate]);
+                    let newTxHistory = root.txHistory.slice(1).concat([root.txRate]);
+                    while (newRxHistory.length < root.historySize)
+                        newRxHistory.unshift(0);
+                    while (newTxHistory.length < root.historySize)
+                        newTxHistory.unshift(0);
+
+                    root.rxHistory = newRxHistory;
+                    root.txHistory = newTxHistory;
+
+                    const minFloor = 1024 * 100; // 100 KB/s floor
+                    root.maxRxRate = root.getHistoryMax(root.rxHistory, minFloor);
+                    root.maxTxRate = root.getHistoryMax(root.txHistory, minFloor);
                 }
-            });
 
-            root.hasEthernet = ethernet;
-            root.hasWifi = wifi;
-            connectionTypeProcess.buffer = "";
+                root.rxBytes = rx;
+                root.txBytes = tx;
+                root.lastRxBytes = rx;
+                root.lastTxBytes = tx;
+            }
         }
     }
 
-    // Get active network name
     Process {
-        id: networkNameProcess
-        command: ["nmcli", "-t", "-f", "NAME", "connection", "show", "--active"]
-
+        id: wifiInfoReader
+        command: ["sh", "-c", `
+            SSID=$(iw dev ${root.primaryInterface} link 2>/dev/null | grep -oP 'SSID: \\K.*' || echo "")
+            SIGNAL=$(iw dev ${root.primaryInterface} link 2>/dev/null | grep -oP 'signal: \\K-?[0-9]+' || echo "0")
+            PERCENT=$(awk "BEGIN {if ($SIGNAL >= -50) print 100; else if ($SIGNAL <= -100) print 0; else print int(($SIGNAL + 100) * 2)}")
+            echo "$SSID|$PERCENT"
+        `]
         stdout: SplitParser {
             onRead: data => {
-                const name = data.trim();
-                if (name && name !== "lo") {
-                    root.networkName = name;
+                const parts = data.trim().split("|");
+                if (parts.length === 2) {
+                    root.ssid = parts[0] || "";
+                    root.signalStrength = parseInt(parts[1]) || 0;
                 }
             }
         }
     }
 
-    // Get WiFi signal strength
     Process {
-        id: signalStrengthProcess
-        command: ["sh", "-c", "nmcli -f IN-USE,SIGNAL,SSID device wifi | awk '/^\\*/{print $2}' | head -1"]
-
-        stdout: SplitParser {
-            onRead: data => {
-                const signal = parseInt(data.trim());
-                if (!isNaN(signal)) {
-                    root.signalStrength = signal;
-                }
-            }
-        }
-    }
-
-    // Check if WiFi is enabled
-    Process {
-        id: wifiStateProcess
+        id: wifiStateChecker
         command: ["nmcli", "radio", "wifi"]
-
         stdout: SplitParser {
-            onRead: data => {
-                root.wifiEnabled = data.trim() === "enabled";
-            }
+            onRead: data => root.wifiEnabled = data.trim() === "enabled"
         }
     }
 
-    // Get available WiFi networks
+    Timer {
+        interval: 10000
+        running: root.primaryType === "wifi"
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: networkScanner.running = true
+    }
+
     Process {
-        id: availableNetworksProcess
+        id: networkScanner
         command: ["nmcli", "-g", "SSID,SIGNAL,SECURITY", "device", "wifi", "list"]
 
         property string buffer: ""
 
         stdout: StdioCollector {
             onStreamFinished: {
-                availableNetworksProcess.buffer += this.text;
+                networkScanner.buffer += this.text;
             }
         }
 
         onExited: (exitCode, exitStatus) => {
             if (exitCode !== 0) {
-                availableNetworksProcess.buffer = "";
+                networkScanner.buffer = "";
                 return;
             }
 
-            const lines = availableNetworksProcess.buffer.trim().split('\n');
+            const lines = networkScanner.buffer.trim().split('\n');
             let networks = [];
 
             lines.forEach(line => {
@@ -172,81 +236,52 @@ Singleton {
                     const signal = parseInt(parts[1]) || 0;
                     const security = parts[2].trim();
 
-                    // Skip empty SSIDs and duplicates
                     if (ssid && !networks.some(n => n.ssid === ssid)) {
                         networks.push({
                             ssid: ssid,
                             signal: signal,
                             security: security,
                             isSecured: security !== "",
-                            isConnected: ssid === root.networkName
+                            isConnected: ssid === root.ssid
                         });
                     }
                 }
             });
 
-            // Sort by signal strength (strongest first)
             networks.sort((a, b) => b.signal - a.signal);
-
             root.availableNetworks = networks;
-            availableNetworksProcess.buffer = "";
+            networkScanner.buffer = "";
         }
     }
 
-    // Control processes
-    Process {
-        id: wifiControlProcess
-        // command set dynamically in functions
-
-        onExited: (exitCode, exitStatus) => {
-            root.update();
-            if (exitCode !== 0) {
-                console.error("WiFi control command failed with exit code:", exitCode);
-            }
-        }
-    }
-
-    Process {
-        id: connectionControlProcess
-        // command set dynamically in functions
-
-        onExited: (exitCode, exitStatus) => {
-            root.update();
-            if (exitCode === 0) {
-                console.log("Connection command completed successfully");
-            } else {
-                console.error("Connection command failed with exit code:", exitCode);
-            }
-        }
-    }
-
-    // Public methods for control
     function enableWifi() {
-        wifiControlProcess.command = ["nmcli", "radio", "wifi", "on"];
-        wifiControlProcess.running = true;
+        controlProcess.command = ["nmcli", "radio", "wifi", "on"];
+        controlProcess.running = true;
     }
 
     function disableWifi() {
-        wifiControlProcess.command = ["nmcli", "radio", "wifi", "off"];
-        wifiControlProcess.running = true;
+        controlProcess.command = ["nmcli", "radio", "wifi", "off"];
+        controlProcess.running = true;
     }
 
     function connectToWifi(ssid, password) {
         if (password) {
-            connectionControlProcess.command = ["nmcli", "device", "wifi", "connect", ssid, "password", password];
+            controlProcess.command = ["nmcli", "device", "wifi", "connect", ssid, "password", password];
         } else {
-            // Open network
-            connectionControlProcess.command = ["nmcli", "device", "wifi", "connect", ssid];
+            controlProcess.command = ["nmcli", "device", "wifi", "connect", ssid];
         }
-        connectionControlProcess.running = true;
+        controlProcess.running = true;
     }
 
-    function disconnectWifi() {
-        connectionControlProcess.command = ["nmcli", "connection", "down", root.networkName];
-        connectionControlProcess.running = true;
+    function disconnect() {
+        controlProcess.command = ["nmcli", "device", "disconnect", root.primaryInterface];
+        controlProcess.running = true;
     }
 
-    function refreshNetworks() {
-        availableNetworksProcess.running = true;
+    Process {
+        id: controlProcess
+        onExited: (exitCode, exitStatus) => {
+            interfaceDetector.running = true;
+        }
     }
 }

@@ -1,7 +1,6 @@
 pragma Singleton
 
 import Quickshell
-// import Quickshell.Io
 import Quickshell.Bluetooth
 import QtQuick
 import "types" as Types
@@ -10,33 +9,45 @@ Singleton {
     id: root
 
     readonly property Types.Bluetooth indicators: Types.Bluetooth {}
+
+    readonly property bool isEnabled: Bluetooth.defaultAdapter?.enabled ?? false
+    readonly property bool isBlocked: Bluetooth.defaultAdapter?.state === BluetoothAdapterState.Blocked
+    readonly property bool isDiscovering: Bluetooth.defaultAdapter?.discovering ?? false
+    readonly property bool isPairable: Bluetooth.defaultAdapter?.pairable ?? false
+
+    readonly property var devices: Bluetooth.devices?.values ?? []
+    readonly property var connectedDevices: devices.filter(device => device.connected)
+    readonly property int deviceCount: connectedDevices.length
+
     readonly property string status: {
-        // switch (Bluetooth.defaultAdapter.state) {
-        // case BluetoothAdapterState.Disabled:
-        //     print("Disabled");
-        //     break;
-        // case BluetoothAdapterState.Blocked:
-        //     print("Blocked");
-        //     break;
-        // case BluetoothAdapterState.Enabled:
-        //     print("Enabled");
-        //     break;
-        // case BluetoothAdapterState.Enabling:
-        //     print("Enabling");
-        //     break;
-        // case BluetoothAdapterState.Disabling:
-        //     print("Disabling");
-        // }
-        // print(Bluetooth.devices.values);
-        // for (const item of Bluetooth.devices.values) {
-        //     print(`${item.deviceName} ${item.connected}`);
-        // }
-        if ([BluetoothAdapterState.Blocked, BluetoothAdapterState.Disabled].includes(Bluetooth.defaultAdapter?.state))
+        if (isBlocked || !isEnabled)
             return indicators.powerOff;
-        if (Bluetooth.devices?.values.filter(device => device.connected).length > 0)
+        if (deviceCount > 0)
             return indicators.connected;
         return indicators.powerOn;
     }
-    // This file will expose probably only 2 things, a string using nerdfonts that indicates bluetooth status (off/on/connected)
-    // and a list of devices to connect to (i guess we also need a connectDevice(addr)
+
+    function togglePower() {
+        if (!Bluetooth.defaultAdapter)
+            return;
+        Bluetooth.defaultAdapter.enabled = !Bluetooth.defaultAdapter.enabled;
+    }
+
+    function startDiscovery() {
+        if (!Bluetooth.defaultAdapter || isDiscovering)
+            return;
+        Bluetooth.defaultAdapter.discovering = true;
+    }
+
+    function stopDiscovery() {
+        if (!Bluetooth.defaultAdapter || !isDiscovering)
+            return;
+        Bluetooth.defaultAdapter.discovering = false;
+    }
+
+    function toggleDiscovery() {
+        if (!Bluetooth.defaultAdapter)
+            return;
+        Bluetooth.defaultAdapter.discovering = !Bluetooth.defaultAdapter.discovering;
+    }
 }

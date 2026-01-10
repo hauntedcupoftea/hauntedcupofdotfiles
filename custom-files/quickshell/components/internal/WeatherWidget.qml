@@ -10,94 +10,111 @@ Rectangle {
     implicitWidth: 320
     implicitHeight: 200
 
-    radius: Theme.rounding.small
+    radius: Theme.rounding.normal
     color: Theme.colors.surface_container
+    clip: true
+
     border {
         width: 1
-        color: Theme.colors.outline_variant
+        color: Qt.alpha(Theme.colors.outline_variant, 0.5)
+    }
+
+    Rectangle {
+        anchors.fill: parent
+        radius: parent.radius
+        opacity: 0.15
+
+        gradient: Gradient {
+            orientation: Gradient.Vertical
+            GradientStop {
+                position: 0.0
+                color: Weather.conditionColor
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 1000
+                    }
+                }
+            }
+            GradientStop {
+                position: 1.0
+                color: "transparent"
+            }
+        }
     }
 
     ColumnLayout {
-        anchors {
-            fill: parent
-            margins: Theme.padding
-        }
-        spacing: Theme.margin
+        anchors.fill: parent
+        anchors.margins: Theme.padding
+        spacing: 0
 
-        // Header with location and refresh status
         RowLayout {
             Layout.fillWidth: true
+            Layout.preferredHeight: 24
+            spacing: Theme.margin / 2
 
             Text {
-                text: "Weather"
-                color: Theme.colors.on_surface
+                text: " " + (Weather.locationName || "Locating...")
+                color: Theme.colors.on_surface_variant
                 font {
                     family: Theme.font.family
-                    pixelSize: Theme.font.large
+                    pixelSize: Theme.font.small
                     weight: Font.Medium
                 }
-            }
-
-            Item {
                 Layout.fillWidth: true
+                elide: Text.ElideRight
             }
 
-            // Loading indicator
             Rectangle {
-                visible: Weather.isLoading
-                implicitHeight: Theme.font.normal
-                implicitWidth: Theme.font.normal
-                radius: Theme.rounding.small
-                color: Theme.colors.primary
+                Layout.preferredWidth: 24
+                Layout.preferredHeight: 24
+                radius: 12
+                color: hoverHandler.hovered ? Qt.alpha(Theme.colors.on_surface, 0.1) : "transparent"
 
-                SequentialAnimation on opacity {
-                    running: Weather.isLoading
-                    loops: Animation.Infinite
-                    NumberAnimation {
-                        from: 0.3
-                        to: 1.0
-                        duration: 800
+                Text {
+                    anchors.centerIn: parent
+                    text: ""
+                    color: Theme.colors.on_surface_variant
+                    font.family: Theme.font.family
+
+                    RotationAnimation on rotation {
+                        running: Weather.isLoading
+                        loops: Animation.Infinite
+                        from: 0
+                        to: 360
+                        duration: 1000
                     }
-                    NumberAnimation {
-                        from: 1.0
-                        to: 0.3
-                        duration: 800
-                    }
+                }
+
+                HoverHandler {
+                    id: hoverHandler
+                }
+                TapHandler {
+                    onTapped: Weather.fetchWeather()
                 }
             }
         }
 
-        // Main weather display
+        Item {
+            Layout.fillHeight: true
+        }
         RowLayout {
             Layout.fillWidth: true
-            Layout.fillHeight: true
             spacing: Theme.padding
 
-            // Weather icon
-            Text {
-                id: weatherIcon
-                text: Weather.icon
-                color: Theme.colors.primary
-                font {
-                    family: Theme.font.family
-                    pixelSize: Theme.font.huge * 2
-                }
-                Layout.alignment: Qt.AlignCenter
-            }
-
-            // Temperature and description
             ColumnLayout {
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignVCenter
-                spacing: Theme.margin
+                spacing: 0
 
                 Text {
-                    text: Weather.temp
-                    color: Theme.colors.on_surface
+                    text: Weather.icon
+                    color: Weather.conditionColor
                     font {
                         family: Theme.font.family
-                        pixelSize: Theme.font.huge * 1.5
-                        weight: Font.Medium
+                        pixelSize: 48
+                    }
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: 500
+                        }
                     }
                 }
 
@@ -106,34 +123,10 @@ Rectangle {
                     color: Theme.colors.on_surface_variant
                     font {
                         family: Theme.font.family
-                        pixelSize: Theme.font.normal
-                    }
-                    wrapMode: Text.WordWrap
-                    Layout.fillWidth: true
-                }
-
-                Text {
-                    text: `Feels like ${Weather.feelsLike}`
-                    color: Theme.colors.on_surface_variant
-                    font {
-                        family: Theme.font.family
                         pixelSize: Theme.font.small
                     }
-                }
-            }
-        }
-
-        // Additional weather info
-        RowLayout {
-            Layout.fillWidth: true
-            spacing: Theme.padding
-
-            Text {
-                text: ` ${Weather.humidity}%`
-                color: Theme.colors.on_surface_variant
-                font {
-                    family: Theme.font.family
-                    pixelSize: Theme.font.small
+                    Layout.maximumWidth: 120
+                    elide: Text.ElideRight
                 }
             }
 
@@ -141,140 +134,111 @@ Rectangle {
                 Layout.fillWidth: true
             }
 
-            // Location info (if available)
             Text {
-                text: Weather.loc ? ` ${Weather.locationName}` : ""
-                color: Theme.colors.on_surface_variant
+                text: Weather.temp + "°"
+                color: Theme.colors.on_surface
                 font {
                     family: Theme.font.family
-                    pixelSize: Theme.font.smallest
+                    pixelSize: 56
+                    weight: Font.Light
                 }
-                visible: Weather.loc
             }
         }
 
-        // Forecast preview (if available)
+        Item {
+            Layout.fillHeight: true
+        }
+
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 1
+            color: Qt.alpha(Theme.colors.outline, 0.2)
+            Layout.bottomMargin: Theme.margin
+        }
+
         RowLayout {
             Layout.fillWidth: true
-            visible: Weather.forecast?.length > 0
             spacing: Theme.margin
+
+            ColumnLayout {
+                spacing: 2
+                Layout.fillWidth: true
+
+                RowLayout {
+                    spacing: 6
+                    Text {
+                        text: ""
+                        color: Theme.colors.primary
+                        font.family: Theme.font.family
+                    }
+                    Text {
+                        text: "Humidity: " + Weather.humidity + "%"
+                        color: Theme.colors.on_surface_variant
+                        font.pixelSize: Theme.font.small
+                    }
+                }
+
+                RowLayout {
+                    spacing: 6
+                    Text {
+                        text: ""
+                        color: Theme.colors.primary
+                        font.family: Theme.font.family
+                    }
+                    Text {
+                        text: "Feels Like: " + Weather.feelsLike + "°"
+                        color: Theme.colors.on_surface_variant
+                        font.pixelSize: Theme.font.small
+                    }
+                }
+            }
 
             Repeater {
                 model: Math.min(3, Weather.forecast ? Weather.forecast.length : 0)
 
                 Rectangle {
-                    id: forecast
-                    Layout.preferredWidth: 60
+                    id: block
+                    Layout.preferredWidth: 40
                     Layout.preferredHeight: 50
-                    radius: Theme.rounding.unsharpenmore
-                    color: Theme.colors.surface_variant
-                    required property var modelData
+                    radius: Theme.rounding.small
+                    color: Qt.alpha(Theme.colors.surface_variant, 0.3)
                     required property int index
 
                     ColumnLayout {
                         anchors.centerIn: parent
-                        spacing: 2
+                        spacing: 0
 
                         Text {
                             text: {
-                                if (!Weather.forecast || !Weather.forecast[forecast.index])
-                                    return "";
-                                const date = new Date(Weather.forecast[forecast.index].date);
-                                return date.toLocaleDateString('en', {
-                                    weekday: 'short'
-                                });
+                                const d = new Date(Weather.forecast[block.index].date);
+                                return Qt.formatDate(d, "dd/MMM");
                             }
+                            font.pixelSize: 10
                             color: Theme.colors.on_surface_variant
-                            font {
-                                family: Theme.font.family
-                                pixelSize: Theme.font.smaller
-                            }
                             Layout.alignment: Qt.AlignHCenter
                         }
 
                         Text {
                             text: {
-                                if (!Weather.forecast || !Weather.forecast[forecast.index])
-                                    return "󰧠";
-                                const hourly = Weather.forecast[forecast.index].hourly;
-                                if (!hourly || hourly.length === 0)
-                                    return "󰧠";
-                                const weatherCode = hourly[Math.floor(hourly.length / 2)]?.weatherCode;
-                                return Weather.weatherIcons[weatherCode] || "󰧠";
+                                const h = Weather.forecast[block.index].hourly;
+                                const code = h[4]?.weatherCode || "113"; // Noon-ish
+                                return Weather.weatherIcons[code] || "󰧠";
                             }
-                            color: Theme.colors.primary
-                            font {
-                                family: Theme.font.family
-                                pixelSize: Theme.font.normal
-                            }
+                            font.family: Theme.font.family
+                            font.pixelSize: Theme.font.normal
+                            color: Theme.colors.on_surface
                             Layout.alignment: Qt.AlignHCenter
                         }
 
                         Text {
-                            text: {
-                                if (!Weather.forecast || !Weather.forecast[forecast.index])
-                                    return "";
-                                return `${Weather.forecast[forecast.index].maxtempC}°`;
-                            }
-                            color: Theme.colors.on_surface_variant
-                            font {
-                                family: Theme.font.family
-                                pixelSize: Theme.font.smallest
-                            }
+                            text: Weather.forecast[block.index].maxtempC + "°"
+                            font.pixelSize: 10
+                            font.weight: Font.Bold
+                            color: Theme.colors.on_surface
                             Layout.alignment: Qt.AlignHCenter
                         }
                     }
                 }
-            }
-        }
-    }
-
-    // Click to refresh
-    MouseArea {
-        anchors.fill: parent
-        onClicked: Weather.reload()
-        cursorShape: Qt.PointingHandCursor
-    }
-
-    // Fallback state when no data is available
-    Rectangle {
-        anchors.fill: parent
-        visible: !Weather.cc && !Weather.isLoading
-        color: Theme.colors.surface_container
-        radius: parent.radius
-
-        ColumnLayout {
-            anchors.centerIn: parent
-            spacing: Theme.margin
-
-            Text {
-                text: "󰧠"
-                color: Theme.colors.on_surface_variant
-                font {
-                    family: Theme.font.family
-                    pixelSize: Theme.font.huge
-                }
-                Layout.alignment: Qt.AlignHCenter
-            }
-
-            Text {
-                text: "Weather unavailable"
-                color: Theme.colors.on_surface_variant
-                font {
-                    family: Theme.font.family
-                    pixelSize: Theme.font.normal
-                }
-                Layout.alignment: Qt.AlignHCenter
-            }
-
-            Text {
-                text: "Click to retry"
-                color: Theme.colors.primary
-                font {
-                    family: Theme.font.family
-                    pixelSize: Theme.font.small
-                }
-                Layout.alignment: Qt.AlignHCenter
             }
         }
     }

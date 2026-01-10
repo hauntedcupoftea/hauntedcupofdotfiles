@@ -1,17 +1,15 @@
 {
   config,
-  inputs,
-  system,
+  pkgs,
   ...
 }: {
   services.hyprpaper = {
     enable = true;
-    package = inputs.hyprpaper.packages.${system}.default;
+    package = pkgs.hyprpaper;
     settings = {
       ipc = true;
       splash = false;
 
-      #!! you might need to change this, because i'm not pushing the wallpapers to github.
       preload = [
         "${config.home.homeDirectory}/Wallpapers/"
       ];
@@ -20,15 +18,15 @@
         {
           monitor = "DP-2";
           path = "${config.home.homeDirectory}/Wallpapers/";
-          timeout = 3600;
+          timeout = 3600; # 1 hour
         }
         {
           monitor = "eDP-1";
           path = "${config.home.homeDirectory}/Wallpapers/";
-          timeout = 3600;
+          timeout = 3600; # 1 hour
         }
       ];
     };
   };
-  home.packages = [inputs.hyprpaper.packages.${system}.default];
+  home.packages = [pkgs.hyprpaper];
 }

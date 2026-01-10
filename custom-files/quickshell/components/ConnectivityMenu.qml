@@ -1,45 +1,31 @@
 import QtQuick
-import Quickshell
+import QtQuick.Layouts
 
 import qs.theme
-import qs.services
 import qs.widgets
-
-import "internal" as Private
 
 AbstractBarButton {
     id: connectivityMenu
-    implicitWidth: conText.width + (Theme.padding * 2)
+    implicitWidth: layout.width
     implicitHeight: Theme.barHeight - (Theme.margin)
-
-    Private.StyledText {
-        id: conText
-        anchors.centerIn: connectivityMenu
-        text: `${Network.status}  ${Bluetooth.status}`
-        textColor: Theme.colors.tertiary
+    background: Rectangle {
+        color: "transparent"
     }
 
-    background: Rectangle {
-        color: connectivityMenu.hovered ? Theme.colors.surface_container_highest : Theme.colors.surface_container
-        radius: Theme.rounding.pillMedium
-        border {
-            width: 2
-            color: Qt.alpha(Theme.colors.tertiary, 0.3)
+    RowLayout {
+        id: layout
+        spacing: Theme.padding
+
+        NetworkPill {
+            id: networkPill
+            action: connectivityMenu.action
+        }
+
+        BluetoothPill {
+            id: bluetoothPill
+            action: connectivityMenu.action
         }
     }
 
     sidebarComponent: "connectivity-menu"
-
-    Private.ToolTipPopup {
-        id: connectivityToolTip
-        expandDirection: Edges.Bottom
-        targetWidget: connectivityMenu
-        triggerTarget: true
-        position: Qt.rect(connectivityMenu.width / 2, connectivityMenu.height + Theme.padding, 0, 0)
-
-        Private.StyledText {
-            text: "Network and Bluetooth status"
-            color: Theme.colors.on_surface_variant
-        }
-    }
 }
