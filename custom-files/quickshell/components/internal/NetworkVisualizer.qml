@@ -58,14 +58,6 @@ Item {
 
                     color: Theme.colors.tertiary
                     radius: 1
-
-                    Behavior on height {
-                        SpringAnimation {
-                            spring: 3.0
-                            damping: 0.4
-                            mass: 0.5
-                        }
-                    }
                 }
 
                 Rectangle {
@@ -78,14 +70,6 @@ Item {
 
                     color: Theme.colors.primary
                     radius: 1
-
-                    Behavior on height {
-                        SpringAnimation {
-                            spring: 3.0
-                            damping: 0.4
-                            mass: 0.5
-                        }
-                    }
                 }
             }
         }

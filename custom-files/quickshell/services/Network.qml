@@ -13,6 +13,7 @@ Singleton {
     property var availableNetworks: []
 
     readonly property string status: {
+        console.log(signalStrength);
         if (!isConnected)
             return indicators.noNetwork;
         if (primaryType === "ethernet")
@@ -176,17 +177,19 @@ Singleton {
     Process {
         id: wifiInfoReader
         command: ["sh", "-c", `
-            SSID=$(iw dev ${root.primaryInterface} link 2>/dev/null | grep -oP 'SSID: \\K.*' || echo "")
-            SIGNAL=$(iw dev ${root.primaryInterface} link 2>/dev/null | grep -oP 'signal: \\K-?[0-9]+' || echo "0")
-            PERCENT=$(awk "BEGIN {if ($SIGNAL >= -50) print 100; else if ($SIGNAL <= -100) print 0; else print int(($SIGNAL + 100) * 2)}")
-            echo "$SSID|$PERCENT"
+            nmcli -t -f IN-USE,SSID,SIGNAL dev wifi list ifname ${root.primaryInterface} --rescan no 2>/dev/null | \
+            grep '^\*:' | \
+            sed -E 's/^\\*:(.*):([0-9]+)$/\\1|\\2/' || echo "|0"
         `]
+
         stdout: SplitParser {
             onRead: data => {
-                const parts = data.trim().split("|");
-                if (parts.length === 2) {
-                    root.ssid = parts[0] || "";
-                    root.signalStrength = parseInt(parts[1]) || 0;
+                const text = data.trim();
+                const separator = text.lastIndexOf("|");
+
+                if (separator !== -1) {
+                    root.ssid = text.substring(0, separator);
+                    root.signalStrength = parseInt(text.substring(separator + 1)) || 0;
                 }
             }
         }
