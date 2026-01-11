@@ -1,14 +1,12 @@
 {
   lib,
   config,
-  inputs,
   pkgs,
   ...
 }: {
   # Enable Hyprland at the system level
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.default;
     withUWSM = true;
     xwayland.enable = true; # Kinda needed for electron apps sadly
   };

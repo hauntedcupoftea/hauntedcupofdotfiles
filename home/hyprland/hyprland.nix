@@ -1,7 +1,6 @@
 {
   lib,
   inputs,
-  pkgs,
   ...
 }: let
   isGE66Raider = builtins.hasAttr "Anand-GE66-Raider" (inputs.self.nixosConfigurations or {});
