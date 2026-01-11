@@ -16,83 +16,112 @@ Rectangle {
 
     property bool showMonthYearPicker: false
     property date currentDate: new Date()
+    property bool horizontal: true
 
     StackLayout {
         id: stackLayout
-        anchors.fill: parent
-        anchors.margins: 16
+        anchors.centerIn: parent
         currentIndex: calendarRoot.showMonthYearPicker ? 1 : 0
+        implicitHeight: calendarRoot.horizontal ? (parent.height - Theme.padding) : undefined
+        implicitWidth: calendarRoot.horizontal ? undefined : (parent.width - Theme.padding)
 
         ColumnLayout {
-            spacing: 16
+            spacing: Theme.padding
 
             RowLayout {
                 Layout.fillWidth: true
 
                 Button {
                     id: prevMonthButton
+                    Layout.preferredWidth: Theme.barHeight
+                    Layout.preferredHeight: Theme.barHeight
+
                     StyledText {
-                        text: "‹"
+                        text: "󰅁"
                         color: Theme.colors.on_surface
                         anchors.centerIn: parent
+                        font.pixelSize: Theme.font.large
                     }
 
                     flat: true
-                    Layout.preferredWidth: 48
-                    Layout.preferredHeight: 48
                     onClicked: {
                         if (calendar.month == 0)
                             calendar.year -= 1;
                         calendar.month = (calendar.month + 11) % 12;
                     }
+
                     background: Rectangle {
                         color: prevMonthButton.hovered ? Theme.colors.surface_container_highest : "transparent"
                         radius: Theme.rounding.small
+
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: Theme.anims.duration.small
+                            }
+                        }
                     }
                 }
 
                 Button {
                     id: monthButton
                     Layout.fillWidth: true
+                    Layout.preferredHeight: Theme.barHeight
                     text: Qt.formatDate(new Date(calendar.year, calendar.month), "MMMM yyyy")
                     flat: true
                     onClicked: calendarRoot.showMonthYearPicker = true
 
                     background: Rectangle {
                         color: monthButton.hovered ? Theme.colors.surface_container_highest : "transparent"
-                        radius: Theme.rounding.verysmall
+                        radius: Theme.rounding.small
+
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: Theme.anims.duration.small
+                            }
+                        }
                     }
 
                     contentItem: Text {
                         text: monthButton.text
                         font {
                             family: Theme.font.family
-                            pixelSize: 22
+                            pixelSize: Theme.font.larger
                             weight: Font.Medium
                         }
                         color: Theme.colors.on_surface
                         horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
                     }
                 }
 
                 Button {
                     id: nextMonthButton
+                    Layout.preferredWidth: Theme.barHeight
+                    Layout.preferredHeight: Theme.barHeight
+
                     StyledText {
-                        text: "›"
+                        text: "󰅂"
                         color: Theme.colors.on_surface
                         anchors.centerIn: parent
+                        font.pixelSize: Theme.font.large
                     }
+
                     flat: true
-                    Layout.preferredWidth: 48
-                    Layout.preferredHeight: 48
                     onClicked: {
                         if (calendar.month == 11)
                             calendar.year += 1;
                         calendar.month = (calendar.month + 1) % 12;
                     }
+
                     background: Rectangle {
                         color: nextMonthButton.hovered ? Theme.colors.surface_container_highest : "transparent"
                         radius: Theme.rounding.small
+
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: Theme.anims.duration.small
+                            }
+                        }
                     }
                 }
             }
@@ -109,7 +138,7 @@ Rectangle {
                     Rectangle {
                         id: dayLabels
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 40
+                        Layout.preferredHeight: Theme.barHeight - Theme.padding
                         color: "transparent"
                         required property var modelData
 
@@ -118,7 +147,7 @@ Rectangle {
                             text: dayLabels.modelData
                             font {
                                 family: Theme.font.family
-                                pixelSize: 14
+                                pixelSize: Theme.font.small
                                 weight: Font.Medium
                             }
                             color: Theme.colors.on_surface_variant
@@ -140,11 +169,12 @@ Rectangle {
                 delegate: Rectangle {
                     id: dayCell
                     required property var modelData
+
                     property bool isToday: modelData.day === calendar.today.getDate() && modelData.month === calendar.today.getMonth() && modelData.year === calendar.today.getFullYear()
                     property bool isCurrentMonth: modelData.month === calendar.month
                     property bool isHovered: dayMouseArea.containsMouse
 
-                    radius: Theme.rounding.verysmall
+                    radius: Theme.rounding.small
 
                     color: {
                         if (isToday)
@@ -154,13 +184,19 @@ Rectangle {
                         return "transparent";
                     }
 
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: Theme.anims.duration.small
+                        }
+                    }
+
                     Text {
                         anchors.centerIn: parent
                         text: dayCell.modelData.day
                         font {
                             family: Theme.font.family
-                            pixelSize: 14
-                            weight: dayCell.isToday ? Font.Medium : Font.Normal
+                            pixelSize: Theme.font.normal
+                            weight: dayCell.isToday ? Font.Bold : Font.Normal
                         }
                         color: {
                             if (dayCell.isToday)
@@ -169,13 +205,14 @@ Rectangle {
                                 return Theme.colors.on_surface_variant;
                             return Theme.colors.on_surface;
                         }
-                        opacity: dayCell.isCurrentMonth ? 1.0 : 0.6
+                        opacity: dayCell.isCurrentMonth ? 1.0 : 0.5
                     }
 
                     MouseArea {
                         id: dayMouseArea
                         anchors.fill: parent
                         hoverEnabled: true
+                        cursorShape: dayCell.isCurrentMonth ? Qt.PointingHandCursor : Qt.ArrowCursor
                         onClicked: {
                             if (dayCell.isCurrentMonth) {
                                 console.log("Selected date:", Qt.formatDate(dayCell.modelData.date, "yyyy-MM-dd"));
@@ -188,28 +225,40 @@ Rectangle {
             Button {
                 id: todayButton
                 Layout.alignment: Qt.AlignHCenter
-                text: "Today"
+                Layout.preferredHeight: Theme.barHeight - Theme.margin
+                implicitWidth: todayText.implicitWidth + (Theme.padding * 2)
+
                 flat: true
                 onClicked: {
-                    var today = new Date();
+                    const today = new Date();
                     calendar.month = today.getMonth();
                     calendar.year = today.getFullYear();
                 }
+
                 background: Rectangle {
                     color: todayButton.hovered ? Theme.colors.primary_container : Theme.colors.surface_container_highest
-                    radius: 20
+                    radius: Theme.rounding.pillMedium
                     border {
                         width: 1
-                        color: Theme.colors.outline
+                        color: Theme.colors.outline_variant
+                    }
+
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: Theme.anims.duration.small
+                        }
                     }
                 }
+
                 contentItem: Text {
-                    text: todayButton.text
+                    id: todayText
+                    text: "Today"
                     font {
                         family: Theme.font.family
-                        pixelSize: 14
+                        pixelSize: Theme.font.normal
+                        weight: Font.Medium
                     }
-                    color: Theme.colors.on_surface
+                    color: todayButton.hovered ? Theme.colors.on_primary_container : Theme.colors.on_surface
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                 }
@@ -217,25 +266,35 @@ Rectangle {
         }
 
         ColumnLayout {
-            spacing: 24
+            spacing: Theme.padding
 
             RowLayout {
                 Layout.fillWidth: true
 
                 Button {
-                    id: prevButton
+                    id: backButton
+                    Layout.preferredHeight: Theme.barHeight
+                    Layout.preferredWidth: Theme.barHeight
+
                     StyledText {
-                        text: "←"
+                        text: "󰅁"
                         color: Theme.colors.on_surface
                         anchors.centerIn: parent
+                        font.pixelSize: Theme.font.large
                     }
+
                     flat: true
-                    Layout.preferredHeight: 48
-                    Layout.preferredWidth: 48
                     onClicked: calendarRoot.showMonthYearPicker = false
+
                     background: Rectangle {
-                        color: prevButton.hovered ? Theme.colors.surface_container_highest : "transparent"
+                        color: backButton.hovered ? Theme.colors.surface_container_highest : "transparent"
                         radius: Theme.rounding.small
+
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: Theme.anims.duration.small
+                            }
+                        }
                     }
                 }
 
@@ -244,7 +303,7 @@ Rectangle {
                     text: "Select Month & Year"
                     font {
                         family: Theme.font.family
-                        pixelSize: 22
+                        pixelSize: Theme.font.larger
                         weight: Font.Medium
                     }
                     color: Theme.colors.on_surface
@@ -252,8 +311,8 @@ Rectangle {
                 }
 
                 Item {
-                    Layout.preferredHeight: 48
-                    Layout.preferredWidth: 48
+                    Layout.preferredHeight: Theme.barHeight
+                    Layout.preferredWidth: Theme.barHeight
                 }
             }
 
@@ -262,19 +321,29 @@ Rectangle {
                 Layout.alignment: Qt.AlignHCenter
 
                 Button {
-                    id: prevArrowButton
-                    Layout.preferredHeight: 48
-                    Layout.preferredWidth: 48
+                    id: prevYearButton
+                    Layout.preferredHeight: Theme.barHeight
+                    Layout.preferredWidth: Theme.barHeight
+
                     StyledText {
-                        text: "‹"
+                        text: "󰅁"
                         color: Theme.colors.on_surface
                         anchors.centerIn: parent
+                        font.pixelSize: Theme.font.large
                     }
+
                     flat: true
                     onClicked: calendar.year = calendar.year - 1
+
                     background: Rectangle {
-                        color: prevArrowButton.hovered ? Theme.colors.surface_container_highest : "transparent"
+                        color: prevYearButton.hovered ? Theme.colors.surface_container_highest : "transparent"
                         radius: Theme.rounding.small
+
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: Theme.anims.duration.small
+                            }
+                        }
                     }
                 }
 
@@ -282,26 +351,36 @@ Rectangle {
                     text: calendar.year
                     font {
                         family: Theme.font.family
-                        pixelSize: 32
+                        pixelSize: Theme.font.huge
                         weight: Font.Medium
                     }
                     color: Theme.colors.on_surface
                 }
 
                 Button {
-                    id: nextArrowButton
-                    Layout.preferredHeight: 48
-                    Layout.preferredWidth: 48
+                    id: nextYearButton
+                    Layout.preferredHeight: Theme.barHeight
+                    Layout.preferredWidth: Theme.barHeight
+
                     StyledText {
-                        text: "›"
+                        text: "󰅂"
                         color: Theme.colors.on_surface
                         anchors.centerIn: parent
+                        font.pixelSize: Theme.font.large
                     }
+
                     flat: true
                     onClicked: calendar.year = calendar.year + 1
+
                     background: Rectangle {
-                        color: nextArrowButton.hovered ? Theme.colors.surface_container_highest : "transparent"
+                        color: nextYearButton.hovered ? Theme.colors.surface_container_highest : "transparent"
                         radius: Theme.rounding.small
+
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: Theme.anims.duration.small
+                            }
+                        }
                     }
                 }
             }
@@ -310,8 +389,8 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 columns: 3
-                rowSpacing: 8
-                columnSpacing: 8
+                rowSpacing: Theme.margin
+                columnSpacing: Theme.margin
 
                 Repeater {
                     model: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -320,8 +399,11 @@ Rectangle {
                         id: gridMonthButton
                         required property var modelData
                         required property int index
+
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 48
+                        Layout.fillHeight: true
+                        Layout.minimumHeight: Theme.barHeight
+
                         text: modelData
 
                         property bool isSelected: index === calendar.month
@@ -334,10 +416,16 @@ Rectangle {
                                     return Theme.colors.surface_container_highest;
                                 return Theme.colors.surface_container;
                             }
-                            radius: 12
+                            radius: Theme.rounding.small
                             border {
                                 width: gridMonthButton.isSelected ? 2 : 1
                                 color: gridMonthButton.isSelected ? Theme.colors.primary : Theme.colors.outline_variant
+                            }
+
+                            Behavior on color {
+                                ColorAnimation {
+                                    duration: Theme.anims.duration.small
+                                }
                             }
                         }
 
@@ -345,8 +433,8 @@ Rectangle {
                             text: gridMonthButton.text
                             font {
                                 family: Theme.font.family
-                                pixelSize: 14
-                                weight: gridMonthButton.isSelected ? Font.Medium : Font.Normal
+                                pixelSize: Theme.font.normal
+                                weight: gridMonthButton.isSelected ? Font.Bold : Font.Normal
                             }
                             color: gridMonthButton.isSelected ? Theme.colors.on_primary_container : Theme.colors.on_surface
                             horizontalAlignment: Text.AlignHCenter

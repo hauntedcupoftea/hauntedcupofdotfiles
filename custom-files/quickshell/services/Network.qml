@@ -13,7 +13,6 @@ Singleton {
     property var availableNetworks: []
 
     readonly property string status: {
-        console.log(signalStrength);
         if (!isConnected)
             return indicators.noNetwork;
         if (primaryType === "ethernet")
