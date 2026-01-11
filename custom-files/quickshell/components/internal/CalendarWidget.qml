@@ -22,8 +22,8 @@ Rectangle {
         id: stackLayout
         anchors.centerIn: parent
         currentIndex: calendarRoot.showMonthYearPicker ? 1 : 0
-        implicitHeight: calendarRoot.horizontal ? (parent.height - Theme.padding) : undefined
-        implicitWidth: calendarRoot.horizontal ? undefined : (parent.width - Theme.padding)
+        implicitHeight: calendarRoot.horizontal ?? (parent.height - Theme.padding)
+        implicitWidth: calendarRoot.horizontal ?? (parent.width - Theme.padding)
 
         ColumnLayout {
             spacing: Theme.padding
