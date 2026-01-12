@@ -12,5 +12,6 @@
     ./tailscale.nix
     ./xdg.nix
     ./mail.nix
+    ./localsend.nix
   ];
 }

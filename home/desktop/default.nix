@@ -1,5 +1,9 @@
 {pkgs, ...}: {
-  imports = [./mpv.nix ./zen-browser.nix ./screen-recording.nix];
+  imports = [
+    ./mpv.nix
+    ./screen-recording.nix
+    ./zen-browser.nix
+  ];
 
   home.packages = with pkgs; [
     kdePackages.okular # pdf editor

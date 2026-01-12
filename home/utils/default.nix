@@ -13,7 +13,7 @@
     brightnessctl # brightness control
     btop # system resource monitor
     btrfs-progs # for btrfs
-    desktop-desktop-file-utils # xdg utils
+    desktop-file-utils # xdg utils
     fastfetch # cool sysinfo monitor
     git # version control
     inetutils # other network goodies
