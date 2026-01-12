@@ -123,7 +123,22 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux"];
 
+      perSystem = {system, ...}: let
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+          overlays = [rust-overlay.overlays.default customOverlay];
+        };
+      in {
+        packages = {
+          dungeondraft = pkgs.dungeondraft;
+          default = pkgs.dungeondraft;
+        };
+      };
+
       flake = {
+        overlays.default = customOverlay;
+
         nixosConfigurations = {
           "Anand-GE66-Raider" = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
