@@ -16,7 +16,6 @@
         use-split = false;
       };
       window = {
-        opacity = 0.75;
         decorations = "enabled";
         blur = true;
       };
