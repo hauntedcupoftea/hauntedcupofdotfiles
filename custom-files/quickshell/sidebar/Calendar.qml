@@ -72,7 +72,7 @@ Rectangle {
             Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.minimumHeight: 380
+                Layout.minimumHeight: 220
 
                 CalendarWidget {
                     anchors.fill: parent

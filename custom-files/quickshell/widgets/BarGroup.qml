@@ -9,6 +9,8 @@ Item {
     required property string sidebarTitle
     required property real screenHeight
     required property real screenWidth
+    required property real widthRatio
+    required property real heightRatio
     property var gravity
     property rect position
     property list<string> sidebarComponents: []
@@ -41,6 +43,8 @@ Item {
         sidebarTitle: barGroup.sidebarTitle
         screenHeight: barGroup.screenHeight
         screenWidth: barGroup.screenWidth
+        widthRatio: barGroup.widthRatio
+        heightRatio: barGroup.heightRatio
         barGroup: barGroup
         visible: false
 

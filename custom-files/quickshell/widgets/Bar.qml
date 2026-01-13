@@ -33,8 +33,10 @@ Rectangle {
             spacing: Theme.padding
             screenHeight: bar.screenHeight
             screenWidth: bar.screenWidth
-            gravity: Edges.Bottom | Edges.Right
+            gravity: Edges.Bottom | Edges.Left
             position: Qt.rect(Theme.padding, Theme.barHeight + Theme.padding, 0, 0)
+            widthRatio: 0.3
+            heightRatio: 1.0
 
             OSButton {
                 Layout.leftMargin: Theme.padding
@@ -54,9 +56,10 @@ Rectangle {
             screenHeight: bar.screenHeight
             screenWidth: bar.screenWidth
             spacing: Theme.padding
+            widthRatio: 0.6
+            heightRatio: 0.7
             gravity: Edges.Bottom
             position: Qt.rect(0.5 * centerPanel.width, Theme.barHeight + Theme.padding, 0, 0)
-
             PlayerMenu {
                 id: player
             }
@@ -78,6 +81,8 @@ Rectangle {
             spacing: Theme.padding
             gravity: Edges.Bottom | Edges.Right
             position: Qt.rect(rightPanel.width - Theme.padding, Theme.barHeight + Theme.padding, 0, 0)
+            widthRatio: 0.3
+            heightRatio: 1.0
 
             ConnectivityMenu {
                 id: connectivityMenu

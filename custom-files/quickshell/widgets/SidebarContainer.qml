@@ -18,26 +18,12 @@ PopupWindow {
     required property string sidebarTitle
     required property real screenHeight
     required property real screenWidth
-
+    required property real widthRatio
+    required property real heightRatio
     color: "transparent"
 
-    readonly property int idealWidth: {
-        const baseWidth = Math.min(screenWidth * 0.4, 900);
-        const minWidth = 500;
-        const maxWidth = 1000;
-
-        return Math.max(minWidth, Math.min(baseWidth, maxWidth));
-    }
-
-    readonly property int idealHeight: {
-        const headerHeight = Theme.barHeight + (Theme.padding * 2);
-        const availableHeight = screenHeight - headerHeight - (Theme.padding * 4);
-
-        return Math.min(availableHeight, screenHeight * 0.92);
-    }
-
-    implicitWidth: idealWidth
-    implicitHeight: idealHeight
+    implicitWidth: screenWidth * widthRatio
+    implicitHeight: screenHeight * heightRatio
 
     anchor {
         item: anchorItem
@@ -53,20 +39,21 @@ PopupWindow {
         border.width: 1
         border.color: Theme.colors.outline_variant
 
-        scale: container.visible ? 1.0 : 0.95
+        scale: container.visible ? 1.0 : 0.90
         opacity: container.visible ? 1.0 : 0.0
 
         Behavior on scale {
             NumberAnimation {
-                duration: Theme.anims.duration.normal
-                easing.type: Easing.OutCubic
+                duration: Theme.anims.duration.small
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: Theme.anims.curve.emphasizedDecel
             }
         }
 
         Behavior on opacity {
             NumberAnimation {
-                duration: Theme.anims.duration.normal
-                easing.type: Easing.OutCubic
+                duration: Theme.anims.duration.small
+                easing.type: Easing.OutQuad
             }
         }
     }
@@ -82,43 +69,30 @@ PopupWindow {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        height: Theme.barHeight + (Theme.padding * 2)
+        anchors.margins: Theme.padding
+        height: Theme.barHeight - Theme.margin
         color: Theme.colors.surface_container_high
-        radius: Theme.rounding.normal
-
-        Rectangle {
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: Theme.rounding.normal
-            color: parent.color
-        }
+        radius: Theme.rounding.small
 
         Text {
             anchors.centerIn: parent
             text: container.sidebarTitle
             font.pixelSize: Theme.font.large
-            font.weight: Font.DemiBold
+            font.weight: 600
             color: Theme.colors.on_surface
         }
 
         Button {
             id: closeButton
             anchors.right: parent.right
-            anchors.rightMargin: Theme.padding
+            anchors.rightMargin: Theme.margin
             anchors.verticalCenter: parent.verticalCenter
-            width: Theme.barHeight
-            height: Theme.barHeight
+            width: parent.height - Theme.margin
+            height: parent.height - Theme.margin
 
             background: Rectangle {
                 color: closeButton.hovered ? Theme.colors.error_container : Theme.colors.surface_container_low
                 radius: Theme.rounding.small
-
-                Behavior on color {
-                    ColorAnimation {
-                        duration: Theme.anims.duration.small
-                    }
-                }
             }
 
             Text {
@@ -126,12 +100,6 @@ PopupWindow {
                 text: "󰅖"
                 font.pixelSize: Theme.font.large
                 color: closeButton.hovered ? Theme.colors.on_error_container : Theme.colors.on_surface
-
-                Behavior on color {
-                    ColorAnimation {
-                        duration: Theme.anims.duration.small
-                    }
-                }
             }
 
             onClicked: container.visible = false
@@ -145,159 +113,183 @@ PopupWindow {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: Theme.padding
-
         spacing: Theme.padding
+
+        visible: bg.opacity > 0.95
         clip: true
 
         model: container.barGroup ? container.barGroup.sidebarComponents : []
 
         delegate: Loader {
             id: delegateLoader
+            required property var modelData
+            required property int index
+
             width: contentRepeater.width
-            required property string modelData
 
-            readonly property int componentHeight: {
-                switch (modelData) {
-                case "notification-manager":
-                    return Math.max(400, container.idealHeight * 0.6);
-                case "calendar":
-                    return Math.min(600, container.idealHeight - (Theme.padding * 2));
-                case "session-menu":
-                    return 180;
-                case "battery-menu":
-                    return 200;
-                case "connectivity-menu":
-                    return 300;
-                default:
-                    return 120;
-                }
-            }
+            property real itemOpacity: 1.0
+            property real itemScale: 1.0
 
-            height: componentHeight
+            opacity: itemOpacity
+            scale: itemScale
+
+            transformOrigin: Item.Center
 
             sourceComponent: {
                 switch (modelData) {
                 case "notification-manager":
-                    return notificationManagerComponent;
+                    return notifComponent;
                 case "session-menu":
-                    return sessionMenuComponent;
+                    return sessionComponent;
                 case "calendar":
                     return calendarComponent;
                 case "battery-menu":
-                    return batteryMenuComponent;
+                    return batteryComponent;
                 case "connectivity-menu":
-                    return connectivityMenuComponent;
+                    return connectivityComponent;
                 case "to-do":
                     return todoComponent;
                 default:
-                    return placeholderComponent;
+                    return null;
+                }
+            }
+
+            Component {
+                id: notifComponent
+                NotificationManager {
+                    height: contentRepeater.height * 0.7
+                    width: contentRepeater.width
+                }
+            }
+
+            Component {
+                id: sessionComponent
+                SessionMenu {
+                    height: 150
+                    width: contentRepeater.width
+                }
+            }
+
+            Component {
+                id: calendarComponent
+                Calendar {
+                    height: 500 + (Theme.margin * 2)
+                    width: contentRepeater.width
+                }
+            }
+
+            Component {
+                id: batteryComponent
+                Rectangle {
+                    height: 120
+                    width: contentRepeater.width
+                    color: Theme.colors.primary_container
+                    radius: Theme.rounding.verysmall
+                    Text {
+                        anchors.centerIn: parent
+                        text: "battery-menu placeholder"
+                        color: Theme.colors.on_primary_container
+                    }
+                }
+            }
+
+            Component {
+                id: connectivityComponent
+                Rectangle {
+                    height: 120
+                    width: contentRepeater.width
+                    color: Theme.colors.secondary_container
+                    radius: Theme.rounding.verysmall
+                    Text {
+                        anchors.centerIn: parent
+                        text: "connectivity-menu placeholder"
+                        color: Theme.colors.on_secondary_container
+                    }
+                }
+            }
+
+            Component {
+                id: todoComponent
+                Rectangle {
+                    height: 120
+                    width: contentRepeater.width
+                    color: Theme.colors.tertiary_container
+                    radius: Theme.rounding.verysmall
+                    Text {
+                        anchors.centerIn: parent
+                        text: "to-do placeholder"
+                        color: Theme.colors.on_tertiary_container
+                    }
                 }
             }
         }
-    }
 
-    Component {
-        id: notificationManagerComponent
-        NotificationManager {
-            anchors.fill: parent
-        }
-    }
-
-    Component {
-        id: sessionMenuComponent
-        SessionMenu {
-            anchors.fill: parent
-        }
-    }
-
-    Component {
-        id: calendarComponent
-        Calendar {
-            anchors.fill: parent
-        }
-    }
-
-    Component {
-        id: batteryMenuComponent
-        Rectangle {
-            color: Theme.colors.primary_container
-            radius: Theme.rounding.verysmall
-            border {
-                width: 1
-                color: Theme.colors.outline_variant
-            }
-            Text {
-                anchors.centerIn: parent
-                text: "Battery Menu (WIP)"
-                color: Theme.colors.on_primary_container
-                font {
-                    family: Theme.font.family
-                    pixelSize: Theme.font.normal
+        add: Transition {
+            SequentialAnimation {
+                PropertyAction {
+                    property: "itemOpacity"
+                    value: 0
+                }
+                PropertyAction {
+                    property: "itemScale"
+                    value: 0.8
+                }
+                PauseAnimation {
+                    duration: 40 * (ViewTransition.index || 0)
+                }
+                ParallelAnimation {
+                    NumberAnimation {
+                        property: "itemOpacity"
+                        to: 1.0
+                        duration: 150
+                        easing.type: Easing.OutQuad
+                    }
+                    NumberAnimation {
+                        property: "itemScale"
+                        to: 1.0
+                        duration: 200
+                        easing.type: Easing.OutBack
+                        easing.overshoot: 1.2
+                    }
                 }
             }
         }
-    }
 
-    Component {
-        id: connectivityMenuComponent
-        Rectangle {
-            color: Theme.colors.secondary_container
-            radius: Theme.rounding.verysmall
-            border {
-                width: 1
-                color: Theme.colors.outline_variant
-            }
-            Text {
-                anchors.centerIn: parent
-                text: "Connectivity Menu (WIP)"
-                color: Theme.colors.on_secondary_container
-                font {
-                    family: Theme.font.family
-                    pixelSize: Theme.font.normal
+        remove: Transition {
+            SequentialAnimation {
+                ParallelAnimation {
+                    NumberAnimation {
+                        property: "itemOpacity"
+                        to: 0
+                        duration: 120
+                        easing.type: Easing.InQuad
+                    }
+                    NumberAnimation {
+                        property: "itemScale"
+                        to: 0.8
+                        duration: 120
+                        easing.type: Easing.InQuad
+                    }
                 }
+                PropertyAction {
+                    property: "height"
+                    value: 0
+                }
+            }
+        }
+
+        displaced: Transition {
+            NumberAnimation {
+                properties: "x,y"
+                duration: 200
+                easing.type: Easing.OutQuad
             }
         }
     }
 
-    Component {
-        id: todoComponent
-        Rectangle {
-            color: Theme.colors.tertiary_container
-            radius: Theme.rounding.verysmall
-            border {
-                width: 1
-                color: Theme.colors.outline_variant
-            }
-            Text {
-                anchors.centerIn: parent
-                text: "To-Do (WIP)"
-                color: Theme.colors.on_tertiary_container
-                font {
-                    family: Theme.font.family
-                    pixelSize: Theme.font.normal
-                }
-            }
-        }
-    }
-
-    Component {
-        id: placeholderComponent
-        Rectangle {
-            color: Theme.colors.error_container
-            radius: Theme.rounding.verysmall
-            border {
-                width: 1
-                color: Theme.colors.outline_variant
-            }
-            Text {
-                anchors.centerIn: parent
-                text: "Unknown Component"
-                color: Theme.colors.on_error_container
-                font {
-                    family: Theme.font.family
-                    pixelSize: Theme.font.normal
-                }
-            }
+    onVisibleChanged: {
+        if (!visible && barGroup.sidebarOpen) {
+            barGroup.sidebarOpen = false;
         }
     }
 }
