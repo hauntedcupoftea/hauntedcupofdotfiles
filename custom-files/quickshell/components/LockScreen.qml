@@ -92,7 +92,8 @@ Rectangle {
                 enabled: !LockContext.unlockInProgress
                 echoMode: TextInput.Password
                 inputMethodHints: Qt.ImhSensitiveData
-                onTextChanged: LockContext.currentText = this.text
+                text: LockContext.currentText
+                onTextEdited: LockContext.currentText = text
                 onAccepted: LockContext.tryUnlock()
                 focus: true
             }
