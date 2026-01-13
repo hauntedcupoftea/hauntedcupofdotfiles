@@ -1,5 +1,7 @@
-{ pkgs
-, ...
+{
+  pkgs,
+  lib,
+  ...
 }: {
   programs.kitty = {
     enable = true;
@@ -8,7 +10,7 @@
       enable_audio_bell = true;
       window_alert_on_bell = true;
       update_check_interval = 0;
-      shell = "${pkgs.fish}/bin/fish";
+      shell = lib.getExe pkgs.fish;
       tab_bar_style = "hidden";
       window_padding_width = "1 2";
     };
