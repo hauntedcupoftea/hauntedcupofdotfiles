@@ -74,7 +74,6 @@
           yanky-nvim.enable = false;
           icon-picker.enable = true;
           surround.enable = true;
-          leetcode-nvim.enable = true;
           multicursors.enable = true;
           smart-splits.enable = true;
           undotree.enable = true;

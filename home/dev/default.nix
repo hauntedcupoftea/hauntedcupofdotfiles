@@ -13,6 +13,7 @@
     ./teamviewer.nix
     ./ts.nix
     ./typst.nix
+    ./zed-editor.nix
   ];
 
   home.packages = with pkgs; [
