@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./mpv.nix
     ./screen-recording.nix
@@ -6,6 +7,7 @@
   ];
 
   home.packages = with pkgs; [
+    jellyfin-media-player
     kdePackages.okular # pdf editor
     pinta # paint
     gparted
