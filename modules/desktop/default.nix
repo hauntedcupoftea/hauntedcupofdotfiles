@@ -2,6 +2,7 @@
   imports = [
     # ./gnome.nix # fallback
     ./appimage.nix
+    ./cloudflare.nix
     ./fonts.nix
     ./gaming.nix
     ./hyprland.nix

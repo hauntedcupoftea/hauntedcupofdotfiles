@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   networking = {
     useDHCP = lib.mkDefault true;
     networkmanager = {
@@ -7,6 +11,7 @@
         backend = "iwd";
         powersave = false;
       };
+      plugins = [pkgs.networkmanager-openvpn];
     };
     enableIPv6 = true;
 
