@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   imports = [
-    # ./ags.nix # we go quickshell now.
     ./git.nix
     ./firefox.nix
     ./nvf.nix
@@ -9,7 +8,7 @@
     ./podman.nix
     ./quickshell.nix
     ./game-dev.nix
-    # ./rust.nix # BETTER IN DEVSHELLS
+    ./rust.nix # only LSP
     ./teamviewer.nix
     ./ts.nix
     ./typst.nix
