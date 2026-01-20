@@ -10,6 +10,8 @@ in {
     XDG_CURRENT_DESKTOP = "Hyprland";
   };
 
+  imports = [inputs.hyprland.homeManagerModules.default];
+
   # catppuccin.hyprland = {
   #   enable = true;
   # };

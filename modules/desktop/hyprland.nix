@@ -2,8 +2,11 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }: {
+  imports = [inputs.hyprland.nixosModules.default];
+
   # Enable Hyprland at the system level
   programs.hyprland = {
     enable = true;
