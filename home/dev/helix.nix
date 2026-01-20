@@ -111,6 +111,11 @@
     # Language specific configurations
     languages = {
       language-server = {
+        biome = {
+          command = lib.getExe pkgs.biome;
+          args = ["lsp-proxy"];
+        };
+
         harper-ls = {
           command = "harper-ls";
           args = ["--stdio"];
@@ -171,12 +176,12 @@
           args = ["server"];
         };
 
-        rust-analyzer-ls = {
-          command = "rust-analyzer";
+        rust-analyzer = {
+          command = lib.getExe pkgs.rust-analyzer;
         };
 
         svelte-ls = {
-          command = "svelteserver";
+          command = lib.getExe pkgs.svelte-language-server;
           args = ["--stdio"];
         };
 
@@ -193,6 +198,10 @@
             formatterMode = "typstyle";
             formatterPrintWidth = 80;
           };
+        };
+
+        typescript-ls = {
+          command = lib.getExe pkgs.typescript-language-server;
         };
 
         uwu-colors = {
@@ -263,38 +272,78 @@
             command = "rustfmt";
             args = ["--edition=2024"];
           };
-          language-servers = ["rust-analyzer-ls" "harper-ls"];
+          language-servers = ["rust-analyzer" "harper-ls"];
         }
 
         # --- TypeScript ---
         {
           name = "typescript";
           roots = ["deno.json" "deno.jsonc" "package.json"];
-          file-types = ["ts" "tsx"];
           auto-format = true;
-          language-servers = ["deno-lsp" "harper-ls"];
-          formatter = deno "ts";
+          language-servers = [
+            {
+              name = "deno-lsp";
+              except-features = ["format"];
+            }
+            "biome"
+            "harper-ls"
+          ];
+        }
+
+        # --- TSX ---
+        {
+          name = "tsx";
+          roots = ["deno.json" "deno.jsonc" "package.json"];
+          auto-format = true;
+          language-servers = [
+            {
+              name = "deno-lsp";
+              except-features = ["format"];
+            }
+            "biome"
+            "harper-ls"
+          ];
         }
 
         # --- JavaScript ---
         {
           name = "javascript";
           roots = ["deno.json" "deno.jsonc" "package.json"];
-          file-types = ["js" "jsx"];
           auto-format = true;
-          language-servers = ["deno-lsp" "harper-ls"];
-          formatter = deno "js";
+          language-servers = [
+            {
+              name = "deno-lsp";
+              except-features = ["format"];
+            }
+            "biome"
+            "harper-ls"
+          ];
+        }
+
+        # --- JSX ---
+        {
+          name = "jsx";
+          roots = ["deno.json" "deno.jsonc" "package.json"];
+          auto-format = true;
+          language-servers = [
+            {
+              name = "deno-lsp";
+              except-features = ["format"];
+            }
+            "biome"
+            "harper-ls"
+          ];
         }
 
         # --- Svelte ---
         {
           name = "svelte";
           auto-format = true;
-          language-servers = ["svelte-ls" "tailwindcss-ls" "uwu-colors"];
-          formatter = {
-            command = lib.getExe pkgs.deno;
-            args = ["fmt" "--unstable-component" "-" "--ext" "svelte"];
-          };
+          language-servers = [
+            "svelte-ls"
+            "tailwindcss-ls"
+            "uwu-colors"
+          ];
         }
 
         # --- HTML ---
@@ -323,7 +372,13 @@
         {
           name = "json";
           auto-format = true;
-          language-servers = ["vscode-json-language-server"];
+          language-servers = [
+            {
+              name = "vscode-json-language-server";
+              except-features = ["format"];
+            }
+            "biome"
+          ];
           formatter = deno "json";
         }
 
