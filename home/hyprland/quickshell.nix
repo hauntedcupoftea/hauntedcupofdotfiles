@@ -14,7 +14,7 @@
         Restart = "on-failure";
       };
       Install = {
-        WantedBy = ["default.target"];
+        WantedBy = ["graphical-session.target"];
       };
     };
 
@@ -29,7 +29,7 @@
         Restart = "on-failure";
       };
       Install = {
-        WantedBy = ["default.target"];
+        WantedBy = ["graphical-session.target"];
       };
     };
   };
