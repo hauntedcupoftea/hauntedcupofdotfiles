@@ -10,6 +10,9 @@
   # Enable Hyprland at the system level
   programs.hyprland = {
     enable = true;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs {
+      patches = [../../custom-files/patches/hypr-glaze-patch.txt];
+    };
     withUWSM = true;
     xwayland.enable = true; # Kinda needed for electron apps sadly
   };

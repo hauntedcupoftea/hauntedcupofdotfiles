@@ -1,6 +1,7 @@
 {
   lib,
   inputs,
+  pkgs,
   ...
 }: let
   isGE66Raider = builtins.hasAttr "Anand-GE66-Raider" (inputs.self.nixosConfigurations or {});
@@ -20,6 +21,9 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs {
+      patches = [../../custom-files/patches/hypr-glaze-patch.txt];
+    };
 
     settings = {
       # Set default terminal to kitty
