@@ -3,6 +3,7 @@
     # ./gnome.nix # fallback
     ./appimage.nix
     ./cloudflare.nix
+    ./dualsense.nix
     ./fonts.nix
     ./gaming.nix
     ./hyprland.nix
