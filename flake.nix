@@ -138,6 +138,7 @@
       in {
         packages = {
           dungeondraft = pkgs.dungeondraft;
+          embridge = pkgs.embridge;
           default = pkgs.dungeondraft;
         };
       };
