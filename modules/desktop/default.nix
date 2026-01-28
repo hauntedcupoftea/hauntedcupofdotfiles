@@ -4,6 +4,7 @@
     ./appimage.nix
     ./cloudflare.nix
     ./dualsense.nix
+    ./dsc.nix
     ./fonts.nix
     ./gaming.nix
     ./hyprland.nix
