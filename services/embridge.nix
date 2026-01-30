@@ -1,3 +1,4 @@
+# embridge-module.nix
 {
   config,
   lib,
@@ -6,6 +7,7 @@
 }:
 with lib; let
   cfg = config.services.embridge;
+  stateDir = "/var/lib/embridge";
 in {
   options.services.embridge = {
     enable = mkEnableOption "eMudhra eMbridge service for crypto token access";
@@ -23,14 +25,21 @@ in {
       after = ["network.target"];
       wantedBy = ["multi-user.target"];
 
+      preStart = ''
+        # Ensure state directory exists and is populated
+        if [ ! -f ${stateDir}/emBridge ]; then
+          ${pkgs.rsync}/bin/rsync -a ${cfg.package.passthru.unwrapped}/opt/eMudhra/emBridge-3.3.0.2/ ${stateDir}/
+          chmod -R u+w ${stateDir}
+        fi
+      '';
+
       serviceConfig = {
         Type = "simple";
         ExecStart = "${cfg.package}/bin/embridge";
-        WorkingDirectory = "${cfg.package}/opt/eMudhra/emBridge-3.3.0.2";
+        StateDirectory = "embridge";
         Restart = "always";
         RestartSec = 10;
 
-        # Security hardening
         PrivateTmp = true;
         NoNewPrivileges = false;
       };
