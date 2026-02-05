@@ -136,7 +136,7 @@ in {
       monitor = lib.mkMerge [
         (lib.mkIf isGE66Raider [
           "DP-2, 2560x1440@165, 0x0, 1, vrr, 3"
-          "eDP-1, 1920x1080@240, 2560x360, 1.25"
+          "eDP-1, 1920x1080@240, 2560x360, 1"
         ])
         (lib.mkIf (!isGE66Raider) [
           ",preferred,auto,1"
