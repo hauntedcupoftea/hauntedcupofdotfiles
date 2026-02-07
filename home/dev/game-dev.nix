@@ -14,7 +14,7 @@
   };
 in {
   home.packages = with pkgs; [
-    freecadWayland
+    # freecadWayland
     godot
   ];
 }
