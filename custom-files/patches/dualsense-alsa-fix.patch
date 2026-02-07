@@ -1,0 +1,17 @@
+diff --git a/ucm2/USB-Audio/Sony/DualSense-PS5.conf b/ucm2/USB-Audio/Sony/DualSense-PS5.conf
+index 42d525b..d6bfb4a 100644
+--- a/ucm2/USB-Audio/Sony/DualSense-PS5.conf
++++ b/ucm2/USB-Audio/Sony/DualSense-PS5.conf
+@@ -1,6 +1,11 @@
+ Comment "Sony Corp. DualSense wireless controller (PS5)"
+ 
+-SectionUseCase."HiFi" {
++Include.dhw.File "/common/directm.conf"
++
++# keep this use case first - wine compatibility
++Macro.0.DirectUseCase { Id="Direct" PlaybackChannels=4 CaptureChannels=2 }
++
++If.default.Prepend.SectionUseCase."Default" {
+ 	Comment "Default"
+ 	File "/USB-Audio/Sony/DualSense-PS5-HiFi.conf"
+ }
