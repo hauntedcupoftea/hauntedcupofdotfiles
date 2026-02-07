@@ -14,6 +14,7 @@
     ./podman.nix
     ./teamviewer.nix
     ./tailscale.nix
+    ./waydroid.nix
     ./xdg.nix
     ./xserver.nix
   ];
