@@ -2,6 +2,7 @@
   imports = [
     ./git.nix
     # ./firefox.nix
+    ./direnv.nix
     ./nvf.nix
     ./helix.nix
     ./py.nix
