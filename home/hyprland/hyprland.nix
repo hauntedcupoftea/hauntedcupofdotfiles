@@ -186,6 +186,13 @@ in {
           center = "on";
           stay_focused = "on";
         }
+        {
+          name = "waydroid-phone";
+          match.class = "^(Waydroid)$";
+          float = "on";
+          size = "405 877";
+          center = "on";
+        }
       ];
 
       exec-once = [
