@@ -105,6 +105,8 @@
             ":set mouse true"
           ];
         };
+        insert = {"C-space" = "completion";};
+        select = {"C-space" = "completion";};
       };
     };
 
