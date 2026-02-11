@@ -123,9 +123,9 @@
           args = ["--stdio"];
         };
 
-        basedpyright = {
-          command = "basedpyright-langserver";
-          args = ["--stdio"];
+        ty = {
+          command = "ty";
+          args = ["server"];
         };
 
         clangd-ls = {
@@ -258,7 +258,7 @@
         # --- Python ---
         {
           name = "python";
-          language-servers = ["basedpyright" "ruff" "harper-ls"];
+          language-servers = ["ty" "ruff" "harper-ls"];
           formatter = {
             command = "ruff";
             args = ["format" "-"];
