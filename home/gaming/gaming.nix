@@ -6,7 +6,7 @@
     # lutris
     heroic
     dualsensectl
-    wineWowPackages.stable
+    wineWow64Packages.stable
     winetricks
     goverlay
     samrewritten

@@ -18,6 +18,7 @@
   programs.yazi = {
     enable = true;
     enableFishIntegration = true;
+    shellWrapperName = "y";
     plugins = {
       "full-border" = pkgs.yaziPlugins.full-border;
       "git" = pkgs.yaziPlugins.git;

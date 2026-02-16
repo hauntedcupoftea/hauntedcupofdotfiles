@@ -7,7 +7,12 @@
   makeWrapper,
   libGL,
   libkrb5,
-  xorg,
+  libxcursor,
+  libx11,
+  libxext,
+  libxrandr,
+  libxi,
+  libxinerama,
   zlib,
   alsa-lib,
   udev,
@@ -38,12 +43,12 @@ stdenv.mkDerivation rec {
   buildInputs = [
     libGL
     libkrb5
-    xorg.libXcursor
-    xorg.libX11
-    xorg.libXext
-    xorg.libXrandr
-    xorg.libXi
-    xorg.libXinerama
+    libxcursor
+    libx11
+    libxext
+    libxrandr
+    libxi
+    libxinerama
     zlib
   ];
 
