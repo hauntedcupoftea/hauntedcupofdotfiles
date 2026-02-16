@@ -9,7 +9,7 @@
     ./quickshell.nix
     # ./mako.nix # I have disabled this.
     # ./waybar.nix # goodbye
-    ./screenshare.nix
+    # ./screenshare.nix
     ./udiskie.nix
     ./walker.nix
     # ./sherlock.nix
