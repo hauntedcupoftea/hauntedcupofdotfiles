@@ -9,6 +9,7 @@
   programs = {
     steam = {
       enable = true;
+      package = pkgs.millennium-steam;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = false;
       gamescopeSession.enable = true;
@@ -16,9 +17,6 @@
       # nix-gaming
       platformOptimizations.enable = true;
       protontricks.enable = true;
-      package = pkgs.steam.override {
-        extraBwrapArgs = ["--unsetenv TZ"];
-      };
     };
 
     gamemode = {

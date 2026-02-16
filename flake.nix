@@ -32,6 +32,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprland-preview-share-picker = {
+      url = "github:WhySoBad/hyprland-preview-share-picker";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hyprpicker = {
       url = "github:hyprwm/hyprpicker";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,7 +49,6 @@
       inputs.systems.follows = "systems";
     };
 
-    # Theming & Desktop
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -69,7 +73,6 @@
       inputs.systems.follows = "systems";
     };
 
-    # Applications & Tools
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -94,14 +97,13 @@
       inputs.systems.follows = "systems";
     };
 
-    # Gaming & Overlays
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };
 
-    # millennium.url = "git+https://github.com/SteamClientHomebrew/Millennium";
+    millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
@@ -121,7 +123,7 @@
     nix-on-droid,
     rust-overlay,
     home-manager,
-    # millennium,
+    millennium,
     ...
   }: let
     customOverlay = import ./pkgs {inherit inputs;};
@@ -156,7 +158,7 @@
               config.allowUnfree = true;
               system = "x86_64-linux";
               overlays = [
-                # millennium.overlays.default
+                millennium.overlays.default
                 rust-overlay.overlays.default
                 customOverlay
               ];
