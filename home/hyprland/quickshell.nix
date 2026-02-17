@@ -12,6 +12,10 @@
       Service = {
         ExecStart = "${lib.getExe pkgs.uwsm} app -- qs -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/";
         Restart = "on-failure";
+        Environment = [
+          "QT_SCALE_FACTOR=1"
+          "QT_AUTO_SCREEN_SCALE_FACTOR=0"
+        ];
       };
       Install = {
         WantedBy = ["graphical-session.target"];

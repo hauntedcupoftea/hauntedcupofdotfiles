@@ -15,13 +15,19 @@ Scope {
     Variants {
         model: Quickshell.screens
 
+        WallpaperLayer {}
+    }
+
+    Variants {
+        model: Quickshell.screens
+
         PanelWindow {
             id: bgpanel
             required property var modelData
             screen: modelData
             color: "transparent"
             exclusiveZone: Theme.barHeight + Theme.debugOffsetHeight
-            WlrLayershell.layer: WlrLayer.Background
+            WlrLayershell.layer: WlrLayer.Bottom
             implicitHeight: screen.height
 
             anchors {
