@@ -7,6 +7,8 @@ import Quickshell.Wayland
 import qs.services
 import qs.theme
 
+// https://github.com/Rexcrazy804/Zaphkiel/blob/master/dots/quickshell/kurukurubar/Layers/Wallpaper.qml
+// thanks, rexi
 WlrLayershell {
     id: layerRoot
 
