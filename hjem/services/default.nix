@@ -1,3 +1,3 @@
 {...}: {
-  imports = [./awww.nix];
+  imports = [./awww.nix ./color-generation.nix];
 }
