@@ -4,23 +4,11 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 
-// Wallpaper service singleton.
-//
-// Reads config from ~/.config/hauntedcupof/wallpaper.json at startup and
-// on file change. WallpaperLayer.qml reacts to `current` changing.
-//
-// Config file format (all fields optional, defaults shown):
-// {
-//   "path": "~/Pictures/Wallpapers",   // file → stays fixed; directory → rotates
-//   "intervalMinutes": 30,             // ignored when path is a file
-//   "runMatugen": true                 // set false to skip theme generation
-// }
-//
 // IPC (qs ipc call wallpaper <method>):
-//   next()         — pick next random wallpaper immediately
-//   set(path)      — set a specific file by absolute path
-//   toggle()       — pause/resume auto-rotation
-//   reload()       — rescan directory and pick a new wallpaper
+//   next()       — pick next random wallpaper
+//   set(path)    — set specific file
+//   toggle()     — pause/resume auto-rotation
+//   reload()     — rescan directory
 
 Singleton {
     id: root
@@ -28,24 +16,65 @@ Singleton {
     property string current: ""
     property bool autoRotate: true
     property bool ready: false
+    property bool swwwReady: false
 
     readonly property string defaultPath: Quickshell.env("HOME") + "/Pictures/Wallpapers"
     property string configuredPath: defaultPath
     property int intervalMinutes: 30
     property bool runMatugen: true
+    property string transition: "wipe"
+    property real transitionDuration: 1.5
+    property int transitionFps: 60
+    property int transitionAngle: 30
 
     property var wallpaperList: []
     property bool pathIsFile: false
     property int lastIndex: -1
 
-    onDefaultPathChanged: console.info(defaultPath)
+    Component.onCompleted: {
+        killAwww.running = true;
+    }
 
+    Process {
+        id: killAwww
+        command: ["pkill", "awww-daemon"]
+        running: false
+        onExited: (code, status) => {
+            startAwww.running = true;
+        }
+    }
+
+    Process {
+        id: startAwww
+        command: ["awww-daemon"]
+        running: false
+        onExited: (code, status) => {
+            if (code !== 0) {
+                console.warn("[Wallpaper] awww-daemon exited with code " + code);
+            }
+        }
+    }
+
+    Timer {
+        id: awwwReadyTimer
+        interval: 300
+        running: true
+        repeat: false
+        onTriggered: {
+            root.swwwReady = true;
+            configView.reload();
+        }
+    }
+
+    // ── Config watcher ────────────────────────────────────────────────────
     readonly property FileView configFile: FileView {
         id: configView
-        path: Qt.resolvedUrl("../wallpaper.json")
+        path: Quickshell.env("HOME") + "/.config/hauntedcupof/wallpaper.json"
         watchChanges: true
         onFileChanged: configView.reload()
         onLoaded: {
+            if (!root.swwwReady)
+                return;  // wait for daemon
             try {
                 const cfg = JSON.parse(text());
                 if (cfg.path !== undefined)
@@ -54,15 +83,22 @@ Singleton {
                     root.intervalMinutes = cfg.intervalMinutes;
                 if (cfg.runMatugen !== undefined)
                     root.runMatugen = cfg.runMatugen;
-                console.log("[Wallpaper] Config: path=" + root.configuredPath + " interval=" + root.intervalMinutes + "m" + " matugen=" + root.runMatugen);
+                if (cfg.transition !== undefined)
+                    root.transition = cfg.transition;
+                if (cfg.transitionDuration !== undefined)
+                    root.transitionDuration = cfg.transitionDuration;
+                if (cfg.transitionFps !== undefined)
+                    root.transitionFps = cfg.transitionFps;
+                if (cfg.transitionAngle !== undefined)
+                    root.transitionAngle = cfg.transitionAngle;
             } catch (e) {
-                // File missing or malformed — defaults already set, proceed
+                // Config missing or malformed — defaults are fine
             }
             root.initPath();
         }
-        Component.onCompleted: configView.reload()
     }
 
+    // ── Path init ─────────────────────────────────────────────────────────
     function initPath() {
         pathChecker.command = ["bash", "-c", `[ -f "${root.configuredPath}" ] && echo file ` + `|| ([ -d "${root.configuredPath}" ] && echo dir || echo missing)`];
         pathChecker.running = true;
@@ -77,12 +113,8 @@ Singleton {
                 if (result === "file") {
                     root.pathIsFile = true;
                     root.wallpaperList = [root.configuredPath];
-                    root.current = root.configuredPath;
                     root.ready = true;
-                    if (root.runMatugen) {
-                        matugenCmd.command = ["matugen", "image", root.current];
-                        matugenCmd.running = true;
-                    }
+                    root.setWallpaper(root.configuredPath);
                 } else if (result === "dir") {
                     root.pathIsFile = false;
                     scanProcess.running = true;
@@ -95,6 +127,7 @@ Singleton {
         }
     }
 
+    // ── Directory scanner ─────────────────────────────────────────────────
     Process {
         id: scanProcess
         running: false
@@ -103,7 +136,7 @@ Singleton {
             onStreamFinished: {
                 const files = text.trim().split("\n").filter(f => f.length > 0);
                 if (files.length === 0) {
-                    console.warn("[Wallpaper] No images found in " + root.configuredPath);
+                    console.warn("[Wallpaper] No images in " + root.configuredPath);
                     return;
                 }
                 root.wallpaperList = files;
@@ -114,6 +147,7 @@ Singleton {
         }
     }
 
+    // ── Core ──────────────────────────────────────────────────────────────
     function pickRandom() {
         if (wallpaperList.length === 0)
             return;
@@ -129,12 +163,27 @@ Singleton {
     }
 
     function setWallpaper(path) {
-        if (!path || path === "")
+        if (!path || path === "" || !root.swwwReady)
             return;
         root.current = path;
-        if (root.runMatugen) {
-            matugenCmd.command = ["matugen", "image", path];
-            matugenCmd.running = true;
+
+        awwwCmd.command = ["awww", "img", path, "--transition-type", root.transition, "--transition-fps", root.transitionFps.toString(), "--transition-step", root.transitionAngle.toString()];
+        awwwCmd.running = true;
+    }
+
+    Process {
+        id: awwwCmd
+        running: false
+        onExited: (code, status) => {
+            if (code !== 0) {
+                console.warn("[Wallpaper] awww img failed with code " + code);
+                return;
+            }
+            // awww succeeded → run matugen (ThemeColors.qml watches theme.json)
+            if (root.runMatugen) {
+                matugenCmd.command = ["matugen", "image", root.current];
+                matugenCmd.running = true;
+            }
         }
     }
 
@@ -147,6 +196,7 @@ Singleton {
         }
     }
 
+    // ── Auto-rotation ─────────────────────────────────────────────────────
     Timer {
         id: rotationTimer
         interval: root.intervalMinutes * 60 * 1000
@@ -156,6 +206,7 @@ Singleton {
     }
     onIntervalMinutesChanged: rotationTimer.restart()
 
+    // ── IPC ───────────────────────────────────────────────────────────────
     IpcHandler {
         target: "wallpaper"
         function next(): void {
@@ -167,6 +218,7 @@ Singleton {
         }
         function toggle(): void {
             root.autoRotate = !root.autoRotate;
+            console.log("[Wallpaper] auto-rotate: " + root.autoRotate);
         }
         function reload(): void {
             root.wallpaperList = [];

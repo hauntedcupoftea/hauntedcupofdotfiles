@@ -1,5 +1,9 @@
 {
   "path": "~/Pictures/Wallpapers",
   "intervalMinutes": 30,
-  "runMatugen": false
+  "runMatugen": true,
+  "transition": "wipe",
+  "transitionDuration": 1.5,
+  "transitionFps": 60,
+  "transitionAngle": 30
 }

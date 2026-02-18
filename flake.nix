@@ -11,6 +11,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # life will change
+    hjem.follows = "hjem-rum/hjem";
+
+    hjem-rum = {
+      url = "github:snugnug/hjem-rum";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    awww.url = "git+https://codeberg.org/LGFae/awww";
+
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";

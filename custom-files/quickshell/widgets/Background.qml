@@ -15,12 +15,6 @@ Scope {
     Variants {
         model: Quickshell.screens
 
-        WallpaperLayer {}
-    }
-
-    Variants {
-        model: Quickshell.screens
-
         PanelWindow {
             id: bgpanel
             required property var modelData
