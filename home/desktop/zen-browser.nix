@@ -1,4 +1,7 @@
 {inputs, ...}: {
   imports = [inputs.zen-browser.homeModules.twilight];
-  programs.zen-browser.enable = true;
+  programs.zen-browser = {
+    enable = true;
+    suppressXdgMigrationWarning = true;
+  };
 }
