@@ -66,10 +66,9 @@ Singleton {
         }
     }
 
-    // ── Config watcher ────────────────────────────────────────────────────
     readonly property FileView configFile: FileView {
         id: configView
-        path: Quickshell.env("HOME") + "/.config/hauntedcupof/wallpaper.json"
+        path: Qt.resolvedUrl("../wallpaper.json")
         watchChanges: true
         onFileChanged: configView.reload()
         onLoaded: {
@@ -98,7 +97,6 @@ Singleton {
         }
     }
 
-    // ── Path init ─────────────────────────────────────────────────────────
     function initPath() {
         pathChecker.command = ["bash", "-c", `[ -f "${root.configuredPath}" ] && echo file ` + `|| ([ -d "${root.configuredPath}" ] && echo dir || echo missing)`];
         pathChecker.running = true;
@@ -127,7 +125,6 @@ Singleton {
         }
     }
 
-    // ── Directory scanner ─────────────────────────────────────────────────
     Process {
         id: scanProcess
         running: false
@@ -147,7 +144,6 @@ Singleton {
         }
     }
 
-    // ── Core ──────────────────────────────────────────────────────────────
     function pickRandom() {
         if (wallpaperList.length === 0)
             return;
@@ -196,7 +192,6 @@ Singleton {
         }
     }
 
-    // ── Auto-rotation ─────────────────────────────────────────────────────
     Timer {
         id: rotationTimer
         interval: root.intervalMinutes * 60 * 1000
@@ -206,7 +201,6 @@ Singleton {
     }
     onIntervalMinutesChanged: rotationTimer.restart()
 
-    // ── IPC ───────────────────────────────────────────────────────────────
     IpcHandler {
         target: "wallpaper"
         function next(): void {

@@ -7,6 +7,7 @@ import QtQuick
 import qs.components.internal as Private
 import qs.theme
 import qs.config
+import qs.services
 
 Scope {
     id: bgScope
@@ -99,6 +100,8 @@ Scope {
                 implicitWidth: Theme.padding
                 color: Theme.colors.surface
             }
+
+            Component.onCompleted: print(Wallpaper.wallpaperList) // hack for now
         }
     }
 }
