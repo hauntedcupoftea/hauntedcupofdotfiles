@@ -1,21 +1,12 @@
 {
-  lib,
   inputs,
-  pkgs,
+  lib,
   ...
 }: let
   isGE66Raider = builtins.hasAttr "Anand-GE66-Raider" (inputs.self.nixosConfigurations or {});
 in {
-  home.sessionVariables = {
-    HYPRSHOT_DIR = "Pictures";
-    XDG_CURRENT_DESKTOP = "Hyprland";
-  };
-
-  wayland.windowManager.hyprland = {
+  hjem.users.tea.rum.desktops.hyprland = {
     enable = true;
-    systemd.enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.default;
-
     settings = {
       # Set default terminal to kitty
       "$terminal" = "kitty";
@@ -60,7 +51,7 @@ in {
           "$mod, k, movefocus, u"
           "$mod, l, movefocus, r"
 
-          "$mod, Z, exec, uwsm app -- zen" # bro i cannot decipher whether zen or zen-beta is the way to go.
+          "$mod, Z, exec, uwsm app -- zen-twilight" # bro i cannot decipher whether zen or zen-beta is the way to go.
           "$mod, E, exec, uwsm app -- $terminal -e yazi"
           # Screenshot a region (freezing)
           ", Print, exec, uwsm app -- grimblast copy area --notify"
