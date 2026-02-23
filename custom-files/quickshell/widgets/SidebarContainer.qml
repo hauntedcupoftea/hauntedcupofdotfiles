@@ -59,9 +59,14 @@ PopupWindow {
     }
 
     HyprlandFocusGrab {
-        active: container.visible
+        id: focusGrab
+        active: container.barGroup.sidebarOpen
+        onActiveChanged: console.info(`[FOCUS]: grab ${active ? "activated" : "deactivated"}`)
         windows: [container]
-        onCleared: container.visible = false
+        onCleared: {
+            console.info("[FOCUS]: container should be gone now");
+            container.visible = false;
+        }
     }
 
     Rectangle {

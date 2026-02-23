@@ -13,7 +13,8 @@ PopupWindow {
 
     required property Rectangle anchorItem
     property QsMenuOpener menuHandle: dummy
-    property list<QsMenuOpener> menuStack: []  // Stack to track menu history
+    property list<QsMenuOpener> menuStack: []
+    property bool menuOpen: false
 
     implicitHeight: content.height + (Theme.padding * 2)
     implicitWidth: content.width + (Theme.padding * 2)
@@ -24,10 +25,13 @@ PopupWindow {
     }
 
     HyprlandFocusGrab {
-        active: root.visible
+        id: focusGrab
+        active: root.menuOpen
+        onActiveChanged: console.info(`[FOCUS]: grab ${active ? "activated" : "deactivated"}`)
         windows: [root]
         onCleared: {
-            root.close();
+            console.info("[FOCUS]: container should be gone now");
+            root.menuOpen = false;
         }
     }
 
@@ -39,6 +43,7 @@ PopupWindow {
 
     function open(handle: QsMenuOpener) {
         root.visible = true;
+        root.menuOpen = true;
         root.menuStack = [];
         root.menuHandle = handle;
     }
@@ -54,7 +59,7 @@ PopupWindow {
         }
     }
 
-    function close() {
+    onMenuOpenChanged: if (!menuOpen) {
         root.menuStack = [];
         root.menuHandle = dummy;
         root.visible = false;
@@ -197,7 +202,7 @@ PopupWindow {
                                             root.pushMenu(subMenu);
                                         } else {
                                             loader.modelData.triggered();
-                                            root.close();
+                                            root.menuOpen = false;
                                         }
                                     }
 
