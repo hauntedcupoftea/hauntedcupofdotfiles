@@ -17,6 +17,29 @@
 
   programs.mangohud = {
     enable = true;
-    # TODO: add settings (copy from goverlay probably)
+    settings = {
+      position = "top-right";
+      gpu_temp = true;
+      cpu_temp = true;
+
+      gpu_power = true;
+      cpu_power = true;
+      gpu_core_clock = true;
+      gpu_mem_clock = true;
+      cpu_mhz = true;
+
+      throttling_status = true;
+      throttling_status_graph = true;
+
+      gpu_load_change = true;
+      cpu_load_change = true;
+      fps = true;
+      frame_timing = true;
+
+      toggle_hud = "F12";
+
+      cpu_temp_limit = 90;
+      gpu_temp_limit = 87;
+    };
   };
 }

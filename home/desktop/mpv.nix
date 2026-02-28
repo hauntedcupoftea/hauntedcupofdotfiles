@@ -4,6 +4,6 @@
     defaultProfiles = [
       "gpu-hq"
     ];
-    scripts = with pkgs.mpvScripts; [mpris mpv-discord mpv-notify-send mpv-cheatsheet];
+    scripts = with pkgs.mpvScripts; [mpris mpv-discord mpv-notify-send];
   };
 }
