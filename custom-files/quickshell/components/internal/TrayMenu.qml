@@ -27,10 +27,8 @@ PopupWindow {
     HyprlandFocusGrab {
         id: focusGrab
         active: root.menuOpen
-        onActiveChanged: console.info(`[FOCUS]: grab ${active ? "activated" : "deactivated"}`)
         windows: [root]
         onCleared: {
-            console.info("[FOCUS]: container should be gone now");
             root.menuOpen = false;
         }
     }
