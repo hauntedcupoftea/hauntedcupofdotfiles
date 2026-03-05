@@ -1,3 +1,8 @@
 {...}: {
-  imports = [./services ./hyprland];
+  imports = [
+    ./services
+    ./desktops
+    ./misc
+    ./programs
+  ];
 }

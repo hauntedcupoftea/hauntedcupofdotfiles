@@ -18,6 +18,6 @@
     dungeondraft # custom derivation for map maker
     element-desktop # matrix
     zapzap # whatsapp client
-    zmkBATx # zmk battery indicator
+    zmkbatx # zmk battery indicator
   ];
 }

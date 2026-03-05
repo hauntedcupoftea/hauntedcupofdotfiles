@@ -1,6 +1,6 @@
 {...}: {
   imports = [
-    ./dev
+    # ./dev # moved to hjem
     ./desktop
     ./gaming
     ./hardware

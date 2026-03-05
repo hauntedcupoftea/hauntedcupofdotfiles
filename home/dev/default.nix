@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./git.nix
-    # ./firefox.nix
+    ./firefox.nix
     ./direnv.nix
     ./nvf.nix
     ./helix.nix

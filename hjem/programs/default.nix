@@ -1,5 +1,6 @@
 {...}: {
   imports = [
-    ./theming.nix
+    ./desktop
+    ./shell
   ];
 }

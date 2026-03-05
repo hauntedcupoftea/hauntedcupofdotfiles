@@ -1,27 +1,46 @@
 {...}: {
   imports = [
-    # Hardware configuration
     ./hardware-configuration.nix
-
-    # Core modules
     ../../modules/core
-
-    # Hardware modules
     ../../modules/hardware
-
-    # Desktop environment
     ../../modules/desktop
-
-    # Theme
     ../../modules/theme
-
-    # User configuration
+    ../../modules/profiles
     ../../users
   ];
 
-  # Host-specific overrides can go here
   networking.hostName = "Anand-GE66-Raider";
 
-  # This value determines the NixOS release
+  dotfiles = {
+    desktop = {
+      enable = true;
+      environment = ["hyprland"];
+      gaming.enable = true;
+      audio.enable = true;
+      monitors = [
+        {
+          name = "DP-2";
+          resolution = "2560x1440";
+          refreshRate = 165;
+          position = "0x0";
+          scale = 1;
+          vrr = true;
+          primary = true;
+        }
+        {
+          name = "eDP-1";
+          resolution = "1920x1080";
+          refreshRate = 240;
+          position = "2560x360";
+          scale = 1;
+          vrr = false;
+          primary = false;
+        }
+      ];
+    };
+
+    podman.enable = true;
+  };
+
   system.stateVersion = "24.11";
 }
