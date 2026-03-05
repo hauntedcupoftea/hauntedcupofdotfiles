@@ -6,5 +6,7 @@
     ./git.nix
     ./extras.nix
     ./fish.nix
+    ./fzf.nix
+    ./zoxide.nix
   ];
 }
