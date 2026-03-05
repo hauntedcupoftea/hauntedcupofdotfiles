@@ -13,7 +13,7 @@ in {
   ];
 
   stylix = {
-    enable = true;
+    enable = false;
     polarity = currentPolarity;
     image = ../../wallpapers/malenia.jpg;
 
@@ -53,9 +53,9 @@ in {
         name = "FiraCode Nerd Font Mono";
       };
       sizes = {
-        popups = 13;
-        applications = 13;
-        terminal = 13;
+        popups = 14;
+        applications = 14;
+        terminal = 14;
         desktop = 14;
       };
     };

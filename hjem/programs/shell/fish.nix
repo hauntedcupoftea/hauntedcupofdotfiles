@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: let
   cfg = config.dotfiles.shell.fish;
@@ -39,6 +38,10 @@ in {
         ''
           set fish_greeting # disable greeting
           bind \cz 'fg 2>/dev/null; commandline -f repaint'
+
+          if status is-interactive
+              eval (zellij setup --generate-auto-start fish | string collect)
+          end
         ''
         cfg.shellInit
       ];

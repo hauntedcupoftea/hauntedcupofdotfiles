@@ -13,6 +13,7 @@
       shell = lib.getExe pkgs.fish;
       tab_bar_style = "hidden";
       window_padding_width = "1 2";
+      font_size = 14.0;
     };
     shellIntegration.enableFishIntegration = true;
   };

@@ -3,7 +3,7 @@
     ../../services/embridge.nix
   ];
 
-  services.embridge.enable = true;
+  services.embridge.enable = false;
 
   services.pcscd = {
     enable = true;

@@ -1,3 +1,3 @@
 {...}: {
-  imports = [./hyprland.nix ./quickshell.nix];
+  imports = [./hyprland.nix ./cursors.nix];
 }

@@ -1,13 +1,10 @@
 {
   config,
   lib,
-  pkgs,
-  inputs,
   nixosConfig,
   ...
 }: let
-  cfg = config.rum.desktops.hyprland;
-  qsCfg = cfg.quickshell;
+  cfg = config.dotfiles.desktops.hyprland;
 
   monitors = nixosConfig.dotfiles.desktop.monitors;
   monitorStrings =
@@ -26,29 +23,12 @@
     secondaryMonitors
   );
 in {
-  options.rum.desktops.hyprland.quickshell = {
-    configPath = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-      description = ''
-        Absolute path to the quickshell config directory.
-        When set, quickshell packages and systemd user services are enabled,
-        and QS_CONFIG_PATH is exported as a session environment variable.
-      '';
-    };
+  options.dotfiles.environments.hyprland = {
+    enable = lib.mkEnableOption "tea's hyprland configuration";
   };
 
   config = lib.mkIf cfg.enable {
-    # expose path as session env var so hypridle, qs config, etc. can reference it
-    rum.programs.fish.config = lib.mkIf (qsCfg.configPath != null) ''
-      set -gx QS_CONFIG_PATH "${qsCfg.configPath}"
-    '';
-
     rum.desktops.hyprland.settings = {
-      env = lib.mkIf (qsCfg.configPath != null) [
-        "QS_CONFIG_PATH,${qsCfg.configPath}"
-      ];
-
       "$terminal" = "kitty";
       "$mod" = "SUPER";
       "$altMod" = "SUPER_SHIFT";

@@ -117,12 +117,10 @@
             zmkbatx
           ];
         };
-      };
 
-      rum = {
-        desktops.hyprland = {
+        environments.hyprland = {
           enable = true;
-          quickshell.configPath = "/home/tea/hauntedcupofdotfiles/custom-files/quickshell";
+          # quickshell.configPath = "/home/tea/hauntedcupofdotfiles/custom-files/quickshell";
         };
       };
     };

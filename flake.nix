@@ -13,6 +13,7 @@
 
     # life will change
     hjem.follows = "hjem-rum/hjem";
+    niqspkgs.url = "github:diniamo/niqspkgs";
 
     hjem-rum = {
       url = "github:snugnug/hjem-rum";
