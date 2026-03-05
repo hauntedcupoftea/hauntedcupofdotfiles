@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   programs.fish = {
-    enable = true;
+    enable = false;
     loginShellInit = "";
     interactiveShellInit = ''
       set fish_greeting # disable greeting

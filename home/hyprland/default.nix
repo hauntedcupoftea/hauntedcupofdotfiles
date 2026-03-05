@@ -5,8 +5,8 @@
     ./hypridle.nix
     # ./wofi.nix # use either this or walker.
     # ./hyprlock.nix
-    ./hyprpaper.nix
-    ./quickshell.nix
+    # ./hyprpaper.nix
+    # ./quickshell.nix
     # ./mako.nix # I have disabled this.
     # ./waybar.nix # goodbye
     # ./screenshare.nix
