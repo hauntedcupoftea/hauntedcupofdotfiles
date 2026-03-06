@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   inputs,
   ...
@@ -20,4 +21,18 @@ in {
   # some packages needed
 
   # the service doesn't work i kneel to home manager
+  systemd.user.services.qs = {
+    description = "QuickShell Service";
+    wantedBy = ["graphical-session.target"];
+    serviceConfig = {
+      ExecStart = "${lib.getExe pkgs.uwsm} app -- ${lib.getExe pkgs.quickshell} -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell";
+      Restart = "on-failure";
+    };
+    # thanks, random botan fan
+    enableDefaultPath = false;
+    environment = {
+      QT_SCALE_FACTOR = "1";
+      QT_AUTO_SCREEN_SCALE_FACTOR = "0";
+    };
+  };
 }
