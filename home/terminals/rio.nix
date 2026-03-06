@@ -4,7 +4,7 @@
   ...
 }: {
   programs.rio = {
-    enable = true;
+    enable = false;
     settings = {
       shell = {
         program = lib.getExe pkgs.fish;

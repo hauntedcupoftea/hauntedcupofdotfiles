@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ./gammastep.nix
-    # ./hyprland.nix
+    ./hyprland.nix
     ./hypridle.nix
     # ./wofi.nix # use either this or walker.
     # ./hyprlock.nix

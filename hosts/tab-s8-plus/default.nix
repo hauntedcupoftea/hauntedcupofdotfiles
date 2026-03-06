@@ -1,4 +1,5 @@
 {pkgs, ...}: {
+  imports = [./ssh-client.nix];
   environment.packages = with pkgs; [
     gh
     git
@@ -36,11 +37,7 @@
   # Locale because nix-on-droid hates me
   time.timeZone = "Asia/Kolkata";
 
-  user = {
-    # apparently this is read-only?
-    # userName = "tea";
-    shell = "${pkgs.fish}/bin/fish";
-  };
+  user.shell = "${pkgs.fish}/bin/fish";
 
   # Read the changelog before changing this value
   system.stateVersion = "24.05";

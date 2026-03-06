@@ -24,6 +24,7 @@ in {
 
       settings = lib.mkMerge [
         {
+          theme = "base16_transparent"; # TODO: theming
           editor = {
             auto-format = true;
             end-of-line-diagnostics = "hint";

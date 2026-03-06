@@ -43,12 +43,22 @@
 
       dotfiles = {
         shell = {
-          helix = {
-            enable = true;
-          };
-
+          helix.enable = true;
           fish.enable = true;
           direnv.enable = true;
+          starship.enable = true;
+          zellij = {
+            enable = true;
+            exitOnSessionExit = true;
+          };
+
+          eza.enable = true;
+          btop.enable = true;
+          bat.enable = true;
+          yazi.enable = true;
+
+          fzf.enable = true;
+          zoxide.enable = true;
 
           git = {
             enable = true;
@@ -59,21 +69,22 @@
 
           podman.enable = true;
 
-          # NOTE: dotfiles.shell.kitty / starship / yazi / zellij are not
-          # defined as hjem options yet — those modules live in home/ and
-          # haven't been ported to hjem/programs/shell. Enabling them here
-          # will cause "option does not exist" errors until ported.
-          # kitty.enable = true;
-          # starship.enable = true;
-          # yazi.enable = true;
-          # zellij.enable = true;
-
           packages = with pkgs; [
             bruno
             requestly
             sql-studio
             zrok
             zathura
+            brightnessctl
+            btrfs-progs
+            desktop-file-utils
+            fastfetch
+            git
+            inetutils
+            lm_sensors
+            nload
+            parted
+            wget2
           ];
         };
 
@@ -95,12 +106,13 @@
         };
 
         desktop = {
-          # NOTE: dotfiles.desktop.game-dev is not defined as a hjem option yet.
-          # game-dev.enable = true;
-          # mpv.enable = true;
+          kitty.enable = true;
+          rio.enable = true;
+
           teamviewer.enable = true;
           zed.enable = true;
 
+          # Desktop GUI packages that don't warrant their own module yet
           packages = with pkgs; [
             jellyfin-media-player
             kdePackages.okular
@@ -115,18 +127,25 @@
             element-desktop
             zapzap
             zmkbatx
+            # screen capture / screenshot stack
+            wf-recorder
+            hyprshot
+            grimblast
+            slurp
+            flameshot
+            # misc desktop utils
+            kid3-qt
           ];
         };
 
         environments.hyprland = {
           enable = true;
-          # quickshell.configPath = "/home/tea/hauntedcupofdotfiles/custom-files/quickshell";
+          quickshellConfigPath = "/home/tea/hauntedcupofdotfiles/custom-files/quickshell";
         };
       };
     };
   };
 
-  # home-manager block kept until remaining home/ modules are ported to hjem
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;

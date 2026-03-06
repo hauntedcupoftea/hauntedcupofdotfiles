@@ -1,6 +1,6 @@
-{ ... }: {
+{...}: {
   imports = [
-    ./stylix.nix
+    # ./stylix.nix
     # ./catppuccin.nix
     ./matugen.nix
   ];

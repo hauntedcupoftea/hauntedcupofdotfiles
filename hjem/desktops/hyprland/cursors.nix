@@ -13,6 +13,13 @@
       };
     };
   };
+  environment.sessionVariables = {
+    HYPRCURSOR_THEME = "Bibata-modern";
+    HYPRCURSOR_SIZE = 24;
+    XCURSOR_THEME = "Bibata-Modern-Classic";
+    XCURSOR_SIZE = 24;
+    XCURSOR_PATH = ["${pkgs.bibata-cursors}/share/icons"];
+  };
   packages = [
     (pkgs.callPackage "${inputs.niqspkgs}/pkgs/bibata-hyprcursor/package.nix" {
       variant = "modern";

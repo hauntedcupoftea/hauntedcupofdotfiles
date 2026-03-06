@@ -1,7 +1,6 @@
-{ pkgs, ... }: {
-  home.packages = [ pkgs.zellij ];
+{...}: {
   programs.zellij = {
-    enable = true;
+    enable = false;
     enableFishIntegration = true; # disable if using bash
     attachExistingSession = false;
     exitShellOnExit = true; # close shell on <C-d> zellij

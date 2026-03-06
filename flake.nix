@@ -14,13 +14,13 @@
     # life will change
     hjem.follows = "hjem-rum/hjem";
     niqspkgs.url = "github:diniamo/niqspkgs";
-
     hjem-rum = {
       url = "github:snugnug/hjem-rum";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    nixos-grub-themes.url = "github:jeslie0/nixos-grub-themes";
     awww.url = "git+https://codeberg.org/LGFae/awww";
+    # life has changed this much
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -53,13 +53,6 @@
       url = "github:abenz1267/walker";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
-    };
-
-    stylix = {
-      url = "github:danth/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.systems.follows = "systems";
-      inputs.flake-parts.follows = "flake-parts";
     };
 
     matugen = {

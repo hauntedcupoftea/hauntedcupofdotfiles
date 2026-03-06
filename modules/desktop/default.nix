@@ -8,9 +8,10 @@
     ./fonts.nix
     ./gaming.nix
 
-    ./cursor.nix
+    ./cursors.nix
     ./hyprland.nix
     ./quickshell.nix
+    ./services.nix
 
     ./kb.nix
     ./localsend.nix

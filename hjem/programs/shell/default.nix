@@ -1,12 +1,18 @@
 {...}: {
   imports = [
-    ./helix.nix
+    ./bat.nix
+    ./btop.nix
     ./direnv.nix
-    ./podman.nix
-    ./git.nix
     ./extras.nix
+    ./eza.nix
     ./fish.nix
     ./fzf.nix
+    ./git.nix
+    ./helix.nix
+    ./podman.nix
+    ./starship.nix
+    ./yazi.nix
+    ./zellij.nix
     ./zoxide.nix
   ];
 }

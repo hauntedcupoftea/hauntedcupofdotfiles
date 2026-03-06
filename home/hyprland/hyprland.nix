@@ -12,8 +12,8 @@ in {
   };
 
   wayland.windowManager.hyprland = {
-    enable = true;
-    systemd.enable = true;
+    enable = false;
+    systemd.enable = false;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
     settings = {

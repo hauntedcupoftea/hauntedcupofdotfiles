@@ -11,7 +11,7 @@
     ./security.nix
     ./terminals
     ./theme
-    ./utils
+    # ./utils # moved to hjem
     ./xdg.nix
   ];
 

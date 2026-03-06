@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: let
+  grubTheme = inputs.nixos-grub-themes.packages.${pkgs.stdenv.hostPlatform.system}.nixos;
+in {
   boot = {
     # Enable GRUB
     loader.grub = {
@@ -9,6 +15,7 @@
       useOSProber = true; # Detect Windows
       default = "saved"; # Default to last booted OS
       configurationLimit = 8;
+      theme = grubTheme; # TODO: probably consolidate theming into one module (split horizontally)
     };
 
     kernelPackages = pkgs.linuxPackages_zen;

@@ -4,7 +4,7 @@
   ...
 }: {
   programs.kitty = {
-    enable = true;
+    enable = false;
     settings = {
       scrollback_lines = 10000;
       enable_audio_bell = true;
