@@ -1,6 +1,6 @@
 {...}: {
   imports = [
-    ./services
+    ./theming
     ./desktops
     ./misc
     ./programs

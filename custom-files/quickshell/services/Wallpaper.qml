@@ -177,7 +177,7 @@ Singleton {
             }
             // awww succeeded → run matugen (ThemeColors.qml watches theme.json)
             if (root.runMatugen) {
-                matugenCmd.command = ["matugen", "image", root.current];
+                matugenCmd.command = ["matugen", "image", root.current, "--source-color-index", "0"];
                 matugenCmd.running = true;
             }
         }
@@ -189,6 +189,7 @@ Singleton {
         onExited: (code, status) => {
             if (code !== 0)
                 console.warn("[Wallpaper] matugen exited with code " + code);
+            console.warn("[Wallpaper] status:" + status);
         }
     }
 

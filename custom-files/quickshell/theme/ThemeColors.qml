@@ -261,7 +261,7 @@ QtObject {
 
     readonly property FileView themeFile: FileView {
         id: fileView
-        path: "/home/tea/.config/matugen/theme.json"
+        path: "/home/tea/.config/hauntedcupofbar/theme.json"
         watchChanges: true
         onFileChanged: fileView.reload()
         onLoaded: {

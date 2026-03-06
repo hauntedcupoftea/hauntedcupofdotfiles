@@ -19,27 +19,9 @@ in {
         args = ["--login"];
       };
       editor.program = lib.getExe pkgs.helix;
+      font = "Fira Code";
       fonts = {
         size = 18.0;
-        regular = {
-          family = "FiraCode Nerd Font Mono Ret";
-          style = "Normal";
-          weight = 300;
-        };
-        bold = {
-          family = "FiraCode Nerd Font Mono Ret";
-          style = "Normal";
-          weight = 500;
-        };
-        italic = {
-          family = "FiraCode Nerd Font Mono Ret";
-          style = "Italic";
-        };
-        bold-italic = {
-          family = "FiraCode Nerd Font Mono Ret";
-          style = "Italic";
-          weight = 500;
-        };
         extras = [
           {family = "Noto Sans Mono CJK SC";}
           {family = "Noto Sans Mono CJK KR";}
