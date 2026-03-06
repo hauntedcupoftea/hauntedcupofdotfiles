@@ -5,7 +5,7 @@
       settings = {
         "org/gnome/desktop/interface" = {
           cursor-theme = "Bibata-Modern-Classic";
-          cursor-size = lib.gvariant.mkInt32 24;
+          cursor-size = lib.gvariant.mkInt32 28;
         };
       };
     }

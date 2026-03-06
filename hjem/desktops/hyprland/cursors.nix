@@ -9,15 +9,15 @@
     data.files."icons/default/index.theme" = {
       generator = lib.generators.toINI {};
       value = {
-        "Icon Theme".Inherits = "Bibata-Original-Classic";
+        "Icon Theme".Inherits = "Bibata-Modern-Classic";
       };
     };
   };
   environment.sessionVariables = {
     HYPRCURSOR_THEME = "Bibata-modern";
-    HYPRCURSOR_SIZE = 24;
+    HYPRCURSOR_SIZE = 28;
     XCURSOR_THEME = "Bibata-Modern-Classic";
-    XCURSOR_SIZE = 24;
+    XCURSOR_SIZE = 28;
     XCURSOR_PATH = ["${pkgs.bibata-cursors}/share/icons"];
   };
   packages = [
