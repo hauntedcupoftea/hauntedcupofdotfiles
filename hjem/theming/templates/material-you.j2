@@ -1,0 +1,39 @@
+{#
+  Jinja2 template that emulates material you colors
+  To use the variables in here, you need to import it inside a template:
+  {% from 'material-you.j2' import primary, onPrimary, primaryContainer ... %}
+#}
+{% set primary            = color4 | lighten(0.2) %}
+{% set onPrimary          = color2 | darken(0.2) %}
+{% set primaryContainer   = color4 | darken(0.2) %}
+{% set onPrimaryContainer = color4 | lighten(0.1) %}
+
+{% set secondary            = color5 | lighten(0.2) %}
+{% set onSecondary          = color5 | darken(0.2) %}
+{% set secondaryContainer   = color3 | darken(0.2) %}
+{% set onSecondaryContainer = color5 | lighten(0.1) %}
+
+{% set tertiary             = color4 | lighten(0.2) | adjust_hue(30) %}
+{% set onTertiary           = color2 | darken(0.2)  | adjust_hue(30) %}
+{% set tertiaryContainer    = color2 | darken(0.1)  | adjust_hue(30) %}
+{% set onTertiaryContainer  = color4 | lighten(0.1) | adjust_hue(30) %}
+
+{% set error            = color1 | lighten(0.3) %}
+{% set onError          = color1 | darken(0.4) %}
+{% set errorContainer   = color1 | darken(0.2) %}
+{% set onErrorContainer = color1 | lighten(0.3) %}
+
+{% set background       = color0 %}
+{% set onBackground     = color7 %}
+
+{% set surface          = color0 | lighten(0.05) %}
+{% set onSurface        = color7 %}
+{% set surfaceVariant   = color1 | darken(0.2) %}
+{% set onSurfaceVariant = color7 %}
+
+{% set outline          = color8 | darken(0.1) %}
+{% set shadow           = color0 | darken(0.3) %}
+
+{% set inverseSurface   = color7 %}
+{% set inverseOnSurface = color0 %}
+{% set inversePrimary   = color4 | complementary %}

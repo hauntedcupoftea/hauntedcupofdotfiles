@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   files.".config/wallust/wallust.toml".source = (pkgs.formats.toml {}).generate "wallust.toml" {
-    backend = "resized";
-    palette = "dark16";
+    backend = "wal";
+    palette = "saliencedark16";
     check_contrast = true;
     templates = {
       zellij = {
@@ -12,6 +12,11 @@
         template = "kitty.conf";
         target = "~/.config/kitty/colors.conf";
       };
+      # uncomment once adjust-hue goes through
+      # material-you = {
+      #   template = "material-you-theme.json";
+      #   target = "~/.config/hauntedcupofbar/new-theme.json";
+      # };
     };
 
     hooks = {
@@ -22,4 +27,6 @@
 
   files.".config/wallust/templates/zellij.kdl".source = ./templates/zellij.kdl;
   files.".config/wallust/templates/kitty.conf".source = ./templates/kitty.conf;
+  # files.".config/wallust/templates/material-you.j2".source = ./templates/material-you.j2;
+  # files.".config/wallust/templates/material-you-theme.json".source = ./templates/material-you-theme.json;
 }

@@ -1,0 +1,37 @@
+{% from 'material-you.j2' import primary, onPrimary, primaryContainer, onPrimaryContainer,
+   secondary, onSecondary, secondaryContainer, onSecondaryContainer,
+   tertiary, onTertiary, tertiaryContainer, onTertiaryContainer,
+   error, onError, errorContainer, onErrorContainer,
+   background, onBackground, surface, onSurface, surfaceVariant, onSurfaceVariant,
+   outline, shadow, inverseSurface, inverseOnSurface, inversePrimary %}
+{
+  "colors": {
+    "primary":              "{{ primary }}",
+    "onPrimary":            "{{ onPrimary }}",
+    "primaryContainer":     "{{ primaryContainer }}",
+    "onPrimaryContainer":   "{{ onPrimaryContainer }}",
+    "secondary":            "{{ secondary }}",
+    "onSecondary":          "{{ onSecondary }}",
+    "secondaryContainer":   "{{ secondaryContainer }}",
+    "onSecondaryContainer": "{{ onSecondaryContainer }}",
+    "tertiary":             "{{ tertiary }}",
+    "onTertiary":           "{{ onTertiary }}",
+    "tertiaryContainer":    "{{ tertiaryContainer }}",
+    "onTertiaryContainer":  "{{ onTertiaryContainer }}",
+    "error":                "{{ error }}",
+    "onError":              "{{ onError }}",
+    "errorContainer":       "{{ errorContainer }}",
+    "onErrorContainer":     "{{ onErrorContainer }}",
+    "background":           "{{ background }}",
+    "onBackground":         "{{ onBackground }}",
+    "surface":              "{{ surface }}",
+    "onSurface":            "{{ onSurface }}",
+    "surfaceVariant":       "{{ surfaceVariant }}",
+    "onSurfaceVariant":     "{{ onSurfaceVariant }}",
+    "outline":              "{{ outline }}",
+    "shadow":               "{{ shadow }}",
+    "inverseSurface":       "{{ inverseSurface }}",
+    "inverseOnSurface":     "{{ inverseOnSurface }}",
+    "inversePrimary":       "{{ inversePrimary }}"
+  }
+}
