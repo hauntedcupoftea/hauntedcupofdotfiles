@@ -157,6 +157,7 @@
               # https://discourse.nixos.org/t/hardware-encoding-in-obs-studio-with-nvidia-rtx-2070-tu106/63638
               config = {
                 allowUnfree = true;
+                # please build with this false once to add cuda to cachix otherwise compilation death will take you
                 cudaSupport = true;
               };
               system = "x86_64-linux";
@@ -194,4 +195,12 @@
         };
       };
     };
+
+  # cachix configs go here
+  nixConfig = {
+    extra-substituters = ["https://nix-community.cachix.org"];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+  };
 }
