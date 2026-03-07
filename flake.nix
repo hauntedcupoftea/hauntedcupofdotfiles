@@ -154,7 +154,11 @@
               inherit inputs;
             };
             pkgs = import nixpkgs {
-              config.allowUnfree = true;
+              # https://discourse.nixos.org/t/hardware-encoding-in-obs-studio-with-nvidia-rtx-2070-tu106/63638
+              config = {
+                allowUnfree = true;
+                cudaSupport = true;
+              };
               system = "x86_64-linux";
               overlays = [
                 millennium.overlays.default
