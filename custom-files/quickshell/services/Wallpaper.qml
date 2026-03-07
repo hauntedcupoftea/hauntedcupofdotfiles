@@ -177,8 +177,13 @@ Singleton {
             }
             // awww succeeded → run matugen (ThemeColors.qml watches theme.json)
             if (root.runMatugen) {
-                matugenCmd.command = ["matugen", "image", root.current, "--source-color-index", "0"];
+                const types = ["scheme-fidelity", "scheme-vibrant", "scheme-expressive"];
+                const type = types[Math.floor(Math.random() * types.length)];
+                const index = String(Math.floor(Math.random() * 4));
+                matugenCmd.command = ["matugen", "image", root.current, "--source-color-index", index, "-t", type];
                 matugenCmd.running = true;
+                wallustCmd.command = ["wallust", "run", root.current, "-b", "wal", "-p", "saliencedark16", "--check-contrast", "--quiet", "--skip-sequences"];
+                wallustCmd.running = true;
             }
         }
     }
@@ -189,7 +194,15 @@ Singleton {
         onExited: (code, status) => {
             if (code !== 0)
                 console.warn("[Wallpaper] matugen exited with code " + code);
-            console.warn("[Wallpaper] status:" + status);
+        }
+    }
+
+    Process {
+        id: wallustCmd
+        running: false
+        onExited: (code, status) => {
+            if (code !== 0)
+                console.warn("[Wallpaper] wallust exited with code " + code);
         }
     }
 

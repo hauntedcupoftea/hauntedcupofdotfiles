@@ -13,6 +13,23 @@ in {
     rum.programs.starship = {
       enable = true;
       integrations.fish.enable = fishOn;
+      settings = {
+        add_newline = true;
+        character = {
+          success_symbol = "[](bold blue)";
+          error_symbol = "[✗](bold red)";
+          vicmd_symbol = "[](bold green)";
+        };
+        nix_shell = {
+          symbol = "󱄅";
+          impure_msg = "";
+          pure_msg = "";
+          format = "via [$symbol$state( \($name\))]($style) ";
+        };
+        # jobs = {
+
+        # };
+      };
     };
   };
 }

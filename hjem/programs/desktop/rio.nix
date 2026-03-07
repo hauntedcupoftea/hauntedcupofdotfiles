@@ -19,8 +19,9 @@ in {
         args = ["--login"];
       };
       editor.program = lib.getExe pkgs.helix;
-      font = "Fira Code";
       fonts = {
+        family = "Fira Code";
+        use-drawable-chars = true;
         size = 18.0;
         extras = [
           {family = "Noto Sans Mono CJK SC";}

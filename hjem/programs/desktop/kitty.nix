@@ -15,6 +15,7 @@ in {
       enable = true;
       integrations.fish.enable = config.dotfiles.shell.fish.enable;
       settings = {
+        include = "colors.conf"; # theming
         scrollback_lines = 10000;
         enable_audio_bell = true;
         window_alert_on_bell = true;

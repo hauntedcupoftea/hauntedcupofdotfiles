@@ -1,6 +1,6 @@
 {...}: {
   programs.starship = {
-    enable = true;
+    enable = false;
     enableFishIntegration = true;
     settings = {
       add_newline = true;

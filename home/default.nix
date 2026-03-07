@@ -3,14 +3,14 @@
     # ./dev # moved to hjem
     ./desktop
     ./gaming
-    ./hardware
+    # ./hardware
     ./hyprland
     ./music
-    ./shell
+    # ./shell
     ./sioyek.nix
     ./security.nix
-    ./terminals
-    ./theme
+    # ./terminals
+    # ./theme
     # ./utils # moved to hjem
     ./xdg.nix
   ];

@@ -51,6 +51,7 @@ in {
     files.".config/zellij/config.kdl".text = ''
       default_shell "fish"
       show_startup_tips false
+      theme "wallust"
       ui {
         pane_frames {
           hide_session_name true
