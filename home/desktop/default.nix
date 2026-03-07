@@ -10,7 +10,7 @@
     kdePackages.okular # pdf editor
     pinta # paint
     gparted
-    helvum # i don't know what this is but it's cool
+    crosspipe # i don't know what this is but it's cool
     easyeffects # eq and shit
     obsidian # note-taking
     peazip # winrar but good

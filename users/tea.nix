@@ -118,7 +118,7 @@
             kdePackages.okular
             pinta
             gparted
-            helvum
+            crosspipe
             easyeffects
             obsidian
             peazip

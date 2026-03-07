@@ -14,7 +14,7 @@ in {
   wayland.windowManager.hyprland = {
     enable = false;
     systemd.enable = false;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    package = pkgs.hyprland;
 
     settings = {
       # Set default terminal to kitty
