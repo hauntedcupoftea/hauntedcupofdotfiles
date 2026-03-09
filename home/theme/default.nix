@@ -2,6 +2,6 @@
   imports = [
     # ./catppuccin.nix
     ./gtk.nix
-    ./matugen.nix
+    # ./matugen.nix
   ];
 }
