@@ -6,10 +6,19 @@
   imports = [
     inputs.nix-gaming.nixosModules.platformOptimizations
   ];
+
   programs = {
     steam = {
       enable = true;
-      package = pkgs.millennium-steam;
+      package = pkgs.millennium-steam.override {
+        extraProfile = ''
+          export MANGOHUD=1
+          export GAMEMODERUN=1
+          export PROTON_ENABLE_WAYLAND=1
+          export PROTON_DLSS_UPGRADE=1
+          unset TZ
+        '';
+      };
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = false;
       gamescopeSession.enable = true;
