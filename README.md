@@ -1,5 +1,19 @@
 # hauntedcupof.dotfiles
 
+<!--toc:start-->
+
+- [hauntedcupof.dotfiles](#hauntedcupofdotfiles)
+  - [Using Custom Packages (Probably Why You're Here)](#using-custom-packages-probably-why-youre-here)
+    - [Available Packages](#available-packages)
+      - [Dungeondraft](#dungeondraft)
+      - [emBridge](#embridge)
+    - [Using in Your Flake](#using-in-your-flake)
+  - [Running It for Yourself](#running-it-for-yourself)
+  - [Conventions I'm following](#conventions-im-following)
+  - [Special Thanks](#special-thanks)
+
+<!--toc:end-->
+
 > <small>(thanks for the name,
 > [SyedAhkam](https://github.com/SyedAhkam))</small>
 
@@ -15,8 +29,8 @@ configurations.
 
 #### Dungeondraft
 
-A map making tool for Tabletop Roleplaying Games. This is a **paid
-application** - you must purchase and download it yourself.
+A map making tool for Tabletop Roleplaying Games. This is a **paid application**
+and as such must first be purchased and downloaded it yourself.
 
 **To use:**
 
@@ -39,6 +53,8 @@ environment.systemPackages = [
 The package will fail with instructions if the file is not in your store.
 
 #### emBridge
+
+> [!ERROR] Broken lol
 
 eMudhra's emBridge service for accessing crypto tokens (Digital Signature
 Certificates) in Linux. Required for signing PDFs with Indian DSC tokens.
@@ -111,7 +127,7 @@ Add this repository as an input:
 }
 ```
 
-## Running it for yourself
+## Running It for Yourself
 
 Since I'm creating a flake, running this setup would be as simple as cloning,
 copying over your host configuration to a new folder and rebuilding flake with
@@ -119,18 +135,17 @@ that host. (will update this with more clear instructions later).
 
 PLEASE NOTE that it is NOT RECOMMENDED to use this if you don't know what you
 are doing. I will improve things over time, and at a certain point it will be
-more user-friendly. The ultimate goal here is to make a setup that anyone can
-use.
+more user-friendly.
 
 > [!WARNING]
 > If you're running this for the first time and your linux kernel is not set to
-> `latest`, it is recommended to use `sudo nixos-rebuild boot --flake .#HOST`
+> `zen`, it is recommended to use `sudo nixos-rebuild boot --flake .#HOST`
 > instead of the `switch` command. Changing the kernel always requires a reboot
 > to activate successfully so switch will fail with an error. Everything else
 > will be updated, and a simple restart will update the kernel as well, but if
 > you dislike errors like me it's recommended.
 
-## Conventions I'm following
+## Conventions I'm Following
 
 - Home Manager imports /[user].nix instead of home.nix (to make multi-user
   management easier).
@@ -139,14 +154,6 @@ use.
   This should make it easy to simply pick and choose what you require by
   commenting/uncommenting stuff in the various `default.nix` files scattered
   around.
-
-## Wallpaper Credits
-
-- Fern: [nest_virgo](https://www.instagram.com/p/C0Sh_5gP-xu/)
-- Malenia:
-  [Espen Olsen Saetervik](https://x.com/VideoArtGame/status/1698002847575769189)
-  -# This is the only source I could find that credits this image, I cannot find
-  the artist, if you know who they are, please tell me so I can credit them.
 
 ## Special Thanks
 
@@ -159,5 +166,5 @@ use.
   layout + some of the functionalities
 - [Rexiel](https://github.com/Rexcrazy804) for teaching me true nixlang and
   kurukuruDM
-- All the flake providers and home manager contributors. We stand on the
-  shoulders of giants, so we may one day see the sun for ourselves
+- All the flake providers and nix ecosystem contributors. We stand on the
+  shoulders of giants, so that we may one day see the sun for ourselves
