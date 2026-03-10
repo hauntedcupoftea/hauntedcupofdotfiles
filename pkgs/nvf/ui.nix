@@ -20,7 +20,6 @@ in {
     ui.nvim-ufo = {
       enable = true;
       setupOpts = {
-        foldcolumn = "1";
         foldlevel = 99;
         foldlevelstart = 99;
         foldenable = true;
@@ -40,7 +39,24 @@ in {
       borders.enable = true;
       colorizer.enable = true; # highlight #hex colour codes inline
       illuminate.enable = true; # highlight other uses of word under cursor
-      noice.enable = true; # prettier cmdline + notification popups
+      noice = {
+        enable = true;
+        setupOpts = {
+          presets = {
+            command_palette = true;
+            long_message_to_split = true;
+            lsp_doc_border = true;
+          };
+          views = {
+            cmdline_popup = {
+              border.style = "rounded";
+              win_options.winhighlight = "Normal:Normal,FloatBorder:FloatBorder";
+            };
+            popupmenu.border.style = "rounded";
+          };
+        };
+      };
+      modes-nvim.enable = false;
       smartcolumn = {
         enable = true;
         setupOpts.colorcolumn = "100";
@@ -51,7 +67,42 @@ in {
       };
     };
 
-    utility.snacks-nvim.enable = true;
+    utility.snacks-nvim = {
+      enable = true;
+      setupOpts = {
+        notifier = {
+          enabled = true;
+          style = "fancy";
+        };
+        input.enabled = true;
+        explorer.enabled = true;
+        picker.enabled = true;
+        styles = {
+          notification = {
+            border = "rounded";
+            wo.winblend = 0;
+          };
+          input = {
+            border = "rounded";
+            wo.winblend = 0;
+          };
+        };
+      };
+    };
+
+    # Fix float backgrounds — pixel.nvim maps to cterm slots,
+    # so we clear the background on all float-adjacent groups
+    luaConfigRC.float-highlights = ''
+      vim.api.nvim_set_hl(0, 'NormalFloat',   { ctermbg = 'NONE', ctermfg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'FloatBorder',   { ctermbg = 'NONE', ctermfg = 4 })
+      vim.api.nvim_set_hl(0, 'WhichKeyFloat', { ctermbg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'WhichKeyBorder',{ ctermbg = 'NONE', ctermfg = 4 })
+      vim.api.nvim_set_hl(0, 'WhichKeyNormal',{ ctermbg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'Pmenu',         { ctermbg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'PmenuSel',      { ctermbg = 4, ctermfg = 0 })
+      vim.api.nvim_set_hl(0, 'Normal',   { ctermbg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'NonText',  { ctermbg = 'NONE' })
+    '';
 
     visuals = {
       nvim-web-devicons.enable = true;

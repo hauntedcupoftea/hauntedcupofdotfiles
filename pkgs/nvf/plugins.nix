@@ -2,14 +2,13 @@
   vim = {
     # ── Extra plugins ──────────────────────────────────────────────────────
     startPlugins = [
-      pkgs.vimPlugins.promise-async # nvim-ufo dep
-      # pkgs.vimPlugins.refactoring-nvim
+      pkgs.vimPlugins.refactoring-nvim
     ];
 
     # refactoring.nvim: extract function/variable, inline variable
-    # luaConfigRC.refactoring = ''
-    #   require('refactoring').setup({})
-    # '';
+    luaConfigRC.refactoring = ''
+      require('refactoring').setup({})
+    '';
 
     # mini.ai: extended textobjects — mi( ma( mi" ma` mif mia etc.
     mini.ai = {

@@ -46,7 +46,7 @@
 
     # File tree
     filetree.neo-tree = {
-      enable = true;
+      enable = false;
       setupOpts = {
         close_if_last_window = true;
         filesystem.filtered_items = {
@@ -79,8 +79,21 @@
       wrap = false;
       scrolloff = 8;
       sidescrolloff = 8;
-      updatetime = 250; # faster CursorHold → lightbulb + illuminate
     };
+
+    luaConfigRC.startup-explorer = ''
+      vim.api.nvim_create_autocmd("VimEnter", {
+        callback = function()
+          if vim.fn.argc() == 0 then
+            Snacks.explorer()
+          end
+        end,
+      })
+    '';
+
+    luaConfigRC.eob = ''
+      vim.opt.fillchars:append({ eob = " " })
+    '';
 
     globals = {
       mapleader = " ";
