@@ -1,7 +1,5 @@
-{ inputs
-, ...
-}: {
-  imports = [ inputs.kurukurubar.nixosModules.kurukuruDM ];
+{inputs, ...}: {
+  imports = [inputs.kurukurubar.nixosModules.kurukuruDM];
 
   programs.kurukuruDM = {
     enable = true;
@@ -10,6 +8,7 @@
       instantAuth = false;
       extraConfig = ''
         monitor = DP-2, preferred, auto, 1
+        monitor = eDP-1, preferred, auto, 1
       '';
     };
   };
