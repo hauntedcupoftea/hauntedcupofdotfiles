@@ -79,6 +79,8 @@
       wrap = false;
       scrolloff = 8;
       sidescrolloff = 8;
+      updatetime = 50;
+      timeoutlen = 300;
     };
 
     luaConfigRC.startup-explorer = ''
@@ -93,6 +95,14 @@
 
     luaConfigRC.eob = ''
       vim.opt.fillchars:append({ eob = " " })
+    '';
+
+    luaConfigRC.focus-redraw = ''
+      vim.api.nvim_create_autocmd("FocusGained", {
+        callback = function()
+          vim.cmd("redraw!")
+        end,
+      })
     '';
 
     globals = {

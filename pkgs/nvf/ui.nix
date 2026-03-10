@@ -38,7 +38,6 @@ in {
     ui = {
       borders.enable = true;
       colorizer.enable = true; # highlight #hex colour codes inline
-      illuminate.enable = true; # highlight other uses of word under cursor
       noice = {
         enable = true;
         setupOpts = {
@@ -57,10 +56,6 @@ in {
         };
       };
       modes-nvim.enable = false;
-      smartcolumn = {
-        enable = true;
-        setupOpts.colorcolumn = "100";
-      };
       breadcrumbs = {
         enable = true;
         navbuddy.enable = true; # <leader>ns symbol navigation popup

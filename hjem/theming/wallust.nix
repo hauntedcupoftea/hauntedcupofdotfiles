@@ -12,6 +12,10 @@
         template = "kitty.conf";
         target = "~/.config/kitty/colors.conf";
       };
+      nvim = {
+        template = "nvim-colors.lua";
+        target = "~/.config/nvim/wallust-colors.lua";
+      };
       # uncomment once adjust-hue goes through
       # material-you = {
       #   template = "material-you-theme.json";
@@ -27,6 +31,7 @@
 
   files.".config/wallust/templates/zellij.kdl".source = ./templates/zellij.kdl;
   files.".config/wallust/templates/kitty.conf".source = ./templates/kitty.conf;
+  files.".config/wallust/templates/nvim-colors.lua".source = ./templates/nvim-colors.lua;
   # files.".config/wallust/templates/material-you.j2".source = ./templates/material-you.j2;
   # files.".config/wallust/templates/material-you-theme.json".source = ./templates/material-you-theme.json;
 }

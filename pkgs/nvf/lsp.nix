@@ -4,7 +4,6 @@
     lsp = {
       enable = true;
       formatOnSave = true;
-      lightbulb.enable = true; # glyph in sign column when code actions available
       lspkind.enable = true; # pretty icons in completion menu
       inlayHints.enable = true; # parameter names, return types inline
       trouble.enable = true; # diagnostics panel (<leader>xx)
