@@ -84,6 +84,7 @@
             lm_sensors
             nload
             parted
+            hauntedcupof-nvim
             wget2
           ];
         };

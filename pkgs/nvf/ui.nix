@@ -1,0 +1,92 @@
+{pkgs, ...}: let
+  # pixel.nvim — maps every highlight group to ANSI slots 0-15.
+  # Your terminal palette (wallust locally, Android theme over SSH) drives all
+  # colors with zero per-host or per-app color config needed.
+  pixel-nvim = pkgs.vimUtils.buildVimPlugin {
+    pname = "pixel-nvim";
+    version = "unstable";
+    src = pkgs.fetchFromGitHub {
+      owner = "bjarneo";
+      repo = "pixel.nvim";
+      rev = "main";
+      hash = "sha256-D4o5IkLsW4iq6ceeCHKHCNwxVpEV8fYPbpms+J7ZcJQ=";
+    };
+  };
+in {
+  vim = {
+    # ── Theme ──────────────────────────────────────────────────────────────
+    theme.enable = false; # handled by pixel.nvim below
+
+    ui.nvim-ufo = {
+      enable = true;
+      setupOpts = {
+        foldcolumn = "1";
+        foldlevel = 99;
+        foldlevelstart = 99;
+        foldenable = true;
+      };
+    };
+
+    extraPlugins.pixel-nvim = {
+      package = pixel-nvim;
+      setup = "";
+    };
+
+    luaConfigRC.colorscheme = ''
+      vim.cmd('colorscheme pixel')
+    '';
+
+    ui = {
+      borders.enable = true;
+      colorizer.enable = true; # highlight #hex colour codes inline
+      illuminate.enable = true; # highlight other uses of word under cursor
+      noice.enable = true; # prettier cmdline + notification popups
+      smartcolumn = {
+        enable = true;
+        setupOpts.colorcolumn = "100";
+      };
+      breadcrumbs = {
+        enable = true;
+        navbuddy.enable = true; # <leader>ns symbol navigation popup
+      };
+    };
+
+    utility.snacks-nvim.enable = true;
+
+    visuals = {
+      nvim-web-devicons.enable = true;
+      nvim-cursorline.enable = true;
+      indent-blankline.enable = true;
+    };
+
+    # ── Statusline ─────────────────────────────────────────────────────────
+    statusline.lualine = {
+      enable = true;
+      setupOpts.options = {
+        theme = "auto"; # reads terminal ANSI colors
+        section_separators = "";
+        component_separators = "│";
+        globalstatus = true; # one statusline across all splits
+      };
+      setupOpts.sections = {
+        lualine_a = ["mode"];
+        lualine_b = ["branch" "diff"];
+        lualine_c = [
+          {
+            name = "filename";
+            extraConfig.path = 1;
+          } # relative path
+        ];
+        lualine_x = ["diagnostics" "filetype"];
+        lualine_y = ["progress"];
+        lualine_z = ["location"];
+      };
+    };
+
+    tabline.nvimBufferline.enable = true;
+
+    # ── Misc UI ────────────────────────────────────────────────────────────
+    binds.whichKey.enable = true;
+    notify.nvim-notify.enable = true;
+  };
+}
