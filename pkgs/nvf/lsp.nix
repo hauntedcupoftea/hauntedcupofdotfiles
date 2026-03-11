@@ -18,14 +18,24 @@
       ts = {
         enable = true;
         lsp.servers = ["denols"];
+        format.type = ["biome"];
       };
-      css.enable = true;
+      css = {
+        enable = true;
+        format.type = ["biome"];
+      };
       html = {
         enable = true;
         lsp.servers = ["emmet-ls"];
+        format.type = ["biome"];
       };
-      svelte.enable = true;
-      tailwind.enable = true;
+      svelte = {
+        enable = true;
+        format.type = ["biome"];
+      };
+      tailwind = {
+        enable = true;
+      };
       json.enable = true;
       nix = {
         enable = true;

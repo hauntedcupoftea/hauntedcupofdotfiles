@@ -1,38 +1,76 @@
-{pkgs, ...}: let
-  # pixel.nvim — maps every highlight group to ANSI slots 0-15.
-  # Your terminal palette (wallust locally, Android theme over SSH) drives all
-  # colors with zero per-host or per-app color config needed.
-  pixel-nvim = pkgs.vimUtils.buildVimPlugin {
-    pname = "pixel-nvim";
-    version = "unstable";
-    src = pkgs.fetchFromGitHub {
-      owner = "bjarneo";
-      repo = "pixel.nvim";
-      rev = "main";
-      hash = "sha256-D4o5IkLsW4iq6ceeCHKHCNwxVpEV8fYPbpms+J7ZcJQ=";
-    };
-  };
-in {
+{pkgs, ...}: {
   vim = {
-    # ── Theme ──────────────────────────────────────────────────────────────
-    theme.enable = false; # handled by pixel.nvim below
+    theme.enable = false;
 
-    ui.nvim-ufo = {
-      enable = true;
-      setupOpts = {
-        foldlevel = 99;
-        foldlevelstart = 99;
-        foldenable = true;
-      };
-    };
-
-    extraPlugins.pixel-nvim = {
-      package = pixel-nvim;
+    extraPlugins.mini-base16 = {
+      package = pkgs.vimPlugins.mini-base16;
       setup = "";
     };
 
     luaConfigRC.colorscheme = ''
-      vim.cmd('colorscheme pixel')
+      local function load_colors()
+        local ok, colors = pcall(dofile, vim.fn.expand('~/.config/nvim/wallust-colors.lua'))
+        if not ok or not colors then return end
+
+        require('mini.base16').setup({
+          palette = {
+            base00 = colors.background,
+            base01 = colors.color0,
+            base02 = colors.color8,
+            base03 = colors.color9,
+            base04 = colors.color7,
+            base05 = colors.foreground,
+            base06 = colors.color7,
+            base07 = colors.color15,
+            base08 = colors.color1,
+            base09 = colors.color3,
+            base0A = colors.color11,
+            base0B = colors.color2,
+            base0C = colors.color6,
+            base0D = colors.color4,
+            base0E = colors.color5,
+            base0F = colors.color13,
+          },
+        })
+
+        -- Transparency + highlight fixes
+        local transparent = {
+          "Normal", "NormalNC", "NormalFloat", "FloatBorder", "FloatTitle",
+          "Pmenu", "PmenuSel", "PmenuSbar", "PmenuThumb",
+          "StatusLine", "StatusLineNC", "TabLine", "TabLineFill", "TabLineSel",
+          "WinBar", "WinBarNC", "SignColumn", "LineNr", "LineNrAbove",
+          "LineNrBelow", "CursorLineNr", "FoldColumn", "Folded",
+          "EndOfBuffer", "ColorColumn", "CursorLine",
+          "WhichKey", "WhichKeyGroup", "WhichKeyDesc", "WhichKeySeparator",
+          "WhichKeyFloat", "WhichKeyBorder", "WhichKeyValue",
+        }
+        for _, group in ipairs(transparent) do
+          vim.api.nvim_set_hl(0, group, { bg = "NONE" })
+        end
+
+        vim.api.nvim_set_hl(0, "FloatBorder",  { fg = colors.color8, bg = "NONE" })
+        vim.api.nvim_set_hl(0, "WinSeparator", { fg = colors.color8, bg = "NONE" })
+        vim.api.nvim_set_hl(0, "LineNr",       { fg = colors.color8, bg = "NONE" })
+        vim.api.nvim_set_hl(0, "Visual",       { bg = colors.color8, fg = colors.foreground })
+        vim.api.nvim_set_hl(0, "Search",       { bg = colors.color3, fg = colors.background })
+        vim.api.nvim_set_hl(0, "IncSearch",    { bg = colors.color6, fg = colors.background })
+        vim.api.nvim_set_hl(0, "MatchParen",   { bg = colors.color8, fg = colors.foreground, bold = true })
+      end
+
+      load_colors()
+
+      local w = vim.uv.new_fs_event()
+      local path = vim.fn.expand('~/.config/nvim/wallust-colors.lua')
+
+      local function watch()
+        w:start(path, {}, vim.schedule_wrap(function()
+          w:stop()
+          load_colors()
+          watch() -- debounce by restarting after handling
+        end))
+      end
+
+      watch()
     '';
 
     ui = {
@@ -85,27 +123,12 @@ in {
       };
     };
 
-    # Fix float backgrounds — pixel.nvim maps to cterm slots,
-    # so we clear the background on all float-adjacent groups
-    luaConfigRC.float-highlights = ''
-      vim.api.nvim_set_hl(0, 'NormalFloat',   { ctermbg = 'NONE', ctermfg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'FloatBorder',   { ctermbg = 'NONE', ctermfg = 4 })
-      vim.api.nvim_set_hl(0, 'WhichKeyFloat', { ctermbg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'WhichKeyBorder',{ ctermbg = 'NONE', ctermfg = 4 })
-      vim.api.nvim_set_hl(0, 'WhichKeyNormal',{ ctermbg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'Pmenu',         { ctermbg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'PmenuSel',      { ctermbg = 4, ctermfg = 0 })
-      vim.api.nvim_set_hl(0, 'Normal',   { ctermbg = 'NONE' })
-      vim.api.nvim_set_hl(0, 'NonText',  { ctermbg = 'NONE' })
-    '';
-
     visuals = {
       nvim-web-devicons.enable = true;
       nvim-cursorline.enable = true;
       indent-blankline.enable = true;
     };
 
-    # ── Statusline ─────────────────────────────────────────────────────────
     statusline.lualine = {
       enable = true;
       setupOpts.options = {
@@ -131,7 +154,6 @@ in {
 
     tabline.nvimBufferline.enable = true;
 
-    # ── Misc UI ────────────────────────────────────────────────────────────
     binds.whichKey.enable = true;
     notify.nvim-notify.enable = true;
   };
