@@ -19,7 +19,10 @@
       fold = true; # required by nvim-ufo
     };
 
-    # Yazi
+    ui.nvim-ufo = {
+      enable = true;
+    };
+
     utility.yazi-nvim = {
       enable = true;
       setupOpts.open_for_directories = true; # hijack netrw directory opens
@@ -27,9 +30,6 @@
       mappings.openYaziDir = "<leader>Y";
       mappings.yaziToggle = "<leader>yt";
     };
-
-    # Telescope
-    telescope.enable = true;
 
     # Project root detection
     projects.project-nvim = {
@@ -81,17 +81,9 @@
       sidescrolloff = 8;
       updatetime = 50;
       timeoutlen = 300;
+      foldlevel = 99;
+      foldlevelstart = 99;
     };
-
-    luaConfigRC.startup-explorer = ''
-      vim.api.nvim_create_autocmd("VimEnter", {
-        callback = function()
-          if vim.fn.argc() == 0 then
-            Snacks.explorer()
-          end
-        end,
-      })
-    '';
 
     luaConfigRC.eob = ''
       vim.opt.fillchars:append({ eob = " " })

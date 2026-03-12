@@ -110,6 +110,48 @@
         input.enabled = true;
         explorer.enabled = true;
         picker.enabled = true;
+
+        scratch.enabled = true;
+
+        git.enabled = true;
+        gitbrowse.enabled = true;
+
+        dashboard = {
+          enabled = true;
+          preset.keys = [
+            {
+              icon = " ";
+              key = "e";
+              desc = "Explorer";
+              action = ":lua Snacks.explorer()";
+            }
+            {
+              icon = " ";
+              key = "f";
+              desc = "Find File";
+              action = ":lua Snacks.dashboard.pick('files')";
+            }
+            {
+              icon = " ";
+              key = "r";
+              desc = "Recent Files";
+              action = ":lua Snacks.dashboard.pick('oldfiles')";
+            }
+            {
+              icon = " ";
+              key = "g";
+              desc = "Find Text";
+              action = ":lua Snacks.dashboard.pick('live_grep')";
+            }
+            {
+              icon = " ";
+              key = "q";
+              desc = "Quit";
+              action = ":qa";
+            }
+          ];
+        };
+
         styles = {
           notification = {
             border = "rounded";

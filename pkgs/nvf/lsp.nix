@@ -1,41 +1,39 @@
-{...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   vim = {
-    # LSP core
     lsp = {
       enable = true;
       formatOnSave = true;
-      lspkind.enable = true; # pretty icons in completion menu
-      inlayHints.enable = true; # parameter names, return types inline
-      trouble.enable = true; # diagnostics panel (<leader>xx)
+      lspkind.enable = true;
+      inlayHints.enable = true;
+      trouble.enable = true;
     };
-
-    # Languages
     languages = {
       enableFormat = true;
       enableTreesitter = true;
       enableExtraDiagnostics = true;
-
       ts = {
         enable = true;
         lsp.servers = ["denols"];
-        format.type = ["biome"];
+        format.enable = false;
       };
       css = {
         enable = true;
-        format.type = ["biome"];
+        format.enable = false;
       };
       html = {
         enable = true;
         lsp.servers = ["emmet-ls"];
-        format.type = ["biome"];
+        format.enable = false;
       };
       svelte = {
         enable = true;
-        format.type = ["biome"];
+        format.enable = false;
       };
-      tailwind = {
-        enable = true;
-      };
+      tailwind.enable = true;
       json.enable = true;
       nix = {
         enable = true;
@@ -57,13 +55,31 @@
       lua.enable = true;
       toml.enable = true;
     };
-
-    formatter.conform-nvim.setupOpts.formatters = {
-      biome.command = "biome";
-      alejandra.command = "alejandra";
-      ruff_format.command = "ruff";
+    formatter.conform-nvim = {
+      enable = true;
+      setupOpts = {
+        formatters_by_ft = {
+          typescript = ["deno_fmt"];
+          javascript = ["deno_fmt"];
+          css = ["deno_fmt"];
+          html = ["deno_fmt"];
+          svelte = ["deno_fmt"];
+          python = ["ruff_format"];
+        };
+        formatters = {
+          ruff_format.command = "ruff";
+          deno_fmt = {
+            command = lib.getExe pkgs.deno;
+            args = lib.generators.mkLuaInline ''
+              function(self, ctx)
+                local ext = vim.fn.fnamemodify(ctx.filename, ":e")
+                return { "fmt", "--ext", ext, "-" }
+              end
+            '';
+          };
+        };
+      };
     };
-
     luaConfigRC.lsp-roots = ''
       vim.lsp.config('denols', {
         root_markers = { 'deno.json', 'deno.jsonc' },

@@ -52,79 +52,91 @@
       desc = "Reveal in explorer";
     }
 
-    # ── Telescope ─────────────────────────────────────────────────────────
+    # ── Snacks Picker ───────────────────────────────────
     {
       key = "<leader>ff";
       mode = "n";
-      action = "<cmd>Telescope find_files<cr>";
+      action = "<cmd>lua Snacks.picker.files()<cr>";
       desc = "Find files";
     }
     {
       key = "<leader>fg";
       mode = "n";
-      action = "<cmd>Telescope live_grep<cr>";
+      action = "<cmd>lua Snacks.picker.grep()<cr>";
       desc = "Live grep";
     }
     {
       key = "<leader>fb";
       mode = "n";
-      action = "<cmd>Telescope buffers<cr>";
+      action = "<cmd>lua Snacks.picker.buffers()<cr>";
       desc = "Buffers";
     }
     {
       key = "<leader>fr";
       mode = "n";
-      action = "<cmd>Telescope oldfiles<cr>";
+      action = "<cmd>lua Snacks.picker.recent()<cr>";
       desc = "Recent files";
     }
     {
       key = "<leader>fs";
       mode = "n";
-      action = "<cmd>Telescope lsp_document_symbols<cr>";
+      action = "<cmd>lua Snacks.picker.lsp_symbols()<cr>";
       desc = "Symbols (file)";
     }
     {
       key = "<leader>fS";
       mode = "n";
-      action = "<cmd>Telescope lsp_workspace_symbols<cr>";
+      action = "<cmd>lua Snacks.picker.lsp_workspace_symbols()<cr>";
       desc = "Symbols (workspace)";
     }
     {
       key = "<leader>fd";
       mode = "n";
-      action = "<cmd>Telescope diagnostics<cr>";
+      action = "<cmd>lua Snacks.picker.diagnostics()<cr>";
       desc = "Diagnostics";
+    }
+    {
+      key = "<leader>fc";
+      mode = "n";
+      action = "<cmd>lua Snacks.picker.command_history()<cr>";
+      desc = "Command history";
+    }
+    {
+      key = "<leader>fk";
+      mode = "n";
+      action = "<cmd>lua Snacks.picker.keymaps()<cr>";
+      desc = "Keymaps";
     }
 
     # ── LSP ───────────────────────────────────────────────────────────────
     {
       key = "gd";
       mode = "n";
-      action = "<cmd>lua vim.lsp.buf.definition()<cr>";
+      action = "<cmd>lua Snacks.picker.lsp_definitions()<cr>";
       desc = "Definition";
     }
     {
       key = "gD";
       mode = "n";
-      action = "<cmd>lua vim.lsp.buf.declaration()<cr>";
+      action = "<cmd>lua Snacks.picker.lsp_declarations()<cr>";
       desc = "Declaration";
     }
     {
       key = "gr";
       mode = "n";
-      action = "<cmd>lua vim.lsp.buf.references()<cr>";
+      action = "<cmd>lua Snacks.picker.lsp_references()<cr>";
       desc = "References";
     }
     {
       key = "gi";
       mode = "n";
-      action = "<cmd>lua vim.lsp.buf.implementation()<cr>";
+      action = "<cmd>lua Snacks.picker.lsp_implementations()<cr>";
       desc = "Implementation";
     }
     {
       key = "gt";
       mode = "n";
-      action = "<cmd>lua vim.lsp.buf.type_definition()<cr>";
+      action = "<cmd>lua Snacks.picker.lsp_type_definitions()<cr>";
       desc = "Type definition";
     }
     {
@@ -261,13 +273,38 @@
       action = "<cmd>Gitsigns preview_hunk<cr>";
       desc = "Preview hunk";
     }
+
+    # ── Git (Snacks) ──────────────────────────────────────────────────────
     {
       key = "<leader>gb";
       mode = "n";
-      action = "<cmd>Gitsigns blame_line<cr>";
-      desc = "Blame line";
+      action = "<cmd>lua Snacks.git.blame_line()<cr>";
+      desc = "Blame line (float)";
     }
-
+    {
+      key = "<leader>gl";
+      mode = "n";
+      action = "<cmd>lua Snacks.picker.git_log()<cr>";
+      desc = "Git log";
+    }
+    {
+      key = "<leader>gL";
+      mode = "n";
+      action = "<cmd>lua Snacks.picker.git_log_file()<cr>";
+      desc = "Git log (file)";
+    }
+    {
+      key = "<leader>go";
+      mode = ["n" "v"];
+      action = "<cmd>lua Snacks.gitbrowse()<cr>";
+      desc = "Open in browser";
+    }
+    {
+      key = "<leader>gS";
+      mode = "n";
+      action = "<cmd>lua Snacks.picker.git_status()<cr>";
+      desc = "Git status";
+    }
     # ── Buffers ───────────────────────────────────────────────────────────
     {
       key = "<leader>bd";
@@ -286,6 +323,20 @@
       mode = "n";
       action = "<cmd>bprev<cr>";
       desc = "Prev buffer";
+    }
+
+    # ── Scratch ───────────────────────────────────────────────────────────
+    {
+      key = "<leader>ss";
+      mode = "n";
+      action = "<cmd>lua Snacks.scratch()<cr>";
+      desc = "Scratch buffer";
+    }
+    {
+      key = "<leader>sS";
+      mode = "n";
+      action = "<cmd>lua Snacks.scratch.select()<cr>";
+      desc = "Select scratch";
     }
   ];
 }
