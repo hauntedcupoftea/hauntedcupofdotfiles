@@ -75,7 +75,7 @@
 
     ui = {
       borders.enable = true;
-      colorizer.enable = true; # highlight #hex colour codes inline
+      colorizer.enable = true;
       noice = {
         enable = true;
         setupOpts = {
@@ -96,7 +96,7 @@
       modes-nvim.enable = false;
       breadcrumbs = {
         enable = true;
-        navbuddy.enable = true; # <leader>ns symbol navigation popup
+        navbuddy.enable = true;
       };
     };
 
@@ -107,15 +107,22 @@
           enabled = true;
           style = "fancy";
         };
+
         input.enabled = true;
-        bufdelete.enable = true;
+        indent.enabled = true;
+        scroll.enabled = true;
+        words.enabled = true;
+        statuscolumn.enabled = true;
+
+        quickfile.enabled = true;
+        bigfile.enabled = true;
+
         explorer.enabled = true;
         picker.enabled = true;
-
         scratch.enabled = true;
-
         git.enabled = true;
         gitbrowse.enabled = true;
+        bufdelete.enabled = true;
 
         dashboard = {
           enabled = true;
@@ -190,17 +197,15 @@
 
     visuals = {
       nvim-web-devicons.enable = true;
-      nvim-cursorline.enable = true;
-      indent-blankline.enable = true;
     };
 
     statusline.lualine = {
       enable = true;
       setupOpts.options = {
-        theme = "auto"; # reads terminal ANSI colors
+        theme = "auto";
         section_separators = "";
         component_separators = "│";
-        globalstatus = true; # one statusline across all splits
+        globalstatus = true;
       };
       setupOpts.sections = {
         lualine_a = ["mode"];
@@ -209,7 +214,7 @@
           {
             name = "filename";
             extraConfig.path = 1;
-          } # relative path
+          }
         ];
         lualine_x = ["diagnostics" "filetype"];
         lualine_y = ["progress"];
@@ -220,6 +225,5 @@
     tabline.nvimBufferline.enable = true;
 
     binds.whichKey.enable = true;
-    notify.nvim-notify.enable = true;
   };
 }

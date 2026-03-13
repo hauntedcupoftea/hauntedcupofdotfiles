@@ -1,6 +1,6 @@
 {...}: {
   vim.keymaps = [
-    # ── Windows ──────────────────────────────────────────────────────────
+    # Windows
     {
       key = "<C-h>";
       mode = "n";
@@ -38,7 +38,7 @@
       desc = "Split horizontal";
     }
 
-    # ── File tree ─────────────────────────────────────────────────────────
+    # File tree
     {
       key = "<leader>e";
       mode = "n";
@@ -52,7 +52,7 @@
       desc = "Reveal in explorer";
     }
 
-    # ── Snacks Picker ─────────────────────────────────────────────────────
+    # Snacks Picker
     {
       key = "<leader>ff";
       mode = "n";
@@ -108,7 +108,7 @@
       desc = "Keymaps";
     }
 
-    # ── LSP ───────────────────────────────────────────────────────────────
+    # LSP
     {
       key = "gd";
       mode = "n";
@@ -176,7 +176,7 @@
       desc = "Toggle inlay hints";
     }
 
-    # ── Diagnostics ───────────────────────────────────────────────────────
+    # Diagnostics
     {
       key = "<leader>xx";
       mode = "n";
@@ -202,7 +202,7 @@
       desc = "Prev diagnostic";
     }
 
-    # ── Folds (nvim-ufo) ──────────────────────────────────────────────────
+    # Folds (nvim-ufo)
     {
       key = "zR";
       mode = "n";
@@ -222,7 +222,7 @@
       desc = "Peek fold";
     }
 
-    # ── Refactoring ───────────────────────────────────────────────────────
+    # Refactoring
     {
       key = "<leader>rf";
       mode = "v";
@@ -242,7 +242,7 @@
       desc = "Inline variable";
     }
 
-    # ── Git hunks ─────────────────────────────────────────────────────────
+    # Git hunks
     {
       key = "]h";
       mode = "n";
@@ -274,7 +274,7 @@
       desc = "Preview hunk";
     }
 
-    # ── Git (Snacks) ──────────────────────────────────────────────────────
+    # Git (Snacks)
     {
       key = "<leader>gb";
       mode = "n";
@@ -306,7 +306,7 @@
       desc = "Git status";
     }
 
-    # ── Buffers ───────────────────────────────────────────────────────────
+    # Buffers
     {
       key = "<Tab>";
       mode = "n";
@@ -362,7 +362,7 @@
       desc = "Pick buffer to close";
     }
 
-    # ── Scratch ───────────────────────────────────────────────────────────
+    # Scratch
     {
       key = "<leader>ss";
       mode = "n";
