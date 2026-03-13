@@ -41,6 +41,11 @@
       user = "tea";
       directory = "/home/tea";
 
+      environment.sessionVariables = {
+        EDITOR = "nvim";
+        VISUAL = "nvim";
+      };
+
       dotfiles = {
         shell = {
           helix.enable = true;

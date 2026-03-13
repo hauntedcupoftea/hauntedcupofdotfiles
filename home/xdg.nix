@@ -55,7 +55,7 @@
       text = ''
         [filechooser]
         cmd=yazi-wrapper.fish
-        env=EDITOR=hx
+        env=EDITOR=nvim
       '';
     };
     ".config/xdg-desktop-portal-termfilechooser/yazi-wrapper.fish" = {
