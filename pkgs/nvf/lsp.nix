@@ -14,7 +14,6 @@
     languages = {
       enableFormat = true;
       enableTreesitter = true;
-      enableExtraDiagnostics = true;
       ts = {
         enable = true;
         lsp.servers = ["denols"];
@@ -49,7 +48,6 @@
         enable = true;
         extensions.crates-nvim.enable = true;
       };
-      clang.enable = true;
       typst.enable = true;
       bash.enable = true;
       lua.enable = true;

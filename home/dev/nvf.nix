@@ -59,7 +59,6 @@
         languages = {
           enableFormat = true;
           enableTreesitter = true;
-          enableExtraDiagnostics = true;
 
           bash.enable = true;
           css.enable = true;

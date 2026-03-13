@@ -13,7 +13,7 @@
   monitorStrings =
     if monitors == []
     then [",preferred,auto,1"]
-    else map (m: "${m.name}, ${m.resolution}@${toString m.refreshRate}, ${m.position}, ${toString m.scale}${lib.optionalString m.vrr ", vrr, 3"}") monitors;
+    else map (m: "${m.name}, ${m.resolution}@${toString m.refreshRate}, ${m.position}, ${toString m.scale}${lib.optionalString m.vrr ", vrr, 2"}") monitors;
 
   primaryMonitor = lib.findFirst (m: m.primary) null monitors;
   secondaryMonitors = lib.filter (m: !m.primary) monitors;

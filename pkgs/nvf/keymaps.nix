@@ -52,7 +52,7 @@
       desc = "Reveal in explorer";
     }
 
-    # ── Snacks Picker ───────────────────────────────────
+    # ── Snacks Picker ─────────────────────────────────────────────────────
     {
       key = "<leader>ff";
       mode = "n";
@@ -305,24 +305,61 @@
       action = "<cmd>lua Snacks.picker.git_status()<cr>";
       desc = "Git status";
     }
+
     # ── Buffers ───────────────────────────────────────────────────────────
-    {
-      key = "<leader>bd";
-      mode = "n";
-      action = "<cmd>bd<cr>";
-      desc = "Close buffer";
-    }
     {
       key = "<Tab>";
       mode = "n";
-      action = "<cmd>bnext<cr>";
+      action = "<cmd>BufferLineCycleNext<cr>";
       desc = "Next buffer";
     }
     {
       key = "<S-Tab>";
       mode = "n";
-      action = "<cmd>bprev<cr>";
+      action = "<cmd>BufferLineCyclePrev<cr>";
       desc = "Prev buffer";
+    }
+    {
+      key = "<leader>bd";
+      mode = "n";
+      action = "<cmd>lua Snacks.bufdelete()<cr>";
+      desc = "Close buffer";
+    }
+    {
+      key = "<leader>bo";
+      mode = "n";
+      action = "<cmd>lua Snacks.bufdelete.other()<cr>";
+      desc = "Close other buffers";
+    }
+    {
+      key = "<leader>bD";
+      mode = "n";
+      action = "<cmd>lua Snacks.bufdelete.all(); Snacks.dashboard()<cr>";
+      desc = "Close all buffers";
+    }
+    {
+      key = "<leader>bl";
+      mode = "n";
+      action = "<cmd>BufferLineMoveNext<cr>";
+      desc = "Move buffer right";
+    }
+    {
+      key = "<leader>bh";
+      mode = "n";
+      action = "<cmd>BufferLineMovePrev<cr>";
+      desc = "Move buffer left";
+    }
+    {
+      key = "<leader>bp";
+      mode = "n";
+      action = "<cmd>BufferLinePick<cr>";
+      desc = "Pick buffer";
+    }
+    {
+      key = "<leader>bP";
+      mode = "n";
+      action = "<cmd>BufferLinePickClose<cr>";
+      desc = "Pick buffer to close";
     }
 
     # ── Scratch ───────────────────────────────────────────────────────────

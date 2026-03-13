@@ -92,7 +92,7 @@
         theming.enable = true;
 
         languages = {
-          cpp = true;
+          cpp = false;
           fish = true;
           markdown = true;
           nix = true;
