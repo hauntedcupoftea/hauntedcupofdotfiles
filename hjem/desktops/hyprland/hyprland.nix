@@ -157,6 +157,15 @@ in {
             immediate = "on";
           }
           {
+            name = "steam-games-wayland";
+            match.xdg_tag = "proton-game";
+            fullscreen_state = "2 2";
+            content = "game";
+            workspace = "2";
+            no_max_size = "on";
+            immediate = "on";
+          }
+          {
             name = "polkit-float";
             match.class = "^(polkit-gnome|polkit-kde|gcr-prompter)$";
             float = "on";
