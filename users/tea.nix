@@ -91,6 +91,8 @@
             parted
             hauntedcupof-nvim
             wget2
+            claude-code
+            claude-monitor
           ];
         };
 
@@ -133,6 +135,7 @@
             element-desktop
             zapzap
             zmkbatx
+            antigravity-fhs
             # screen capture / screenshot stack
             wf-recorder
             hyprshot
