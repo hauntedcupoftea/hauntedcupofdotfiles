@@ -37,9 +37,6 @@
       frame_timing = true;
 
       toggle_hud = "F12";
-
-      cpu_temp_limit = 90;
-      gpu_temp_limit = 87;
     };
   };
 }
