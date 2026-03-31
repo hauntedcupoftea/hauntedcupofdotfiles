@@ -48,9 +48,11 @@ in {
         else "false";
     };
 
+    # theme_dir is a temporary fix for https://github.com/zellij-org/zellij/issues/4889
     files.".config/zellij/config.kdl".text = ''
       default_shell "fish"
       show_startup_tips false
+      theme_dir "/home/tea/.config/zellij/themes"
       theme "wallust"
       ui {
         pane_frames {
