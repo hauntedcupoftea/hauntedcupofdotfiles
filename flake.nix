@@ -140,7 +140,7 @@
         packages = {
           dungeondraft = pkgs.dungeondraft;
           embridge = pkgs.embridge;
-          hauntecupof-nvim = pkgs.hauntedcupof-nvim;
+          hauntedcupof-nvim = pkgs.hauntedcupof-nvim;
           default = pkgs.dungeondraft;
         };
       };
