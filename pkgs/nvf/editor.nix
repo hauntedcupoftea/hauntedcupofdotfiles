@@ -61,6 +61,9 @@
       enable = true;
       gitsigns.enable = true;
       gitsigns.codeActions.enable = true; # stage/reset hunk via code action
+      git-conflict = {
+        enable = true;
+      };
     };
 
     # Misc

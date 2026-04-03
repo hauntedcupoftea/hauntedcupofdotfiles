@@ -7,13 +7,19 @@
     inputs.nix-gaming.nixosModules.platformOptimizations
   ];
 
+  boot.kernelModules = [
+    "ntsync"
+  ];
+
   programs = {
     steam = {
       enable = true;
       package = pkgs.millennium-steam.override {
         extraProfile = ''
           export MANGOHUD=1
-          export GAMEMODERUN=1
+          export PROTON_USE_WOW64=1
+          export PROTON_USE_NTSYNC=1
+          export SDL_VIDEODRIVER="wayland,x11,windows"
           export PROTON_ENABLE_WAYLAND=1
           export PROTON_DLSS_UPGRADE=1
           unset TZ

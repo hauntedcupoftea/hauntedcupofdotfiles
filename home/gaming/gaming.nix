@@ -35,6 +35,7 @@
       cpu_load_change = true;
       fps = true;
       frame_timing = true;
+      winesync = true;
 
       toggle_hud = "F12";
     };
