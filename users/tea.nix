@@ -92,8 +92,6 @@
             parted
             hauntedcupof-nvim
             wget2
-            claude-code
-            claude-monitor
           ];
         };
 

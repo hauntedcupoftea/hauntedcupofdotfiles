@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
     systems.url = "github:nix-systems/default";
 
     home-manager = {
@@ -13,13 +12,23 @@
 
     # life will change
     hjem.follows = "hjem-rum/hjem";
-    niqspkgs.url = "github:diniamo/niqspkgs";
+    niqspkgs = {
+      url = "github:diniamo/niqspkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hjem-rum = {
       url = "github:snugnug/hjem-rum";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-grub-themes.url = "github:jeslie0/nixos-grub-themes";
-    awww.url = "git+https://codeberg.org/LGFae/awww";
+    nixos-grub-themes = {
+      url = "github:jeslie0/nixos-grub-themes";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    awww = {
+      url = "git+https://codeberg.org/LGFae/awww";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
+    };
     # life has changed this much
 
     flake-parts = {
@@ -102,7 +111,10 @@
       inputs.flake-parts.follows = "flake-parts";
     };
 
-    millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
+    millennium = {
+      url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
