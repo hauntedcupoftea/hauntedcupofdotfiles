@@ -87,6 +87,7 @@
             btrfs-progs
             desktop-file-utils
             fastfetch
+            just
             git
             inetutils
             lm_sensors
