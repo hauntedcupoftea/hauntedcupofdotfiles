@@ -77,6 +77,8 @@
           packages = with pkgs; [
             bruno
             deno
+            claude-code
+            claude-monitor
             requestly
             sql-studio
             zrok
