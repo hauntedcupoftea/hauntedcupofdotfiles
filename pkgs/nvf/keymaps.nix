@@ -192,13 +192,13 @@
     {
       key = "]d";
       mode = "n";
-      action = "<cmd>lua vim.diagnostic.goto_next()<cr>";
+      action = "<cmd>lua vim.diagnostic.jump({ count = 1, float = true })<cr>";
       desc = "Next diagnostic";
     }
     {
       key = "[d";
       mode = "n";
-      action = "<cmd>lua vim.diagnostic.goto_prev()<cr>";
+      action = "<cmd>lua vim.diagnostic.jump({ count = -1, float = true })<cr>";
       desc = "Prev diagnostic";
     }
 
