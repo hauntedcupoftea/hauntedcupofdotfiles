@@ -12,8 +12,6 @@ in {
     enable = lib.mkEnableOption "hauntedcupofdotfiles themeing (awww + matugen + wallust)";
   };
 
-  # Wallpaper daemon and color generation tools.
-  # Future: add matugen/wallust hooks here to auto-recolor on wallpaper change.
   config = lib.mkIf cfg.enable {
     packages = [
       awww

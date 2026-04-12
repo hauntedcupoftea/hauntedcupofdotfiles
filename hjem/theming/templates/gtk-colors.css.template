@@ -1,0 +1,95 @@
+@define-color wallust_bg {{ background }};
+@define-color wallust_fg {{ foreground }};
+@define-color wallust_color0 {{ color0 }};
+@define-color wallust_color1 {{ color1 }};
+@define-color wallust_color2 {{ color2 }};
+@define-color wallust_color3 {{ color3 }};
+@define-color wallust_color4 {{ color4 }};
+@define-color wallust_color5 {{ color5 }};
+@define-color wallust_color6 {{ color6 }};
+@define-color wallust_color7 {{ color7 }};
+@define-color wallust_color8 {{ color8 }};
+@define-color wallust_color9 {{ color9 }};
+@define-color wallust_color10 {{ color10 }};
+@define-color wallust_color11 {{ color11 }};
+@define-color wallust_color12 {{ color12 }};
+@define-color wallust_color13 {{ color13 }};
+@define-color wallust_color14 {{ color14 }};
+@define-color wallust_color15 {{ color15 }};
+
+/* Semantic layer — these are what Colloid and libadwaita actually reference */
+@define-color accent_color @wallust_color4;
+@define-color accent_bg_color @wallust_color4;
+@define-color accent_fg_color @wallust_bg;
+
+@define-color destructive_color @wallust_color1;
+@define-color destructive_bg_color @wallust_color1;
+@define-color destructive_fg_color @wallust_bg;
+
+@define-color success_color @wallust_color2;
+@define-color success_bg_color @wallust_color2;
+@define-color success_fg_color @wallust_bg;
+
+@define-color warning_color @wallust_color3;
+@define-color warning_bg_color @wallust_color3;
+@define-color warning_fg_color @wallust_bg;
+
+@define-color error_color @wallust_color1;
+@define-color error_bg_color @wallust_color1;
+@define-color error_fg_color @wallust_bg;
+
+/* Window and surface hierarchy */
+@define-color window_bg_color @wallust_bg;
+@define-color window_fg_color @wallust_fg;
+@define-color view_bg_color @wallust_color0;
+@define-color view_fg_color @wallust_fg;
+
+/* Headerbar */
+@define-color headerbar_bg_color @wallust_color0;
+@define-color headerbar_fg_color @wallust_fg;
+@define-color headerbar_border_color @wallust_color8;
+@define-color headerbar_backdrop_color @wallust_bg;
+@define-color headerbar_shade_color rgba(0, 0, 0, 0.3);
+@define-color headerbar_darker_shade_color rgba(0, 0, 0, 0.2);
+
+/* Sidebar and navigation */
+@define-color sidebar_bg_color @wallust_color0;
+@define-color sidebar_fg_color @wallust_fg;
+@define-color sidebar_border_color @wallust_color8;
+@define-color sidebar_backdrop_color @wallust_bg;
+
+/* Popovers */
+@define-color popover_bg_color @wallust_color0;
+@define-color popover_fg_color @wallust_fg;
+@define-color popover_shade_color rgba(0, 0, 0, 0.1);
+
+/* Cards */
+@define-color card_bg_color {{ color0 }}19;
+@define-color card_fg_color @wallust_fg;
+@define-color card_shade_color rgba(0, 0, 0, 0.2);
+
+/* Dialogs */
+@define-color dialog_bg_color @wallust_color0;
+@define-color dialog_fg_color @wallust_fg;
+
+/* Thumbnails */
+@define-color thumbnail_bg_color @wallust_color0;
+@define-color thumbnail_fg_color @wallust_fg;
+
+/* Borders and chrome */
+@define-color borders @wallust_color8;
+@define-color shade_color rgba(0, 0, 0, 0.3);
+@define-color scrollbar_outline_color rgba(0, 0, 0, 0.5);
+
+/* Selection */
+@define-color selected_bg_color @wallust_color4;
+@define-color selected_fg_color @wallust_bg;
+
+/* Tooltip */
+@define-color tooltip_bg_color @wallust_color0;
+@define-color tooltip_fg_color @wallust_fg;
+
+/* Insensitive / disabled */
+@define-color insensitive_bg_color @wallust_color0;
+@define-color insensitive_fg_color @wallust_color8;
+@define-color insensitive_border_color @wallust_color8;
