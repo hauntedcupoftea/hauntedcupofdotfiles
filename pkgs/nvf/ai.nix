@@ -1,14 +1,3 @@
-# ai.nix — codecompanion-nvim configuration for nvf
-# Provider-agnostic AI setup. Gracefully inactive when no API key is present.
-#
-# Supported env vars (set whichever you're using):
-#   ANTHROPIC_API_KEY   → adapter = "anthropic"
-#   GEMINI_API_KEY      → adapter = "gemini"
-#   OPENAI_API_KEY      → adapter = "openai"
-#   KIMI_API_KEY        → adapter = "kimi"
-#
-# To switch provider, change interactions.chat.adapter and
-# interactions.inline.adapter below.
 {lib, ...}: let
   inherit (lib.generators) mkLuaInline;
 in {
@@ -19,15 +8,11 @@ in {
       adapters = mkLuaInline ''
         {
           anthropic = require("codecompanion.adapters").extend("anthropic", {
-            schema = { model = { default = "claude-sonnet-4-20250514" } },
+            schema = { model = { default = "claude-sonnet-4.6" } },
           }),
 
           gemini = require("codecompanion.adapters").extend("gemini", {
-            schema = { model = { default = "gemini-2.0-flash" } },
-          }),
-
-          openai = require("codecompanion.adapters").extend("openai", {
-            schema = { model = { default = "gpt-4o" } },
+            schema = { model = { default = "gemini-3.1-pro" } },
           }),
 
           -- Kimi is OpenAI-compatible; set KIMI_API_KEY in your environment.
@@ -84,25 +69,25 @@ in {
             close = {
               modes = {
                 n = "q";
-                i = "<C-c>";
+                i = "<leader>iq";
               };
               description = "Close chat";
             };
             stop = {
               modes = {
-                n = "<C-c>";
+                n = "<leader>is";
               };
               description = "Stop generation";
             };
             clear = {
               modes = {
-                n = "<leader>acl";
+                n = "<leader>icl";
               };
               description = "Clear chat";
             };
             codeblock = {
               modes = {
-                n = "<leader>acc";
+                n = "<leader>icc";
               };
               description = "Insert code block";
             };
@@ -118,27 +103,20 @@ in {
               };
               description = "Previous chat";
             };
-            pin = {
-              modes = {
-                n = "<leader>ap";
-              };
-              description = "Pin buffer as context";
-            };
-            watch = {
-              modes = {
-                n = "<leader>aw";
-              };
-              description = "Watch buffer for changes";
-            };
           };
         };
 
         inline = {
           adapter = "anthropic";
-
           keymaps = {
-            accept_change.n = "ga";
-            reject_change.n = "gr";
+            accept_change = {
+              modes = {n = "ga";};
+              description = "Accept inline change";
+            };
+            reject_change = {
+              modes = {n = "gR";};
+              description = "Reject inline change";
+            };
           };
         };
       };
@@ -284,22 +262,22 @@ in {
   };
 
   vim.maps.normal = {
-    "<leader>ac" = {
+    "<leader>ic" = {
       action = "<cmd>CodeCompanionChat Toggle<CR>";
       desc = "AI: Toggle chat";
       silent = true;
     };
-    "<leader>aa" = {
+    "<leader>ia" = {
       action = "<cmd>CodeCompanionActions<CR>";
       desc = "AI: Action palette";
       silent = true;
     };
-    "<leader>ai" = {
+    "<leader>ii" = {
       action = "<cmd>CodeCompanion<CR>";
       desc = "AI: Inline prompt";
       silent = true;
     };
-    "<leader>an" = {
+    "<leader>in" = {
       action = "<cmd>CodeCompanionChat<CR>";
       desc = "AI: New chat";
       silent = true;
@@ -307,17 +285,17 @@ in {
   };
 
   vim.maps.visual = {
-    "<leader>ac" = {
+    "<leader>ic" = {
       action = "<cmd>CodeCompanionChat Toggle<CR>";
       desc = "AI: Send selection to chat";
       silent = true;
     };
-    "<leader>aa" = {
+    "<leader>ia" = {
       action = "<cmd>CodeCompanionActions<CR>";
       desc = "AI: Action palette";
       silent = true;
     };
-    "<leader>ai" = {
+    "<leader>ii" = {
       action = "<cmd>CodeCompanion<CR>";
       desc = "AI: Inline prompt on selection";
       silent = true;

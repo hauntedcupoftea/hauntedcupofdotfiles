@@ -58,6 +58,6 @@ in {
       theme=wallust
     '';
 
-    files.".config/Kvantum/wallust/wallust.svg".source = ./static/Colloid.svg;
+    files.".config/Kvantum/wallust/wallust.svg".source = ./static/ColloidDark.svg;
   };
 }

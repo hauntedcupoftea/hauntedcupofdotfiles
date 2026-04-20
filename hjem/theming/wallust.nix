@@ -39,8 +39,7 @@
       '';
       # GTK4 / libadwaita reads color-scheme preference too
       gtk4 = "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'";
-      # kvantum: set active theme (new Qt processes will pick it up)
-      kvantum = "kvantummanager --set wallust 2>/dev/null || true";
+      kvantum = "touch ~/.config/Kvantum/kvantum.kvconfig";
     };
   };
 
