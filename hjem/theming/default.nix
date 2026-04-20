@@ -3,5 +3,6 @@
     ./packages.nix
     ./matugen.nix
     ./wallust.nix
+    ./gtk.nix
   ];
 }
