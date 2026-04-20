@@ -1,4 +1,7 @@
-{ inputs, pkgs }:
+{
+  inputs,
+  pkgs,
+}:
 (inputs.nvf.lib.neovimConfiguration {
   inherit pkgs;
   modules = [
@@ -7,5 +10,6 @@
     ./plugins.nix
     ./editor.nix
     ./keymaps.nix
+    ./ai.nix
   ];
 }).neovim

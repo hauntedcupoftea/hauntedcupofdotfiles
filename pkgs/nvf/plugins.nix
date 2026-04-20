@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   vim = {
     # ── Extra plugins ──────────────────────────────────────────────────────
     startPlugins = [
@@ -17,17 +21,17 @@
         n_lines = 500;
         custom_textobjects = {
           # treesitter-aware textobjects: f=function, c=class, a=argument
-          f.__raw = ''
+          f = lib.generators.mkLuaInline ''
             require('mini.ai').gen_spec.treesitter({
               a = '@function.outer', i = '@function.inner'
             })
           '';
-          c.__raw = ''
+          c = lib.generators.mkLuaInline ''
             require('mini.ai').gen_spec.treesitter({
               a = '@class.outer', i = '@class.inner'
             })
           '';
-          a.__raw = ''
+          a = lib.generators.mkLuaInline ''
             require('mini.ai').gen_spec.treesitter({
               a = '@parameter.outer', i = '@parameter.inner'
             })

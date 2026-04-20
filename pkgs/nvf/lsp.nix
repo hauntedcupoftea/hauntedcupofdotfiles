@@ -16,7 +16,7 @@
       enableTreesitter = true;
       ts = {
         enable = true;
-        lsp.servers = ["denols"];
+        lsp.servers = ["deno"];
         format.enable = false;
       };
       css = {
