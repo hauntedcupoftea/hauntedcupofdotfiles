@@ -18,7 +18,7 @@
     ./mail.nix
     ./podman.nix
     ./services.nix
-    ./teamviewer.nix
+    # ./teamviewer.nix
     ./tailscale.nix
     ./udisks2.nix
     ./waydroid.nix

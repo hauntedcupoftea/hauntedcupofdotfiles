@@ -16,11 +16,6 @@
     treesitter = {
       enable = true;
       autotagHtml = true; # auto close/rename JSX + HTML tags
-      fold = true; # required by nvim-ufo
-    };
-
-    ui.nvim-ufo = {
-      enable = true;
     };
 
     utility.yazi-nvim = {

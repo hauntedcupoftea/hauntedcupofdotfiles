@@ -176,6 +176,7 @@
         stateVersion = "24.11";
       };
       programs.home-manager.enable = true;
+      xdg.userDirs.setSessionVariables = true; # don't exactly know what this do;
     };
   };
 

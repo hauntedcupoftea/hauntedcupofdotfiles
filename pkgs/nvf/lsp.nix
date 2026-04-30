@@ -2,7 +2,27 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  inherit (lib.nvim.lua) toLuaObject;
+  # https://microsoft.github.io/language-server-protocol/specifications/specification-current#serverCapabilities
+  # https://github.com/neovim/nvim-lspconfig/issues/2542#issuecomment-1547019213
+  overrideCapabilities = attrs:
+    lib.generators.mkLuaInline
+    /*
+    lua
+    */
+    ''
+      function(client, initialization_result)
+        if client.server_capabilities then
+          client.server_capabilities = vim.tbl_deep_extend(
+            "force",
+            client.server_capabilities or {},
+            ${toLuaObject attrs}
+          )
+        end
+      end
+    '';
+in {
   vim = {
     lsp = {
       enable = true;
@@ -10,11 +30,33 @@
       lspkind.enable = true;
       inlayHints.enable = true;
       trouble.enable = true;
+
+      presets.tailwindcss-language-server.enable = true;
+
+      servers = {
+        nixd = {
+          on_init = overrideCapabilities {
+            # capabilities that are also provided by nil
+            completionProvider = false;
+            declarationProvider = false;
+            definitionProvider = false;
+            referencesProvider = false;
+            renameProvider = false;
+          };
+        };
+
+        nil = {
+          on_init = overrideCapabilities {
+            documentFormattingProvider = false; # we have conform.nvim
+            semanticTokensProvider = false; # overrides tree-sitter comment
+          };
+        };
+      };
     };
     languages = {
       enableFormat = true;
       enableTreesitter = true;
-      ts = {
+      typescript = {
         enable = true;
         lsp.servers = ["deno"];
         format.enable = false;
@@ -32,11 +74,10 @@
         enable = true;
         format.enable = false;
       };
-      tailwind.enable = true;
       json.enable = true;
       nix = {
         enable = true;
-        lsp.servers = ["nixd"];
+        lsp.servers = ["nixd" "nil"];
       };
       markdown.enable = true;
       yaml.enable = true;
