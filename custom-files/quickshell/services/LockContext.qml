@@ -13,6 +13,7 @@ Singleton {
     property string currentText: ""
     property bool unlockInProgress: false
     property bool showFailure: false
+    property bool showSuccess: false
     property bool locked: false
 
     function unlock() {
@@ -21,6 +22,8 @@ Singleton {
     }
 
     onCurrentTextChanged: showFailure = false
+    onLockedChanged: if (root.locked === true)
+        showSuccess = false
 
     function tryUnlock() {
         if (currentText === "")
@@ -50,6 +53,7 @@ Singleton {
         onCompleted: result => {
             root.currentText = "";
             if (result == PamResult.Success) {
+                root.showSuccess = true;
                 root.unlocked();
                 root.locked = false;
             } else {

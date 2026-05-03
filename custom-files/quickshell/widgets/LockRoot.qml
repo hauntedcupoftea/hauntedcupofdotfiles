@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import qs.services
 import qs.components
 
@@ -10,7 +11,9 @@ WlSessionLock {
     locked: LockContext.locked
 
     WlSessionLockSurface {
+        id: lockSurface
         LockScreen {
+            screen: lockSurface.screen
             anchors.fill: parent
         }
     }

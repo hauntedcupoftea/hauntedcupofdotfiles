@@ -2,27 +2,168 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls.Fusion
+import Qt5Compat.GraphicalEffects
 import Quickshell
+import Quickshell.Wayland
 import qs.services
 import qs.theme
 
 Rectangle {
     id: root
-    color: Theme.colors.background
+    color: "transparent"
+    required property ShellScreen screen
     property int length: passwordBox.length
     property list<string> charShapes: ['', '󱓻', '󰜡', '󰮊', '󰝬', '󰜁']
+    anchors.fill: parent
 
-    // Gradient overlay for depth
-    Rectangle {
+    ScreencopyView {
+        id: lockBG
+        captureSource: root.screen
         anchors.fill: parent
-        gradient: Gradient {
-            GradientStop {
-                position: 0.0
-                color: Qt.rgba(0, 0, 0, 0)
+        visible: LockContext.locked
+
+        property int blurSize
+        live: false
+        layer.enabled: true
+        layer.effect: FastBlur {
+            source: lockBG
+            radius: LockContext.locked ? lockBG.blurSize : 0
+        }
+    }
+
+    ParallelAnimation {
+        id: lockAnim
+        running: LockContext.locked === true
+        NumberAnimation {
+            target: lockBG
+            property: "blurSize"
+            from: 0
+            to: 64
+            duration: 250
+            easing.type: Easing.InCirc
+        }
+        // NumberAnimation {
+        //     target: date
+        //     property: "opacity"
+        //     from: 0
+        //     to: 1
+        //     duration: 400
+        //     easing.type: Easing.OutQuad
+        // }
+        NumberAnimation {
+            target: clock
+            property: "opacity"
+            duration: 400
+            from: 0
+            to: 1
+            easing.type: Easing.OutQuad
+        }
+        // NumberAnimation {
+        //     target: username
+        //     property: "opacity"
+        //     duration: 400
+        //     from: 0
+        //     to: 1
+        //     easing.type: Easing.OutQuad
+        // }
+        NumberAnimation {
+            target: pwInput
+            property: "opacity"
+            duration: 400
+            from: 0
+            to: 1
+            easing.type: Easing.OutQuad
+        }
+        // NumberAnimation {
+        //     target: nowBar
+        //     property: "opacity"
+        //     duration: 400
+        //     from: 0
+        //     to: 1
+        //     easing.type: Easing.OutQuad
+        // }
+        // NumberAnimation {
+        //     target: notiToggle
+        //     property: "opacity"
+        //     duration: 400
+        //     from: 0
+        //     to: 1
+        //     easing.type: Easing.OutQuad
+        // }
+    }
+
+    SequentialAnimation {
+        id: unlockAnim
+        running: LockContext.showSuccess === true
+        ParallelAnimation {
+            NumberAnimation {
+                target: clock
+                property: "opacity"
+                duration: 250
+                from: 1
+                to: 0
+                easing.type: Easing.OutQuad
             }
-            GradientStop {
-                position: 1.0
-                color: Qt.rgba(0, 0, 0, 0.3)
+            NumberAnimation {
+                target: date
+                property: "opacity"
+                duration: 250
+                from: 1
+                to: 0
+                easing.type: Easing.OutQuad
+            }
+            // NumberAnimation {
+            //     target: username
+            //     property: "opacity"
+            //     duration: 250
+            //     from: 1
+            //     to: 0
+            //     easing.type: Easing.OutQuad
+            // }
+            NumberAnimation {
+                target: pwInput
+                property: "opacity"
+                duration: 250
+                from: 1
+                to: 0
+                easing.type: Easing.OutQuad
+            }
+            // NumberAnimation {
+            //     target: nowBar
+            //     property: "opacity"
+            //     duration: 250
+            //     from: 1
+            //     to: 0
+            //     easing.type: Easing.OutQuad
+            // }
+            // NumberAnimation {
+            //     target: player3
+            //     property: "opacity"
+            //     from: 1
+            //     to: 0
+            //     duration: 250
+            //     easing.type: Easing.OutQuad
+            // }
+            // NumberAnimation {
+            //     target: notiToggle
+            //     property: "opacity"
+            //     duration: 250
+            //     from: 1
+            //     to: 0
+            //     easing.type: Easing.OutQuad
+            // }
+            NumberAnimation {
+                target: lockBG
+                property: "blurSize"
+                from: 64
+                to: 0
+                duration: 250
+                easing.type: Easing.InCirc
+            }
+        }
+        ScriptAction {
+            script: {
+                LockContext.locked = false;
             }
         }
     }
@@ -47,6 +188,7 @@ Rectangle {
     }
 
     Label {
+        id: date
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: clock.bottom
@@ -63,6 +205,7 @@ Rectangle {
     }
 
     ColumnLayout {
+        id: pwInput
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: parent.verticalCenter
