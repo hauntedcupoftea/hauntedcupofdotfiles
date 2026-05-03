@@ -93,6 +93,7 @@ in {
       bash.enable = true;
       lua.enable = true;
       toml.enable = true;
+      qml.enable = true;
     };
     formatter.conform-nvim = {
       enable = true;
