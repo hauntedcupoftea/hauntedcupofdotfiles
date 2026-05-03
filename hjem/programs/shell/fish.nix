@@ -26,8 +26,10 @@ in {
       enable = true;
 
       aliases = lib.mkMerge [
-        {
+        (lib.mkIf (!config.dotfiles.shell.eza.enable) {
           ll = "ls -la";
+        })
+        {
           update = "sudo nixos-rebuild switch";
           nix-gc = "sudo nix-collect-garbage -d";
         }

@@ -11,6 +11,7 @@ in {
     lib.mkEnableOption "eza (modern ls replacement)";
 
   config = lib.mkIf cfg.enable {
+    # maybe someday
     # rum.programs.eza = {
     #   enable = true;
     #   integrations.fish.enable = fishOn;
@@ -22,7 +23,7 @@ in {
     # TODO: theming
     packages = [pkgs.eza];
 
-    rum.programs.fish.aliases = lib.mkIf fishOn {
+    dotfiles.shell.fish.shellAliases = lib.mkIf fishOn {
       ls = "eza";
       ll = "eza -la --icons=auto --git";
       tree = "eza --tree --icons=auto";

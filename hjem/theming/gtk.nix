@@ -19,6 +19,7 @@ in {
 
     environment.sessionVariables = {
       QT_STYLE_OVERRIDE = "kvantum";
+      QT_QPA_PLATFORMTHEME = "kvantum";
     };
 
     files.".config/gtk-3.0/settings.ini".text = ''

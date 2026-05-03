@@ -48,6 +48,7 @@
 
       dotfiles = {
         shell = {
+          cava.enable = true;
           helix.enable = true;
           fish.enable = true;
           direnv.enable = true;
@@ -77,8 +78,6 @@
           packages = with pkgs; [
             bruno
             deno
-            claude-code
-            claude-monitor
             requestly
             sql-studio
             zrok
@@ -118,11 +117,12 @@
         desktop = {
           kitty.enable = true;
           rio.enable = true;
-
           teamviewer.enable = true;
           zed.enable = true;
+          mpv.enable = true;
+          obs.enable = true;
+          mangohud.enable = true;
 
-          # Desktop GUI packages that don't warrant their own module yet
           packages = with pkgs; [
             jellyfin-media-player
             kdePackages.okular
@@ -138,13 +138,26 @@
             zapzap
             zmkbatx
             antigravity-fhs
-            # screen capture / screenshot stack
+            # screen capture stack (was home/desktop/screen-recording.nix)
             wf-recorder
             hyprshot
             grimblast
             slurp
             flameshot
-            # misc desktop utils
+            # gaming (was home/gaming/gaming.nix)
+            protonup-qt
+            protonplus
+            heroic
+            dualsensectl
+            wineWow64Packages.stable
+            winetricks
+            goverlay
+            samrewritten
+            r2modman
+            gale
+            vulkan-tools
+            lact
+            # music
             kid3-qt
           ];
         };
