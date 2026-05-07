@@ -27,6 +27,11 @@ in {
       ls = "eza";
       ll = "eza -la --icons=auto --git";
       tree = "eza --tree --icons=auto";
+      la = "eza -a --icons=auto"; # all files, no details
+      lt = "eza -la --icons=auto --git --sort=modified"; # sorted by modification time, newest first
+      lr = "eza -la --icons=auto --git --sort=size"; # sorted by size, largest first
+      lx = "eza -la --icons=auto --git --sort=ext"; # grouped by extension
+      td = "eza --tree --icons=auto --only-dirs"; # tree of directories only
     };
   };
 }
