@@ -2,6 +2,7 @@
   config,
   lib,
   nixosConfig,
+  pkgs,
   ...
 }: let
   cfg = config.dotfiles.desktop.mangohud;
@@ -10,6 +11,7 @@ in {
     lib.mkEnableOption "MangoHud GPU/CPU overlay";
 
   config = lib.mkIf (nixosConfig.dotfiles.desktop.enable && cfg.enable) {
+    packages = [pkgs.mangohud];
     files.".config/MangoHud/MangoHud.conf".text = ''
       position=top-right
       gpu_temp
