@@ -31,9 +31,9 @@ in {
         mgr.linemode = "size";
         opener.edit = [
           {
-            run = ''hx "$@"'';
+            run = ''nvim "$@"'';
             block = true;
-            desc = "Helix";
+            desc = "Edit with Neovim";
           }
         ];
         plugin.prepend_fetcher = [
