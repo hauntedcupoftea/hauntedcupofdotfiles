@@ -11,7 +11,9 @@ in {
     lib.mkEnableOption "rio terminal emulator";
 
   config = lib.mkIf (nixosConfig.dotfiles.desktop.enable && cfg.enable) {
-    packages = [pkgs.rio];
+    packages = [
+      pkgs.rio
+    ];
 
     files.".config/rio/config.toml".source = (pkgs.formats.toml {}).generate "rio.toml" {
       theme = "wallust";
@@ -27,7 +29,7 @@ in {
         args = ["--login"];
       };
 
-      editor.program = lib.getExe pkgs.helix;
+      editor.program = "nvim";
 
       cursor = {
         shape = "block";
@@ -37,11 +39,16 @@ in {
 
       fonts = {
         family = "FiraCode Nerd Font";
-        size = 14.0;
+        size = 18.0;
         use-drawable-chars = true;
         # ligatures tracked at https://github.com/raphamorim/rio/issues/310
         features = [];
         disable-warnings-not-found = false;
+        extras = [
+          {family = "Noto Sans Mono CJK SC";}
+          {family = "Noto Sans Mono CJK KR";}
+          {family = "Noto Sans Mono CJK JP";}
+        ];
       };
 
       scroll = {
