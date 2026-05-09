@@ -1,0 +1,56 @@
+[colors]
+background = '{{ background }}'
+foreground = '{{ foreground }}'
+cursor = '{{ cursor }}'
+vi-cursor = '{{ color6 }}'
+
+# Navigation
+tabs = '{{ color8 }}'
+tabs-foreground = '{{ color8 | darken(0.2) }}'
+tabs-active = '{{ color0 }}'
+tabs-active-highlight = '{{ color3 }}'
+tabs-active-foreground = '{{ foreground }}'
+bar = '{{ background | darken(0.05) }}'
+split = '{{ color0 | lighten(0.05) }}'
+
+# Search
+search-match-background = '{{ color6 }}'
+search-match-foreground = '{{ background }}'
+search-focused-match-background = '{{ color3 }}'
+search-focused-match-foreground = '{{ background }}'
+
+# Selection
+selection-background = '{{ color4 }}'
+selection-foreground = '{{ background }}'
+
+# Regular ANSI
+black = '{{ color0 }}'
+red = '{{ color1 }}'
+green = '{{ color2 }}'
+yellow = '{{ color3 }}'
+blue = '{{ color4 }}'
+magenta = '{{ color5 }}'
+cyan = '{{ color6 }}'
+white = '{{ color7 }}'
+
+# Dim (subdued variants for inactive/background text)
+dim-black = '{{ color0 | darken(0.1) }}'
+dim-red = '{{ color1 | darken(0.15) }}'
+dim-green = '{{ color2 | darken(0.15) }}'
+dim-yellow = '{{ color3 | darken(0.15) }}'
+dim-blue = '{{ color4 | darken(0.15) }}'
+dim-magenta = '{{ color5 | darken(0.15) }}'
+dim-cyan = '{{ color6 | darken(0.15) }}'
+dim-white = '{{ color7 | darken(0.15) }}'
+dim-foreground = '{{ foreground | darken(0.2) }}'
+
+# Light (bright variants)
+light-black = '{{ color8 }}'
+light-red = '{{ color9 }}'
+light-green = '{{ color10 }}'
+light-yellow = '{{ color11 }}'
+light-blue = '{{ color12 }}'
+light-magenta = '{{ color13 }}'
+light-cyan = '{{ color14 }}'
+light-white = '{{ color15 }}'
+light-foreground = '{{ foreground | lighten(0.1) }}'

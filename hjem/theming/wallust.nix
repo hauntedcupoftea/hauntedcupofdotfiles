@@ -11,6 +11,10 @@
         template = "kitty.conf";
         target = "~/.config/kitty/colors.conf";
       };
+      rio = {
+        template = "rio.toml";
+        target = "~/.config/rio/themes/wallust.toml";
+      };
       nvim = {
         template = "nvim-colors.lua";
         target = "~/.config/nvim/wallust-colors.lua";
@@ -43,9 +47,12 @@
     };
   };
 
-  files.".config/wallust/templates/zellij.kdl".source = ./templates/zellij.kdl;
-  files.".config/wallust/templates/kitty.conf".source = ./templates/kitty.conf;
-  files.".config/wallust/templates/nvim-colors.lua".source = ./templates/nvim-colors.lua;
-  files.".config/wallust/templates/gtk-colors.css".source = ./templates/gtk-colors.css.template;
-  files.".config/wallust/templates/kvantum-colors.kvconfig".source = ./templates/kvantum-colors.kvconfig;
+  files = {
+    ".config/wallust/templates/zellij.kdl".source = ./templates/zellij.kdl;
+    ".config/wallust/templates/kitty.conf".source = ./templates/kitty.conf;
+    ".config/wallust/templates/rio.toml".source = ./templates/rio.toml;
+    ".config/wallust/templates/nvim-colors.lua".source = ./templates/nvim-colors.lua;
+    ".config/wallust/templates/gtk-colors.css".source = ./templates/gtk-colors.css.template;
+    ".config/wallust/templates/kvantum-colors.kvconfig".source = ./templates/kvantum-colors.kvconfig;
+  };
 }
