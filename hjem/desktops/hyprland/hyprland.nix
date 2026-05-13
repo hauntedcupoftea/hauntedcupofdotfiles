@@ -60,6 +60,7 @@ in {
           disable_splash_rendering = true;
           focus_on_activate = true;
           force_default_wallpaper = 0;
+          session_lock_xray = true;
           vrr = 3;
         };
 
