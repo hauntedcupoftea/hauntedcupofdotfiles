@@ -22,7 +22,7 @@
 
     nvidiaSettings = true;
 
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   environment.systemPackages = with pkgs; [nvidia-vaapi-driver libva-utils nvtopPackages.nvidia];
