@@ -19,6 +19,16 @@ in {
       default = "";
       description = "Extra fish shell initialisation lines.";
     };
+
+    vim-mode = {
+      enable = lib.mkEnableOption "fish shell vim-mode";
+
+      default-mode = lib.mkOption {
+        type = lib.types.enum ["insert" "default" "visual"];
+        default = "insert";
+        description = "The starting mode for each shell prompt. defaults to insert mode.";
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -36,16 +46,22 @@ in {
         cfg.shellAliases
       ];
 
-      config = lib.mkMerge [
+      config = lib.concatStringsSep "\n" [
         ''
           set fish_greeting # disable greeting
           bind \cz 'fg 2>/dev/null; commandline -f repaint'
-
-          if status is-interactive
-              eval (zellij setup --generate-auto-start fish | string collect)
-          end
         ''
         cfg.shellInit
+        (
+          lib.optionalString (cfg.vim-mode.enable)
+          ''
+            function fish_vi_bindings
+                fish_vi_key_bindings ${cfg.vim-mode.default-mode}
+            end
+
+            set -g fish_key_bindings fish_vi_bindings
+          ''
+        )
       ];
 
       functions.y = ''

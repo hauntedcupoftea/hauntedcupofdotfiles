@@ -5,6 +5,7 @@
 }: {
   systemd.user.services = {
     zmkbatx = {
+      enable = false;
       description = "ZMK Battery Status";
       wantedBy = ["graphical-session.target"];
       partOf = ["graphical-session.target"];

@@ -4,6 +4,7 @@
     ./python.nix
     ./rust.nix
     ./qml.nix
+    ./go.nix
     ./uwu-colors.nix
     ./markdown.nix
     ./fish-lang.nix

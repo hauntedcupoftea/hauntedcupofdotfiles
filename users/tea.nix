@@ -1,12 +1,14 @@
 {
+  lib,
   config,
   inputs,
   pkgs,
   ...
-}: {
+}: let
+  zen-browser =
+    inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".twilight;
+in {
   imports = [
-    inputs.home-manager.nixosModules.home-manager
-    inputs.catppuccin.nixosModules.catppuccin
     inputs.hjem.nixosModules.default
   ];
 
@@ -30,8 +32,12 @@
           desktop = {
             enable = config.dotfiles.desktop.enable;
             monitors = config.dotfiles.desktop.monitors;
+            audio.enable = config.dotfiles.desktop.audio.enable;
           };
-          podman.enable = config.dotfiles.podman.enable;
+          services = {
+            enable = config.dotfiles.services.enable;
+            podman.enable = config.dotfiles.services.podman.enable;
+          };
         };
       };
     };
@@ -50,7 +56,13 @@
         shell = {
           cava.enable = true;
           helix.enable = true;
-          fish.enable = true;
+          fish = {
+            enable = true;
+            vim-mode = {
+              enable = true;
+              default-mode = "insert";
+            };
+          };
           direnv.enable = true;
           starship.enable = true;
           zellij = {
@@ -107,6 +119,7 @@
           python = true;
           qml = true;
           rust = true;
+          go = true;
           toml = true;
           typst = true;
           uwu-colors = true;
@@ -122,8 +135,36 @@
           mpv.enable = true;
           obs.enable = true;
           mangohud.enable = true;
+          walker = {
+            enable = true;
+            runAsService = true;
+            elephant.enable = true;
+            config = {
+              app_launch_prefix = "uwsm app -- ";
+              ui.fullscreen = true;
+              list.height = 200;
+              websearch.prefix = "?";
+              switcher.prefix = "/";
+              general.runner_mode = "drun";
+            };
+          };
+          vesktop = {
+            enable = true;
+            arrpc.enable = true;
+            settings = {
+              customTitleBar = false;
+              disableMinSize = true;
+              arRPC = true;
+              hardwareVideoAcceleration = true;
+              hardwareAcceleration = true;
+              splashThemeing = true;
+            };
+            themeDir = ../custom-files/vesktop/themes;
+            settingsDir = ../custom-files/vesktop/settings;
+          };
 
           packages = with pkgs; [
+            zen-browser
             jellyfin-media-player
             kdePackages.okular
             pinta
@@ -159,37 +200,80 @@
             lact
             # music
             kid3-qt
+            # experimenting
+            logseq
+            drawy
+            drawio
           ];
+        };
+
+        services = {
+          music = {
+            enable = true;
+            mpd.enable = true;
+            rmpc = {
+              enable = true;
+            };
+            discordRpc = {
+              enable = true;
+            };
+            mpdris2 = {
+              enable = true;
+              multimediaKeys = true;
+              notifications = true;
+              mpd = {
+                host = "127.0.0.1";
+              };
+            };
+          };
+          udiskie = {
+            enable = true;
+            automount = true;
+            notify = true;
+          };
+          zmkbatx.enable = true;
         };
 
         environments.hyprland = {
           enable = true;
-          quickshellConfigPath = "/home/tea/hauntedcupofdotfiles/custom-files/quickshell";
+          hypridle = {
+            enable = true;
+            settings = {
+              general = {
+                lock_cmd = "pidof hyprlock || hyprlock";
+                before_sleep_cmd = "${lib.getExe pkgs.quickshell} -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/ ipc call lockscreen lock";
+                after_sleep_cmd = "hyprctl dispatch dpms on";
+              };
+              listener = [
+                {
+                  timeout = 150;
+                  on-timeout = "brightnessctl -s set 10";
+                  on-resume = "brightnessctl -r";
+                }
+                {
+                  timeout = 150;
+                  on-timeout = "brightnessctl -sd rgb:kbd_backlight set 0";
+                  on-resume = "brightnessctl -rd rgb:kbd_backlight";
+                }
+                {
+                  timeout = 300;
+                  on-timeout = "${lib.getExe pkgs.quickshell} -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/ ipc call lockscreen lock";
+                }
+                {
+                  timeout = 360;
+                  on-timeout = "hyprctl dispatch dpms off";
+                  on-resume = "hyprctl dispatch dpms on && brightnessctl -r";
+                }
+              ];
+            };
+          };
+
+          quickshell = {
+            enable = true;
+            projectPath = "/home/tea/hauntedcupofdotfiles/custom-files/quickshell";
+          };
         };
       };
-    };
-  };
-
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    backupFileExtension = "bak";
-    extraSpecialArgs = {
-      inherit inputs;
-      system = "x86_64-linux";
-    };
-    users.tea = {
-      imports = [
-        ../home
-        inputs.catppuccin.homeModules.catppuccin
-      ];
-      home = {
-        username = "tea";
-        homeDirectory = "/home/tea";
-        stateVersion = "24.11";
-      };
-      programs.home-manager.enable = true;
-      xdg.userDirs.setSessionVariables = true; # don't exactly know what this do;
     };
   };
 

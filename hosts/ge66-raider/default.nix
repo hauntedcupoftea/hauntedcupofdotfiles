@@ -38,8 +38,10 @@
         }
       ];
     };
-
-    podman.enable = true;
+    services = {
+      enable = true;
+      podman.enable = true;
+    };
   };
 
   system.stateVersion = "24.11";

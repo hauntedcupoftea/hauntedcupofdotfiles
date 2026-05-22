@@ -1,3 +1,3 @@
 {...}: {
-  imports = [./desktop.nix];
+  imports = [./desktop.nix ./services.nix];
 }

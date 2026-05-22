@@ -52,7 +52,7 @@ in {
     files.".config/zellij/config.kdl".text = ''
       default_shell "fish"
       show_startup_tips false
-      theme_dir "/home/tea/.config/zellij/themes"
+      theme_dir "${config.directory}/.config/zellij/themes"
       theme "wallust"
       ui {
         pane_frames {
@@ -63,7 +63,7 @@ in {
     '';
 
     rum.programs.fish.config = lib.mkIf (fishOn && cfg.autoStart) ''
-      if status is-interactive
+      if status is-interactive && command -q zellij
           eval (zellij setup --generate-auto-start fish | string collect)
       end
     '';

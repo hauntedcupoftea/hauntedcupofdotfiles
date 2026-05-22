@@ -5,7 +5,7 @@
     ./gaming
     # ./hardware
     ./hyprland
-    ./music
+    # ./music
     # ./shell
     ./sioyek.nix
     ./security.nix

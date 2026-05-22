@@ -4,5 +4,6 @@
     ./desktops
     ./misc
     ./programs
+    ./services
   ];
 }

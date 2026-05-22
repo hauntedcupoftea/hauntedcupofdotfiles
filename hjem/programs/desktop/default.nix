@@ -8,5 +8,7 @@
     ./zed-editor.nix
     ./kitty.nix
     ./rio.nix
+    ./walker.nix
+    ./vesktop.nix
   ];
 }

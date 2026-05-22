@@ -1,0 +1,8 @@
+{
+  config,
+  nixosConfig,
+  ...
+}: {
+  assertions = [
+  ];
+}

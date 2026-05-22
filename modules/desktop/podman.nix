@@ -1,7 +1,11 @@
-{lib, config, ...}: let
-  cfg = config.dotfiles.podman;
+{
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.dotfiles.services.podman;
 in {
-  options.dotfiles.podman.enable = lib.mkEnableOption "podman containerisation";
+  options.dotfiles.services.podman.enable = lib.mkEnableOption "podman containerisation";
 
   config = lib.mkIf cfg.enable {
     virtualisation.containers.enable = true;

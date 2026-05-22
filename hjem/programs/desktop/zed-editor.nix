@@ -23,7 +23,7 @@ in {
           hard_tabs = true;
           tab_size = 2;
           disable_ai = true;
-          helix_mode = true;
+          vim_mode = true;
           telemetry = {
             diagnostics = true;
             metrics = false;

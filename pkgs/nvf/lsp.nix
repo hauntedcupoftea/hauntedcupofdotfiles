@@ -89,6 +89,7 @@ in {
         enable = true;
         extensions.crates-nvim.enable = true;
       };
+      go.enable = true;
       typst.enable = true;
       bash.enable = true;
       lua.enable = true;
