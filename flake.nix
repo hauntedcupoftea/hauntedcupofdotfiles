@@ -5,31 +5,28 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     systems.url = "github:nix-systems/default";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # life will change
     hjem.follows = "hjem-rum/hjem";
+
     niqspkgs = {
       url = "github:diniamo/niqspkgs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     hjem-rum = {
       url = "github:snugnug/hjem-rum";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nixos-grub-themes = {
       url = "github:jeslie0/nixos-grub-themes";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     awww = {
       url = "git+https://codeberg.org/LGFae/awww";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.rust-overlay.follows = "rust-overlay";
     };
-    # life has changed this much
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -84,7 +81,7 @@
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
+      inputs.home-manager.follows = null;
     };
 
     nvf = {
@@ -124,7 +121,7 @@
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
+      inputs.home-manager.follows = null;
     };
   };
 
@@ -133,7 +130,6 @@
     nixpkgs,
     nix-on-droid,
     rust-overlay,
-    home-manager,
     millennium,
     ...
   }: let
@@ -202,8 +198,6 @@
                 rust-overlay.overlays.default
               ];
             };
-
-            home-manager-path = home-manager.outPath;
           };
         };
       };

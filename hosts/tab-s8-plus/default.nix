@@ -7,6 +7,7 @@
     hostname
     curl
     openssh
+    hauntedcupof-nvim
 
     # Some common stuff that people expect to have
     #procps
@@ -46,11 +47,4 @@
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
-
-  # Configure home-manager
-  home-manager = {
-    config = ./home.nix;
-    backupFileExtension = "hm-bak";
-    useGlobalPkgs = true;
-  };
 }
