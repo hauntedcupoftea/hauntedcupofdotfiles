@@ -81,7 +81,7 @@
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = null;
+      inputs.home-manager.follows = "";
     };
 
     nvf = {
@@ -109,8 +109,8 @@
     };
 
     millennium = {
-      url = "github:SteamClientHomebrew/Millennium/e2c66a276e579ee73c5151b01897bf63503aa12c?dir=packages/nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:SteamClientHomebrew/Millennium/next?dir=packages/nix";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     rust-overlay = {
@@ -121,7 +121,7 @@
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = null;
+      inputs.home-manager.follows = "";
     };
   };
 

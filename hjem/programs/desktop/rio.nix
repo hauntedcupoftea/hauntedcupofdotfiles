@@ -62,7 +62,7 @@ in {
       };
 
       window = {
-        opacity = 0.85;
+        opacity = 0.75;
         blur = true;
         decorations = "Enabled";
         mode = "Maximized";

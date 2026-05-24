@@ -115,6 +115,7 @@ in {
 
     systemd.services = lib.mkIf (hasDesktop && cfg.elephant.enable) {
       elephant = lib.mkIf cfg.elephant.installService {
+        enableDefaultPath = false;
         description = "Elephant launcher backend";
         wantedBy = ["graphical-session.target"];
         partOf = ["graphical-session.target"];
@@ -129,10 +130,11 @@ in {
           ExecStopPost = "${pkgs.coreutils}/bin/rm -f /tmp/elephant.sock";
         };
         environment = {
-          PATH = lib.mkForce "/run/wrappers/bin:/etc/profiles/per-user/%u/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
+          PATH = "/run/wrappers/bin:/etc/profiles/per-user/%u/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
         };
       };
       walker = lib.mkIf cfg.runAsService {
+        enableDefaultPath = false;
         description = "Walker launcher";
         wantedBy = ["graphical-session.target"];
         after = ["graphical-session.target" "elephant.service"];
@@ -146,7 +148,7 @@ in {
           Restart = "on-failure";
         };
         environment = {
-          PATH = lib.mkForce "${cfg.elephant.package}/bin:/run/wrappers/bin:/run/current-system/sw/bin";
+          PATH = "${cfg.elephant.package}/bin:/run/wrappers/bin:/run/current-system/sw/bin";
         };
       };
     };
