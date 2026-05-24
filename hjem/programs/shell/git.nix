@@ -40,7 +40,10 @@ in {
             name = cfg.userName;
             email = cfg.userEmail;
           };
-          init.defaultBranch = if cfg.github.enable then "main" else "master";
+          init.defaultBranch =
+            if cfg.github.enable
+            then "main"
+            else "master";
           pull.rebase = true;
           push.autoSetupRemote = true;
         }

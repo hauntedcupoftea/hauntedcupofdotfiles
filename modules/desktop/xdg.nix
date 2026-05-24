@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
@@ -7,8 +7,8 @@
       xdg-desktop-portal-termfilechooser
     ];
     config.common = {
-      default = [ "hyprland" "gtk" ];
-      "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" "gtk" ];
+      default = ["hyprland" "gtk"];
+      "org.freedesktop.impl.portal.FileChooser" = ["termfilechooser" "gtk"];
     };
   };
 

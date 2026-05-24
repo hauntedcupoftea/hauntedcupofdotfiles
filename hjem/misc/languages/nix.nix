@@ -22,12 +22,14 @@ in {
         };
         nil-ls.command = lib.getExe pkgs.nil;
       };
-      language = [{
-        name = "nix";
-        language-servers = ["nixd" "harper-ls" "nil-ls"];
-        formatter.command = "alejandra";
-        auto-format = true;
-      }];
+      language = [
+        {
+          name = "nix";
+          language-servers = ["nixd" "harper-ls" "nil-ls"];
+          formatter.command = "alejandra";
+          auto-format = true;
+        }
+      ];
     };
 
     rum.programs.zed.settings = lib.mkIf zedOn {

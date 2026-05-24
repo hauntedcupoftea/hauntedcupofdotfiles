@@ -24,11 +24,13 @@ in {
           formatterPrintWidth = 80;
         };
       };
-      language = [{
-        name = "typst";
-        auto-format = true;
-        language-servers = ["tinymist" "harper-ls"];
-      }];
+      language = [
+        {
+          name = "typst";
+          auto-format = true;
+          language-servers = ["tinymist" "harper-ls"];
+        }
+      ];
     };
 
     rum.programs.zed.settings = lib.mkIf zedOn {

@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   imports = [
     ./audio.nix
     ./filesystems.nix # something breaks here potentially

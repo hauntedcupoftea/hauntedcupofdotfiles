@@ -80,7 +80,10 @@ in {
           roots = ["deno.json" "deno.jsonc" "package.json"];
           auto-format = true;
           language-servers = [
-            {name = "deno-lsp"; except-features = ["format"];}
+            {
+              name = "deno-lsp";
+              except-features = ["format"];
+            }
             "biome"
             "harper-ls"
           ];
@@ -90,7 +93,10 @@ in {
           roots = ["deno.json" "deno.jsonc" "package.json"];
           auto-format = true;
           language-servers = [
-            {name = "deno-lsp"; except-features = ["format"];}
+            {
+              name = "deno-lsp";
+              except-features = ["format"];
+            }
             "biome"
             "harper-ls"
           ];
@@ -100,7 +106,10 @@ in {
           roots = ["deno.json" "deno.jsonc" "package.json"];
           auto-format = true;
           language-servers = [
-            {name = "deno-lsp"; except-features = ["format"];}
+            {
+              name = "deno-lsp";
+              except-features = ["format"];
+            }
             "biome"
             "harper-ls"
           ];
@@ -110,7 +119,10 @@ in {
           roots = ["deno.json" "deno.jsonc" "package.json"];
           auto-format = true;
           language-servers = [
-            {name = "deno-lsp"; except-features = ["format"];}
+            {
+              name = "deno-lsp";
+              except-features = ["format"];
+            }
             "biome"
             "harper-ls"
           ];
@@ -118,33 +130,40 @@ in {
         {
           name = "svelte";
           auto-format = true;
-          language-servers = ["svelte-ls" "tailwindcss-ls"]
+          language-servers =
+            ["svelte-ls" "tailwindcss-ls"]
             ++ lib.optional uwuOn "uwu-colors";
         }
         {
           name = "html";
           auto-format = true;
-          language-servers = ["vscode-html-language-server" "tailwindcss-ls"]
+          language-servers =
+            ["vscode-html-language-server" "tailwindcss-ls"]
             ++ lib.optional uwuOn "uwu-colors";
           formatter = denoFmt "html";
         }
         {
           name = "css";
           auto-format = true;
-          language-servers = ["vscode-css-language-server" "tailwindcss-ls"]
+          language-servers =
+            ["vscode-css-language-server" "tailwindcss-ls"]
             ++ lib.optional uwuOn "uwu-colors";
         }
         {
           name = "scss";
           auto-format = true;
-          language-servers = ["vscode-css-language-server" "tailwindcss-ls"]
+          language-servers =
+            ["vscode-css-language-server" "tailwindcss-ls"]
             ++ lib.optional uwuOn "uwu-colors";
         }
         {
           name = "json";
           auto-format = true;
           language-servers = [
-            {name = "vscode-json-language-server"; except-features = ["format"];}
+            {
+              name = "vscode-json-language-server";
+              except-features = ["format"];
+            }
             "biome"
           ];
           formatter = denoFmt "json";

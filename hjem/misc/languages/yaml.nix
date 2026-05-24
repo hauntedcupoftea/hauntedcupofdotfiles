@@ -15,11 +15,13 @@ in {
     packages = [pkgs.yaml-language-server];
 
     rum.programs.helix.languages = lib.mkIf helixOn {
-      language = [{
-        name = "yaml";
-        auto-format = true;
-        language-servers = ["yaml-language-server"];
-      }];
+      language = [
+        {
+          name = "yaml";
+          auto-format = true;
+          language-servers = ["yaml-language-server"];
+        }
+      ];
     };
 
     rum.programs.zed.settings = lib.mkIf zedOn {

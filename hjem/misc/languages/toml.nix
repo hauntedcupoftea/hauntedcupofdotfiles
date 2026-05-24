@@ -15,11 +15,13 @@ in {
     packages = [pkgs.taplo];
 
     rum.programs.helix.languages = lib.mkIf helixOn {
-      language = [{
-        name = "toml";
-        auto-format = true;
-        language-servers = ["taplo-lsp"];
-      }];
+      language = [
+        {
+          name = "toml";
+          auto-format = true;
+          language-servers = ["taplo-lsp"];
+        }
+      ];
     };
 
     rum.programs.zed.settings = lib.mkIf zedOn {

@@ -14,15 +14,17 @@ in {
     packages = with pkgs; [marksman markdown-oxide];
 
     rum.programs.helix.languages = lib.mkIf helixOn {
-      language = [{
-        name = "markdown";
-        language-servers = ["marksman" "harper-ls"];
-        formatter = {
-          command = lib.getExe pkgs.deno;
-          args = ["fmt" "-" "--ext" "md"];
-        };
-        auto-format = true;
-      }];
+      language = [
+        {
+          name = "markdown";
+          language-servers = ["marksman" "harper-ls"];
+          formatter = {
+            command = lib.getExe pkgs.deno;
+            args = ["fmt" "-" "--ext" "md"];
+          };
+          auto-format = true;
+        }
+      ];
     };
   };
 }

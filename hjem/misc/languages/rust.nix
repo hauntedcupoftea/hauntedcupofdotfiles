@@ -16,15 +16,17 @@ in {
 
     rum.programs.helix.languages = lib.mkIf helixOn {
       language-server.rust-analyzer.command = lib.getExe pkgs.rust-analyzer;
-      language = [{
-        name = "rust";
-        auto-format = true;
-        formatter = {
-          command = "rustfmt";
-          args = ["--edition=2024"];
-        };
-        language-servers = ["rust-analyzer" "harper-ls"];
-      }];
+      language = [
+        {
+          name = "rust";
+          auto-format = true;
+          formatter = {
+            command = "rustfmt";
+            args = ["--edition=2024"];
+          };
+          language-servers = ["rust-analyzer" "harper-ls"];
+        }
+      ];
     };
 
     rum.programs.zed.settings = lib.mkIf zedOn {

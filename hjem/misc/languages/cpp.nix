@@ -19,15 +19,17 @@ in {
         command = "clangd";
         args = ["--compile-commands-dir=build"];
       };
-      language = [{
-        name = "cpp";
-        language-servers = ["clangd-ls"];
-        auto-format = true;
-        formatter = {
-          command = "clang-format";
-          args = ["--style=Google"];
-        };
-      }];
+      language = [
+        {
+          name = "cpp";
+          language-servers = ["clangd-ls"];
+          auto-format = true;
+          formatter = {
+            command = "clang-format";
+            args = ["--style=Google"];
+          };
+        }
+      ];
     };
 
     rum.programs.zed.settings = lib.mkIf zedOn {

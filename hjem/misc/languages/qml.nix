@@ -18,11 +18,13 @@ in {
         command = "qmlls";
         args = ["-E"];
       };
-      language = [{
-        name = "qml";
-        auto-format = true;
-        language-servers = ["qmlls"] ++ lib.optional uwuOn "uwu-colors";
-      }];
+      language = [
+        {
+          name = "qml";
+          auto-format = true;
+          language-servers = ["qmlls"] ++ lib.optional uwuOn "uwu-colors";
+        }
+      ];
     };
 
     rum.programs.zed.settings = lib.mkIf zedOn {

@@ -14,11 +14,13 @@ in {
     packages = [pkgs.fish-lsp];
 
     rum.programs.helix.languages = lib.mkIf helixOn {
-      language = [{
-        name = "fish";
-        auto-format = true;
-        language-servers = ["fish-lsp"];
-      }];
+      language = [
+        {
+          name = "fish";
+          auto-format = true;
+          language-servers = ["fish-lsp"];
+        }
+      ];
     };
   };
 }
