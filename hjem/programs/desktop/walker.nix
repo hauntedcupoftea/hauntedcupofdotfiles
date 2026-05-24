@@ -128,6 +128,9 @@ in {
           RestartSec = 1;
           ExecStopPost = "${pkgs.coreutils}/bin/rm -f /tmp/elephant.sock";
         };
+        environment = {
+          PATH = lib.mkForce "/run/wrappers/bin:/etc/profiles/per-user/%u/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
+        };
       };
       walker = lib.mkIf cfg.runAsService {
         description = "Walker launcher";
@@ -141,6 +144,9 @@ in {
         serviceConfig = {
           ExecStart = "${cfg.package}/bin/walker --gapplication-service";
           Restart = "on-failure";
+        };
+        environment = {
+          PATH = lib.mkForce "${cfg.elephant.package}/bin:/run/wrappers/bin:/run/current-system/sw/bin";
         };
       };
     };

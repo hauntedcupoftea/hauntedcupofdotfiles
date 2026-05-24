@@ -50,10 +50,6 @@ in {
             on-timeout = "brightnessctl -s set 10";
             on-resume = "brightnessctl -r";
           }
-          {
-            timeout = 300;
-            on-timeout = "quickshell ... lock";
-          }
         ];
       };
     };

@@ -205,13 +205,12 @@ in {
           args =
             lib.optionalString (!cfg.mpdris2.multimediaKeys) "--no-multimedia-keys "
             + lib.optionalString (!cfg.mpdris2.notifications) "--no-notifications ";
-        in "${pkgs.mpdris2}/bin/mpdris2 ${args}--host ${cfg.mpdris2.mpd.host}";
+        in "${lib.getExe pkgs.mpdris2} ${args}--host ${cfg.mpdris2.mpd.host}";
         Restart = "on-failure";
         RestartSec = 5;
       };
     };
 
-    # Session variables for MPD (always)
     environment.sessionVariables =
       lib.mkIf cfg.mpd.enable {
         MPD_PORT = toString cfg.mpd.network.port;
