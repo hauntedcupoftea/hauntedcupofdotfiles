@@ -62,10 +62,10 @@ in {
       };
 
       window = {
-        opacity = 0.75;
+        mode = "Windowed";
+        opacity = 0.80;
         blur = true;
         decorations = "Enabled";
-        mode = "Maximized";
         opacity-cells = false; # keeps TUI surfaces (helix, zellij) opaque
       };
 
