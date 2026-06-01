@@ -198,7 +198,7 @@ in {
     # mpdris2 service (only if user wants AND host has desktop)
     systemd.services.mpdris2 = lib.mkIf (cfg.mpdris2.enable && hasDesktop) {
       description = "MPRIS2 bridge for MPD";
-      after = ["mpd.service" (lib.mkif hyprlandOn "quickshell.service")];
+      after = ["mpd.service" (lib.mkIf hyprlandOn "quickshell.service")];
       partOf = ["mpd.service"];
       wantedBy = ["default.target"];
       serviceConfig = {
