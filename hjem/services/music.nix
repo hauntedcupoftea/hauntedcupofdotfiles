@@ -10,6 +10,7 @@
   xdgConfig = config.xdg.config.directory;
   xdgData = config.xdg.data.directory;
   hasDesktop = nixosConfig.dotfiles.desktop.enable or false;
+  hyprlandOn = config.dotfiles.environments.hyprland.enable;
 
   musicDir =
     if cfg.mpd.musicDirectory != null
@@ -197,7 +198,7 @@ in {
     # mpdris2 service (only if user wants AND host has desktop)
     systemd.services.mpdris2 = lib.mkIf (cfg.mpdris2.enable && hasDesktop) {
       description = "MPRIS2 bridge for MPD";
-      after = ["mpd.service"];
+      after = ["mpd.service" (lib.mkif hyprlandOn "quickshell.service")];
       partOf = ["mpd.service"];
       wantedBy = ["default.target"];
       serviceConfig = {

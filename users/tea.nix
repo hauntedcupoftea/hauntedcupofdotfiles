@@ -225,6 +225,20 @@ in {
                 host = "127.0.0.1";
               };
             };
+            mpdscribble = {
+              enable = true;
+              verbose = 1;
+              mpd = {
+                host = "127.0.0.1";
+                port = 6600;
+              };
+              endpoints = {
+                "last.fm" = {
+                  username = "hauntedcupoftea";
+                  passwordFile = "/home/tea/.secrets/lastfm-password";
+                };
+              };
+            };
           };
           udiskie = {
             enable = true;
