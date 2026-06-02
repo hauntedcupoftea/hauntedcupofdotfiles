@@ -201,7 +201,6 @@ in {
             # music
             kid3-qt
             # experimenting
-            logseq
             drawy
             drawio
           ];
@@ -234,6 +233,7 @@ in {
               };
               endpoints = {
                 "last.fm" = {
+                  url = "http://post.audioscrobbler.com";
                   username = "hauntedcupoftea";
                   passwordFile = "/home/tea/.secrets/lastfm-password";
                 };
