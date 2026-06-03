@@ -129,7 +129,8 @@ in {
 
         desktop = {
           kitty.enable = true;
-          rio.enable = true;
+          rio.enable = false;
+          ghostty.enable = true;
           teamviewer.enable = true;
           zed.enable = true;
           mpv.enable = true;

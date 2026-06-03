@@ -6,6 +6,7 @@
     ./obs-studio.nix
     ./teamviewer.nix
     ./zed-editor.nix
+    ./ghostty.nix
     ./kitty.nix
     ./rio.nix
     ./walker.nix

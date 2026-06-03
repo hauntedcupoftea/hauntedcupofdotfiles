@@ -66,12 +66,13 @@ in {
         opacity = 0.80;
         blur = true;
         decorations = "Enabled";
-        opacity-cells = false; # keeps TUI surfaces (helix, zellij) opaque
+        opacity-cells = false;
       };
 
       renderer = {
-        disable-unfocused-render = true; # saves GPU when backgrounded
+        backend = "Webgpu";
         strategy = "events";
+        target-fps = 165;
       };
     };
   };

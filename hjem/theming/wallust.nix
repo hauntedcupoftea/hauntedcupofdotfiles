@@ -1,20 +1,45 @@
-{pkgs, ...}: {
-  files.".config/wallust/wallust.toml".source = (pkgs.formats.toml {}).generate "wallust.toml" {
-    backend = "wal";
-    check_contrast = true;
-    templates = {
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
+  when = cond: attrs:
+    if cond
+    then attrs
+    else {};
+
+  z = config.dotfiles.shell.zellij.enable;
+  k = config.dotfiles.desktop.kitty.enable;
+  g = config.dotfiles.desktop.ghostty.enable;
+  r = config.dotfiles.desktop.rio.enable;
+
+  wallustTemplates = lib.mergeAttrsList [
+    (when z {
       zellij = {
         template = "zellij.kdl";
         target = "~/.config/zellij/themes/wallust.kdl";
       };
+    })
+    (when k {
       kitty = {
         template = "kitty.conf";
         target = "~/.config/kitty/colors.conf";
       };
+    })
+    (when g {
+      ghostty = {
+        template = "wallust.ghostty";
+        target = "~/.config/ghostty/themes/wallust";
+      };
+    })
+    (when r {
       rio = {
         template = "rio.toml";
         target = "~/.config/rio/themes/wallust.toml";
       };
+    })
+    {
       nvim = {
         template = "nvim-colors.lua";
         target = "~/.config/nvim/wallust-colors.lua";
@@ -31,28 +56,42 @@
         template = "kvantum-colors.kvconfig";
         target = "~/.config/Kvantum/wallust/wallust.kvconfig";
       };
-    };
+    }
+  ];
 
-    hooks = {
-      zellij = "touch ~/.config/zellij/themes/wallust.kdl";
-      kitty = "kill -10 $(pidof kitty)";
-      # GTK hot-reload: toggle theme name to force re-read
+  wallustHooks = lib.mergeAttrsList [
+    (when z {zellij = "touch ~/.config/zellij/themes/wallust.kdl";})
+    (when k {kitty = "kill -SIGUSR1 $(pidof kitty)";})
+    (when g {ghostty = "kill -SIGUSR2 $(pidof ghostty) 2>/dev/null || true";})
+    {
       gtk3 = ''
         gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita' && \
         gsettings set org.gnome.desktop.interface gtk-theme 'Colloid-Dark'
       '';
-      # GTK4 / libadwaita reads color-scheme preference too
       gtk4 = "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'";
-      # kvantum = "touch ~/.config/Kvantum/kvantum.kvconfig";
-    };
-  };
+    }
+  ];
 
-  files = {
-    ".config/wallust/templates/zellij.kdl".source = ./templates/zellij.kdl;
-    ".config/wallust/templates/kitty.conf".source = ./templates/kitty.conf;
-    ".config/wallust/templates/rio.toml".source = ./templates/rio.toml;
-    ".config/wallust/templates/nvim-colors.lua".source = ./templates/nvim-colors.lua;
-    ".config/wallust/templates/gtk-colors.css".source = ./templates/gtk-colors.css.template;
-    ".config/wallust/templates/kvantum-colors.kvconfig".source = ./templates/kvantum-colors.kvconfig;
-  };
+  wallustTemplateFiles = lib.mergeAttrsList [
+    (when z {".config/wallust/templates/zellij.kdl".source = ./templates/zellij.kdl;})
+    (when k {".config/wallust/templates/kitty.conf".source = ./templates/kitty.conf;})
+    (when g {".config/wallust/templates/wallust.ghostty".source = ./templates/wallust.ghostty;})
+    (when r {".config/wallust/templates/rio.toml".source = ./templates/rio.toml;})
+    {
+      ".config/wallust/templates/nvim-colors.lua".source = ./templates/nvim-colors.lua;
+      ".config/wallust/templates/gtk-colors.css".source = ./templates/gtk-colors.css.template;
+      ".config/wallust/templates/kvantum-colors.kvconfig".source = ./templates/kvantum-colors.kvconfig;
+    }
+  ];
+in {
+  files =
+    wallustTemplateFiles
+    // {
+      ".config/wallust/wallust.toml".source = (pkgs.formats.toml {}).generate "wallust.toml" {
+        backend = "wal";
+        check_contrast = true;
+        templates = wallustTemplates;
+        hooks = wallustHooks;
+      };
+    };
 }
