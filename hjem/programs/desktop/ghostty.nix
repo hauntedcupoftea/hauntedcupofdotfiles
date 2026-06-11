@@ -16,16 +16,8 @@ in {
     files.".config/ghostty/config.ghostty".text = ''
       command = ${lib.getExe pkgs.fish} --login
 
-      font-family = FiraCode Nerd Font
+      font-family = FiraCode Nerd Font Mono
       font-size = 14
-      font-feature = ss01
-      font-feature = ss02
-      font-feature = ss03
-      font-feature = ss04
-      font-feature = ss05
-      font-feature = ss06
-      font-feature = ss07
-      font-feature = cv16
       font-codepoint-map = U+4E00-U+9FFF=Noto Sans Mono CJK SC
       font-codepoint-map = U+AC00-U+D7AF=Noto Sans Mono CJK KR
       font-codepoint-map = U+3040-U+30FF=Noto Sans Mono CJK JP

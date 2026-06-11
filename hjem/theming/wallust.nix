@@ -13,6 +13,7 @@
   k = config.dotfiles.desktop.kitty.enable;
   g = config.dotfiles.desktop.ghostty.enable;
   r = config.dotfiles.desktop.rio.enable;
+  w = config.dotfiles.desktop.wezterm.enable;
 
   wallustTemplates = lib.mergeAttrsList [
     (when z {
@@ -39,6 +40,12 @@
         target = "~/.config/rio/themes/wallust.toml";
       };
     })
+    (when w {
+      wezterm = {
+        template = "wezterm.toml";
+        target = "~/.config/wezterm/colors/wallust.toml";
+      };
+    })
     {
       nvim = {
         template = "nvim-colors.lua";
@@ -62,7 +69,8 @@
   wallustHooks = lib.mergeAttrsList [
     (when z {zellij = "touch ~/.config/zellij/themes/wallust.kdl";})
     (when k {kitty = "kill -SIGUSR1 $(pidof kitty)";})
-    (when g {ghostty = "kill -SIGUSR2 $(pidof ghostty) 2>/dev/null || true";})
+    (when g {ghostty = "kill -SIGUSR2 $(pidof ghostty)";})
+    (when w {wezterm = "wezterm cli reload-configuration";})
     {
       gtk3 = ''
         gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita' && \
@@ -77,6 +85,7 @@
     (when k {".config/wallust/templates/kitty.conf".source = ./templates/kitty.conf;})
     (when g {".config/wallust/templates/wallust.ghostty".source = ./templates/wallust.ghostty;})
     (when r {".config/wallust/templates/rio.toml".source = ./templates/rio.toml;})
+    (when w {".config/wallust/templates/wezterm.toml".source = ./templates/wezterm.toml;})
     {
       ".config/wallust/templates/nvim-colors.lua".source = ./templates/nvim-colors.lua;
       ".config/wallust/templates/gtk-colors.css".source = ./templates/gtk-colors.css.template;
