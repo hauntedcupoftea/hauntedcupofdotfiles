@@ -68,6 +68,7 @@ in {
           zellij = {
             enable = true;
             exitOnSessionExit = true;
+            sshOnly = true;
           };
 
           eza.enable = true;

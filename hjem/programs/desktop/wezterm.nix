@@ -39,15 +39,15 @@ in {
       config.font_size = ${toString cfg.fontSize}
       config.color_scheme_dirs = { wezterm.config_dir .. "/colors" }
       config.color_scheme = "wallust"
-      config.window_decorations = "RESIZE"
-      config.window_background_opacity = 0.85
-      config.background = {
-        {
-          source = { File = wezterm.config_dir .. "/wallpaper.png" },
-          hsb = { brightness = 0.1, saturation = 0.8, hue = 1.0 },
-        }
+      config.window_decorations = "NONE"
+      config.window_padding = {
+        left = 1,
+        right = 1,
+        top = 0,
+        bottom = 0
       }
-
+      config.use_resize_increments = false
+      config.window_background_opacity = 0.85
       config.default_prog = { "${fishPath}", "--login" }
       config.enable_tab_bar = true
       config.hide_tab_bar_if_only_one_tab = true
