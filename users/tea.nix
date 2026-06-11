@@ -130,7 +130,7 @@ in {
         desktop = {
           kitty.enable = true;
           rio.enable = false;
-          ghostty.enable = true;
+          wezterm.enable = true;
           teamviewer.enable = true;
           zed.enable = true;
           mpv.enable = true;
@@ -251,6 +251,7 @@ in {
 
         environments.hyprland = {
           enable = true;
+          terminal = "wezterm";
           hypridle = {
             enable = true;
             settings = {

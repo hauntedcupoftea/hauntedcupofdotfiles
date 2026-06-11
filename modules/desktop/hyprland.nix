@@ -29,8 +29,6 @@
     pwvucontrol
     alsa-utils
 
-    wl-clipboard
-    clipse
     playerctl
     hyprpicker
     libqalculate
