@@ -70,7 +70,6 @@
     (when z {zellij = "touch ~/.config/zellij/themes/wallust.kdl";})
     (when k {kitty = "kill -SIGUSR1 $(pidof kitty)";})
     (when g {ghostty = "kill -SIGUSR2 $(pidof ghostty)";})
-    (when w {wezterm = "wezterm cli reload-configuration";})
     {
       gtk3 = ''
         gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita' && \

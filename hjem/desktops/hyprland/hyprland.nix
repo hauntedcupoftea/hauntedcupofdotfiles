@@ -3,10 +3,8 @@
   lib,
   pkgs,
   nixosConfig,
-  inputs,
   ...
 }: let
-  stashPkg = inputs.stash.packages.${pkgs.stdenv.hostPlatform.system}.stash;
   cfg = config.dotfiles.environments.hyprland;
   monitors = nixosConfig.dotfiles.desktop.monitors or [];
 
@@ -41,16 +39,15 @@ in {
 
   config = lib.mkIf cfg.enable {
     rum.desktops.hyprland.enable = true;
-    packages = [stashPkg];
 
-    systemd.services.stash-watch = {
-      description = "Stash clipboard watch daemon";
+    systemd.services.clipse-watch = {
+      description = "Clipse clipboard watch daemon";
       wantedBy = ["graphical-session.target"];
       partOf = ["graphical-session.target"];
       after = ["graphical-session.target"];
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${lib.getExe stashPkg} watch --persist";
+        ExecStart = "${lib.getExe pkgs.clipse} -listen";
         Restart = "on-failure";
         RestartSec = 2;
       };
@@ -157,7 +154,6 @@ in {
         hl.on("hyprland.start", function()
           hl.exec_cmd("uwsm app -- fcitx5 -d")
           hl.exec_cmd("uwsm app -- gnome-keyring-daemon --start --components=pkcs11,secrets")
-          hl.exec_cmd("stash db vacuum")
         end)
 
         -- Keybinds
@@ -169,7 +165,7 @@ in {
         hl.bind(mod .. " + space",    hl.dsp.exec_cmd("nc -U $XDG_RUNTIME_DIR/walker/walker.sock"))
         hl.bind(mod .. " + Z",        hl.dsp.exec_cmd("uwsm app -- zen-twilight"))
         hl.bind(mod .. " + E",        hl.dsp.exec_cmd("uwsm app -- " .. terminal .. " -e --class yazi yazi"))
-        hl.bind(mod .. " + V",        hl.dsp.exec_cmd("uwsm app -- " .. terminal .. " -e --class stash stash list"))
+        hl.bind(mod .. " + V",        hl.dsp.exec_cmd("uwsm app -- " .. terminal .. " -e --class clipse clipse"))
         hl.bind(altMod .. " + C",     hl.dsp.exec_cmd("uwsm app -- hyprpicker -a"))
 
         -- Focus movement
@@ -230,8 +226,8 @@ in {
         })
 
         hl.window_rule({
-          name = "stash-float",
-          match = { class = "stash" },
+          name = "clipse-float",
+          match = { class = "clipse" },
           float = true,
           size = "652 652",
           stay_focused = true,

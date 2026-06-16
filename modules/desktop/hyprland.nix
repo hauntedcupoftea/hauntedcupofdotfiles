@@ -33,6 +33,10 @@
     hyprpicker
     libqalculate
 
+    # clipboard
+    clipse
+    wl-clipboard
+
     # xdg-focused stuff
     xdg-utils
     shared-mime-info
