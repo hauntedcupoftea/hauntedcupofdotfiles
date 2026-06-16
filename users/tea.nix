@@ -205,6 +205,7 @@ in {
             # experimenting
             drawy
             drawio
+            mission-center
           ];
         };
 
