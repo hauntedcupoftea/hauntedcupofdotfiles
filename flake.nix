@@ -112,10 +112,10 @@
       inputs.flake-parts.follows = "flake-parts";
     };
 
-    millennium = {
-      url = "github:SteamClientHomebrew/Millennium/next?dir=packages/nix";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # millennium = {
+    #   url = "github:SteamClientHomebrew/Millennium/next?dir=packages/nix";
+    #   # inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
@@ -134,7 +134,7 @@
     nixpkgs,
     nix-on-droid,
     rust-overlay,
-    millennium,
+    # millennium,
     ...
   }: let
     customOverlay = import ./pkgs {inherit inputs;};
@@ -175,13 +175,32 @@
               };
               system = "x86_64-linux";
               overlays = [
-                millennium.overlays.default
+                # millennium.overlays.default
                 rust-overlay.overlays.default
                 customOverlay
               ];
             };
             modules = [
               ./hosts/ge66-raider
+            ];
+          };
+          "9770xt" = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = { inherit inputs; };
+            pkgs = import nixpkgs {
+              config = {
+                allowUnfree = true;
+                rocmSupport = true;
+              };
+              system = "x86_64-linux";
+              overlays = [
+                # millennium.overlays.default
+                rust-overlay.overlays.default
+                customOverlay
+              ];
+            };
+            modules = [
+              ./hosts/9770xt
             ];
           };
         };

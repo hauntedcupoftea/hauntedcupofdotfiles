@@ -12,11 +12,6 @@ in {
     enable = lib.mkEnableOption "QuickShell panel / lockscreen service";
     package = lib.mkPackageOption pkgs "quickshell" {};
     uwsmPackage = lib.mkPackageOption pkgs "uwsm" {};
-    projectPath = lib.mkOption {
-      type = lib.types.path;
-      description = "Path to the quickshell project directory (contains main.qml or entry point)";
-      example = "/home/tea/hauntedcupofdotfiles/custom-files/quickshell";
-    };
     extraArgs = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [];
@@ -40,6 +35,10 @@ in {
   config = lib.mkIf (cfg.enable && hasDesktop) {
     packages = [cfg.package cfg.uwsmPackage];
 
+    xdg.config.files."quickshell" = {
+      source = ../../../custom-files/quickshell;
+    };
+
     systemd.services.quickshell = {
       description = "QuickShell UI service";
       wantedBy = [cfg.systemdTarget];
@@ -48,14 +47,13 @@ in {
 
       serviceConfig = {
         ExecStart = ''
-          ${lib.getExe cfg.uwsmPackage} app -- \
-            ${lib.getExe cfg.package} -p ${cfg.projectPath} ${lib.escapeShellArgs cfg.extraArgs}
+          ${lib.getExe cfg.package} ${lib.escapeShellArgs cfg.extraArgs}
         '';
         Restart = "on-failure";
         RestartSec = 5;
       };
       environment = cfg.environment;
-      enableDefaultPath = false; # keep minimal PATH
+      enableDefaultPath = false;
     };
   };
 }

@@ -176,7 +176,7 @@ in {
             obsidian
             peazip
             remmina
-            dungeondraft
+            # dungeondraft
             element-desktop
             zapzap
             zmkbatx
@@ -288,7 +288,6 @@ in {
 
           quickshell = {
             enable = true;
-            projectPath = "/home/tea/hauntedcupofdotfiles/custom-files/quickshell";
           };
         };
       };

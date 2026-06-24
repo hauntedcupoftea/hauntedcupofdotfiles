@@ -46,6 +46,7 @@ in {
             else "master";
           pull.rebase = true;
           push.autoSetupRemote = true;
+          safe.directory = "/flake";
         }
         cfg.extraConfig
       ];

@@ -14,7 +14,7 @@
   programs = {
     steam = {
       enable = true;
-      package = pkgs.millennium-steam.override {
+      package = pkgs.steam.override {
         extraProfile = ''
           export MANGOHUD=1
           export PROTON_USE_WOW64=1

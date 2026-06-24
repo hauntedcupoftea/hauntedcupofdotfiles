@@ -8,7 +8,7 @@
 in {
   programs.nh = {
     enable = true;
-    flake = "/home/tea/hauntedcupofdotfiles";
+    flake = "/flake";
     package = inputs.nh.packages.${pkgs.stdenv.hostPlatform.system}.default;
     clean = {
       enable = true;
