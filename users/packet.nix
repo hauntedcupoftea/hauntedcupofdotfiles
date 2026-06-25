@@ -1,4 +1,5 @@
 {
+  lib,
   inputs,
   pkgs,
   ...
@@ -112,7 +113,6 @@ in {
           # dungeondraft
           element-desktop
           zapzap
-          zmkbatx
           antigravity-fhs
           # screen capture stack (was home/desktop/screen-recording.nix)
           wf-recorder
@@ -161,6 +161,46 @@ in {
           enable = true;
           automount = true;
           notify = true;
+        };
+      };
+
+      environments.hyprland = {
+        enable = true;
+        terminal = "wezterm";
+        hypridle = {
+          enable = true;
+          settings = {
+            general = {
+              lock_cmd = "pidof hyprlock || hyprlock";
+              before_sleep_cmd = "${lib.getExe pkgs.quickshell} ipc call lockscreen lock";
+              after_sleep_cmd = "hyprctl dispatch dpms on";
+            };
+            listener = [
+              {
+                timeout = 150;
+                on-timeout = "brightnessctl -s set 10";
+                on-resume = "brightnessctl -r";
+              }
+              {
+                timeout = 150;
+                on-timeout = "brightnessctl -sd rgb:kbd_backlight set 0";
+                on-resume = "brightnessctl -rd rgb:kbd_backlight";
+              }
+              {
+                timeout = 300;
+                on-timeout = "${lib.getExe pkgs.quickshell} -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/ ipc call lockscreen lock";
+              }
+              {
+                timeout = 360;
+                on-timeout = "hyprctl dispatch dpms off";
+                on-resume = "hyprctl dispatch dpms on && brightnessctl -r";
+              }
+            ];
+          };
+        };
+
+        quickshell = {
+          enable = true;
         };
       };
     };

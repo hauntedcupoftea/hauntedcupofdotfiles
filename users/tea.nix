@@ -232,7 +232,7 @@ in {
           settings = {
             general = {
               lock_cmd = "pidof hyprlock || hyprlock";
-              before_sleep_cmd = "${lib.getExe pkgs.quickshell} -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/ ipc call lockscreen lock";
+              before_sleep_cmd = "${lib.getExe pkgs.quickshell} ipc call lockscreen lock";
               after_sleep_cmd = "hyprctl dispatch dpms on";
             };
             listener = [

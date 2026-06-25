@@ -7,7 +7,6 @@
     ./localsend.nix
     ./mail.nix
     ./podman.nix
-    ./services.nix
     ./tailscale.nix
     ./udisks2.nix
     ./xdg.nix
