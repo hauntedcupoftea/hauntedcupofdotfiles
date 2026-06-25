@@ -29,6 +29,9 @@
   services.xserver.videoDrivers = ["amdgpu"];
   ## end AMDGPU config
 
+  ## coolerctl
+  programs.coolercontrol.enable = true;
+
   networking.hostName = "9770xt";
 
   dotfiles = {
