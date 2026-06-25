@@ -1,5 +1,4 @@
 {
-  lib,
   inputs,
   pkgs,
   ...
@@ -7,43 +6,30 @@
   zen-browser =
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".twilight;
 in {
-  users.users.tea = {
+  users.users.packet = {
     isNormalUser = true;
-    description = "Anand Chauhan";
+    description = "Hriday Chauhan";
     shell = pkgs.fish;
     extraGroups = ["networkmanager" "wheel" "openrazer" "plugdev" "gamemode" "input" "dialout"];
     packages = [];
   };
 
-  hjem.users.tea = {
+  hjem.users.packet = {
     enable = true;
-    user = "tea";
-    directory = "/home/tea";
+    user = "packet";
+    directory = "/home/packet";
 
     environment.sessionVariables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
+      EDITOR = "zed";
+      VISUAL = "zed";
     };
 
     dotfiles = {
       shell = {
         cava.enable = true;
         helix.enable = true;
-        fish = {
-          enable = true;
-          vim-mode = {
-            enable = true;
-            default-mode = "insert";
-          };
-        };
-        direnv.enable = true;
+        fish.enable = true;
         starship.enable = true;
-        zellij = {
-          enable = true;
-          exitOnSessionExit = true;
-          sshOnly = true;
-        };
-
         eza.enable = true;
         btop.enable = true;
         bat.enable = true;
@@ -52,15 +38,7 @@ in {
         fzf.enable = true;
         zoxide.enable = true;
 
-        git = {
-          enable = true;
-          userName = "hauntedcupoftea";
-          userEmail = "andydchauhan@gmail.com";
-          github.enable = true;
-        };
-
         podman.enable = true;
-
         packages = with pkgs; [
           bruno
           deno
@@ -85,27 +63,9 @@ in {
 
       theming.enable = true;
 
-      languages = {
-        cpp = false;
-        fish = true;
-        markdown = true;
-        nix = true;
-        python = true;
-        qml = true;
-        rust = true;
-        go = true;
-        toml = true;
-        typst = true;
-        uwu-colors = true;
-        web = true;
-        yaml = true;
-      };
-
       desktop = {
         kitty.enable = true;
-        rio.enable = false;
         wezterm.enable = true;
-        teamviewer.enable = true;
         zed.enable = true;
         mpv.enable = true;
         obs.enable = true;
@@ -173,11 +133,7 @@ in {
           gale
           vulkan-tools
           lact
-          # music
-          kid3-qt
           # experimenting
-          drawy
-          drawio
           mission-center
         ];
       };
@@ -200,71 +156,15 @@ in {
               host = "127.0.0.1";
             };
           };
-          mpdscribble = {
-            enable = true;
-            verbose = 1;
-            mpd = {
-              host = "127.0.0.1";
-              port = 6600;
-            };
-            endpoints = {
-              "last.fm" = {
-                url = "http://post.audioscrobbler.com";
-                username = "hauntedcupoftea";
-                passwordFile = "/home/tea/.secrets/lastfm-password";
-              };
-            };
-          };
         };
         udiskie = {
           enable = true;
           automount = true;
           notify = true;
         };
-        zmkbatx.enable = true;
-      };
-
-      environments.hyprland = {
-        enable = true;
-        terminal = "wezterm";
-        hypridle = {
-          enable = true;
-          settings = {
-            general = {
-              lock_cmd = "pidof hyprlock || hyprlock";
-              before_sleep_cmd = "${lib.getExe pkgs.quickshell} -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/ ipc call lockscreen lock";
-              after_sleep_cmd = "hyprctl dispatch dpms on";
-            };
-            listener = [
-              {
-                timeout = 150;
-                on-timeout = "brightnessctl -s set 10";
-                on-resume = "brightnessctl -r";
-              }
-              {
-                timeout = 150;
-                on-timeout = "brightnessctl -sd rgb:kbd_backlight set 0";
-                on-resume = "brightnessctl -rd rgb:kbd_backlight";
-              }
-              {
-                timeout = 300;
-                on-timeout = "${lib.getExe pkgs.quickshell} -p /home/tea/hauntedcupofdotfiles/custom-files/quickshell/ ipc call lockscreen lock";
-              }
-              {
-                timeout = 360;
-                on-timeout = "hyprctl dispatch dpms off";
-                on-resume = "hyprctl dispatch dpms on && brightnessctl -r";
-              }
-            ];
-          };
-        };
-
-        quickshell = {
-          enable = true;
-        };
       };
     };
   };
 
-  nix.settings.trusted-users = ["tea"];
+  nix.settings.trusted-users = ["packet"];
 }
