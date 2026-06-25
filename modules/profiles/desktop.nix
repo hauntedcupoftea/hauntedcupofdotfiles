@@ -13,7 +13,7 @@
     monitors = lib.mkOption {
       default = [];
       description = "Monitor configuration passed to the compositor. Empty means compositor decides.";
-      type = lib.types.listOf (lib.types.submodule {
+      type = lib.types.listOf (lib.types.submodule ({...}: {
         options = {
           name = lib.mkOption {
             type = lib.types.str;
@@ -48,7 +48,7 @@
             description = "Primary monitor for workspace assignment.";
           };
         };
-      });
+      }));
     };
   };
 }

@@ -1,20 +1,25 @@
 {
+  config,
   lib,
-  pkgs,
   inputs,
+  pkgs,
   ...
 }: let
+  cfg = config.dotfiles.desktop;
   qs = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  isHyprlandEnabled = cfg.enable && (builtins.elem "hyprland" cfg.environment);
 in {
-  # prerequisites
-  environment.systemPackages = with pkgs.kdePackages; [
-    qs
-    qtdeclarative
-    qt5compat
-    qtstyleplugin-kvantum
-    qtsvg
-  ];
+  config = lib.mkIf isHyprlandEnabled {
+    # prerequisites
+    environment.systemPackages = with pkgs.kdePackages; [
+      qs
+      qtdeclarative
+      qt5compat
+      qtstyleplugin-kvantum
+      qtsvg
+    ];
 
-  # qt itself
-  qt.enable = true;
+    # qt itself
+    qt.enable = true;
+  };
 }
