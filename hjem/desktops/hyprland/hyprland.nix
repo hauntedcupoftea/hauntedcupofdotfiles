@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   nixosConfig,
   ...
 }: let
@@ -39,19 +38,6 @@ in {
 
   config = lib.mkIf cfg.enable {
     rum.desktops.hyprland.enable = true;
-
-    systemd.services.clipse-watch = {
-      description = "Clipse clipboard watch daemon";
-      wantedBy = ["graphical-session.target"];
-      partOf = ["graphical-session.target"];
-      after = ["graphical-session.target"];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${lib.getExe pkgs.clipse} -listen";
-        Restart = "on-failure";
-        RestartSec = 2;
-      };
-    };
 
     files.".config/hypr/hyprland.lua".text =
       /*
@@ -154,6 +140,7 @@ in {
         hl.on("hyprland.start", function()
           hl.exec_cmd("uwsm app -- fcitx5 -d")
           hl.exec_cmd("uwsm app -- gnome-keyring-daemon --start --components=pkcs11,secrets")
+          hl.exec_cmd("uwsm app -- clipse -listen")
         end)
 
         -- Keybinds
