@@ -27,6 +27,8 @@ in {
             export SDL_VIDEODRIVER="wayland,x11,windows"
             export PROTON_ENABLE_WAYLAND=1
             export PROTON_DLSS_UPGRADE=1
+            export PROTON_FSR4_UPGRADE=1
+            export PROTON_ENABLE_HDR=1
             unset TZ
           '';
         };

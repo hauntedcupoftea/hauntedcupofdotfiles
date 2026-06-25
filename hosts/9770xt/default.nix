@@ -29,20 +29,22 @@
   services.xserver.videoDrivers = ["amdgpu"];
   ## end AMDGPU config
 
-  ## coolerctl
+  ## hw monitoring and control
   programs.coolercontrol.enable = true;
+  services.hardware.openrgb.enable = true;
+  ## end hwmac
 
   networking.hostName = "9770xt";
 
   dotfiles = {
     desktop = {
       enable = true;
-      environment = ["hyprland" "plasma"];
+      environment = ["hyprland"];
       gaming.enable = true;
       audio.enable = true;
       monitors = [
         {
-          name = "HDMI-A-1";
+          name = "DP-3";
           resolution = "2560x1440";
           refreshRate = 165;
           position = "0x0";

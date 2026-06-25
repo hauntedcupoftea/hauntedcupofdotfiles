@@ -50,12 +50,12 @@ in {
           lib.concatStrings (
             map (i: ''
               hl.workspace_rule({ workspace = "${toString i}", persistent = true, monitor = "${primaryMonitor.name}" })
-            '') [1 2 3]
+            '') [1 2 3 4 5]
             ++ lib.concatMap (
               m:
                 map (i: ''
                   hl.workspace_rule({ workspace = "${toString i}", persistent = true, monitor = "${m.name}" })
-                '') [4 5 6]
+                '') [6 7 8 9 0]
             )
             secondaryMonitors
           )
@@ -171,12 +171,16 @@ in {
         hl.bind(altMod .. " + S",    hl.dsp.window.move({ workspace = "special:magic" }))
 
         -- Workspace switching: numrow + letter aliases
-        local keymap = { "m", "comma", "period", "j", "k", "l", "u", "i", "o" }
+        local keymap = { "m", "comma", "period", "slash", "j", "k", "l", "semicolon", "u", "i", "o", "p" }
+
+        for i, key in ipairs(keymap) do
+            hl.bind(mod .. " + " .. key,        hl.dsp.focus({ workspace = i }))
+            hl.bind(altMod .. " + " .. key,     hl.dsp.window.move({ workspace = i }))
+        end
+
         for i = 1, 9 do
-          hl.bind(mod .. " + " .. i,           hl.dsp.focus({ workspace = i }))
-          hl.bind(altMod .. " + " .. i,        hl.dsp.window.move({ workspace = i }))
-          hl.bind(mod .. " + " .. keymap[i],   hl.dsp.focus({ workspace = i }))
-          hl.bind(altMod .. " + " .. keymap[i],hl.dsp.window.move({ workspace = i }))
+            hl.bind(mod .. " + " .. i,      hl.dsp.focus({ workspace = i }))
+            hl.bind(altMod .. " + " .. i,   hl.dsp.window.move({ workspace = i }))
         end
 
         -- Mouse workspace scroll
