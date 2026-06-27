@@ -19,7 +19,6 @@ in {
     };
 
     kernelPackages = pkgs.linuxPackages_zen;
-    kernelModules = ["nvme"];
 
     loader.efi.canTouchEfiVariables = true;
     plymouth.enable = true;

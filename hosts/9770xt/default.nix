@@ -27,6 +27,7 @@
   systemd.services.lactd.wantedBy = ["multi-user.target"];
 
   services.xserver.videoDrivers = ["amdgpu"];
+  boot.kernelParams = ["video=DP-3:2560x1440@60e"];
   ## end AMDGPU config
 
   ## hw monitoring and control
