@@ -95,6 +95,10 @@ in {
       lua.enable = true;
       toml.enable = true;
       qml.enable = true;
+      dart = {
+        enable = true;
+        flutter-tools.enable = true;
+      };
     };
     formatter.conform-nvim = {
       enable = true;
