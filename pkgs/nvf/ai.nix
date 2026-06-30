@@ -261,44 +261,54 @@ in {
     };
   };
 
-  vim.maps.normal = {
-    "<leader>ic" = {
+  vim.keymaps = [
+    {
+      key = "<leader>ic";
       action = "<cmd>CodeCompanionChat Toggle<CR>";
       desc = "AI: Toggle chat";
-      silent = true;
-    };
-    "<leader>ia" = {
+      mode = "n";
+    }
+    {
+      key = "<leader>ia";
       action = "<cmd>CodeCompanionActions<CR>";
       desc = "AI: Action palette";
       silent = true;
-    };
-    "<leader>ii" = {
+      mode = "n";
+    }
+    {
+      key = "<leader>ii";
       action = "<cmd>CodeCompanion<CR>";
       desc = "AI: Inline prompt";
       silent = true;
-    };
-    "<leader>in" = {
+      mode = "n";
+    }
+    {
+      key = "<leader>in";
       action = "<cmd>CodeCompanionChat<CR>";
       desc = "AI: New chat";
       silent = true;
-    };
-  };
-
-  vim.maps.visual = {
-    "<leader>ic" = {
+      mode = "n";
+    }
+    {
+      key = "<leader>ic";
       action = "<cmd>CodeCompanionChat Toggle<CR>";
       desc = "AI: Send selection to chat";
       silent = true;
-    };
-    "<leader>ia" = {
+      mode = "v";
+    }
+    {
+      key = "<leader>ia";
       action = "<cmd>CodeCompanionActions<CR>";
       desc = "AI: Action palette";
       silent = true;
-    };
-    "<leader>ii" = {
+      mode = "v";
+    }
+    {
+      key = "<leader>ii";
       action = "<cmd>CodeCompanion<CR>";
       desc = "AI: Inline prompt on selection";
       silent = true;
-    };
-  };
+      mode = "v";
+    }
+  ];
 }

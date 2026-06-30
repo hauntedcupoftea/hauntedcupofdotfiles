@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}: let
+{lib, ...}: let
   inherit (lib.nvim.lua) toLuaObject;
   # https://microsoft.github.io/language-server-protocol/specifications/specification-current#serverCapabilities
   # https://github.com/neovim/nvim-lspconfig/issues/2542#issuecomment-1547019213
@@ -34,7 +30,11 @@ in {
       presets.tailwindcss-language-server.enable = true;
 
       servers = {
+        ty.cmd = lib.mkForce ["ty" "server"];
+        dart.cmd = lib.mkForce ["dart" "language-server" "--protocol=lsp"];
+
         nixd = {
+          cmd = lib.mkForce ["nixd"];
           on_init = overrideCapabilities {
             # capabilities that are also provided by nil
             completionProvider = false;
@@ -46,6 +46,7 @@ in {
         };
 
         nil = {
+          cmd = lib.mkForce ["nil"];
           on_init = overrideCapabilities {
             documentFormattingProvider = false; # we have conform.nvim
             semanticTokensProvider = false; # overrides tree-sitter comment
@@ -97,31 +98,26 @@ in {
       qml.enable = true;
       dart = {
         enable = true;
-        flutter-tools.enable = true;
+        flutter-tools = {
+          enable = true;
+          flutterPackage = null;
+        };
       };
     };
     formatter.conform-nvim = {
       enable = true;
       setupOpts = {
         formatters_by_ft = {
-          typescript = ["deno_fmt"];
-          javascript = ["deno_fmt"];
-          css = ["deno_fmt"];
-          html = ["deno_fmt"];
-          svelte = ["deno_fmt"];
+          typescript = ["prettier"];
+          javascript = ["prettier"];
+          css = ["prettier"];
+          html = ["prettier"];
+          svelte = ["prettier"];
           python = ["ruff_format"];
         };
         formatters = {
           ruff_format.command = "ruff";
-          deno_fmt = {
-            command = lib.getExe pkgs.deno;
-            args = lib.generators.mkLuaInline ''
-              function(self, ctx)
-                local ext = vim.fn.fnamemodify(ctx.filename, ":e")
-                return { "fmt", "--ext", ext, "-" }
-              end
-            '';
-          };
+          prettier.command = "prettier";
         };
       };
     };
