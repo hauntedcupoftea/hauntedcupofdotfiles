@@ -47,6 +47,11 @@
             default = false;
             description = "Primary monitor for workspace assignment.";
           };
+          hdr = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+            description = "Enable hdr-specific options in hyprland config.";
+          };
         };
       }));
     };

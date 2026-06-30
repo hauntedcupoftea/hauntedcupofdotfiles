@@ -20,6 +20,7 @@
           position = "${m.position}",
           scale = ${toString m.scale},
           ${lib.optionalString m.vrr "vrr = true,"}
+          ${lib.optionalString m.hdr "bitdepth = 10,"}
         })
       '')
       monitors;

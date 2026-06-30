@@ -52,6 +52,7 @@
           scale = 1;
           vrr = true;
           primary = true;
+          hdr = true;
         }
       ];
     };

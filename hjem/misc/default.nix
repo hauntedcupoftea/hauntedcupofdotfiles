@@ -1,3 +1,6 @@
 {...}: {
-  imports = [./qol ./languages];
+  imports = [
+    ./qol
+    # ./languages
+  ];
 }

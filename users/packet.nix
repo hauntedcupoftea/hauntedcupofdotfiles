@@ -28,7 +28,6 @@ in {
     dotfiles = {
       shell = {
         cava.enable = true;
-        helix.enable = true;
         fish.enable = true;
         starship.enable = true;
         eza.enable = true;
@@ -113,7 +112,6 @@ in {
           # dungeondraft
           element-desktop
           zapzap
-          antigravity-fhs
           # screen capture stack (was home/desktop/screen-recording.nix)
           wf-recorder
           hyprshot

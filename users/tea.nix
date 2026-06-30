@@ -85,22 +85,6 @@ in {
 
       theming.enable = true;
 
-      languages = {
-        cpp = false;
-        fish = true;
-        markdown = true;
-        nix = true;
-        python = true;
-        qml = true;
-        rust = true;
-        go = true;
-        toml = true;
-        typst = true;
-        uwu-colors = true;
-        web = true;
-        yaml = true;
-      };
-
       desktop = {
         kitty.enable = true;
         rio.enable = false;
