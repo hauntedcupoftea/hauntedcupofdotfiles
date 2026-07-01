@@ -38,7 +38,7 @@
   fileSystems."/games" = {
     device = "/dev/disk/by-uuid/0e703968-ca59-4e3d-bbea-16aab36412cc";
     fsType = "btrfs";
-    options = ["subvol=games" "compress=zstd" "noatime" "nofail"];
+    options = ["nofail"];
   };
 
   fileSystems."/nix" = {
