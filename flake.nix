@@ -38,10 +38,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stash = {
-      url = "github:NotAShelf/stash";
-    };
-
     hyprland = {
       url = "github:hyprwm/hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -176,8 +172,11 @@
               system = "x86_64-linux";
               overlays = [
                 # millennium.overlays.default
-                rust-overlay.overlays.default
                 customOverlay
+                # https://github.com/NixOS/nixpkgs/issues/536623
+                (final: _prev: {
+                  pnpm_10_29_2 = final.pnpm_10;
+                })
               ];
             };
             modules = [
@@ -186,7 +185,7 @@
           };
           "9770xt" = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            specialArgs = { inherit inputs; };
+            specialArgs = {inherit inputs;};
             pkgs = import nixpkgs {
               config = {
                 allowUnfree = true;
@@ -195,8 +194,11 @@
               system = "x86_64-linux";
               overlays = [
                 # millennium.overlays.default
-                rust-overlay.overlays.default
                 customOverlay
+                # https://github.com/NixOS/nixpkgs/issues/536623
+                (final: _prev: {
+                  pnpm_10_29_2 = final.pnpm_10;
+                })
               ];
             };
             modules = [
