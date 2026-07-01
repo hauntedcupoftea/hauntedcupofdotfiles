@@ -41,7 +41,6 @@ in {
         podman.enable = true;
         packages = with pkgs; [
           bruno
-          deno
           requestly
           sql-studio
           zrok

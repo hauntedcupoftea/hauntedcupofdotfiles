@@ -27,16 +27,18 @@ in {
       inlayHints.enable = true;
       trouble.enable = true;
 
-      presets.tailwindcss-language-server.enable = true;
-
       servers = {
         ty.cmd = lib.mkForce ["ty" "server"];
         dart.cmd = lib.mkForce ["dart" "language-server" "--protocol=lsp"];
+        rust_analyzer.cmd = lib.mkForce ["rust-analyzer"];
+        gopls.cmd = lib.mkForce ["gopls"];
+        typescript-go.cmd = lib.mkForce ["tsgo" "--lsp" "--stdio"];
+        svelte-language-server.cmd = lib.mkForce ["svelteserver" "--stdio"];
+        tinymist.cmd = lib.mkForce ["tinymist"];
 
         nixd = {
-          cmd = lib.mkForce ["nixd"];
           on_init = overrideCapabilities {
-            # capabilities that are also provided by nil
+            # capabilities that are better provided by nil
             completionProvider = false;
             declarationProvider = false;
             definitionProvider = false;
@@ -46,7 +48,6 @@ in {
         };
 
         nil = {
-          cmd = lib.mkForce ["nil"];
           on_init = overrideCapabilities {
             documentFormattingProvider = false; # we have conform.nvim
             semanticTokensProvider = false; # overrides tree-sitter comment
@@ -59,28 +60,26 @@ in {
       enableTreesitter = true;
       typescript = {
         enable = true;
-        lsp.servers = ["deno"];
-        format.enable = false;
+        lsp.servers = ["typescript-go"];
       };
       css = {
         enable = true;
-        format.enable = false;
       };
       html = {
         enable = true;
-        lsp.servers = ["emmet-ls"];
-        format.enable = false;
       };
       svelte = {
         enable = true;
-        format.enable = false;
       };
       json.enable = true;
       nix = {
         enable = true;
         lsp.servers = ["nixd" "nil"];
       };
-      markdown.enable = true;
+      markdown = {
+        enable = true;
+        lsp.servers = ["marksman"];
+      };
       yaml.enable = true;
       python = {
         enable = true;
@@ -108,24 +107,18 @@ in {
       enable = true;
       setupOpts = {
         formatters_by_ft = {
-          typescript = ["prettier"];
-          javascript = ["prettier"];
-          css = ["prettier"];
-          html = ["prettier"];
-          svelte = ["prettier"];
+          typescript = ["prettier_fmt"];
+          javascript = ["prettier_fmt"];
+          css = ["prettier_fmt"];
+          html = ["prettier_fmt"];
+          svelte = ["prettier_fmt"];
           python = ["ruff_format"];
         };
         formatters = {
           ruff_format.command = "ruff";
-          prettier.command = "prettier";
+          prettier_fmt.command = "prettier";
         };
       };
     };
-    luaConfigRC.lsp-roots = ''
-      vim.lsp.config('denols', {
-        root_markers = { 'deno.json', 'deno.jsonc' },
-        workspace_required = true,
-      })
-    '';
   };
 }

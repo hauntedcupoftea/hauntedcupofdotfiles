@@ -10,6 +10,6 @@
     ./plugins.nix
     ./editor.nix
     ./keymaps.nix
-    ./ai.nix
+    # ./ai.nix
   ];
 }).neovim
