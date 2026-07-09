@@ -1,21 +1,31 @@
 {
   inputs,
   pkgs,
+  config,
   ...
 }: let
   grubTheme = inputs.nixos-grub-themes.packages.${pkgs.stdenv.hostPlatform.system}.nixos;
+
+  hasPrimary = config.dotfiles.desktop.enable && (builtins.any (m: m.primary) config.dotfiles.desktop.monitors);
+  primaryMonitor =
+    if hasPrimary
+    then builtins.head (builtins.filter (m: m.primary) config.dotfiles.desktop.monitors)
+    else null;
 in {
   boot = {
-    # Enable GRUB
     loader.grub = {
       enable = true;
       device = "nodev";
       efiSupport = true;
       enableCryptodisk = false;
-      useOSProber = true; # Detect Windows
-      default = "saved"; # Default to last booted OS
+      useOSProber = true;
+      default = "saved";
       configurationLimit = 8;
-      theme = grubTheme; # TODO: probably consolidate theming into one module (split horizontally)
+      theme = grubTheme;
+      gfxmodeEfi =
+        if hasPrimary
+        then "${primaryMonitor.resolution}x32"
+        else "auto";
     };
 
     kernelPackages = pkgs.linuxPackages_zen;

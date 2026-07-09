@@ -87,8 +87,6 @@
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.systems.follows = "systems";
-      inputs.flake-parts.follows = "flake-parts";
     };
 
     quickshell = {
@@ -173,10 +171,6 @@
               overlays = [
                 # millennium.overlays.default
                 customOverlay
-                # https://github.com/NixOS/nixpkgs/issues/536623
-                (final: _prev: {
-                  pnpm_10_29_2 = final.pnpm_10;
-                })
               ];
             };
             modules = [
@@ -195,10 +189,6 @@
               overlays = [
                 # millennium.overlays.default
                 customOverlay
-                # https://github.com/NixOS/nixpkgs/issues/536623
-                (final: _prev: {
-                  pnpm_10_29_2 = final.pnpm_10;
-                })
               ];
             };
             modules = [
