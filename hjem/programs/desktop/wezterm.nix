@@ -65,7 +65,7 @@ in {
         config.webgpu_power_preference = "HighPerformance"
 
         -- Font
-        config.font = wezterm.font_with_fallback{ "${cfg.fontFamily}", "Symbols Nerd Font Mono" }
+        config.font = wezterm.font_with_fallback{ "${cfg.fontFamily}", "Symbols Nerd Font Mono", "DejaVu Sans Mono" }
         config.font_size = ${toString cfg.fontSize}
 
         config.unicode_version = 14

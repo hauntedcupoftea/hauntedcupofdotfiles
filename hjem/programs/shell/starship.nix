@@ -97,14 +97,14 @@ in {
         git_status = {
           style = "bg:purple";
           format = "[[($all_status$ahead_behind )](fg:bright-white bg:purple)]($style)";
-          ahead = "⇡\${count} ";
-          behind = "⇣\${count} ";
-          diverged = "⇵\${ahead_count}⇡/\${behind_count}⇣ ";
+          ahead = "\${count} ";
+          behind = "\${count} ";
+          diverged = "\${ahead_count}/\${behind_count} ";
           untracked = "?\${count} ";
           modified = "!\${count} ";
           staged = "+\${count} ";
           renamed = "»\${count} ";
-          deleted = "✘\${count} ";
+          deleted = "\${count} ";
           conflicted = "=\${count} ";
         };
 
@@ -119,8 +119,8 @@ in {
           symbol = " ";
           style = "bg:yellow fg:bright-white";
           format = "[[ $symbol$state( \($name\)) ](fg:bright-white bg:yellow)]($style)";
-          impure_msg = " ";
-          pure_msg = " ";
+          impure_msg = "󰞷 ";
+          pure_msg = "";
           unknown_msg = "";
           disabled = false;
         };
