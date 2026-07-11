@@ -63,6 +63,10 @@
         template = "kvantum-colors.kvconfig";
         target = "~/.config/Kvantum/wallust/wallust.kvconfig";
       };
+      theme-json = {
+        template = "wallust-theme.json";
+        target = "~/.config/wallust/theme.json";
+      };
     }
   ];
 
@@ -72,10 +76,15 @@
     (when g {ghostty = "kill -SIGUSR2 $(pidof ghostty)";})
     {
       gtk3 = ''
-        gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita' && \
-        gsettings set org.gnome.desktop.interface gtk-theme 'Colloid-Dark'
+        dconf write /org/gnome/desktop/interface/gtk-theme \"'Adwaita'\" && \
+        sleep 0.3 && \
+        dconf write /org/gnome/desktop/interface/gtk-theme \"'Colloid-Dark'\"
       '';
-      gtk4 = "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'";
+      gtk4 = ''
+        dconf write /org/gnome/desktop/interface/color-scheme "'default'" && \
+        sleep 0.3 && \
+        dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
+      '';
     }
   ];
 
@@ -89,6 +98,7 @@
       ".config/wallust/templates/nvim-colors.lua".source = ./templates/nvim-colors.lua;
       ".config/wallust/templates/gtk-colors.css".source = ./templates/gtk-colors.css.template;
       ".config/wallust/templates/kvantum-colors.kvconfig".source = ./templates/kvantum-colors.kvconfig;
+      ".config/wallust/templates/wallust-theme.json".source = ./templates/wallust-theme.json;
     }
   ];
 in {

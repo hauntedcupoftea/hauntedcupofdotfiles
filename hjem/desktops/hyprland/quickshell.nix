@@ -33,7 +33,7 @@ in {
   };
 
   config = lib.mkIf (cfg.enable && hasDesktop) {
-    packages = [cfg.package cfg.uwsmPackage];
+    packages = [cfg.package cfg.uwsmPackage pkgs.cava];
 
     xdg.config.files."quickshell" = {
       source = ../../../custom-files/quickshell;
