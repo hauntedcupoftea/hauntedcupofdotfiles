@@ -27,6 +27,20 @@
 
   primaryMonitor = lib.findFirst (m: m.primary) null monitors;
   secondaryMonitors = lib.filter (m: !m.primary) monitors;
+  orderedMonitors = lib.optional (primaryMonitor != null) primaryMonitor ++ secondaryMonitors;
+  workspaceRuleLines = lib.concatStrings (
+    lib.imap0 (
+      monitorIndex: m:
+        lib.concatMapStrings (
+          localWs: let
+            globalWs = monitorIndex * 4 + localWs;
+          in ''
+            hl.workspace_rule({ workspace = "${toString globalWs}", persistent = true, monitor = "${m.name}" })
+          ''
+        ) [1 2 3 4]
+    )
+    orderedMonitors
+  );
 in {
   options.dotfiles.environments.hyprland = {
     enable = lib.mkEnableOption "hyprland configuration";
@@ -47,20 +61,7 @@ in {
       ''
         ${monitorLines}
 
-        ${lib.optionalString (primaryMonitor != null) (
-          lib.concatStrings (
-            map (i: ''
-              hl.workspace_rule({ workspace = "${toString i}", persistent = true, monitor = "${primaryMonitor.name}" })
-            '') [1 2 3 4 5]
-            ++ lib.concatMap (
-              m:
-                map (i: ''
-                  hl.workspace_rule({ workspace = "${toString i}", persistent = true, monitor = "${m.name}" })
-                '') [6 7 8 9 0]
-            )
-            secondaryMonitors
-          )
-        )}
+        ${workspaceRuleLines}
 
         local terminal = "${cfg.terminal}"
         local mod = "SUPER"
