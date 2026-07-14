@@ -22,7 +22,7 @@
           name = "eDP-1";
           resolution = "1920x1080";
           refreshRate = 240;
-          position = "0";
+          position = "0x0";
           hdr = true;
           scale = 1;
           vrr = false;
