@@ -38,7 +38,7 @@ in {
         fzf.enable = true;
         zoxide.enable = true;
 
-        podman.enable = true;
+        podman.enable = false;
         packages = with pkgs; [
           bruno
           requestly

@@ -132,7 +132,7 @@ in {
           obsidian
           peazip
           remmina
-          # dungeondraft
+          dungeondraft
           element-desktop
           zapzap
           zmkbatx
