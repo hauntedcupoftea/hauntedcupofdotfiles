@@ -5,6 +5,7 @@
     ../../modules/hardware/audio.nix
     ../../modules/hardware/razer.nix
     ../../modules/hardware/power.nix
+    ../../modules/hardware/filesystems.nix
     ../../modules/hardware/openlinkhub.nix
     ../../modules/desktop
     ../../modules/theme
