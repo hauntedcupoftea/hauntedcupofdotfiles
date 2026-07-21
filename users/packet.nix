@@ -93,8 +93,6 @@ in {
             hardwareAcceleration = true;
             splashThemeing = true;
           };
-          themeDir = ../custom-files/vesktop/themes;
-          settingsDir = ../custom-files/vesktop/settings;
         };
 
         packages = with pkgs; [
