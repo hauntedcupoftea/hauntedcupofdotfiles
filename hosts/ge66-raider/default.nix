@@ -7,6 +7,7 @@
     ../../modules/theme
     ../../modules/profiles
     ../../users
+    ../../modules/desktop/teamviewer.nix
   ];
 
   networking.hostName = "Anand-GE66-Raider";
