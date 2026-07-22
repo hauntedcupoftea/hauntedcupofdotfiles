@@ -78,7 +78,12 @@ in {
       };
       markdown = {
         enable = true;
-        lsp.servers = ["marksman"];
+        lsp.servers = ["rumdl"];
+        format.type = ["rumdl"];
+        extensions = {
+          markview-nvim.enable = true;
+          render-markdown-nvim.enable = true;
+        };
       };
       yaml.enable = true;
       python = {
@@ -107,16 +112,16 @@ in {
       enable = true;
       setupOpts = {
         formatters_by_ft = {
-          typescript = ["prettier_fmt"];
-          javascript = ["prettier_fmt"];
-          css = ["prettier_fmt"];
-          html = ["prettier_fmt"];
-          svelte = ["prettier_fmt"];
+          typescript = ["prettier"];
+          javascript = ["prettier"];
+          css = ["prettier"];
+          html = ["prettier"];
+          svelte = ["prettier"];
           python = ["ruff_format"];
         };
         formatters = {
           ruff_format.command = "ruff";
-          prettier_fmt.command = "prettier";
+          prettier.command = lib.mkForce "prettier";
         };
       };
     };
