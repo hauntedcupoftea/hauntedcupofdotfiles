@@ -110,6 +110,7 @@ in {
     };
     formatter.conform-nvim = {
       enable = true;
+      presets.prettier.plugins = lib.mkForce [];
       setupOpts = {
         formatters_by_ft = {
           typescript = ["prettier"];

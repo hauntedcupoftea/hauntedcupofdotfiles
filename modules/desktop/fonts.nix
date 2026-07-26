@@ -1,5 +1,4 @@
 {pkgs, ...}: {
-  # Add nerdfonts
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     nerd-fonts.droid-sans-mono
@@ -11,6 +10,13 @@
     material-symbols
     material-icons
   ];
+
+  fonts.fontconfig.defaultFonts = {
+    monospace = ["FiraCode Nerd Font Mono" "DejaVu Sans Mono"];
+    sansSerif = ["DejaVu Sans" "Noto Sans CJK SC"];
+    serif = ["DejaVu Serif" "Noto Serif CJK SC"];
+    emoji = ["Noto Color Emoji"];
+  };
 
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
