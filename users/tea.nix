@@ -28,7 +28,6 @@ in {
     dotfiles = {
       shell = {
         cava.enable = true;
-        helix.enable = true;
         fish = {
           enable = true;
           vim-mode = {
