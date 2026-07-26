@@ -74,6 +74,7 @@ in {
           git
           inetutils
           lm_sensors
+          scooter
           nload
           parted
           hauntedcupof-nvim

@@ -141,7 +141,7 @@ in {
         -- Autostart: things that explicitly need Hyprland
         hl.on("hyprland.start", function()
           hl.exec_cmd("uwsm app -- fcitx5 -d")
-          hl.exec_cmd("uwsm app -- gnome-keyring-daemon --start --components=pkcs11,secrets")
+          hl.exec_cmd("uwsm app -- gnome-keyring-daemon --start --components=pkcs11")
           hl.exec_cmd("uwsm app -- clipse -listen")
         end)
 
