@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   security.rtkit.enable = true;
   security.sudo.enable = true;
   security.pam.services.hyprlock = {
@@ -7,30 +11,14 @@
     '';
   };
   security.polkit.enable = true;
-
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.hyprland = {
-    enableGnomeKeyring = true;
-    text = ''
-      session optional ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so auto_start components=secrets,pkcs11
-    '';
-  };
-
-  security.pam.services.sddm = {
-    enableGnomeKeyring = true;
-    text = ''
-      session optional ${pkgs.gnome-keyring}/lib/security/pam_gnome_keyring.so auto_start components=secrets,pkcs11
-    '';
-  };
-
+  services.gnome.gnome-keyring.enable = lib.mkForce false;
   environment.systemPackages = [
     pkgs.polkit
     pkgs.polkit_gnome
+    pkgs.keepassxc
   ];
-
-  # Keep your polkit agent
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
+  systemd.user.services = {
+    polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
       wantedBy = ["graphical-session.target"];
       wants = ["graphical-session.target"];

@@ -202,7 +202,16 @@ in {
           automount = true;
           notify = true;
         };
-        zmkbatx.enable = true;
+        keepassxc = {
+          enable = true;
+          sshAgent = false;
+          fdoSecrets = true;
+          browserIntegration = {
+            enable = true;
+            zen = true;
+          };
+        };
+        zmkbatx.enable = false;
       };
 
       environments.hyprland = {

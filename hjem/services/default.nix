@@ -1,3 +1,10 @@
 {...}: {
-  imports = [./music.nix ./meta ./udiskie.nix ./zmkbatx.nix ./mpdscribble.nix];
+  imports = [
+    ./music.nix
+    ./meta
+    ./udiskie.nix
+    ./zmkbatx.nix
+    ./mpdscribble.nix
+    ./keepassxc.nix
+  ];
 }
