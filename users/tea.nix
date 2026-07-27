@@ -134,7 +134,6 @@ in {
           element-desktop
           zapzap
           zmkbatx
-          antigravity-fhs
           # screen capture stack (was home/desktop/screen-recording.nix)
           wf-recorder
           hyprshot

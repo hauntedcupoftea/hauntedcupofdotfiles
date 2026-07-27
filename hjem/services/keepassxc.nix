@@ -12,6 +12,18 @@
       SSHAgent.Enabled = cfg.sshAgent;
       FdoSecrets.Enabled = cfg.fdoSecrets;
       Browser.Enabled = cfg.browserIntegration.enable;
+      GUI = {
+        ShowTrayIcon = true;
+        MinimizeToTray = true;
+        MinimizeOnClose = true;
+        MinimizeOnStartup = true;
+        TrayIconAppearance = "colorful";
+      };
+      Security = {
+        LockDatabaseIdle = true;
+        LockDatabaseIdleSeconds = 600;
+        LockDatabaseOnSuspend = true;
+      };
     }
     cfg.settings;
 
@@ -61,7 +73,7 @@ in {
           nativeMessagingManifest;
       }
       // lib.optionalAttrs cfg.browserIntegration.zen {
-        ".zen/native-messaging-hosts/org.keepassxc.keepassxc_browser.json".source =
+        ".config/zen/native-messaging-hosts/org.keepassxc.keepassxc_browser.json".source =
           nativeMessagingManifest;
       }
     );
