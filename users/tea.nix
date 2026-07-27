@@ -203,7 +203,7 @@ in {
         };
         keepassxc = {
           enable = true;
-          sshAgent = false;
+          sshAgent = true;
           fdoSecrets = true;
           browserIntegration = {
             enable = true;

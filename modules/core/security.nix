@@ -12,6 +12,7 @@
   };
   security.polkit.enable = true;
   services.gnome.gnome-keyring.enable = lib.mkForce false;
+  programs.ssh.startAgent = true;
   environment.systemPackages = [
     pkgs.polkit
     pkgs.polkit_gnome
