@@ -51,6 +51,8 @@ in {
         '';
         Restart = "on-failure";
         RestartSec = 5;
+        Type = "dbus";
+        BusName = "org.kde.StatusNotifierWatcher";
       };
       environment = cfg.environment;
       enableDefaultPath = false;
