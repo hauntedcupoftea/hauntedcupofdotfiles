@@ -62,6 +62,10 @@ in {
         enable = true;
         lsp.servers = ["typescript-go"];
       };
+      tsx = {
+        enable = true;
+        lsp.servers = ["typescript-go"];
+      };
       css = {
         enable = true;
       };
@@ -114,6 +118,7 @@ in {
       setupOpts = {
         formatters_by_ft = {
           typescript = ["prettier"];
+          tsx = ["prettier"];
           javascript = ["prettier"];
           css = ["prettier"];
           html = ["prettier"];

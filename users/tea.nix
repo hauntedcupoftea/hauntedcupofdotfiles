@@ -109,14 +109,7 @@ in {
         vesktop = {
           enable = true;
           arrpc.enable = true;
-          settings = {
-            customTitleBar = false;
-            disableMinSize = true;
-            arRPC = true;
-            hardwareVideoAcceleration = true;
-            hardwareAcceleration = true;
-            splashThemeing = true;
-          };
+          hardwareVideoAcceleration = true;
         };
 
         packages = with pkgs; [

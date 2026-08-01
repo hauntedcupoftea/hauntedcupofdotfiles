@@ -27,6 +27,7 @@
             enable = config.dotfiles.services.enable;
             podman.enable = config.dotfiles.services.podman.enable;
           };
+          hardware.videoDrivers = config.services.xserver.videoDrivers;
         };
       };
     };

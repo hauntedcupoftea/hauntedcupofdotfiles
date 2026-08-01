@@ -1,23 +1,28 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }: {
+  imports = [inputs.gaze.nixosModules.default];
+  services.gaze = {
+    enable = true;
+    gui.enable = true;
+  };
   security.rtkit.enable = true;
   security.sudo.enable = true;
-  security.pam.services.hyprlock = {
-    text = ''
-      auth include login
-    '';
-  };
+
   security.polkit.enable = true;
+
   services.gnome.gnome-keyring.enable = lib.mkForce false;
   programs.ssh.startAgent = true;
+
   environment.systemPackages = [
     pkgs.polkit
     pkgs.polkit_gnome
     pkgs.keepassxc
   ];
+
   systemd.user.services = {
     polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
