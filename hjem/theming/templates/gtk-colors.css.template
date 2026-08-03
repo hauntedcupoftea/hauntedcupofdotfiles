@@ -64,7 +64,7 @@
 @define-color popover_shade_color rgba(0, 0, 0, 0.1);
 
 /* Cards */
-@define-color card_bg_color {{ color0 }}19;
+@define-color card_bg_color {{ color0 }};
 @define-color card_fg_color @wallust_fg;
 @define-color card_shade_color rgba(0, 0, 0, 0.2);
 
