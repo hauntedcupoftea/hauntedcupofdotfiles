@@ -27,7 +27,7 @@ in {
     };
     systemdTarget = lib.mkOption {
       type = lib.types.str;
-      default = "graphical-session.target";
+      default = "wayland-wm@hyprland.desktop.service";
       description = "Systemd target to bind to";
     };
   };
@@ -43,7 +43,7 @@ in {
       description = "QuickShell UI service";
       wantedBy = [cfg.systemdTarget];
       partOf = [cfg.systemdTarget];
-      # after = [cfg.systemdTarget];
+      after = [cfg.afterTarget];
 
       serviceConfig = {
         ExecStart = ''
