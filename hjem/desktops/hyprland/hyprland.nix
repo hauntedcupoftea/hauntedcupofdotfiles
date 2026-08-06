@@ -69,6 +69,8 @@ in {
 
         hl.env("XCURSOR_SIZE", "24")
         hl.env("HYPRCURSOR_SIZE", "24")
+        hl.env("TERM", "${cfg.terminal}")
+        hl.env("TERMINAL", "${cfg.terminal}")
 
         hl.config({
           general = {

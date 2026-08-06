@@ -43,7 +43,7 @@ in {
       description = "QuickShell UI service";
       wantedBy = [cfg.systemdTarget];
       partOf = [cfg.systemdTarget];
-      after = [cfg.afterTarget];
+      after = [cfg.systemdTarget];
 
       serviceConfig = {
         ExecStart = ''

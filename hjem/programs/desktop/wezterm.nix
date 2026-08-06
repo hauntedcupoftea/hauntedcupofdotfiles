@@ -61,7 +61,7 @@ in {
         -- Performance
         config.max_fps = 240
         config.animation_fps = 240
-        config.front_end = "WebGpu"
+        config.front_end = "OpenGL"
         config.webgpu_power_preference = "HighPerformance"
 
         -- Font
