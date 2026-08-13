@@ -128,7 +128,7 @@ in {
           zapzap
           zmkbatx
           # screen capture stack (was home/desktop/screen-recording.nix)
-          wf-recorder
+          # wf-recorder
           hyprshot
           grimblast
           slurp

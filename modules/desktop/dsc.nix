@@ -3,7 +3,7 @@
     ../../services/embridge.nix
   ];
 
-  services.embridge.enable = false;
+  # services.embridge.enable = false;
 
   services.pcscd = {
     enable = true;
@@ -11,7 +11,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    embridge
+    # embridge
     pcscliteWithPolkit
     pcsc-tools
     opensc

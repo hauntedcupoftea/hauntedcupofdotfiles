@@ -18,7 +18,7 @@
 
     src = fetchzip {
       url = "https://resources.emudhra.com/hs/RedHat/latest/emBridge.zip";
-      sha256 = "sha256-ZJHlFH/4pFaEE81772+KrlNZlfFZV4wIWffmxtaHAD8=";
+      sha256 = "sha256-V0tamPaiSdy3fRAgu4t6MNQgeTRijDt9hboLnTXBZzo=";
       stripRoot = false;
     };
 

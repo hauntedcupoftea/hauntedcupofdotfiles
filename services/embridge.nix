@@ -14,7 +14,7 @@ in {
 
     package = mkOption {
       type = types.package;
-      default = pkgs.embridge;
+      # default = pkgs.embridge;
       description = "The eMbridge package to use";
     };
   };
