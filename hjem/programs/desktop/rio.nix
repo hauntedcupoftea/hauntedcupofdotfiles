@@ -41,7 +41,6 @@ in {
         family = "FiraCode Nerd Font";
         size = 18.0;
         use-drawable-chars = true;
-        # ligatures tracked at https://github.com/raphamorim/rio/issues/310
         features = [];
         disable-warnings-not-found = false;
         extras = [
@@ -57,8 +56,8 @@ in {
       };
 
       navigation = {
-        mode = "Plain"; # using zellij for multiplexing
-        use-split = false;
+        mode = "Tab";
+        use-split = true;
       };
 
       window = {
@@ -66,13 +65,12 @@ in {
         opacity = 0.80;
         blur = true;
         decorations = "Enabled";
-        opacity-cells = false;
       };
 
       renderer = {
         backend = "Webgpu";
         strategy = "events";
-        target-fps = 165;
+        target-fps = 160;
       };
     };
   };
