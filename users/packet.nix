@@ -64,7 +64,6 @@ in {
 
       desktop = {
         kitty.enable = true;
-        wezterm.enable = true;
         zed.enable = true;
         mpv.enable = true;
         obs.enable = true;
@@ -154,7 +153,7 @@ in {
 
       environments.hyprland = {
         enable = true;
-        terminal = "wezterm";
+        terminal = "kitty";
         hypridle = {
           enable = true;
           settings = {
