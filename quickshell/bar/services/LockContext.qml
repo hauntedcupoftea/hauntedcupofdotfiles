@@ -1,0 +1,66 @@
+pragma Singleton
+
+import QtQuick
+import Quickshell
+import Quickshell.Io
+import Quickshell.Services.Pam
+
+Singleton {
+    id: root
+    signal unlocked
+    signal failed
+
+    property string currentText: ""
+    property bool unlockInProgress: false
+    property bool showFailure: false
+    property bool showSuccess: false
+    property bool locked: false
+
+    function unlock() {
+        root.locked = false;
+        root.unlocked();
+    }
+
+    onCurrentTextChanged: showFailure = false
+    onLockedChanged: if (root.locked === true)
+        showSuccess = false
+
+    function tryUnlock() {
+        if (currentText === "")
+            return;
+
+        root.unlockInProgress = true;
+        pam.start();
+    }
+
+    IpcHandler {
+        target: "lockscreen"
+
+        function lock(): void {
+            root.locked = true;
+        }
+    }
+
+    PamContext {
+        id: pam
+
+        onPamMessage: {
+            if (this.responseRequired) {
+                this.respond(root.currentText);
+            }
+        }
+
+        onCompleted: result => {
+            root.currentText = "";
+            if (result == PamResult.Success) {
+                root.showSuccess = true;
+                root.unlocked();
+                root.locked = false;
+            } else {
+                root.showFailure = true;
+            }
+
+            root.unlockInProgress = false;
+        }
+    }
+}

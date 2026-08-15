@@ -79,6 +79,7 @@ in {
           parted
           hauntedcupof-nvim
           wget2
+          jujutsu
         ];
       };
 
