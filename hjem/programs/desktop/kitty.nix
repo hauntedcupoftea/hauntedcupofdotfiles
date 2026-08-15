@@ -19,7 +19,7 @@ in {
         scrollback_lines = 10000;
         enable_audio_bell = true;
         window_alert_on_bell = true;
-        update_check_interval = 0;
+        update_check_interval = 1;
         shell = lib.getExe pkgs.fish;
         window_padding_width = "1 2";
         font_size = "14.0";
@@ -32,20 +32,25 @@ in {
         cursor_blink_interval = "0.5";
 
         # Cursor trail, Contour-style
-        cursor_trail = 2;
-        cursor_trail_start_threshold = 1;
+        cursor_trail = 3;
+        cursor_trail_start_threshold = 2;
         cursor_trail_decay = "0.1 0.4";
 
-        # Layouts needed for splits and the pane-zoom toggle
         enabled_layouts = "splits,stack";
+        text_composition_strategy = "platform";
 
-        # Tab bar: bottom edge, numbered tabs, inactive tabs faded automatically
         tab_bar_edge = "bottom";
         tab_bar_style = "fade";
         tab_bar_min_tabs = 1;
         tab_title_template = "{index}: {title}";
         active_tab_font_style = "bold";
         inactive_tab_font_style = "normal";
+
+        repaint_delay = "8";
+        input_delay = "2";
+        sync_to_monitor = "yes";
+
+        bell_on_tab = " ";
 
         # Keybindings, leader-style via kitty's key-sequence syntax
         #   Tabs   -> t (new), b/f (prev/next), 1-9 (direct)
@@ -66,8 +71,8 @@ in {
           "${leaderPrefix}>8 goto_tab 8"
           "${leaderPrefix}>9 goto_tab 9"
 
-          "${leaderPrefix}>n launch --location=hsplit --cwd=current"
-          "${leaderPrefix}>shift+n launch --location=vsplit --cwd=current"
+          "${leaderPrefix}>n launch --location=split --horizontal --cwd=current"
+          "${leaderPrefix}>m launch --location=split --vertical --cwd=current"
           "${leaderPrefix}>h neighboring_window left"
           "${leaderPrefix}>j neighboring_window bottom"
           "${leaderPrefix}>k neighboring_window top"
@@ -78,8 +83,15 @@ in {
           "${leaderPrefix}>shift+l resize_window wider 5"
           "${leaderPrefix}>x close_window"
           "${leaderPrefix}>p toggle_layout stack"
+          "${leaderPrefix}>u open_url_with_hints"
+          "${leaderPrefix}>f kitten hints --type path --program firefox"
+          "${leaderPrefix}>c kitten hints --type hash --program @"
+          "${leaderPrefix}>e start_resizing_window"
 
           "${leaderPrefix}>r load_config_file"
+
+          "ctrl+shift+c copy_to_clipboard"
+          "ctrl+shift+v paste_from_clipboard"
         ];
       };
     };
