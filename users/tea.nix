@@ -86,6 +86,7 @@ in {
 
       desktop = {
         kitty.enable = true;
+        ghostty.enable = true;
         teamviewer.enable = true;
         zed.enable = true;
         mpv.enable = true;

@@ -13,6 +13,11 @@ in {
   config = lib.mkIf (nixosConfig.dotfiles.desktop.enable && cfg.enable) {
     packages = [pkgs.ghostty];
 
+    systemd = {
+      packages = [pkgs.ghostty];
+      services."app-com.mitchellh.ghostty".wantedBy = ["graphical-session.target"];
+    };
+
     files.".config/ghostty/config.ghostty".text = ''
       command = ${lib.getExe pkgs.fish} --login
 
