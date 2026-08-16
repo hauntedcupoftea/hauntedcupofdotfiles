@@ -76,8 +76,8 @@ in {
           "${cfg.leaderPrefix}>8 goto_tab 8"
           "${cfg.leaderPrefix}>9 goto_tab 9"
 
-          "${cfg.leaderPrefix}>n launch --location=split --horizontal --cwd=current"
-          "${cfg.leaderPrefix}>m launch --location=split --vertical --cwd=current"
+          "${cfg.leaderPrefix}>n launch --location=hsplit --cwd=current"
+          "${cfg.leaderPrefix}>m launch --location=vsplit --cwd=current"
           "${cfg.leaderPrefix}>h neighboring_window left"
           "${cfg.leaderPrefix}>j neighboring_window bottom"
           "${cfg.leaderPrefix}>k neighboring_window top"
