@@ -6,10 +6,15 @@
   ...
 }: let
   cfg = config.dotfiles.desktop.kitty;
-  leaderPrefix = "ctrl+space";
 in {
-  options.dotfiles.desktop.kitty.enable =
-    lib.mkEnableOption "kitty terminal emulator";
+  options.dotfiles.desktop.kitty = {
+    enable = lib.mkEnableOption "kitty terminal emulator";
+    leaderPrefix = lib.mkOption {
+      type = lib.types.str;
+      default = "ctrl+space";
+      description = "kitty terminal's leader keybind prefix.";
+    };
+  };
   config = lib.mkIf (nixosConfig.dotfiles.desktop.enable && cfg.enable) {
     rum.programs.kitty = {
       enable = true;
@@ -58,37 +63,37 @@ in {
         #             HJKL (resize), x (close), p (zoom toggle)
         #   Misc   -> r (reload config)
         map = [
-          "${leaderPrefix}>t new_tab_with_cwd"
-          "${leaderPrefix}>b previous_tab"
-          "${leaderPrefix}>f next_tab"
-          "${leaderPrefix}>1 goto_tab 1"
-          "${leaderPrefix}>2 goto_tab 2"
-          "${leaderPrefix}>3 goto_tab 3"
-          "${leaderPrefix}>4 goto_tab 4"
-          "${leaderPrefix}>5 goto_tab 5"
-          "${leaderPrefix}>6 goto_tab 6"
-          "${leaderPrefix}>7 goto_tab 7"
-          "${leaderPrefix}>8 goto_tab 8"
-          "${leaderPrefix}>9 goto_tab 9"
+          "${cfg.leaderPrefix}>t new_tab_with_cwd"
+          "${cfg.leaderPrefix}>b previous_tab"
+          "${cfg.leaderPrefix}>f next_tab"
+          "${cfg.leaderPrefix}>1 goto_tab 1"
+          "${cfg.leaderPrefix}>2 goto_tab 2"
+          "${cfg.leaderPrefix}>3 goto_tab 3"
+          "${cfg.leaderPrefix}>4 goto_tab 4"
+          "${cfg.leaderPrefix}>5 goto_tab 5"
+          "${cfg.leaderPrefix}>6 goto_tab 6"
+          "${cfg.leaderPrefix}>7 goto_tab 7"
+          "${cfg.leaderPrefix}>8 goto_tab 8"
+          "${cfg.leaderPrefix}>9 goto_tab 9"
 
-          "${leaderPrefix}>n launch --location=split --horizontal --cwd=current"
-          "${leaderPrefix}>m launch --location=split --vertical --cwd=current"
-          "${leaderPrefix}>h neighboring_window left"
-          "${leaderPrefix}>j neighboring_window bottom"
-          "${leaderPrefix}>k neighboring_window top"
-          "${leaderPrefix}>l neighboring_window right"
-          "${leaderPrefix}>shift+h resize_window narrower 5"
-          "${leaderPrefix}>shift+j resize_window shorter 5"
-          "${leaderPrefix}>shift+k resize_window taller 5"
-          "${leaderPrefix}>shift+l resize_window wider 5"
-          "${leaderPrefix}>x close_window"
-          "${leaderPrefix}>p toggle_layout stack"
-          "${leaderPrefix}>u open_url_with_hints"
-          "${leaderPrefix}>f kitten hints --type path --program firefox"
-          "${leaderPrefix}>c kitten hints --type hash --program @"
-          "${leaderPrefix}>e start_resizing_window"
+          "${cfg.leaderPrefix}>n launch --location=split --horizontal --cwd=current"
+          "${cfg.leaderPrefix}>m launch --location=split --vertical --cwd=current"
+          "${cfg.leaderPrefix}>h neighboring_window left"
+          "${cfg.leaderPrefix}>j neighboring_window bottom"
+          "${cfg.leaderPrefix}>k neighboring_window top"
+          "${cfg.leaderPrefix}>l neighboring_window right"
+          "${cfg.leaderPrefix}>shift+h resize_window narrower 5"
+          "${cfg.leaderPrefix}>shift+j resize_window shorter 5"
+          "${cfg.leaderPrefix}>shift+k resize_window taller 5"
+          "${cfg.leaderPrefix}>shift+l resize_window wider 5"
+          "${cfg.leaderPrefix}>x close_window"
+          "${cfg.leaderPrefix}>p toggle_layout stack"
+          "${cfg.leaderPrefix}>u open_url_with_hints"
+          "${cfg.leaderPrefix}>f kitten hints --type path --program firefox"
+          "${cfg.leaderPrefix}>c kitten hints --type hash --program @"
+          "${cfg.leaderPrefix}>e start_resizing_window"
 
-          "${leaderPrefix}>r load_config_file"
+          "${cfg.leaderPrefix}>r load_config_file"
 
           "ctrl+shift+c copy_to_clipboard"
           "ctrl+shift+v paste_from_clipboard"
