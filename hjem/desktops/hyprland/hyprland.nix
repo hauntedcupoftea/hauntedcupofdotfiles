@@ -231,7 +231,16 @@ in {
 
         hl.window_rule({
           name = "termfilechooser",
-          match = { class = "^(kitty|rio|wezterm)$", title = "^(Save File|Select Directory|Select File)$" },
+          match = { class = "^(kitty|rio|wezterm|ghostty)$", initial_title = "^(termfilechooser)" },
+          float = true,
+          stay_focused = true,
+          size = "1200 800",
+          center = true,
+        })
+
+        hl.window_rule({
+          name = "keepass-float",
+          match = { class = "^(org.keepassxc.KeePassXC)$" },
           float = true,
           stay_focused = true,
           size = "1200 800",
