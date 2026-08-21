@@ -9,6 +9,19 @@
     enable = true;
     gui.enable = true;
   };
+
+  security.pam.services.sudo.gaze = {
+    enable = true;
+    control = "sufficient";
+    simultaneous = true;
+  };
+
+  security.pam.services.polkit-1.gaze = {
+    enable = true;
+    control = "sufficient";
+    simultaneous = true;
+  };
+
   security.rtkit.enable = true;
   security.sudo.enable = true;
 
