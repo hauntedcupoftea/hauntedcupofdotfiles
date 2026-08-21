@@ -2,7 +2,7 @@
   options.dotfiles.desktop = {
     enable = lib.mkEnableOption "desktop profile";
 
-    environment = lib.mkOption {
+    environments = lib.mkOption {
       type = lib.types.listOf (lib.types.enum ["hyprland" "plasma" "gnome" "cosmic"]);
       default = ["hyprland"];
     };

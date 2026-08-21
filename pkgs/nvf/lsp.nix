@@ -20,12 +20,14 @@
     '';
 in {
   vim = {
+    diagnostics.presets.rumdl.enable = true;
     lsp = {
       enable = true;
       formatOnSave = true;
       lspkind.enable = true;
       inlayHints.enable = true;
       trouble.enable = true;
+      presets.rumdl.enable = true;
 
       servers = {
         ty.cmd = lib.mkForce ["ty" "server"];
@@ -115,6 +117,7 @@ in {
     formatter.conform-nvim = {
       enable = true;
       presets.prettier.plugins = lib.mkForce [];
+      presets.rumdl.enable = true;
       setupOpts = {
         formatters_by_ft = {
           typescript = ["prettier"];

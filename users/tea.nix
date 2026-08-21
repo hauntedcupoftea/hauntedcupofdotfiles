@@ -213,7 +213,7 @@ in {
           enable = true;
           settings = {
             general = {
-              lock_cmd = "pidof hyprlock || hyprlock";
+              lock_cmd = "qs ipc call lockscreen lock";
               before_sleep_cmd = "${lib.getExe pkgs.quickshell} ipc call lockscreen lock";
               after_sleep_cmd = "hyprctl dispatch dpms on";
             };

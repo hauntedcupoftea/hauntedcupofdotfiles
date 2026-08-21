@@ -22,6 +22,7 @@
             enable = config.dotfiles.desktop.enable;
             monitors = config.dotfiles.desktop.monitors;
             audio.enable = config.dotfiles.desktop.audio.enable;
+            environments = config.dotfiles.desktop.environments;
           };
           services = {
             enable = config.dotfiles.services.enable;

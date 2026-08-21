@@ -5,7 +5,7 @@
   ...
 }: let
   cfg = config.dotfiles.desktop;
-  isGnomeEnabled = cfg.enable && (builtins.elem "gnome" cfg.environment);
+  isGnomeEnabled = cfg.enable && (builtins.elem "gnome" cfg.environments);
 in {
   config = lib.mkIf isGnomeEnabled {
     # Enable the GNOME Desktop Environment.

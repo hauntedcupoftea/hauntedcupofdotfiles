@@ -4,7 +4,7 @@
   ...
 }: let
   cfg = config.dotfiles.desktop;
-  isHyprlandEnabled = cfg.enable && (builtins.elem "hyprland" cfg.environment);
+  isHyprlandEnabled = cfg.enable && (builtins.elem "hyprland" cfg.environments);
 in {
   config = lib.mkIf isHyprlandEnabled {
     programs.dconf.profiles.user.databases = [

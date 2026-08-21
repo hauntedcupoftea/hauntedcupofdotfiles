@@ -8,9 +8,9 @@
   needsXServer =
     cfg.enable
     && (
-      builtins.elem "plasma" cfg.environment
-      || builtins.elem "gnome" cfg.environment
-      || builtins.elem "hyprland" cfg.environment
+      builtins.elem "plasma" cfg.environments
+      || builtins.elem "gnome" cfg.environments
+      || builtins.elem "hyprland" cfg.environments
     );
 in {
   config = lib.mkIf needsXServer {

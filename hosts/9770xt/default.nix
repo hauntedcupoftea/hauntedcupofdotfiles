@@ -45,7 +45,7 @@
   dotfiles = {
     desktop = {
       enable = true;
-      environment = ["hyprland"];
+      environments = ["hyprland"];
       gaming.enable = true;
       audio.enable = true;
       monitors = [

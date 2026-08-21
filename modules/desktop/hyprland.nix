@@ -6,7 +6,7 @@
   ...
 }: let
   cfg = config.dotfiles.desktop;
-  isHyprlandEnabled = cfg.enable && (builtins.elem "hyprland" cfg.environment);
+  isHyprlandEnabled = cfg.enable && (builtins.elem "hyprland" cfg.environments);
   isNvidia = builtins.elem "nvidia" config.services.xserver.videoDrivers;
 in {
   imports = [inputs.hyprland.nixosModules.default];
