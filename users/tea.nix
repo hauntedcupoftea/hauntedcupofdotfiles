@@ -36,7 +36,10 @@ in {
           };
         };
         direnv.enable = true;
-        starship.enable = true;
+        starship = {
+          enable = true;
+          jj.enable = true;
+        };
         zellij = {
           enable = true;
           exitOnSessionExit = true;

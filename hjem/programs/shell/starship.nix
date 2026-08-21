@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.dotfiles.shell.starship;
@@ -8,10 +9,12 @@
   sep = "";
   sep_left = "";
 in {
-  options.dotfiles.shell.starship.enable =
-    lib.mkEnableOption "starship cross-shell prompt";
-
+  options.dotfiles.shell.starship = {
+    enable = lib.mkEnableOption "starship cross-shell prompt";
+    jj.enable = lib.mkEnableOption "custom starship-jj module for jujutsu";
+  };
   config = lib.mkIf cfg.enable {
+    packages = lib.optional cfg.jj.enable pkgs.jj-starship;
     rum.programs.starship = {
       enable = true;
       integrations.fish.enable = fishOn;
@@ -26,6 +29,7 @@ in {
           "$directory"
           "[${sep}](fg:cyan bg:purple)"
           "$git_branch"
+          "$\{custom.jj}"
           "$git_status"
           "$git_metrics"
           "[${sep}](fg:purple bg:green)"
@@ -92,6 +96,16 @@ in {
           symbol = " ";
           style = "bg:purple";
           format = "[[ $symbol$branch ](fg:bright-white bg:purple)]($style)";
+        };
+
+        custom = lib.mkIf cfg.jj.enable {
+          jj = {
+            disabled = false;
+            when = "jj-starship detect";
+            shell = ["jj-starship" "--no-git-prefix" "--no-symbol" "--no-color"];
+            style = "bg:purple";
+            format = "[[$output ](fg:bright-white bg:purple)]($style)";
+          };
         };
 
         git_status = {
