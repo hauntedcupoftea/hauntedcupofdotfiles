@@ -94,10 +94,6 @@
         };
       };
       modes-nvim.enable = false;
-      breadcrumbs = {
-        enable = true;
-        navbuddy.enable = true;
-      };
     };
 
     utility.snacks-nvim = {
@@ -207,15 +203,10 @@
         component_separators = "│";
         globalstatus = true;
       };
+      integrations.breadcrumbs.nvim-navic.enable = true;
       setupOpts.sections = {
         lualine_a = ["mode"];
         lualine_b = ["branch" "diff"];
-        lualine_c = [
-          {
-            name = "filename";
-            extraConfig.path = 1;
-          }
-        ];
         lualine_x = ["diagnostics" "filetype"];
         lualine_y = ["progress"];
         lualine_z = ["location"];

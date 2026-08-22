@@ -54,7 +54,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    packages = [pkgs.hyprshutdown];
+    packages = with pkgs; [hyprshutdown];
     systemd = {
       targets = lib.mkIf noUwsm {
         hyprland-session = {

@@ -119,7 +119,7 @@ in {
           zen-browser
           jellyfin-media-player
           kdePackages.okular
-          pinta
+          gimp
           gparted
           crosspipe
           easyeffects
