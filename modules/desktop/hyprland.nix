@@ -22,7 +22,6 @@ in {
       hyprland
       kitty
       libnotify
-      runapp
       # Wi-Fi
       networkmanagerapplet
       impala
