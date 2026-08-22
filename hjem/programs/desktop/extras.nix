@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  nixosConfig,
+  osConfig,
   ...
 }: let
   cfg = config.dotfiles.desktop;
@@ -12,7 +12,7 @@ in {
     description = "Extra desktop-scoped packages. Silently omitted if dotfiles.desktop.enable is false.";
   };
 
-  config = lib.mkIf (nixosConfig.dotfiles.desktop.enable && cfg.packages != []) {
+  config = lib.mkIf (osConfig.dotfiles.desktop.enable && cfg.packages != []) {
     packages = cfg.packages;
   };
 }

@@ -81,7 +81,7 @@ in {
     systemd.services.keepassxc = {
       description = "KeePassXC autostart";
       wantedBy = ["graphical-session.target"];
-      after = ["quickshell.service"];
+      after = ["quickshell.service" "graphical-session.target"];
       partOf = ["graphical-session.target"];
       serviceConfig = {
         ExecStart = lib.getExe' cfg.package "keepassxc";

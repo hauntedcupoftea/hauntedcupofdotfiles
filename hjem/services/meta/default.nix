@@ -1,6 +1,6 @@
 {
   config,
-  nixosConfig,
+  osConfig,
   ...
 }: {
   assertions = [

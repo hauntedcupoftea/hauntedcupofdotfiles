@@ -1,11 +1,11 @@
 {
   config,
   lib,
-  nixosConfig,
+  osConfig,
   ...
 }: let
   cfg = config.dotfiles.shell.direnv;
-  isNixos = nixosConfig != null;
+  isNixos = osConfig != null;
   fishOn = config.dotfiles.shell.fish.enable;
   nushellOn = config.dotfiles.shell.nushell.enable;
   zshOn = config.dotfiles.shell.zsh.enable;

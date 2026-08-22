@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  nixosConfig,
+  osConfig,
   ...
 }: let
   cfg = config.dotfiles.desktop.kitty;
@@ -15,7 +15,7 @@ in {
       description = "kitty terminal's leader keybind prefix.";
     };
   };
-  config = lib.mkIf (nixosConfig.dotfiles.desktop.enable && cfg.enable) {
+  config = lib.mkIf (osConfig.dotfiles.desktop.enable && cfg.enable) {
     rum.programs.kitty = {
       enable = true;
       integrations.fish.enable = config.dotfiles.shell.fish.enable;

@@ -73,7 +73,7 @@ in {
           runAsService = true;
           elephant.enable = true;
           config = {
-            app_launch_prefix = "uwsm app -- ";
+            app_launch_prefix = "runapp -v ";
             ui.fullscreen = true;
             list.height = 200;
             websearch.prefix = "?";

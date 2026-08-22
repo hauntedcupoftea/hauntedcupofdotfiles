@@ -15,7 +15,6 @@ in {
     programs.hyprland = {
       enable = true;
       package = pkgs.hyprland;
-      withUWSM = true;
       xwayland.enable = true;
     };
 
@@ -54,10 +53,6 @@ in {
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
         NVD_BACKEND = "direct";
       };
-
-    programs.uwsm = {
-      enable = true;
-    };
 
     # XDG Portal configuration
     xdg.portal.enable = true;

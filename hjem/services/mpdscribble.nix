@@ -2,14 +2,14 @@
   config,
   lib,
   pkgs,
-  nixosConfig ? {},
+  osConfig ? {},
   ...
 }: let
   cfg = config.dotfiles.services.music.mpdscribble;
   xdgState = config.xdg.state.directory;
   xdgConfig = config.xdg.config.directory;
   mpdOn = config.dotfiles.services.music.mpd.enable;
-  servicesOn = nixosConfig.dotfiles.services.enable;
+  servicesOn = osConfig.dotfiles.services.enable;
 
   defaultUrls = {
     "last.fm" = "http://post.audioscrobbler.com";

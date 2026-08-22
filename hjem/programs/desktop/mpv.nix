@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  nixosConfig,
+  osConfig,
   ...
 }: let
   cfg = config.dotfiles.desktop.mpv;
@@ -10,7 +10,7 @@ in {
   options.dotfiles.desktop.mpv.enable =
     lib.mkEnableOption "mpv media player";
 
-  config = lib.mkIf (nixosConfig.dotfiles.desktop.enable && cfg.enable) {
+  config = lib.mkIf (osConfig.dotfiles.desktop.enable && cfg.enable) {
     rum.programs.mpv = {
       enable = true;
       scripts = with pkgs.mpvScripts; [mpris mpv-discord mpv-notify-send];

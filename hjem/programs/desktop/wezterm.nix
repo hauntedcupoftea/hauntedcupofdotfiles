@@ -2,12 +2,12 @@
   config,
   lib,
   pkgs,
-  nixosConfig ? {},
+  osConfig ? {},
   ...
 }: let
   cfg = config.dotfiles.desktop.wezterm;
   fishPath = lib.getExe pkgs.fish;
-  hasDesktop = nixosConfig.dotfiles.desktop.enable or false;
+  hasDesktop = osConfig.dotfiles.desktop.enable or false;
 in {
   options.dotfiles.desktop.wezterm = {
     enable = lib.mkEnableOption "WezTerm terminal emulator";

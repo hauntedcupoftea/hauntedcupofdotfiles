@@ -2,12 +2,12 @@
   config,
   lib,
   pkgs,
-  nixosConfig ? {},
+  osConfig ? {},
   ...
 }: let
   cfg = config.dotfiles.desktop.walker;
   tomlFormat = pkgs.formats.toml {};
-  hasDesktop = nixosConfig.dotfiles.desktop.enable or false;
+  hasDesktop = osConfig.dotfiles.desktop.enable or false;
 in {
   options.dotfiles.desktop.walker = {
     enable = lib.mkEnableOption "walker launcher (requires elephant)";

@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  nixosConfig,
+  osConfig,
   ...
 }: let
   cfg = config.dotfiles.desktop.rio;
@@ -10,7 +10,7 @@ in {
   options.dotfiles.desktop.rio.enable =
     lib.mkEnableOption "rio terminal emulator";
 
-  config = lib.mkIf (nixosConfig.dotfiles.desktop.enable && cfg.enable) {
+  config = lib.mkIf (osConfig.dotfiles.desktop.enable && cfg.enable) {
     packages = [
       pkgs.rio
     ];

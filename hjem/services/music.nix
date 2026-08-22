@@ -2,14 +2,14 @@
   config,
   lib,
   pkgs,
-  nixosConfig ? {}, # passed via specialArgs, contains host config
+  osConfig ? {}, # passed via specialArgs, contains host config
   ...
 }: let
   cfg = config.dotfiles.services.music;
   home = config.directory;
   xdgConfig = config.xdg.config.directory;
   xdgData = config.xdg.data.directory;
-  hasDesktop = nixosConfig.dotfiles.desktop.enable or false;
+  hasDesktop = osConfig.dotfiles.desktop.enable or false;
   hyprlandOn = config.dotfiles.environments.hyprland.enable;
 
   musicDir =

@@ -1,11 +1,13 @@
 {
   config,
   lib,
-  nixosConfig,
+  pkgs,
+  osConfig,
   ...
 }: let
   cfg = config.dotfiles.environments.hyprland;
-  monitors = nixosConfig.dotfiles.desktop.monitors or [];
+  monitors = osConfig.dotfiles.desktop.monitors or [];
+  noUwsm = !osConfig.programs.hyprland.withUWSM;
 
   monitorLines =
     if monitors == []
@@ -52,7 +54,47 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    rum.desktops.hyprland.enable = true;
+    packages = [pkgs.hyprshutdown];
+    systemd = {
+      targets = lib.mkIf noUwsm {
+        hyprland-session = {
+          description = "Hyprland session";
+          bindsTo = ["graphical-session.target"];
+          wants = ["graphical-session-pre.target" "xdg-desktop-autostart.target"];
+          before = ["xdg-desktop-autostart.target"];
+          after = ["graphical-session-pre.target"];
+          unitConfig = {
+            PropagatesStopTo = ["graphical-session.target"];
+          };
+        };
+      };
+
+      services = {
+        clipse = {
+          description = "clipse listener";
+          wantedBy = ["graphical-session.target"];
+          after = ["graphical-session.target"];
+          partOf = ["graphical-session.target"];
+          serviceConfig = {
+            ExecStart = "${lib.getExe pkgs.clipse} -listen";
+            Type = "oneshot";
+            RemainAfterExit = true;
+            Environment = "PATH=${lib.makeBinPath [pkgs.wl-clipboard]}:/run/current-system/sw/bin";
+          };
+        };
+        gnome-keyring = {
+          description = "gnome-keyring daemon autostart";
+          wantedBy = ["graphical-session.target"];
+          after = ["graphical-session.target"];
+          partOf = ["graphical-session.target"];
+          serviceConfig = {
+            ExecStart = "${pkgs.gnome-keyring}/bin/gnome-keyring-daemon --start --components=pkcs11";
+            Restart = "on-failure";
+            RestartSec = 5;
+          };
+        };
+      };
+    };
 
     files.".config/hypr/hyprland.lua".text =
       /*
@@ -140,24 +182,28 @@ in {
         hl.animation({ leaf = "layersOut",      enabled = true, speed = 1.5,  bezier = "quick",        style = "fade" })
         -- hl.animation({ leaf = "workspaces",     enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
 
-        -- Autostart: things that explicitly need Hyprland
+        -- Autostart
         hl.on("hyprland.start", function()
-          hl.exec_cmd("uwsm app -- fcitx5 -d")
-          hl.exec_cmd("uwsm app -- gnome-keyring-daemon --start --components=pkcs11")
-          hl.exec_cmd("uwsm app -- clipse -listen")
+          hl.exec_cmd("systemctl --user start hyprland-session.target")
+          hl.exec_cmd("dbus-update-activation-environment --systemd --all")
+        end)
+
+        -- Autostop
+        hl.on("hyprland.shutdown", function()
+            os.execute("systemctl --user stop hyprland-session.target && sleep 0.1")
         end)
 
         -- Keybinds
-        hl.bind(mod .. " + return",   hl.dsp.exec_cmd("uwsm app -- " .. terminal))
+        hl.bind(mod .. " + return",   hl.dsp.exec_cmd(terminal))
         hl.bind(mod .. " + Q",        hl.dsp.window.close())
         hl.bind(mod .. " + B",        hl.dsp.window.float({ action = "toggle" }))
         hl.bind(mod .. " + F",        hl.dsp.window.fullscreen())
         hl.bind(mod .. " + P",        hl.dsp.window.pin())
         hl.bind(mod .. " + space",    hl.dsp.exec_cmd("nc -U $XDG_RUNTIME_DIR/walker/walker.sock"))
-        hl.bind(mod .. " + Z",        hl.dsp.exec_cmd("uwsm app -- zen-twilight"))
-        hl.bind(mod .. " + E",        hl.dsp.exec_cmd("uwsm app -- " .. terminal .. " -e --class yazi yazi"))
-        hl.bind(mod .. " + V",        hl.dsp.exec_cmd("uwsm app -- " .. terminal .. " -e --class clipse clipse"))
-        hl.bind(altMod .. " + C",     hl.dsp.exec_cmd("uwsm app -- hyprpicker -a"))
+        hl.bind(mod .. " + Z",        hl.dsp.exec_cmd("zen-twilight"))
+        hl.bind(mod .. " + E",        hl.dsp.exec_cmd(terminal .. " -e --class yazi yazi"))
+        hl.bind(mod .. " + V",        hl.dsp.exec_cmd(terminal .. " -e --class clipse clipse"))
+        hl.bind(altMod .. " + C",     hl.dsp.exec_cmd("hyprpicker -f hex -a -b -n"))
 
         -- Focus movement
         hl.bind(mod .. " + H", hl.dsp.focus({ direction = "left" }))
@@ -166,9 +212,9 @@ in {
         hl.bind(mod .. " + L", hl.dsp.focus({ direction = "right" }))
 
         -- Screenshots
-        hl.bind("Print",              hl.dsp.exec_cmd("uwsm app -- grimblast copy area --notify"))
-        hl.bind(altMod .. " + Print", hl.dsp.exec_cmd("uwsm app -- hyprshot -m region --clipboard-only"))
-        hl.bind(mod .. " + Print",    hl.dsp.exec_cmd("uwsm app -- hyprshot -m output"))
+        hl.bind("Print",              hl.dsp.exec_cmd("grimblast copy area --notify"))
+        hl.bind(altMod .. " + Print", hl.dsp.exec_cmd("hyprshot -m region --clipboard-only"))
+        hl.bind(mod .. " + Print",    hl.dsp.exec_cmd("hyprshot -m output"))
 
         -- Special workspace
         hl.bind(mod .. " + S",       hl.dsp.workspace.toggle_special("magic"))

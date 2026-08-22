@@ -2,12 +2,12 @@
   config,
   lib,
   pkgs,
-  nixosConfig ? {},
+  osConfig ? {},
   ...
 }: let
   cfg = config.dotfiles.services.udiskie;
   yamlFormat = pkgs.formats.yaml {};
-  isDesktop = nixosConfig.dotfiles.desktop.enable or false;
+  isDesktop = osConfig.dotfiles.desktop.enable or false;
 
   mergedSettings =
     lib.recursiveUpdate {

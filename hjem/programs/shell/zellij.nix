@@ -2,13 +2,13 @@
   config,
   lib,
   pkgs,
-  nixosConfig,
+  osConfig,
   ...
 }: let
   inherit (lib) types;
   cfg = config.dotfiles.shell.zellij;
   fishOn = config.dotfiles.shell.fish.enable;
-  isDesktop = nixosConfig.dotfiles.desktop.enable or false;
+  isDesktop = osConfig.dotfiles.desktop.enable or false;
 in {
   options.dotfiles.shell.zellij = {
     enable = lib.mkEnableOption "zellij terminal multiplexer";

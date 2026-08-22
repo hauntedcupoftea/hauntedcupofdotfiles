@@ -2,12 +2,12 @@
   config,
   lib,
   pkgs,
-  nixosConfig ? {},
+  osConfig ? {},
   ...
 }: let
   cfg = config.dotfiles.desktop.vesktop;
 
-  videoDrivers = nixosConfig.hardware.videoDrivers or [];
+  videoDrivers = osConfig.hardware.videoDrivers or [];
   isNvidia = builtins.elem "nvidia" videoDrivers;
 
   hwAccelFlags =
@@ -26,7 +26,7 @@ in {
     hardwareVideoAcceleration = lib.mkOption {
       type = lib.types.bool;
       default = true;
-      description = "Write vendor-appropriate VAAPI/Vulkan flags to vesktop-flags.conf, auto-detected from this host's services.xserver.videoDrivers via nixosConfig.";
+      description = "Write vendor-appropriate VAAPI/Vulkan flags to vesktop-flags.conf, auto-detected from this host's services.xserver.videoDrivers via osConfig.";
     };
     extraFlags = lib.mkOption {
       type = lib.types.listOf lib.types.str;

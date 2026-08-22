@@ -2,16 +2,15 @@
   config,
   lib,
   pkgs,
-  nixosConfig ? {},
+  osConfig ? {},
   ...
 }: let
   cfg = config.dotfiles.environments.hyprland.quickshell;
-  hasDesktop = nixosConfig.dotfiles.desktop.enable or false;
+  hasDesktop = osConfig.dotfiles.desktop.enable or false;
 in {
   options.dotfiles.environments.hyprland.quickshell = {
     enable = lib.mkEnableOption "QuickShell panel / lockscreen service";
     package = lib.mkPackageOption pkgs "quickshell" {};
-    uwsmPackage = lib.mkPackageOption pkgs "uwsm" {};
     extraArgs = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [];
@@ -27,13 +26,13 @@ in {
     };
     systemdTarget = lib.mkOption {
       type = lib.types.str;
-      default = "wayland-wm@hyprland.desktop.service";
+      default = "hyprland-session.target";
       description = "Systemd target to bind to";
     };
   };
 
   config = lib.mkIf (cfg.enable && hasDesktop) {
-    packages = [cfg.package cfg.uwsmPackage pkgs.cava];
+    packages = [cfg.package pkgs.cava];
 
     xdg.config.files."quickshell" = {
       source = ../../../custom-files/quickshell;

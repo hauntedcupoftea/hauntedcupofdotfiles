@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  nixosConfig,
+  osConfig,
   ...
 }: let
   cfg = config.dotfiles.shell.podman;
@@ -12,7 +12,7 @@ in {
   config = lib.mkIf cfg.enable {
     assertions = [
       {
-        assertion = nixosConfig.dotfiles.services.podman.enable;
+        assertion = osConfig.dotfiles.services.podman.enable;
         message = "dotfiles.shell.podman requires dotfiles.podman.enable = true at the NixOS level.";
       }
     ];

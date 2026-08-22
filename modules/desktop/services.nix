@@ -12,7 +12,7 @@
       after = ["graphical-session.target" "qs.service"];
       requires = ["qs.service"];
       serviceConfig = {
-        ExecStart = "${lib.getExe pkgs.uwsm} app -- ${lib.getExe pkgs.zmkbatx}";
+        ExecStart = "${lib.getExe pkgs.zmkbatx}";
         Restart = "on-failure";
       };
     };

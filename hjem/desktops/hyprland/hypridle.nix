@@ -2,13 +2,13 @@
   config,
   lib,
   pkgs,
-  nixosConfig ? {},
+  osConfig ? {},
   ...
 }: let
   cfg = config.dotfiles.environments.hyprland.hypridle;
   hasHyprland =
-    nixosConfig.dotfiles.desktop.enable
-    && (builtins.elem "hyprland" (nixosConfig.dotfiles.desktop.environments));
+    osConfig.dotfiles.desktop.enable or false
+    && (builtins.elem "hyprland" (osConfig.dotfiles.desktop.environment or []));
 
   # Convert Nix attrset to hypridle.conf (same syntax as HM’s toHyprconf)
   toHyprconf = attrs: let

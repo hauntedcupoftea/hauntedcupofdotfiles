@@ -61,7 +61,7 @@ PopupWindow {
                     buttonIcon: "󰍃"
                     buttonText: "Logout"
                     Layout.alignment: Qt.AlignCenter
-                    command: ["uwsm", "stop"]
+                    command: ["hyprshutdown"]
                     onHoveredChanged: {
                         if (hovered)
                             root.hoveredAction = this.buttonText;

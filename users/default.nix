@@ -1,8 +1,4 @@
-{
-  inputs,
-  config,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     ./tea.nix
     ./packet.nix
@@ -16,21 +12,6 @@
     ];
     specialArgs = {
       inputs = inputs;
-      nixosConfig = {
-        dotfiles = {
-          desktop = {
-            enable = config.dotfiles.desktop.enable;
-            monitors = config.dotfiles.desktop.monitors;
-            audio.enable = config.dotfiles.desktop.audio.enable;
-            environments = config.dotfiles.desktop.environments;
-          };
-          services = {
-            enable = config.dotfiles.services.enable;
-            podman.enable = config.dotfiles.services.podman.enable;
-          };
-          hardware.videoDrivers = config.services.xserver.videoDrivers;
-        };
-      };
     };
     clobberByDefault = true;
   };
