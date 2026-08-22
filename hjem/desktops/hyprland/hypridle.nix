@@ -7,8 +7,8 @@
 }: let
   cfg = config.dotfiles.environments.hyprland.hypridle;
   hasHyprland =
-    osConfig.dotfiles.desktop.enable or false
-    && (builtins.elem "hyprland" (osConfig.dotfiles.desktop.environment or []));
+    osConfig.dotfiles.desktop.enable
+    && (builtins.elem "hyprland" (osConfig.dotfiles.desktop.environments));
 
   # Convert Nix attrset to hypridle.conf (same syntax as HM’s toHyprconf)
   toHyprconf = attrs: let
