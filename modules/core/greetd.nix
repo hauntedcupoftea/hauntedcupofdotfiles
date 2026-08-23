@@ -1,18 +1,26 @@
 {
   lib,
   pkgs,
-  config,
   ...
 }: let
-  lockscreenConfig = ''
-    monitor = ,preferred, auto, auto
-    env=XDG_CURRENT_DESKTOP,Hyprland
-    exec-once = ${lib.getExe pkgs.quickshell} && hyprctl dispatch exit
+  lockscreenConfig = pkgs.writeText "hyprland.lua" ''
+    hl.monitor({
+      output = "",
+      mode = "preferred",
+      position = "auto",
+      scale = "auto",
+    })
 
-    misc {
-      force_default_wallpaper = 1
-      disable_hyprland_logo = true
-    }
+    hl.config({
+      misc = {
+        force_default_wallpaper = 1,
+        disable_hyprland_logo = true,
+      },
+    })
+
+    hl.on("hyprland.start", function()
+      hl.exec_cmd("${lib.getExe pkgs.qtgreet} && hyprshutdown")
+    end)
   '';
 in {
   services.greetd = {
@@ -20,8 +28,7 @@ in {
     greeterManagesPlymouth = true;
     settings = {
       default_session = {
-        command = "${lib.getExe pkgs.tuigreet} --time --cmd start-hyprland --sessions /run/current-system/sw/share/wayland-sessions";
-        # command = "${pkgs.hyprland}/bin/start-hyprland -- --config ${lockscreenConfig}";
+        command = "${pkgs.hyprland}/bin/start-hyprland -- --config ${lockscreenConfig}";
       };
     };
   };
@@ -30,7 +37,7 @@ in {
     gaze = {
       enable = true;
       control = "sufficient";
-      simultaneous = true;
+      simultaneous = false;
     };
 
     text = ''
@@ -40,8 +47,4 @@ in {
       session   include       login
     '';
   };
-
-  boot.kernelParams =
-    map (m: "video=${m.name}:${m.resolution}@${toString m.refreshRate}")
-    config.dotfiles.desktop.monitors;
 }
