@@ -4,4 +4,5 @@
   ];
 
   programs.cfs-zen-tweaks.enable = true;
+  programs.nano.enable = false;
 }

@@ -21,7 +21,8 @@ in {
     directory = "/home/packet";
 
     environment.sessionVariables = {
-      EDITOR = "zed";
+      EDITOR = "nvim";
+      MANPAGER = "nvim +Man!";
       VISUAL = "zed";
     };
 

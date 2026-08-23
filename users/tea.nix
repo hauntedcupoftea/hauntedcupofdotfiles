@@ -22,6 +22,7 @@ in {
 
     environment.sessionVariables = {
       EDITOR = "nvim";
+      MANPAGER = "nvim +Man!";
       VISUAL = "nvim";
     };
 

@@ -82,6 +82,7 @@ in {
             Environment = "PATH=${lib.makeBinPath [pkgs.wl-clipboard]}:/run/current-system/sw/bin";
           };
         };
+
         gnome-keyring = {
           description = "gnome-keyring daemon autostart";
           wantedBy = ["graphical-session.target"];
@@ -109,8 +110,6 @@ in {
         local mod = "SUPER"
         local altMod = "SUPER+SHIFT"
 
-        hl.env("XCURSOR_SIZE", "24")
-        hl.env("HYPRCURSOR_SIZE", "24")
         hl.env("TERM", "${cfg.terminal}")
         hl.env("TERMINAL", "${cfg.terminal}")
 
@@ -184,7 +183,7 @@ in {
 
         -- Autostart
         hl.on("hyprland.start", function()
-          hl.exec_cmd("dbus-update-activation-environment --systemd --all")
+          hl.exec_cmd("source ${config.environment.loadEnv} && dbus-update-activation-environment --systemd --all")
           hl.exec_cmd("systemctl --user start hyprland-session.target")
         end)
 
