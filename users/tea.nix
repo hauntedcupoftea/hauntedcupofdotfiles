@@ -64,10 +64,9 @@ in {
         podman.enable = true;
 
         packages = with pkgs; [
-          bruno
+          bruno-cli
           sql-studio
           zrok
-          zathura
           brightnessctl
           btrfs-progs
           desktop-file-utils
@@ -114,8 +113,10 @@ in {
         };
 
         packages = with pkgs; [
+          bruno
           zen-browser
           jellyfin-media-player
+          zathura
           kdePackages.okular
           gimp
           gparted
@@ -125,8 +126,6 @@ in {
           peazip
           remmina
           dungeondraft
-          element-desktop
-          zapzap
           zmkbatx
           # screen capture stack (was home/desktop/screen-recording.nix)
           # wf-recorder
@@ -143,15 +142,12 @@ in {
           winetricks
           goverlay
           samrewritten
-          r2modman
-          gale
           vulkan-tools
           lact
           # music
           kid3-qt
           # experimenting
           drawy
-          drawio
           mission-center
         ];
       };
