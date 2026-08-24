@@ -65,7 +65,6 @@ in {
 
         packages = with pkgs; [
           bruno
-          requestly
           sql-studio
           zrok
           zathura

@@ -40,10 +40,6 @@ in {
 
         podman.enable = false;
         packages = with pkgs; [
-          bruno
-          requestly
-          sql-studio
-          zrok
           zathura
           brightnessctl
           btrfs-progs
