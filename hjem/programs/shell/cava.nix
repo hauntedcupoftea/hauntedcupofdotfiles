@@ -13,6 +13,7 @@ in {
       [general]
       framerate = 60
       autosens = 1
+      sensitivity = 50
       bars = 0
       bar_width = 1
       bar_spacing = 1
@@ -30,8 +31,7 @@ in {
 
       [smoothing]
       monstercat = 1
-      waves = 1
-      noise_reduction = 85
+      noise_reduction = 92
     '';
   };
 }

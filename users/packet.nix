@@ -41,11 +41,6 @@ in {
 
         podman.enable = false;
         packages = with pkgs; [
-          bruno
-          requestly
-          sql-studio
-          zrok
-          zathura
           brightnessctl
           btrfs-progs
           desktop-file-utils
@@ -98,9 +93,6 @@ in {
           obsidian
           peazip
           remmina
-          # dungeondraft
-          element-desktop
-          zapzap
           # screen capture stack (was home/desktop/screen-recording.nix)
           # wf-recorder
           hyprshot
@@ -115,13 +107,11 @@ in {
           wineWow64Packages.stable
           winetricks
           goverlay
-          samrewritten
-          r2modman
-          gale
           vulkan-tools
           lact
           # experimenting
           mission-center
+          drawy
         ];
       };
 
