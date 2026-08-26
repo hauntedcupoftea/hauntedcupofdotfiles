@@ -65,7 +65,6 @@ in {
         podman.enable = true;
 
         packages = with pkgs; [
-          bruno-cli
           sql-studio
           zrok
           brightnessctl
@@ -114,7 +113,6 @@ in {
         };
 
         packages = with pkgs; [
-          bruno
           zen-browser
           jellyfin-media-player
           zathura
