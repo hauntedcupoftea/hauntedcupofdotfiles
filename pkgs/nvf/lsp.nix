@@ -37,6 +37,7 @@ in {
         typescript-go.cmd = lib.mkForce ["tsgo" "--lsp" "--stdio"];
         svelte-language-server.cmd = lib.mkForce ["svelteserver" "--stdio"];
         tinymist.cmd = lib.mkForce ["tinymist"];
+        sqls.cmd = lib.mkForce ["sqls"];
 
         nixd = {
           on_init = overrideCapabilities {
@@ -113,6 +114,10 @@ in {
           flutterPackage = null;
         };
       };
+      sql = {
+        enable = true;
+        extensions.sqls-nvim.enable = true;
+      };
     };
     formatter.conform-nvim = {
       enable = true;
@@ -127,10 +132,12 @@ in {
           html = ["prettier"];
           svelte = ["prettier"];
           python = ["ruff_format"];
+          sqlfluff = ["sqlfluff"];
         };
         formatters = {
           ruff_format.command = "ruff";
           prettier.command = lib.mkForce "prettier";
+          sqlfluff.command = lib.mkForce "sqlfluff";
         };
       };
     };
