@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  osConfig ? {}, # passed via specialArgs, contains host config
+  osConfig,
   ...
 }: let
   cfg = config.dotfiles.services.music;

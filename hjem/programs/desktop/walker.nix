@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  osConfig ? {},
+  osConfig,
   ...
 }: let
   cfg = config.dotfiles.desktop.walker;
