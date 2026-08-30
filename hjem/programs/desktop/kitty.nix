@@ -78,6 +78,7 @@ in {
 
           "${cfg.leaderPrefix}>n launch --location=hsplit --cwd=current"
           "${cfg.leaderPrefix}>m launch --location=vsplit --cwd=current"
+          "${cfg.leaderPrefix}>= layout_action equalize"
           "${cfg.leaderPrefix}>h neighboring_window left"
           "${cfg.leaderPrefix}>j neighboring_window bottom"
           "${cfg.leaderPrefix}>k neighboring_window top"
@@ -86,7 +87,8 @@ in {
           "${cfg.leaderPrefix}>shift+j resize_window shorter 5"
           "${cfg.leaderPrefix}>shift+k resize_window taller 5"
           "${cfg.leaderPrefix}>shift+l resize_window wider 5"
-          "${cfg.leaderPrefix}>x close_window"
+          "${cfg.leaderPrefix}>= layout_action equalize"
+          "${cfg.leaderPrefix}>q close_window"
           "${cfg.leaderPrefix}>p toggle_layout stack"
           "${cfg.leaderPrefix}>u open_url_with_hints"
           "${cfg.leaderPrefix}>f kitten hints --type path --program firefox"

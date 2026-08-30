@@ -76,6 +76,7 @@
     ui = {
       borders.enable = true;
       colorizer.enable = true;
+      colorful-menu-nvim.enable = true;
       noice = {
         enable = true;
         setupOpts = {
@@ -96,96 +97,99 @@
       modes-nvim.enable = false;
     };
 
-    utility.snacks-nvim = {
-      enable = true;
-      setupOpts = {
-        notifier = {
-          enabled = true;
-          style = "fancy";
-        };
-
-        input.enabled = true;
-        indent.enabled = true;
-        scroll.enabled = true;
-        words.enabled = true;
-        statuscolumn.enabled = true;
-
-        quickfile.enabled = true;
-        bigfile.enabled = true;
-
-        explorer.enabled = true;
-        picker.enabled = true;
-        scratch.enabled = true;
-        git.enabled = true;
-        gitbrowse.enabled = true;
-        bufdelete.enabled = true;
-
-        dashboard = {
-          enabled = true;
-          sections = [
-            {section = "header";}
-            {
-              section = "keys";
-              gap = 1;
-              padding = 1;
-            }
-            {
-              icon = " ";
-              title = "Recent Files";
-              section = "recent_files";
-              indent = 2;
-              padding = 1;
-            }
-            {
-              icon = " ";
-              title = "Projects";
-              section = "projects";
-              indent = 2;
-              padding = 1;
-            }
-          ];
-          preset.keys = [
-            {
-              icon = " ";
-              key = "e";
-              desc = "Explorer";
-              action = ":lua Snacks.explorer()";
-            }
-            {
-              icon = " ";
-              key = "f";
-              desc = "Find File";
-              action = ":lua Snacks.dashboard.pick('files')";
-            }
-            {
-              icon = " ";
-              key = "r";
-              desc = "Recent Files";
-              action = ":lua Snacks.dashboard.pick('oldfiles')";
-            }
-            {
-              icon = " ";
-              key = "g";
-              desc = "Find Text";
-              action = ":lua Snacks.dashboard.pick('live_grep')";
-            }
-            {
-              icon = " ";
-              key = "q";
-              desc = "Quit";
-              action = ":qa";
-            }
-          ];
-        };
-
-        styles = {
-          notification = {
-            border = "rounded";
-            wo.winblend = 0;
+    utility = {
+      ccc.enable = true;
+      snacks-nvim = {
+        enable = true;
+        setupOpts = {
+          notifier = {
+            enabled = true;
+            style = "fancy";
           };
-          input = {
-            border = "rounded";
-            wo.winblend = 0;
+
+          input.enabled = true;
+          indent.enabled = true;
+          scroll.enabled = true;
+          words.enabled = true;
+          statuscolumn.enabled = true;
+
+          quickfile.enabled = true;
+          bigfile.enabled = true;
+
+          explorer.enabled = true;
+          picker.enabled = true;
+          scratch.enabled = true;
+          git.enabled = true;
+          gitbrowse.enabled = true;
+          bufdelete.enabled = true;
+
+          dashboard = {
+            enabled = true;
+            sections = [
+              {section = "header";}
+              {
+                section = "keys";
+                gap = 1;
+                padding = 1;
+              }
+              {
+                icon = " ";
+                title = "Recent Files";
+                section = "recent_files";
+                indent = 2;
+                padding = 1;
+              }
+              {
+                icon = " ";
+                title = "Projects";
+                section = "projects";
+                indent = 2;
+                padding = 1;
+              }
+            ];
+            preset.keys = [
+              {
+                icon = " ";
+                key = "e";
+                desc = "Explorer";
+                action = ":lua Snacks.explorer()";
+              }
+              {
+                icon = " ";
+                key = "f";
+                desc = "Find File";
+                action = ":lua Snacks.dashboard.pick('files')";
+              }
+              {
+                icon = " ";
+                key = "r";
+                desc = "Recent Files";
+                action = ":lua Snacks.dashboard.pick('oldfiles')";
+              }
+              {
+                icon = " ";
+                key = "g";
+                desc = "Find Text";
+                action = ":lua Snacks.dashboard.pick('live_grep')";
+              }
+              {
+                icon = " ";
+                key = "q";
+                desc = "Quit";
+                action = ":qa";
+              }
+            ];
+          };
+
+          styles = {
+            notification = {
+              border = "rounded";
+              wo.winblend = 0;
+            };
+            input = {
+              border = "rounded";
+              wo.winblend = 0;
+            };
           };
         };
       };
