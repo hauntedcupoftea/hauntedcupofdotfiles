@@ -54,7 +54,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    packages = with pkgs; [hyprshutdown];
+    packages = with pkgs; [hyprshutdown runapp];
     systemd = {
       targets = lib.mkIf noUwsm {
         hyprland-session = {
@@ -199,10 +199,10 @@ in {
         hl.bind(mod .. " + F",        hl.dsp.window.fullscreen())
         hl.bind(mod .. " + P",        hl.dsp.window.pin())
         hl.bind(mod .. " + space",    hl.dsp.exec_cmd("nc -U $XDG_RUNTIME_DIR/walker/walker.sock"))
-        hl.bind(mod .. " + Z",        hl.dsp.exec_cmd("zen-twilight"))
-        hl.bind(mod .. " + E",        hl.dsp.exec_cmd(terminal .. " -e --class yazi yazi"))
-        hl.bind(mod .. " + V",        hl.dsp.exec_cmd(terminal .. " -e --class clipse clipse"))
-        hl.bind(altMod .. " + C",     hl.dsp.exec_cmd("hyprpicker -f hex -a -b -n"))
+        hl.bind(mod .. " + Z",        hl.dsp.exec_cmd("runapp -v zen-twilight"))
+        hl.bind(mod .. " + E",        hl.dsp.exec_cmd("runapp -v " .. terminal .. " -e --class yazi yazi"))
+        hl.bind(mod .. " + V",        hl.dsp.exec_cmd("runapp -v " .. terminal .. " -e --class clipse clipse"))
+        hl.bind(altMod .. " + C",     hl.dsp.exec_cmd("runapp -v hyprpicker -f hex -a -b -n"))
 
         -- Focus movement
         hl.bind(mod .. " + H", hl.dsp.focus({ direction = "left" }))
@@ -211,9 +211,9 @@ in {
         hl.bind(mod .. " + L", hl.dsp.focus({ direction = "right" }))
 
         -- Screenshots
-        hl.bind("Print",              hl.dsp.exec_cmd("grimblast copy area --notify"))
-        hl.bind(altMod .. " + Print", hl.dsp.exec_cmd("hyprshot -m region --clipboard-only"))
-        hl.bind(mod .. " + Print",    hl.dsp.exec_cmd("hyprshot -m output"))
+        hl.bind("Print",              hl.dsp.exec_cmd("runapp -v grimblast copy area --notify"))
+        hl.bind(altMod .. " + Print", hl.dsp.exec_cmd("runapp -v hyprshot -m region --clipboard-only"))
+        hl.bind(mod .. " + Print",    hl.dsp.exec_cmd("runapp -v hyprshot -m output"))
 
         -- Special workspace
         hl.bind(mod .. " + S",       hl.dsp.workspace.toggle_special("magic"))

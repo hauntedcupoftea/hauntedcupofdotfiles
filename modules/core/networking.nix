@@ -37,15 +37,9 @@
     };
   };
 
-  # boot.kernel.sysctl = {
-  #   "net.ipv6.conf.all.accept_ra" = 2;
-  #   "net.ipv6.conf.default.accept_ra" = 2;
-  # };
-
-  # This will let us install better wifi drivers supposedly
   hardware.enableRedistributableFirmware = true;
 
-  services.blueman.enable = true;
+  environment.systemPackages = with pkgs; [overskride];
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;

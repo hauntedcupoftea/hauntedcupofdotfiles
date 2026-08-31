@@ -23,7 +23,6 @@ in {
       kitty
       libnotify
       # Wi-Fi
-      networkmanagerapplet
       impala
       # audio
       pwvucontrol
