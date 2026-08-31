@@ -117,7 +117,7 @@ in {
           jellyfin-media-player
           zathura
           kdePackages.okular
-          gimp
+          # gimp
           gparted
           crosspipe
           easyeffects

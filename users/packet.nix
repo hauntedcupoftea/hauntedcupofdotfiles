@@ -86,7 +86,7 @@ in {
           zen-browser
           jellyfin-media-player
           kdePackages.okular
-          gimp
+          # gimp
           gparted
           crosspipe
           easyeffects
