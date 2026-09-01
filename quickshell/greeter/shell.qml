@@ -1,3 +1,6 @@
 import Quickshell
+import qs.widgets
 
-ShellRoot {}
+ShellRoot {
+  Background {}
+}
