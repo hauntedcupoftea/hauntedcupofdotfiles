@@ -8,7 +8,6 @@
     # ../../modules/hardware/filesystems.nix
     ../../modules/hardware/openlinkhub.nix
     ../../modules/desktop
-    ../../modules/desktop/teamviewer.nix
     ../../modules/theme
     ../../modules/profiles
     ../../users

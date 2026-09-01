@@ -14,24 +14,21 @@
       plugins = [pkgs.networkmanager-openvpn];
     };
     enableIPv6 = true;
-
-    # Configure network proxy if necessary
-    # proxy.default = "http://user:password@proxy:port/";
-    # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
     firewall = {
       enable = true;
       allowedTCPPorts = [6600]; # for MPD
     };
-
-    wireless.iwd = {
-      enable = true;
-      settings = {
-        Settings = {
-          AutoConnect = true;
-        };
-        DriverQuirks = {
-          PowerSaveDisable = "*";
+    wireless = {
+      enable = false;
+      iwd = {
+        enable = true;
+        settings = {
+          Settings = {
+            AutoConnect = true;
+          };
+          DriverQuirks = {
+            PowerSaveDisable = "*";
+          };
         };
       };
     };
