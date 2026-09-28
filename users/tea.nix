@@ -89,7 +89,6 @@ in {
       desktop = {
         kitty.enable = true;
         ghostty.enable = true;
-        zed.enable = true;
         mpv.enable = true;
         obs.enable = true;
         mangohud.enable = true;
@@ -114,6 +113,8 @@ in {
 
         packages = with pkgs; [
           zen-browser
+          azuredatastudio
+          zed-editor
           jellyfin-media-player
           zathura
           kdePackages.okular

@@ -23,7 +23,7 @@ in {
     environment.sessionVariables = {
       EDITOR = "nvim";
       MANPAGER = "nvim +Man!";
-      VISUAL = "zed";
+      VISUAL = "zeditor";
     };
 
     dotfiles = {
@@ -60,7 +60,6 @@ in {
 
       desktop = {
         kitty.enable = true;
-        zed.enable = true;
         mpv.enable = true;
         obs.enable = true;
         mangohud.enable = true;
@@ -84,6 +83,7 @@ in {
 
         packages = with pkgs; [
           zen-browser
+          zed-editor
           jellyfin-media-player
           kdePackages.okular
           # gimp

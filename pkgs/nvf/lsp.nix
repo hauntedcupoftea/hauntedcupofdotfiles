@@ -34,7 +34,7 @@ in {
         dart.cmd = lib.mkForce ["dart" "language-server" "--protocol=lsp"];
         rust_analyzer.cmd = lib.mkForce ["rust-analyzer"];
         gopls.cmd = lib.mkForce ["gopls"];
-        typescript-go.cmd = lib.mkForce ["tsgo" "--lsp" "--stdio"];
+        typescript-go.cmd = lib.mkForce ["tsc" "--lsp" "--stdio"];
         svelte-language-server.cmd = lib.mkForce ["svelteserver" "--stdio"];
         tinymist.cmd = lib.mkForce ["tinymist"];
         sqls.cmd = lib.mkForce ["sqls"];
