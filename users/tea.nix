@@ -140,7 +140,6 @@ in {
           dualsensectl
           wineWow64Packages.stable
           winetricks
-          goverlay
           samrewritten
           vulkan-tools
           lact

@@ -1,5 +1,4 @@
 {
-  lib,
   inputs,
   pkgs,
   config,
@@ -37,7 +36,4 @@ in {
     # Add NTFS support
     supportedFilesystems = ["ntfs"];
   };
-
-  # disable tty splash
-  systemd.services.plymouth-quit.serviceConfig.ExecStart = lib.mkForce "${pkgs.plymouth}/bin/plymouth quit --retain-splash";
 }

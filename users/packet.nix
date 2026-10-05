@@ -106,7 +106,6 @@ in {
           dualsensectl
           wineWow64Packages.stable
           winetricks
-          goverlay
           vulkan-tools
           lact
           # experimenting

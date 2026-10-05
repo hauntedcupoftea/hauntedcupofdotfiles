@@ -88,7 +88,6 @@ in {
         lsp.servers = ["rumdl"];
         format.type = ["rumdl"];
         extensions = {
-          markview-nvim.enable = true;
           render-markdown-nvim.enable = true;
         };
       };
