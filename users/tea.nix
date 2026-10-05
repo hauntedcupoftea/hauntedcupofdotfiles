@@ -113,7 +113,7 @@ in {
 
         packages = with pkgs; [
           zen-browser
-          azuredatastudio
+          dbeaver-bin
           zed-editor
           jellyfin-media-player
           zathura
