@@ -44,7 +44,7 @@ in {
           brightnessctl
           btrfs-progs
           desktop-file-utils
-          fastfetch
+          microfetch
           just
           git
           inetutils

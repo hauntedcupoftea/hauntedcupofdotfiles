@@ -1,6 +1,7 @@
 {...}: {
   imports = [
     ./hardware-configuration.nix
+    # ./netbird-testing.nix
     ../../modules/core
     ../../modules/hardware
     ../../modules/desktop

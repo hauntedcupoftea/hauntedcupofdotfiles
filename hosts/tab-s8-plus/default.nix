@@ -3,7 +3,7 @@
   environment.packages = with pkgs; [
     gh
     git
-    fastfetchMinimal
+    microfetch
     hostname
     curl
     openssh
