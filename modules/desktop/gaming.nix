@@ -6,12 +6,6 @@
   ...
 }: let
   cfg = config.dotfiles.desktop;
-  creamlinux = import (pkgs.fetchFromGitHub {
-    owner = "Novattz";
-    repo = "creamlinux-installer";
-    rev = "main";
-    hash = "sha256-sV23mp0XnJHf4oSqqvFLFfvSkssHzxafqYMNw3HGEdg=";
-  }) {inherit pkgs;};
 in {
   imports = [
     inputs.nix-gaming.nixosModules.platformOptimizations
@@ -21,8 +15,6 @@ in {
     boot.kernelModules = [
       "ntsync"
     ];
-
-    environment.systemPackages = [creamlinux];
 
     programs = {
       steam = {
