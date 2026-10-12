@@ -19,7 +19,6 @@ in {
       fd
       ripgrep
       imagemagick
-      dragon-drop
       trash-cli
       ouch
       mediainfo
@@ -31,9 +30,10 @@ in {
         mgr.linemode = "size";
         opener.edit = [
           {
-            run = ''nvim "$@"'';
-            block = true;
-            desc = "Edit with Neovim";
+            run = "$TERMINAL -e $EDITOR %s";
+            orphan = true;
+            desc = "$EDITOR";
+            for = "unix";
           }
         ];
         plugin.prepend_fetcher = [
@@ -82,11 +82,6 @@ in {
         ];
       };
       keymap.mgr.prepend_keymap = [
-        {
-          on = "<C-n>";
-          run = ''shell -- dragon-drop -x -i -T "$1"'';
-          desc = "Drag and drop selected files";
-        }
         {
           on = "<C-y>";
           run = ["plugin wl-clipboard"];
