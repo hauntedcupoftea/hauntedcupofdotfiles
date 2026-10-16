@@ -11,7 +11,7 @@ in {
     isNormalUser = true;
     description = "Hriday Chauhan";
     shell = pkgs.fish;
-    extraGroups = ["networkmanager" "wheel" "openrazer" "plugdev" "gamemode" "input" "dialout"];
+    extraGroups = ["networkmanager" "wheel" "plugdev" "gamemode" "input" "dialout"];
     packages = [];
   };
 

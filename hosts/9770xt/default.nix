@@ -3,7 +3,7 @@
     ./hardware-configuration.nix
     ../../modules/core
     ../../modules/hardware/audio.nix
-    ../../modules/hardware/razer.nix
+    # ../../modules/hardware/razer.nix
     ../../modules/hardware/power.nix
     # ../../modules/hardware/filesystems.nix
     ../../modules/hardware/openlinkhub.nix
