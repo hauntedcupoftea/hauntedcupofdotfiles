@@ -10,24 +10,29 @@
     gui.enable = true;
   };
 
-  security.pam.services.sudo.gaze = {
-    enable = true;
-    control = "sufficient";
-    simultaneous = true;
+  security = {
+    rtkit.enable = true;
+    sudo.enable = true;
+    polkit.enable = true;
+
+    pam.services = {
+      sudo.gaze = {
+        enable = true;
+        control = "sufficient";
+        simultaneous = true;
+      };
+      polkit-1.gaze = {
+        enable = true;
+        control = "sufficient";
+        simultaneous = true;
+      };
+      sudo.enableGnomeKeyring = true;
+      greetd.enableGnomeKeyring = true;
+    };
   };
-
-  security.pam.services.polkit-1.gaze = {
-    enable = true;
-    control = "sufficient";
-    simultaneous = true;
-  };
-
-  security.rtkit.enable = true;
-  security.sudo.enable = true;
-
-  security.polkit.enable = true;
 
   services.gnome.gnome-keyring.enable = lib.mkForce false;
+
   programs.ssh.startAgent = true;
 
   environment.systemPackages = [
