@@ -287,7 +287,6 @@ in {
           name = "keepass-float",
           match = { class = "^(org.keepassxc.KeePassXC)$" },
           float = true,
-          stay_focused = true,
           size = "1200 800",
           center = true,
         })

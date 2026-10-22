@@ -192,8 +192,6 @@ in {
         };
         keepassxc = {
           enable = true;
-          sshAgent = true;
-          fdoSecrets = true;
           browserIntegration = {
             enable = true;
             zen = true;
