@@ -8,7 +8,11 @@
   iniFormat = pkgs.formats.ini {};
   mergedSettings =
     lib.recursiveUpdate {
-      General.ConfigVersion = 2;
+      General = {
+        ConfigVersion = 2;
+        UseGoogleFaviconDownload = true;
+        StartAtLogin = true;
+      };
       SSHAgent.Enabled = cfg.sshAgent;
       FdoSecrets.Enabled = cfg.fdoSecrets;
       Browser.Enabled = cfg.browserIntegration.enable;
@@ -20,8 +24,9 @@
         TrayIconAppearance = "colorful";
       };
       Security = {
-        LockDatabaseIdle = true;
-        LockDatabaseIdleSeconds = 600;
+        QuickUnlock = true;
+        QuickUnlockTimeout = 0;
+        LockDatabaseIdle = false;
         LockDatabaseOnSuspend = true;
       };
     }
