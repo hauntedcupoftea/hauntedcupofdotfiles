@@ -295,7 +295,6 @@ in {
           name = "steam-games",
           match = { initial_class = "steam_app_.*" },
           content = "game",
-          fullscreen_state = "2 2",
           workspace = "2",
           no_max_size = true,
           immediate = true,
