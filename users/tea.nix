@@ -88,7 +88,6 @@ in {
 
       desktop = {
         kitty.enable = true;
-        ghostty.enable = true;
         mpv.enable = true;
         obs.enable = true;
         mangohud.enable = true;
