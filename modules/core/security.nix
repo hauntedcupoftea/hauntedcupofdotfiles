@@ -7,6 +7,10 @@
   imports = [inputs.gaze.nixosModules.default];
   services.gaze = {
     enable = true;
+    # https://github.com/GunduLabs/gaze/pull/923
+    package = inputs.gaze.packages.${pkgs.stdenv.hostPlatform.system}.gaze.overrideAttrs (oldAttrs: {
+      buildInputs = (oldAttrs.buildInputs or []) ++ [pkgs.zstd];
+    });
     gui.enable = true;
   };
 

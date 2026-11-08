@@ -7,31 +7,64 @@
 }: let
   cfg = config.dotfiles.desktop.vesktop;
 
-  videoDrivers = osConfig.hardware.videoDrivers or [];
+  videoDrivers = osConfig.services.xserver.videoDrivers or [];
   isNvidia = builtins.elem "nvidia" videoDrivers;
+  isAMD = builtins.elem "amdgpu" videoDrivers;
 
+  # AMD-focused HEVC decode flags
   hwAccelFlags =
     if isNvidia
     then ["--enable-features=VaapiIgnoreDriverChecks,Vulkan,DefaultANGLEVulkan,VulkanFromANGLE,VaapiOnNvidiaGPUs"]
-    else ["--enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder,VaapiIgnoreDriverChecks"];
+    else if isAMD
+    then [
+      "--enable-features=VaapiVideoDecoder,VaapiIgnoreDriverChecks,PlatformHEVCDecoderSupport,UseMultiPlaneFormatForHardwareVideo"
+      "--use-gl=angle"
+      "--use-angle=vulkan"
+      "--ignore-gpu-blocklist"
+      "--enable-zero-copy"
+      "--ozone-platform=x11"
+    ]
+    else [];
+
+  allFlags =
+    (lib.optionals cfg.hardwareVideoAcceleration hwAccelFlags)
+    ++ cfg.extraFlags;
+
+  wrapVesktop = base: flags: let
+    flagsString = lib.concatStringsSep " " flags;
+  in
+    base.overrideAttrs (old: {
+      nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.makeWrapper];
+      postFixup =
+        (old.postFixup or "")
+        + ''
+          wrapProgram $out/bin/vesktop \
+            --add-flags "${flagsString}"
+        '';
+    });
+
+  defaultPackage =
+    if allFlags == []
+    then pkgs.vesktop
+    else wrapVesktop pkgs.vesktop allFlags;
 in {
   options.dotfiles.desktop.vesktop = {
     enable = lib.mkEnableOption "Vesktop Discord client with Vencord";
     package = lib.mkOption {
       type = lib.types.nullOr lib.types.package;
-      default = pkgs.vesktop;
+      default = defaultPackage;
       description = "Vesktop package to use. Set null to skip adding to packages.";
     };
     arrpc.enable = lib.mkEnableOption "arrpc (Discord RPC bridge)";
     hardwareVideoAcceleration = lib.mkOption {
       type = lib.types.bool;
       default = true;
-      description = "Write vendor-appropriate VAAPI/Vulkan flags to vesktop-flags.conf, auto-detected from this host's services.xserver.videoDrivers via osConfig.";
+      description = "Add vendor-appropriate hardware acceleration flags.";
     };
     extraFlags = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [];
-      description = "Additional raw Electron/Chromium flags, appended after the hardware acceleration flags.";
+      description = "Additional raw Electron/Chromium flags.";
     };
     themeDir = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
@@ -45,13 +78,8 @@ in {
       (lib.optional (cfg.package != null) cfg.package)
       ++ lib.optional cfg.arrpc.enable arrpc;
 
-    xdg.config.files = lib.mkMerge [
-      (lib.mkIf (cfg.hardwareVideoAcceleration || cfg.extraFlags != []) {
-        "vesktop-flags.conf".text =
-          lib.concatStringsSep "\n" ((lib.optionals cfg.hardwareVideoAcceleration hwAccelFlags) ++ cfg.extraFlags)
-          + "\n";
-      })
-      (lib.mkIf (cfg.themeDir != null) {"vesktop/themes".source = cfg.themeDir;})
-    ];
+    xdg.config.files = lib.mkIf (cfg.themeDir != null) {
+      "vesktop/themes".source = cfg.themeDir;
+    };
   };
 }

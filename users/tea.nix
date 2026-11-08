@@ -65,7 +65,6 @@ in {
         podman.enable = true;
 
         packages = with pkgs; [
-          sql-studio
           zrok
           brightnessctl
           btrfs-progs
@@ -75,7 +74,6 @@ in {
           git
           inetutils
           lm_sensors
-          scooter
           nload
           parted
           hauntedcupof-nvim
