@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/core
@@ -20,6 +24,10 @@
     extraPackages = with pkgs; [
       libvdpau-va-gl
       libva-vdpau-driver
+      libva
+      libva-utils
+      amf-headers
+      amf
     ];
   };
 
@@ -31,7 +39,16 @@
   environment.systemPackages = with pkgs; [lact];
   systemd.packages = with pkgs; [lact];
   systemd.services.lactd.wantedBy = ["multi-user.target"];
-  boot.kernelParams = ["video=DP-3:2560x1440@60e"];
+  boot = {
+    kernelParams = ["video=DP-3:2560x1440@60e"];
+    ## sidequest: OBS virtual camera
+    kernelModules = ["v4l2loopback"];
+    extraModulePackages = [config.boot.kernelPackages.v4l2loopback];
+    extraModprobeConfig = ''
+      options v4l2loopback devices=1 video_nr=1 card_label="OBS Virtual Camera" exclusive_caps=1
+    '';
+    ## end sidequest
+  };
   ## end AMDGPU config
 
   ## hw monitoring and control
